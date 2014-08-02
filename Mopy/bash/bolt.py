@@ -843,7 +843,8 @@ class Path(object):
     ascii = '[\x00-\x7F]'
     japanese_hankana = '[\xA1-\xDF]'
     japanese_zenkaku ='[\x81-\x9F\xE0-\xFC][\x40-\x7E\x80-\xFC]'
-    reChar = re.compile('('+ascii+'|'+japanese_hankana+'|'+japanese_zenkaku+')', re.M)
+    ideographic_space = '[\xE3\x80\x80]'
+    reChar = re.compile('('+ascii+'|'+ideographic_space+'|'+japanese_hankana+'|'+japanese_zenkaku+')', re.M)
 
     @staticmethod
     def get(name):
