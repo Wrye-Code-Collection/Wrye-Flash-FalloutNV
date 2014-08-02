@@ -855,8 +855,8 @@ class Path(object):
     @staticmethod
     def getNorm(name):
         """Return the normpath for specified name/path object."""
-        if not name: return name
-        elif isinstance(name,Path): return name._s
+        if isinstance(name,Path): return name._s
+        elif not name: return name
         else: return os.path.normpath(name)
 
     @staticmethod
@@ -1041,7 +1041,6 @@ class Path(object):
     @property
     def size(self):
         "Size of file or directory."
-        deprint(self._s)
         if self.isdir():
             join = os.path.join
             getSize = os.path.getsize
