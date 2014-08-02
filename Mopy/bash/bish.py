@@ -1107,7 +1107,7 @@ class Archive:
 
         command = '"%s" l "%s"' % (bosh.exe7z, self.path.s)
         command = Encode(command,'mbcs')
-        out = Popen(command, stdout=PIPE).stdout
+        out = Popen(command, stdout=PIPE, stdin=PIPE).stdout
         for line in out:
             print line,
             maList = reList.match(line)
@@ -1133,7 +1133,7 @@ class Archive:
         """Extracts specified files from archive."""
         command = '"%s" x "%s" -y -oDumpster @listfile.txt -scsWIN' % (exe7z,self.path.s)
         command = Encode(command,'mbcs')
-        out = Popen(command, stdout=PIPE).stdout
+        out = Popen(command, stdout=PIPE, stdin=PIPE).stdout
         reExtracting = re.compile('Extracting\s+(.+)')
         for line in out:
             maExtracting = reExtracting.match(line)

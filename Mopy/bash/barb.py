@@ -435,7 +435,7 @@ def pack7z(dstFile, srcDir, progress=None):
     progress.setFull(1+length)
 
     #--Pack the files
-    ins = Popen(command, stdout=PIPE, startupinfo=startupinfo).stdout
+    ins = Popen(command, stdout=PIPE, stdin=PIPE, startupinfo=startupinfo).stdout
     #--Error checking and progress feedback
     reCompressing = re.compile('Compressing\s+(.+)')
     regMatch = reCompressing.match
@@ -472,7 +472,7 @@ def unpack7z(srcFile, dstDir, progress=None):
         command = r'"%s" l -slt "%s"' % (dirs['compiled'].join('7zUnicode.exe').s, srcFile.s)
     else:
         command = r'"%s" l -slt "%s"' % (dirs['compiled'].join('7z.exe').s, srcFile.s)
-    ins, err = Popen(command, stdout=PIPE, startupinfo=startupinfo).communicate()
+    ins, err = Popen(command, stdout=PIPE, stdin=PIPE, startupinfo=startupinfo).communicate()
     ins = stringBuffer(ins)
     for line in ins: length += 1
     ins.close()
@@ -489,7 +489,7 @@ def unpack7z(srcFile, dstDir, progress=None):
     command = '"%s" x "%s" -y -o"%s"' % (app7z, srcFile.s, dstDir.s)
 
     #--Extract files
-    ins = Popen(command, stdout=PIPE, startupinfo=startupinfo).stdout
+    ins = Popen(command, stdout=PIPE, stdin=PIPE, startupinfo=startupinfo).stdout
     #--Error Checking, and progress feedback
     #--Note subArchives for recursive unpacking
     reExtracting = re.compile('Extracting\s+(.+)')

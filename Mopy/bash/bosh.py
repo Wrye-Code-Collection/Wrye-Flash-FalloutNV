@@ -125,7 +125,7 @@ links = None
 def listArchiveContents(fileName):
     command = r'"%s" l -slt "%s"' % (exe7z, fileName)
     command = Encode(command,'mbcs')
-    ins, err = Popen(command, stdout=PIPE, startupinfo=startupinfo).communicate()
+    ins, err = Popen(command, stdout=PIPE, stdin=PIPE, startupinfo=startupinfo).communicate()
     return ins
 
 #--Settings
@@ -9718,7 +9718,7 @@ class OmodFile:
         reFileSize = re.compile(unicodeConvert(r'[0-9]{4}\-[0-9]{2}\-[0-9]{2}\s+[0-9]{2}\:[0-9]{2}\:[0-9]{2}.{6}\s+([0-9]+)\s+[0-9]+\s+(.+?)$'))
         reFinalLine = re.compile(unicodeConvert(r'\s+([0-9]+)\s+[0-9]+\s+[0-9]+\s+files.*'))
 
-        with subprocess.Popen(cmd7z, stdout=subprocess.PIPE, startupinfo=startupinfo).stdout as ins:
+        with subprocess.Popen(cmd7z, stdout=subprocess.PIPE, stdin=subprocess.PIPE, startupinfo=startupinfo).stdout as ins:
             for line in ins:
                 line = unicodeConvert(line)
                 maFinalLine = reFinalLine.match(line)
@@ -9749,7 +9749,7 @@ class OmodFile:
 
         subprogress = bolt.SubProgress(progress, 0, 0.4)
         current = 0
-        with subprocess.Popen(cmd7z, stdout=subprocess.PIPE, startupinfo=startupinfo).stdout as ins:
+        with subprocess.Popen(cmd7z, stdout=subprocess.PIPE, stdin=subprocess.PIPE, startupinfo=startupinfo).stdout as ins:
             for line in ins:
                 line = unicodeConvert(line)
                 maExtracting = reExtracting.match(line)
@@ -13562,7 +13562,7 @@ class InstallerConverter(object):
         command = '"%s" x "%s" BCF.dat -y -so' % (exe7z, self.fullPath.s)
         command = Encode(command,'mbcs')
         try:
-            ins, err = Popen(command, stdout=PIPE, startupinfo=startupinfo).communicate()
+            ins, err = Popen(command, stdout=PIPE, stdin=PIPE, startupinfo=startupinfo).communicate()
         except:
             raise StateError(_("\nLoading %s:\nBCF extraction failed.") % self.fullPath.s)
         ins = cStringIO.StringIO(Encode(ins))
@@ -13601,7 +13601,7 @@ class InstallerConverter(object):
         progress(0,_("%s\nExtracting files...") % self.fullPath.stail)
         command = '"%s" x "%s" -y -o"%s"' % (exe7z, self.fullPath.s, self.tempDir.s)
         command = Encode(command,'mbcs')
-        ins, err = Popen(command, stdout=PIPE, startupinfo=startupinfo).communicate()
+        ins, err = Popen(command, stdout=PIPE, stdin=PIPE, startupinfo=startupinfo).communicate()
         ins = stringBuffer(ins)
         #--Error checking
         reError = re.compile('Error:')
@@ -13812,7 +13812,7 @@ class InstallerConverter(object):
         progress(0,_("%s\nCompressing files...") % destArchive.s)
         progress.setFull(1+length)
         #--Pack the files
-        ins = Popen(command, stdout=PIPE, startupinfo=startupinfo).stdout
+        ins = Popen(command, stdout=PIPE, stdin=PIPE, startupinfo=startupinfo).stdout
         #--Error checking and progress feedback
         reCompressing = re.compile('Compressing\s+(.+)')
         regMatch = reCompressing.match
@@ -13863,7 +13863,7 @@ class InstallerConverter(object):
         command = '"%s" x "%s" -y -o%s @%s -scsWIN' % (exe7z, apath.s, subTempDir.s, self.tempList.s)
         command = Encode(command,'mbcs')
         #--Extract files
-        ins = Popen(command, stdout=PIPE, startupinfo=startupinfo).stdout
+        ins = Popen(command, stdout=PIPE, stdin=PIPE, startupinfo=startupinfo).stdout
         #--Error Checking, and progress feedback
         #--Note subArchives for recursive unpacking
         subArchives = []
@@ -13889,7 +13889,7 @@ class InstallerConverter(object):
         # Clear ReadOnly flag if set
         cmd = r'attrib -R "%s\*" /S /D' % (subTempDir.s)
         cmd = Encode(cmd,'mbcs')
-        ins, err = Popen(cmd, stdout=PIPE, startupinfo=startupinfo).communicate()
+        ins, err = Popen(cmd, stdout=PIPE, stdin=PIPE, startupinfo=startupinfo).communicate()
         if result:
             raise StateError(_("%s: Extraction failed:\n%s") % (srcInstaller.s, "\n".join(errorLine)))
         #--Done
@@ -13943,7 +13943,7 @@ class InstallerArchive(Installer):
             ins = listArchiveContents(archive.s)
         else:
             command = r'"%s" l -slt "%s"' % (exe7z, archive.s)
-            ins, err = Popen(command, stdout=PIPE, startupinfo=startupinfo).communicate()
+            ins, err = Popen(command, stdout=PIPE, stdin=PIPE, startupinfo=startupinfo).communicate()
             ins = stringBuffer(ins)
 
         cumCRC = 0
@@ -14020,7 +14020,7 @@ class InstallerArchive(Installer):
         if recurse:
             command += ' -r'
 
-        ins = Popen(command, stdout=PIPE, startupinfo=startupinfo).stdout
+        ins = Popen(command, stdout=PIPE, stdin=PIPE, startupinfo=startupinfo).stdout
         if bUseUnicode:
             reExtracting = re.compile(u'Extracting\s+(.+)')
             reError = re.compile(u'Error:')
@@ -14045,7 +14045,7 @@ class InstallerArchive(Installer):
         # Clear ReadOnly flag if set
         cmd = r'attrib -R "%s\*" /S /D' % (self.tempDir.s)
         cmd = Encode(cmd)
-        ins, err = Popen(cmd, stdout=PIPE, startupinfo=startupinfo).communicate()
+        ins, err = Popen(cmd, stdout=PIPE, stdin=PIPE, startupinfo=startupinfo).communicate()
         if result:
             raise StateError(_("%s: Extraction failed\n%s") % (archive.s,"\n".join(errorLine)))
         #--Done
@@ -14109,7 +14109,7 @@ class InstallerArchive(Installer):
         # Clear ReadOnly flag if set
         cmd = r'attrib -R "%s\*" /S /D' % (self.tempDir.s)
         cmd = Encode(cmd)
-        ins, err = Popen(cmd, stdout=PIPE, startupinfo=startupinfo).communicate()
+        ins, err = Popen(cmd, stdout=PIPE, stdin=PIPE, startupinfo=startupinfo).communicate()
         for file in files:
             srcFull = tempDir.join(file)
             destFull = destDir.join(file)
@@ -14140,7 +14140,7 @@ class InstallerArchive(Installer):
             ins = listArchiveContents(apath.s)
         else:
             command = '"%s" l -slt "%s"' % (exe7z, apath.s)
-            ins, err = Popen(command, stdout=PIPE, startupinfo=startupinfo).communicate()
+            ins, err = Popen(command, stdout=PIPE, stdin=PIPE, startupinfo=startupinfo).communicate()
             ins = stringBuffer(ins)
 
         text = []
@@ -14324,7 +14324,7 @@ class InstallerProject(Installer):
         command = Encode(command,'mbcs')
         progress(0,_("%s\nCompressing files...") % archive.s)
         progress.setFull(1+length)
-        ins = Popen(command, stdout=PIPE, startupinfo=startupinfo).stdout
+        ins = Popen(command, stdout=PIPE, stdin=PIPE, startupinfo=startupinfo).stdout
         reCompressing = re.compile('Compressing\s+(.+)')
         regMatch = reCompressing.match
         reError = re.compile('Error: (.*)')
