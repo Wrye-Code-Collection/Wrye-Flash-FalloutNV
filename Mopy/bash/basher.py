@@ -3279,7 +3279,7 @@ class InstallersPanel(SashTankPanel):
                 if bosh.inisettings['ClearRO']:
                     cmd = r'attrib -R "%s\*" /S /D' % (bosh.dirs['mods'])
                     cmd = Encode(cmd,'mbcs')
-                    ins,err = subprocess.Popen(cmd, stdout=subprocess.PIPE, startupinfo=startupinfo).communicate()
+                    ins, err = subprocess.Popen(cmd, stdout=subprocess.PIPE, stdin=subprocess.PIPE, startupinfo=startupinfo).communicate()
             except CancelError:
                 # User canceled the refresh
                 self.refreshing = False
