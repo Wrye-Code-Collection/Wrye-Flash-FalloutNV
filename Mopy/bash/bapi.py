@@ -346,7 +346,7 @@ def Init(path):
     # Class Wrapper
     # =========================================================================
     class BossDb(object):
-        def __init__(self,gamePath,game='Oblivion'):
+        def __init__(self,gamePath,game='Fallout: New Vegas'):
             """ game can be one of the BOSS_API_GAME_*** codes, or one of the
                 aliases defined above in the 'games' dictionary."""
             if isinstance(game,basestring):
