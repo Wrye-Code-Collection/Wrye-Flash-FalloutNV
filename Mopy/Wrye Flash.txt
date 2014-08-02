@@ -1,0 +1,175 @@
+= Wrye Flash NV (Wrye Bash for Fallout New Vegas) =============================
+== Credits and Contact ========================================================
+=== Authors
+* **Original Code**
+  * Wrye Team: Gurus of the Oblivion modding.
+* **Porting**
+  * Valda: Hentai gentleman of mojave.
+
+=== Contact
+* If you have a question/comment about Wrye Flash, it's best to post it on the current RELZ topic on the Bethesda Game Studios (BGS) forums.
+* Please **NEVER** post a question about Wrye Flash in the topic of original Wrye Bash.
+
+== License ===================================================================
+Wrye Bash and Wrye Flash are released under Version 2 of the GNU General Public License. See enclosed [[license.txt]] file for license details, or visit the [[http://www.gnu.org/copyleft/gpl.html|GNU Website]] for information on all of their licenses.
+
+=== Packaged Programs
+Additionally, Wrye Bash comes packaged with the following programs:
+* BOSS API (Better Oblivion Sorting Software API)
+  * Website: [[http://code.google.com/p/better-oblivion-sorting-software/|Googlecode]]
+  * License: API - [[http://www.gnu.org/licenses/gpl.html|GPL 3.0]], Documentation - [[http://www.gnu.org/licenses/fdl.html|GNU FDL 1.3]].
+  * Usage: Wrye Bash uses this libarary to modify Load Order, and retrieve Bash Tag suggestions and Dirty mod information from BOSS's plugin databases.
+* CBash
+  * Website: [[http://sourceforge.net/projects/cbash/|SourceForge]]
+  * License: Triple-license [[http://www.mozilla.org/MPL/|MPL 1.1]]/[[http://www.gnu.org/copyleft/gpl.html|GPL 2.0]]/[[http://www.gnu.org/licenses/lgpl.html|LGPL 2.1]]
+  * Modifications:
+    * cint.py - some changes made that have not yet been merged into the CBash SVN repository.  These are committed to the Wrye Bash SVN repository.
+    * C/C++ Source Code: Version 0.5.1 - 0.5.3 of CBash are built off modified source code, which can be found in the Wrye Bash SVN repository, [[http://oblivionworks.svn.sourceforge.net/viewvc/oblivionworks/Programs/CBash/|here]].
+* 7zip:
+  * Website: [[http://www.7-zip.org/|7zip.org]]
+  * License: [[http://www.gnu.org/licenses/lgpl.html|LGPL]]
+  * Usage: Wrye Bash uses 7z to pack and unpack archives.
+* LZMA SDK:
+  * Website: [[http://www.7-zip.org/sdk.html|7zip.org]]
+  * License: Plublic Domain
+  * Usage: Wrye Bash uses lzma.exe from the SDK to unpack OBMM compressed data streams.
+
+== Versions ===================================================================
+{{CONTENTS=0}}
+**All versions by Wrye team and or Valda unless otherwise noted.**
+
+=== 15.9 [4/3/2014]
+* Fixed ESCE in MGEF preventing Project Nevada - Med-X Fix.esp from working with Wrye Flash
+
+=== 15.8 [4/3/2014]
+* Fixed RDMD in REGN preventing Tale of Two Wastelands from working with Wrye Flash
+
+=== 15.7 [3/17/2014]
+* Fixed SOUN and MSET errors that prevented merging them into the Bash Patch. Digital_Nightmare.esp should merge properly now.
+
+=== 15.6 [3/15/2014]
+* Fixed some attributes that cause errors in routines when building Bash patch.  i.e. MreRegn
+
+=== 15.5 [12/05/2012]
+* Fixed a parse error when reading the EVE FNV.esp.
+
+=== 15.4 [08/10/2012]
+* Fixed a bug that "KeyError: 'maleLeftEye'" in RacePatcher (Thanks for many reporters).
+* Fixed the subrecord order of weapon record (Thanks moho).
+
+=== 15.3 [08/08/2012]
+* Updated BAPI DLLs. Support for BOSS 2.1.
+
+=== 15.2 [04/04/2012]
+* Fixed a bug that could not start Mod Checker.
+* Fixed a bug that fails in starting of BOSS in non-unicode mode.
+
+=== 15.1 [04/02/2012]
+* Added a NAVM (Navi-mesh) record support.
+* Fixed a REFR record structure.
+* Fixed a bug in the FalloutNV.esm version swapping.
+* Support for BOSS 2.0 (from WryeBash 296svn).
+
+=== 14.4 [08/20/2011]
+* Fixed a bug that doesn't newline in the first line of plugins.txt.
+
+=== 14.3 [08/20/2011]
+* Bugfixes from Wrye Bash 295(svn).
+* TES4 version 1.30 is treated as valid now.
+* Fixed an error in the list patch config.
+
+=== 14.2 [08/14/2011]
+* Fixed a bug that cannot run scan UDR.
+* Fixed a bug that throwing error from fomm path correction.
+
+=== 14.1 [08/13/2011] [175175,Valda]
+* Rebase to Wrye Bash 294.2.
+* Program-wide Changes:
+  * Wrye Bash has a new directory layout!  Now the Mopy directory just contains important files that you can run.  All other files have been moved into subdirectories.
+  * Please delete the old Mopy directory before copying the new one in to get rid of the old files
+  * Your configuration will get converted to a new format on first load which will not be readable by older versions of Wrye Bash, so be sure to back up your settings when you upgrade so they will be available if you ever need to downgrade again
+  * Python 2.5x and under compatibility: warn that those are unsupported versions but if the user really wants to use em anyways make some changes so that it is less likely to fail as much.
+* Updated Japanese Translation (contributed by 175175).
+* Added fnv4gb launcher.
+
+=== 13 [07/08/2011]
+* Preliminary support for BOSS 1.8 (from WryeBash 293).
+* Fixed an author name of skeleton esp bundled in "Mopy/Extras/Bashed Patch, 0.esp".
+
+=== 12 [06/11/2011]
+* Support for BOSS 1.7 (from WryeBash 292).
+
+=== 11 [05/08/2011]
+* Fixed a error of ini key.
+* Removed some ini tweaks.
+* Taglist updated to BOSS masterlist revision 2645.
+
+=== 10 [04/09/2011]
+* Bashed Patch:
+  * Added support for Dead Money DLC.
+  * Fixed a bug in Graphics patcher.
+  * Omitted a function to discard empty sublist of FLST.
+  * Added condition function definitions.
+* Ports from latest Wrye Bash.
+  * Fixed 'Open at TesNexus' to work with the new format (still works with the old format ofc) (from WryeBash 291).
+  * Read-Only files in installers (or in Data on uninstall) will no longer throw errors (automatically converted to non-ReadOnly) (from WryeBash 291).
+  * Some minor improvements and bug fixes.
+* Taglist updated to BOSS masterlist revision 2460.
+
+=== 9 [11/25/2010]
+* Fixed a bug that memory error is thrown at the bsafile scan.
+* Fixed a bug in Graphics patcher.
+
+=== 8 [11/13/2010]
+* Fixed a bug which Sound patcher raises an exception.
+
+=== 7 [11/13/2010]
+* Names Tweak: Sort inventory supported book/magazine and caravan cards.
+* Added support new FOMM (The installation path of FOMM can be changed in bash.ini).
+* Support for BsaRedirection specifications after the official patch.
+* Fixed a bug that wasn't considering the owner and condition attribute at leveledlist merger (reported by Space Oden69).
+* Fixed a bug in Graphics patcher (reported by Space Oden69).
+* Added WeaponMods bashtag.
+* Sound tag came to import the weapon sound.
+* Added Destructible tag (same as Destructable).
+* Taglist updated to BOSS masterlist revision 1851.
+
+=== 6 [11/08/2010]
+* Fixed a bug that raise exception when importing ItemData from CSV.
+* Add GMST Tweak: Terminal Speed Adjustment (referred from HackRate: http://www.fallout3nexus.com/downloads/file.php?id=2745).
+* Update BOSS launch code (from WryeBash 291).
+* Fixed CCRD.INTV subrecord structure (reported by platycus).
+
+=== 5 [11/06/2010] [Sativarg,Valda]
+* Fixed a definition of BPTD.BPND subrecord struct.
+* Fixed a definition of WEAP.SNAM (reported by Space Oden69).
+* Added 'animationMultiplier' and 'animationAttackMultiplier' to the import object of Stats tag.
+* Added support for NVSE.
+* Updated 'masterupdate setup.bat' for FNVEdit (contributed by Sativarg).
+* Copied and pasted a BOSS launch code from WB291(svn).
+* Taglist updated to BOSS masterlist revision 1822.
+
+=== 4 [11/06/2010] [DJ_Kovrik,Valda]
+* Fixed/Added so many record definitions.
+* Some tags came to import NV attributes.
+* Updated Russian translation (contributed by DJ_Kovrik).
+* Fixed so that fallout_default.ini might be updated instead of the write-protected fallout.ini.
+* Taglist updated to BOSS masterlist revision 1820.
+
+=== 3 [11/03/2010]
+* Fixed/Added many record definitions.
+* Fixed/Added many condition function definitions.
+* Added NVMM launcher.
+* Remove ammo weight names tweak.
+
+=== 2 [10/24/2010]
+* Saves tab works.
+* Masterlist editor of savedata works.
+* Some tweaks works.
+* update icons.
+* Added FNVEdit launcher.
+
+=== 1 [10/22/2010]
+* Branch from Wrye Flash 21.
+* Only BAIN works.
+
