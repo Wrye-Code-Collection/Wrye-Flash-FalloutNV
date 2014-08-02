@@ -1041,6 +1041,7 @@ class Path(object):
     @property
     def size(self):
         "Size of file or directory."
+        deprint(self._s)
         if self.isdir():
             join = os.path.join
             getSize = os.path.getsize
