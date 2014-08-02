@@ -1243,7 +1243,7 @@ class Path(object):
             # Clear ReadOnly flag if set
             cmd = r'attrib -R "%s\*" /S /D' % (self._s)
             cmd = Encode(cmd,'mbcs')
-            ins, err = Popen(cmd, stdout=PIPE, startupinfo=startupinfo).communicate()
+            ins, err = Popen(cmd, stdout=PIPE, stdin=PIPE, startupinfo=startupinfo).communicate()
             shutil.rmtree(self._s)
 
     #--start, move, copy, touch, untemp
