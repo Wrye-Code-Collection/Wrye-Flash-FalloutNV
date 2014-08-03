@@ -1,7 +1,17 @@
 DeadMoney.esm
- TAG: {{BASH: Deflst}}
+ IFCHECKSUM("DeadMoney.esm",D70F165B) DIRTY: 403 ITM, 51 UDR records. Needs "http://newvegas.nexusmods.com/mods/34703 FNVEdit" cleaning. A cleaning guide is available "http://www.creationkit.com/TES5Edit_Cleaning_Guide_-_TES5Edit here".
+HonestHearts.esm
+ IFCHECKSUM("HonestHearts.esm",2352B189) DIRTY: 121 ITM, 10 UDR records. Needs "http://newvegas.nexusmods.com/mods/34703 FNVEdit" cleaning. A cleaning guide is available "http://www.creationkit.com/TES5Edit_Cleaning_Guide_-_TES5Edit here".
+OldWorldBlues.esm
+ IFCHECKSUM("OldWorldBlues.esm",7F8F8225) DIRTY: 124 ITM, 0 UDR records. Needs "http://newvegas.nexusmods.com/mods/34703 FNVEdit" cleaning. A cleaning guide is available "http://www.creationkit.com/TES5Edit_Cleaning_Guide_-_TES5Edit here".
+LonesomeRoad.esm
+ IFCHECKSUM("LonesomeRoad.esm",30073D50) DIRTY: 240 ITM, 6 UDR records. Needs "http://newvegas.nexusmods.com/mods/34703 FNVEdit" cleaning. A cleaning guide is available "http://www.creationkit.com/TES5Edit_Cleaning_Guide_-_TES5Edit here".
+GunRunnersArsenal.esm
+ IFCHECKSUM("GunRunnersArsenal.esm",AAC938D) DIRTY: 97 ITM, 0 UDR records. Needs "http://newvegas.nexusmods.com/mods/34703 FNVEdit" cleaning. A cleaning guide is available "http://www.creationkit.com/TES5Edit_Cleaning_Guide_-_TES5Edit here".
 Community Bugfix Compilation Patch.esm
  TAG: {{BASH: Actors.AIPackages, Delev, Relev, Sound, Stats, Scripts, Invent}}
+YUP - Base Game + All DLC.esm
+ TAG: {{BASH: Actors.ACBS, Actors.AIData, Actors.CombatStyle, Actors.DeathItem, Actors.Stats, C.Light, C.Owner, C.Water, Deflst, Delev, Destructible, Factions, Eyes, Graphics, Hair, Invent, Names, Relev, Scripts, Sound, Stats}}
 IFNOTVAR(NVAMP) MOD: Machienzo - NPC Cosmetic Fixes - Ver 1.55.esm
  TAG: {{BASH: NpcFaces, Hair, Eyes, Voice-M, Voice-F, Body-M, Body-F, R.Teeth, R.Mouth}}
 IFNOTVAR(NVAMP) MOD: Machienzo - NPC Cosmetic Fixes - Ver 1.57.esm
@@ -15,9 +25,11 @@ IFNOTVAR(NVAMP) MOD: NVCE Main (Faces Only).esm
 IFNOTVAR(NVAMP) MOD: IWS-Core.esm
  TAG: {{BASH: Delev}}
 IFNOTVAR(NVAMP) MOD: Caliber.esm
- TAG: {{BASH: Invent, Names}}
+ TAG: {{BASH: Delev, Graphics, Invent, Names, Stats}}
+IFNOTVAR(NVAMP) MOD: CaliberXhonesthearts.esm
+ TAG: {{BASH: Deflst, Delev, Invent, Names}}
 IFNOTVAR(NVAMP) MOD: CaliberXgunrunners.esm
- TAG: {{BASH: Names}}
+ TAG: {{BASH: Invent, Names}}
 Fiends, With Style.esm
  TAG: {{BASH: Delev}}
 IFNOTVAR(NVAMP) MOD: FOOK - New Vegas.esm
@@ -32,10 +44,31 @@ NSkies - Vanilla Edition.esm
  TAG: {{BASH: C.Climate, C.Light}}
 NSkies URWLified.esm
  TAG: {{BASH: C.Climate, C.Light}}
+NVInteriors_ComboEdition.esm
+ TAG: {{BASH: Graphics}}
+Interior Lighting Overhaul - Core.esm
+ TAG: {{BASH: C.Climate, C.Light, C.Owner, Destructible}}
+Interior Lighting Overhaul - L38PS.esm
+ TAG: {{BASH: C.Light}}
+IFNOTVAR(NVAMP) MOD: Project Nevada - Core.esm
+ TAG: {{BASH: Invent}}
 IFNOTVAR(NVAMP) MOD: Project Nevada - Equipment.esm
- TAG: {{BASH: Delev, Invent}}
+ TAG: {{BASH: Actors.ACBS, Delev, Graphics, Invent, Names, Relev, Scripts, Stats}}
+Psiclones.esm
+ TAG: {{BASH: Names}}
+T6M Equipment Replacer NV.esm
+ TAG: {{BASH: Graphics, Names}}
+IFNOTVAR(NVAMP) MOD: Tales from the Burning Sands.esm
+ IFCHECKSUM("Tales from the Burning Sands.esm",35F7BAE7) DIRTY: 17 ITM, 0 UDR records. Needs "http://newvegas.nexusmods.com/mods/34703 FNVEdit" cleaning. A cleaning guide is available "http://www.creationkit.com/TES5Edit_Cleaning_Guide_-_TES5Edit here".
+ TAG: {{BASH: Factions, Names, Relev, Scripts}}
+WARZONES Respawner.esp
+ TAG: {{BASH: Actors.ACBS, Actors.AIPackages}}
+WARZONES RespawnerLITE.esp
+ TAG: {{BASH: Actors.ACBS, Actors.AIPackages}}
 IFNOTVAR(NVAMP) MOD: Weapon Mod Expansion.esm
  TAG: {{BASH: Names}}
+IFNOTVAR(NVAMP) MOD: ELECTRO-CITY - CompletedWorkorders.esm
+ TAG: {{BASH: Actors.ACBS, Actors.AIData, Actors.AIPackages, Destructible, Invent, Names, NpcFaces, Stats}}
 IFVAR(NVAMP) MOD: Machienzo - NPC Cosmetic Fixes - Ver 1.55.esm
  TAG: {{BASH: NpcFaces, Hair, Eyes, Voice-M, Voice-F, Body-M, Body-F, R.Teeth, R.Mouth}}
 IFVAR(NVAMP) MOD: Machienzo - NPC Cosmetic Fixes - Ver 1.57.esm
@@ -48,6 +81,13 @@ IFVAR(NVAMP) MOD: NVCE Main (Faces Only).esm
  TAG: {{BASH: Actors.ACBS, Deactivate, Filter, NPC.Race, NpcFaces}}
 IFVAR(NVAMP) MOD: IWS-Core.esm
  TAG: {{BASH: Delev}}
+IFVAR(NVAMP) MOD: Tales from the Burning Sands.esm
+ IFCHECKSUM("Tales from the Burning Sands.esm",35F7BAE7) DIRTY: 17 ITM, 0 UDR records. Needs "http://newvegas.nexusmods.com/mods/34703 FNVEdit" cleaning. A cleaning guide is available "http://www.creationkit.com/TES5Edit_Cleaning_Guide_-_TES5Edit here".
+ TAG: {{BASH: Factions, Names, Relev, Scripts}}
+IFVAR(NVAMP) MOD: Project Nevada - Core.esm
+ TAG: {{BASH: Invent}}
+IFVAR(NVAMP) MOD: ELECTRO-CITY - CompletedWorkorders.esm
+ TAG: {{BASH: Actors.ACBS, Actors.AIData, Actors.AIPackages, Destructible, Invent, Names, NpcFaces, Stats}}
 IFVAR(NVAMP) MOD: Caliber.esm
  TAG: {{BASH: Invent, Names}}
 IFVAR(NVAMP) MOD: Weapon Mod Expansion.esm
@@ -61,17 +101,23 @@ IFVAR(NVAMP) MOD: AWorldOfPain(Preview).esm
 IFVAR(NVAMP) MOD: MoMod.esm
  TAG: {{BASH: Relev}}
 IFVAR(NVAMP) MOD: Project Nevada - Equipment.esm
- TAG: {{BASH: Delev, Invent}}
+ TAG: {{BASH: Actors.ACBS, Delev, Graphics, Invent, Names, Relev, Scripts, Stats}}
 New Vegas Redesigned.esm
  TAG: {{BASH: NpcFaces, Hair, Eyes, Body-M, Body-F}}
 New Vegas Redesigned II.esm
  TAG: {{BASH: NpcFaces, Hair, Eyes, Body-M, Body-F}}
 Lings.esm
  TAG: {{BASH: Hair, Eyes}}
-MikotoBeauty.esm
+IFNOTFILE("RHKGilbertCompanion.esm") MOD: MikotoBeauty.esm
  TAG: {{BASH: Hair, Eyes, Graphics}}
+FCOMaster.esm
+ TAG: {{BASH: Actors.ACBS, NpcFaces, NPC.Race}}
 NV GameStabilizerA8.esm
  TAG: {{BASH: NoMerge}}
+YUP - NPC Fixes (Base Game).esp
+ TAG: {{BASH: Actors.ACBS, Actors.AIData, Actors.AIPackages, Actors.CombatStyle, Actors.DeathItem, Actors.Stats, Delev, Factions, Invent, Names, NpcFaces, NPC.Class, NPC.Race, Scripts}}
+YUP - NPC Fixes (Base Game + All DLC).esp
+ TAG: {{BASH: Actors.ACBS, Actors.AIData, Actors.AIPackages, Actors.CombatStyle, Actors.DeathItem, Actors.Stats, Delev, Factions, Invent, Names, NpcFaces, NPC.Class, NPC.Race, Scripts}}
 Mission Mojave - Ultimate Edition.esp
  TAG: {{BASH: Actors.AIPackages, NoMerge, Sound, Stats, Scripts}}
 MMUE - Deutsch.esp
@@ -128,6 +174,8 @@ BIS - Compiled Patch - HonestHearts.esp
  TAG: {{BASH: Names}}
 BIS - Bobblehunt Patch.esp
  TAG: {{BASH: Names}}
+REGEX: Integration - (Couriers Stash|.* Pack)(|\+Shotgun Commando)\.esp
+ TAG: {{BASH: Names, Stats}}
 NVORganizedItems.esp
  TAG: {{BASH: Names}}
 188 Trading Post Revisited.esp
@@ -200,6 +248,8 @@ VyntageVeronica02.esp
  TAG: {{BASH: NpcFaces}}
 1st Recon Revised.esp
  TAG: {{BASH: Invent}}
+Armor Replacer Child NPC Fix.esp
+ TAG: {{BASH: Actors.ACBS, Invent}}
 Doc Mitchell's House Owner.esp
  TAG: {{BASH: C.Owner}}
 monsterranch.esp
@@ -224,6 +274,14 @@ MMWE-LoreOut-VanillaSpawnChance.esp
  TAG: {{BASH: Delev, Relev}}
 Project13 - Populated Wasteland.esp
  TAG: {{BASH: Actors.AIPackages, Delev, Relev}}
+RustTownAdditions3.esp
+ TAG: {{BASH: Names, Invent, Factions}}
+UWHNV-Addon-DLC.esp
+ TAG: {{BASH: C.Light}}
+UWHNV-Addon-GRA.esp
+ TAG: {{BASH: C.Light}}
+UWHNV-Addon-FollowerHome.esp
+ TAG: {{BASH: NpcFaces, Actors.AIPackages, Actors.CombatStyle}}
 NVHarderCore.esp
  TAG: {{BASH: Names, Stats}}
 NVWastelandUnlocked.esp
@@ -348,10 +406,25 @@ BIS - Project Nevada - Core.esp
  TAG: {{BASH: Names}}
 BIS - Project Nevada - Equipment.esp
  TAG: {{BASH: Names, Invent}}
+Project Nevada - Rebalance.esp
+ TAG: {{BASH: Delev, Invent, Names, Stats}}
+Project Nevada - Cyberware.esp
+ TAG: {{BASH: Invent}}
 BIS - Project Nevada - Cyberware.esp
  TAG: {{BASH: Names}}
+Project Nevada - Rebalance Complete.esp
+ TAG: {{BASH: Relev}}
+ IFCHECKSUM("Project Nevada - Rebalance Complete.esp",E0E2C3C0) DIRTY: 22 ITM, 0 UDR records. Needs "http://newvegas.nexusmods.com/mods/34703 FNVEdit" cleaning. A cleaning guide is available "http://www.creationkit.com/TES5Edit_Cleaning_Guide_-_TES5Edit here".
+Project Nevada - All DLC.esp
+ TAG: {{BASH: Actors.DeathItem, Invent, Relev}}
+Project Nevada - Med-X Fix.esp
+ TAG: {{BASH: Names}}
+Project Brazil Project Nevada Patch.esp
+ TAG: {{BASH: Invent}}
 OWB Big Empty Overhaul.esp
  TAG: {{BASH: Names, Invent, Stats}}
+Flight of the ValkED-E.esp
+ TAG: {{BASH: Sound}}
 Improved Sound FX - Weapon Sharing Fix.esp
  TAG: {{BASH: Sound}}
 Improved Sound FX - HH Sharing Fix.esp
@@ -368,14 +441,37 @@ Improved Sound FX - Project Nevada.esp
  TAG: {{BASH: Sound}}
 LouderGuns.esp
  TAG: {{BASH: Sound}}
+avangraffscorned.esp
+ TAG: {{BASH: Actors.AIPackages}}
+ IFCHECKSUM("avangraffscorned.esp",026AB27D) DIRTY: 1 ITM, 0 UDR records. DIRTY: 1 ITM, 0 UDR records. Needs "http://newvegas.nexusmods.com/mods/34703 FNVEdit" cleaning. A cleaning guide is available "http://www.creationkit.com/TES5Edit_Cleaning_Guide_-_TES5Edit here".
+kochandbohr.esp
+ TAG: {{BASH: Actors.ACBS, Factions}}
+NewVegasBountiesII.esp
+ TAG: {{BASH: Relations}}
+rotfacetoriches.esp
+ TAG: {{BASH: Factions}}
+More Perks Update.esp
+ TAG: {{BASH: Actors.ACBS}}
+More Traits Update.esp
+ TAG: {{BASH: Actors.ACBS}}
 BIS - Sprint Mod.esp
  TAG: {{BASH: Names}}
+ACS-DeadMoney.esp
+ TAG: {{BASH: Invent}}
 ACS-HonestHearts.esp
  TAG: {{BASH: Invent}}
+ACS-LonesomeRoad.esp
+ TAG: {{BASH: Names}}
+ACS-GunRunnersArsenal.esp
+ TAG: {{BASH: Invent, Names}}
+ACS-DLCMerged.esp
+ TAG: {{BASH: Invent, Names}}
 Better Ammo Crafting.esp
  TAG: {{BASH: Names}}
 BetterCraftingSorting.esp
  TAG: {{BASH: Names}}
+KFE - Refill Water Bottles.esp
+ TAG: {{BASH: Scripts}}
 AG Shell Casing Fixes-All Five.esp
  TAG: {{BASH: Graphics}}
 AG Shell Casing Fixes Repeater-Service-ThatGun.esp
@@ -404,6 +500,8 @@ christinecos.esp
  TAG: {{BASH: Graphics}}
 GRA WRP Compatibility Patch.esp
  TAG: {{BASH: Graphics}}
+GRA-WRP-Patch-Two_Unofficial.esp
+ TAG: {{BASH: Graphics}}
 Classic Plasma Grenade.esp
  TAG: {{BASH: Graphics}}
 Classic Pulse Grenade (classic sound).esp
@@ -428,8 +526,20 @@ Shotgun Commando.esp
  TAG: {{BASH: Stats}}
 Shotgun Commando 1.2 Caravan.esp
  TAG: {{BASH: Stats}}
+Weapons.of.the.New.Millenia.CaliberX4+.Patch.esp
+ TAG: {{BASH: Delev, Graphics, Stats}}
+Weapons.of.the.New.Millenia.Store.esp
+ TAG: {{BASH: C.Light, Sound}}
+Weapons.of.the.New.Millenia.Store.LITE.esp
+ TAG: {{BASH: C.Light}}
+1nivVSLArmors.esp
+ TAG: {{BASH: Deflst, Delev, Graphics, Invent, Names, Relev}}
 Armored PA Gloves.esp
  TAG: {{BASH: Deflst}}
+AsharasLightningItems_ForNV.esp
+ TAG: {{BASH: Invent, Actors.AIData, NpcFaces}}
+DeadMoneyFemaleTuxedo.esp
+ TAG: {{BASH: Graphics}}
 DragonskinNCRPersonnelWearingOutfits.esp
  TAG: {{BASH: Relev}}
 Hereticus Faction Armors Fading.esp
@@ -442,7 +552,17 @@ KDS Wearable Backpacks.esp
  TAG: {{BASH: Invent}}
 Powered Power Armor.esp
  TAG: {{BASH: Deflst}}
+Roberts_NewVegas.esp
+ TAG: {{BASH: Body-M, Graphics}}
 Seeker Veronica.esp
+ TAG: {{BASH: Invent}}
+T6M Equipment Replacer NV.esp
+ TAG: {{BASH: Graphics, Stats}}
+Type 6.esp
+ TAG: {{BASH: Graphics, Stats}}
+TrooperOverhaul-Dragbody.esp
+ TAG: {{BASH: Deflst, Delev, Graphics, Invent, Names, Relev, Sound, Stats}}
+XVEnclaveBunker.esp
  TAG: {{BASH: Invent}}
 LingsPrettyThings.esp
  TAG: {{BASH: Eyes, Hair, Invent, Names, NPC.Class, NPC.Race, NpcFaces, R.Attributes-F, R.Attributes-M, R.Description, R.Head, R.Mouth, R.Teeth, Voice-F}}
@@ -462,6 +582,20 @@ New Vegas redesigned- Honest Hearts.esp
  TAG: {{BASH: Actors.ACBS, NpcFaces}}
 Voice dissonance fix.esp
  TAG: {{BASH: NpcFaces}}
+FCO.esp
+ TAG: {{BASH: Actors.ACBS, NpcFaces, NPC.Race}}
+FCO - Melissa Fix.esp
+ TAG: {{BASH: NPC.Race}}
+FCO - Willow.esp
+ TAG: {{BASH: NpcFaces, NPC.Race}}
+FCO - Willow (Cazy).esp
+ TAG: {{BASH: NpcFaces, NPC.Race}}
+FCO - Roberts Patch.esp
+ TAG: {{BASH: Body-M}}
+ IFCHECKSUM("FCO - Roberts Patch.esp",A03DB8AE) DIRTY: 1 ITM, 0 UDR records. Needs "http://newvegas.nexusmods.com/mods/34703 FNVEdit" cleaning. A cleaning guide is available "http://www.creationkit.com/TES5Edit_Cleaning_Guide_-_TES5Edit here".
+FCO - OWB.esp
+ TAG: {{BASH: Actors.ACBS, NpcFaces, NPC.Race}}
+ IFCHECKSUM("FCO - OWB.esp",15A3BCC8) DIRTY: 18 ITM, 0 UDR records. Needs "http://newvegas.nexusmods.com/mods/34703 FNVEdit" cleaning. A cleaning guide is available "http://www.creationkit.com/TES5Edit_Cleaning_Guide_-_TES5Edit here".
 AWOP-AhztekWeaponPatch.esp
  TAG: {{BASH: Invent}}
 AWOPCaliberXAmmoPatch.esp
@@ -472,10 +606,18 @@ CompanionLevel30Cap.esp
  TAG: {{BASH: Actors.ACBS}}
 EZ_VanillaFollowers.esp
  TAG: {{BASH: Actors.AIPackages, Actors.CombatStyle}}
+My essential friends (animals).esp
+ TAG: {{BASH: Actors.ACBS, Actors.AIPackages}}
 NVPhalanx.esp
  TAG: {{BASH: Actors.AIPackages, Actors.CombatStyle, C.Owner, Scripts}}
 RexReplacerEss.esp
  TAG: {{BASH: Graphics}}
+IFFILE("RHKGilbertCompanion.esm") MOD: MikotoBeauty.esm
+ TAG: {{BASH: Hair, Eyes, Graphics, Names}}
+RHKGilbertCompanion-Mikoto.esp
+ TAG: {{BASH: R.Mouth, R.Teeth}}
+AnimatedFan.esp
+ TAG: {{BASH: Destructible}}
 Real Weapon Names.esp
  TAG: {{BASH: Names}}
 Real Weapon Names - NPC Compnaion Weapons.esp
@@ -493,6 +635,8 @@ T3T_MiscItemIconsNV.esp
 BIS - T3T_MiscItemIconsNV 0.7.esp
  TAG: {{BASH: Names}}
 BIS - MiscItemIconsNV 0.9.esp
+ TAG: {{BASH: Names}}
+repairkitsexpanded.esp
  TAG: {{BASH: Names}}
 Sorter - Combined.esp
  TAG: {{BASH: Names}}
@@ -528,10 +672,15 @@ LFox Bottle That Water.esp
  TAG: {{BASH: Names, Scripts}}
 IFNOTFILE("Nevada Skies.esp") MOD: BIS - Project Nevada - Rebalance.esp
  TAG: {{BASH: Names}}
+RaestlozFactionArmorEnhancement.esp
+ TAG: {{BASH: Scripts}}
+RagdollOverhaulULTIMATE.esp
+ TAG: {{BASH: Actors.Skeleton}}
+ IFCHECKSUM("RagdollOverhaulULTIMATE.esp",8AB4F125) DIRTY: 15 ITM, 0 UDR records. Needs "http://newvegas.nexusmods.com/mods/34703 FNVEdit" cleaning. A cleaning guide is available "http://www.creationkit.com/TES5Edit_Cleaning_Guide_-_TES5Edit here".
 Realistic Weight.esp
- TAG: {{BASH: Stats}}
+ TAG: {{BASH: Stats, NoMerge}}
 Realistic Weight Overhaul.esp
- TAG: {{BASH: Stats}}
+ TAG: {{BASH: Stats, NoMerge}}
 Weight_Balance.esp
  TAG: {{BASH: Stats}}
 Weight_Balance_v07.esp
@@ -543,6 +692,8 @@ Weight_Rebalance_v10.esp.
 BIS - Weight_Balance_v10.esp
  TAG: {{BASH: Names}}
 WeaponModsExpanded.esp
+ TAG: {{BASH: Actors.AIData, Delev, Graphics, Invent, Names, Relev, Stats, WeaponMods}}
+WMXUE.esp
  TAG: {{BASH: Invent, Delev, WeaponMods}}
 Improved Sound FX - WMX - Weapon Sharing Fix.esp
  TAG: {{BASH: Sound}}
@@ -554,12 +705,14 @@ Frequency - WMX Patch.esp
  TAG: {{BASH: Graphics}}
 Project Nevada - WMX.esp
  TAG: {{BASH: Graphics, Invent, Names, WeaponMods}}
+WMXUE-PN.esp
+ TAG: {{BASH: Graphics, Invent, Names, WeaponMods}}
 Frequency - PN+WMX Patch.esp
  TAG: {{BASH: Graphics}}
 Real Weapon Names - WMX.esp
  TAG: {{BASH: Names}}
 WMX-ModernWeapons.esp
- TAG: {{BASH: Invent}}
+ TAG: {{BASH: Delev, Invent, Relev}}
 ACS-WMXModernWeapons.esp
  TAG: {{BASH: Invent}}
 WMX-DeadMoney.esp
@@ -573,13 +726,21 @@ WMX-OldWorldBlues.esp
 WMX-LonesomeRoad.esp
  TAG: {{BASH: Invent}}
 WMX-GunRunnersArsenal.esp
- TAG: {{BASH: Invent}}
+ TAG: {{BASH: Invent, WeaponMods}}
+WMX-DLCMerged.esp
+ TAG: {{BASH: Graphics, Invent, Names, Relev, Sound, Stats, WeaponMods}}
 Improved Sound FX - WMX - Merged Major DLCs.esp
  TAG: {{BASH: Sound}}
 Improved Sound FX - WMX - GRA Sharing Fix.esp
  TAG: {{BASH: Sound}}
+Improved Sound FX - WMX - LR Sharing Fix.esp
+ TAG: {{BASH: Sound}}
 WMX-ArenovalisTextures.esp
  TAG: {{BASH: Graphics, NoMerge}}
+WMX-POPMerged.esp
+ TAG: {{BASH: Graphics, Stats, WeaponMods}}
+REGEX: Integration - (Couriers Stash|.* Pack)\+?WMX(\+Shotgun Commando)?\.esp
+ TAG: {{BASH: Graphics, Names, Stats, WeaponMods}}
 RH_IronSights_NV_Vanilla.esp
  TAG: {{BASH: Graphics}}
 Weapon Mod Expansion.esp
@@ -614,6 +775,14 @@ BIS - WME - Honest Hearts Arenovalis Retex.esp
  TAG: {{BASH: Names}}
 EVE FNV.esp
  TAG: {{BASH: Graphics, Sound}}
+EVE FNV - ALL DLC.esp
+ TAG: {{BASH: Delev, Destructible, Graphics, Invent, Names, Scripts, Sound, Stats, WeaponMods}}
+WMX-Eve-AllDLCMerged.esp
+ TAG: {{BASH: Graphics, Stats, WeaponMods}}
+Improved Sound FX - EVE.esp
+ TAG: {{BASH: Sound}}
+WMX-EVE.esp
+ TAG: {{BASH: Graphics, WeaponMods}}
 GRA Overhaul.esp
  TAG: {{BASH: Names, Stats}}
 GRA Overhaul - EVE.esp
@@ -644,6 +813,11 @@ NV GameStabilizerA8.esp
  TAG: {{BASH: NoMerge}}
 NV GameStabilizerA9.esp
  TAG: {{BASH: NoMerge}}
+Vurt's WFO.esp
+ IFCHECKSUM("Vurt's WFO.esp",31B1B874) DIRTY: 377 ITM records. Do not clean UDRs, otherwise the game will crash on startup. Needs "http://newvegas.nexusmods.com/mods/34703 FNVEdit" cleaning. A cleaning guide is available "http://www.creationkit.com/TES5Edit_Cleaning_Guide_-_TES5Edit here".
+ IFCHECKSUM("Vurt's WFO.esp",71755F08) DIRTY: 356 ITM records. Do not clean UDRs, otherwise the game will crash on startup. Needs "http://newvegas.nexusmods.com/mods/34703 FNVEdit" cleaning. A cleaning guide is available "http://www.creationkit.com/TES5Edit_Cleaning_Guide_-_TES5Edit here".
+vault22FloralOverhaul.esp
+ IFCHECKSUM("vault22FloralOverhaul.esp",8F16FF2B) DIRTY: Do not clean, otherwise the game will crash on startup.
 LUMENARIUM - Working Sunglasses ONLY.esp
  TAG: {{BASH: Names}}
 ELECTRO-CITY - CompletedWorkorders.esp
@@ -671,8 +845,6 @@ F3NVProjectRealityMkIv4.2.esp
  TAG: {{BASH: C.Climate, C.Light}}
 ProjectRealityMkIv5HDR.esp
  TAG: {{BASH: C.Climate, C.Light}}
-Interior Lighting Overhaul.esp
- TAG: {{BASH: C.Light}}
 Interior Lighting Overhaul-Realistic.esp
  TAG: {{BASH: C.Light}}
 Interior Lighting Overhaul-Realistic Interiors-Full.esp
@@ -683,20 +855,36 @@ Interior Lighting Overhaul - Ultimate Edition.esp
  TAG: {{BASH: C.Light}}
 Interior Lighting Overhaul - Ultimate Edition - No Lucky38.esp
  TAG: {{BASH: C.Light}}
+Interior Lighting Overhaul.esp
+ TAG: {{BASH: C.Light}}
+ILO - Fallout New Vegas.esp
+ TAG: {{BASH: C.Light}}
+ILO - Fallout New Vegas - No Lucky38.esp
+ TAG: {{BASH: C.Light}}
+ILO - GS Shack.esp
+ TAG: {{BASH: C.Light}}
 ILO-RI-Original Lucky38 Suite.esp
+ TAG: {{BASH: C.Light}}
+ILO - Dead Money.esp
  TAG: {{BASH: C.Light}}
 ILO-RI-Dead Money.esp
  TAG: {{BASH: C.Light}}
+ILO - Honest Hearts.esp
+ TAG: {{BASH: C.Light}}
 ILO-RI-Honest Hearts.esp
  TAG: {{BASH: C.Light}}
+ILO - Old World Blues.esp
+ TAG: {{BASH: C.Light}}
 ILO-RI-Old World Blues.esp
+ TAG: {{BASH: C.Light}}
+ILO - Lonesome Road.esp
  TAG: {{BASH: C.Light}}
 ILO-RI-Lonesome Road.esp
  TAG: {{BASH: C.Light}}
 ILO-RI-Rust Town.esp
  TAG: {{BASH: C.Light}}
 ILO - NVInteriors Project.esp
- TAG: {{BASH: C.Light}}
+ TAG: {{BASH: C.Light, C.Owner}}
 ILO - NVInteriors Project - AWOP.esp
  TAG: {{BASH: C.Light}}
 ILO - Project Reality Patch.esp
@@ -707,3 +895,5 @@ IFFILE("Nevada Skies.esp") MOD: BIS - Project Nevada - Rebalance.esp
  TAG: {{BASH: Names}}
 EwwGhoulyBody.esp
  TAG: {{BASH: Body-F}}
+MikotoBeauty.esp
+ TAG: {{BASH: Hair, Eyes, Names}}
