@@ -148,13 +148,13 @@
         ${If} $CheckState_OB == ${BST_CHECKED}
             ; Install resources:
             ${If} Path_OB != $Empty
-                !insertmacro InstallBashFiles "Oblivion" "Oblivion" "$Path_OB" $Reg_Value_OB_Py $Reg_Value_OB_Exe "Oblivion Path" $CheckState_OB_Py $CheckState_OB_Exe true
+                !insertmacro InstallBashFiles "FalloutNV" "FalloutNV" "$Path_OB" $Reg_Value_OB_Py $Reg_Value_OB_Exe "FalloutNV Path" $CheckState_OB_Py $CheckState_OB_Exe true
             ${EndIf}
         ${EndIf}
         ${If} $CheckState_Nehrim == ${BST_CHECKED}
             ; Install resources:
             ${If} Path_Nehrim != $Empty
-                !insertmacro InstallBashFiles "Nehrim" "Oblivion" "$Path_Nehrim" $Reg_Value_Nehrim_Py $Reg_Value_Nehrim_Exe "Nehrim Path" $CheckState_Nehrim_Py $CheckState_Nehrim_Exe true
+                !insertmacro InstallBashFiles "Nehrim" "FalloutNV" "$Path_Nehrim" $Reg_Value_Nehrim_Py $Reg_Value_Nehrim_Exe "Nehrim Path" $CheckState_Nehrim_Py $CheckState_Nehrim_Exe true
             ${EndIf}
         ${EndIf}
         ${If} $CheckState_Skyrim == ${BST_CHECKED}
@@ -180,7 +180,7 @@
         WriteRegStr HKLM "Software\Wrye Flash" "Installer Path" "$EXEPATH"
         WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\Wrye Flash" "DisplayName" "Wrye Flash"
         WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\Wrye Flash" "UninstallString" '"$COMMONFILES\Wrye Flash\uninstall.exe"'
-        WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\Wrye Flash" "URLInfoAbout" 'http://oblivion.nexusmods.com/mods/22368'
+        WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\Wrye Flash" "URLInfoAbout" 'http://www.nexusmods.com/newvegas/mods/35003'
         WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\Wrye Flash" "HelpLink" 'http://forums.bethsoft.com/topic/1376871-rel-wrye-bash/'
         WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\Wrye Flash" "Publisher" 'Wrye & Wrye Flash Development Team'
         WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\Wrye Flash" "DisplayVersion" '${WB_FILEVERSION}'
@@ -199,15 +199,15 @@
             ${If} Path_OB != $Empty
                 SetOutPath $Path_OB\Mopy
                 ${If} $CheckState_OB_Py == ${BST_CHECKED}
-                    CreateShortCut "$SMPROGRAMS\Wrye Flash\Wrye Flash - Oblivion.lnk" "$Path_OB\Mopy\Wrye Flash Launcher.pyw" "" "$Path_OB\Mopy\bash\images\bash_32.ico" 0
-                    CreateShortCut "$SMPROGRAMS\Wrye Flash\Wrye Flash - Oblivion (Debug Log).lnk" "$Path_OB\Mopy\Wrye Flash Debug.bat" "" "$Path_OB\Mopy\bash\images\bash_32.ico" 0
+                    CreateShortCut "$SMPROGRAMS\Wrye Flash\Wrye Flash - FalloutNV.lnk" "$Path_OB\Mopy\Wrye Flash Launcher.pyw" "" "$Path_OB\Mopy\bash\images\bash_32.ico" 0
+                    CreateShortCut "$SMPROGRAMS\Wrye Flash\Wrye Flash - FalloutNV (Debug Log).lnk" "$Path_OB\Mopy\Wrye Flash Debug.bat" "" "$Path_OB\Mopy\bash\images\bash_32.ico" 0
                     ${If} $CheckState_OB_Exe == ${BST_CHECKED}
-                        CreateShortCut "$SMPROGRAMS\Wrye Flash\Wrye Flash (Standalone) - Oblivion.lnk" "$Path_OB\Mopy\Wrye Flash.exe"
-                        CreateShortCut "$SMPROGRAMS\Wrye Flash\Wrye Flash (Standalone) - Oblivion (Debug Log).lnk" "$Path_OB\Mopy\Wrye Flash.exe" "-d"
+                        CreateShortCut "$SMPROGRAMS\Wrye Flash\Wrye Flash (Standalone) - FalloutNV.lnk" "$Path_OB\Mopy\Wrye Flash.exe"
+                        CreateShortCut "$SMPROGRAMS\Wrye Flash\Wrye Flash (Standalone) - FalloutNV (Debug Log).lnk" "$Path_OB\Mopy\Wrye Flash.exe" "-d"
                     ${EndIf}
                 ${ElseIf} $CheckState_OB_Exe == ${BST_CHECKED}
-                    CreateShortCut "$SMPROGRAMS\Wrye Flash\Wrye Flash - Oblivion.lnk" "$Path_OB\Mopy\Wrye Flash.exe"
-                    CreateShortCut "$SMPROGRAMS\Wrye Flash\Wrye Flash - Oblivion (Debug Log).lnk" "$Path_OB\Mopy\Wrye Flash.exe" "-d"
+                    CreateShortCut "$SMPROGRAMS\Wrye Flash\Wrye Flash - FalloutNV.lnk" "$Path_OB\Mopy\Wrye Flash.exe"
+                    CreateShortCut "$SMPROGRAMS\Wrye Flash\Wrye Flash - FalloutNV (Debug Log).lnk" "$Path_OB\Mopy\Wrye Flash.exe" "-d"
                 ${EndIf}
             ${EndIf}
         ${EndIf}

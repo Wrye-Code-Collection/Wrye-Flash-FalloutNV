@@ -8,7 +8,7 @@
         ; Remove files and Directories - Directories are only deleted if empty.
         ${If} $CheckState_OB == ${BST_CHECKED}
             ${If} $Path_OB != $Empty
-                !insertmacro UninstallBash $Path_OB "Oblivion"
+                !insertmacro UninstallBash $Path_OB "FalloutNV"
             ${EndIf}
         ${EndIf}
         ${If} $CheckState_Nehrim == ${BST_CHECKED}
@@ -34,7 +34,7 @@
 
 
         ;If it is a complete uninstall remove the shared data:
-        ReadRegStr $Path_OB HKLM "Software\Wrye Flash" "Oblivion Path"
+        ReadRegStr $Path_OB HKLM "Software\Wrye Flash" "FalloutNV Path"
         ReadRegStr $Path_Nehrim HKLM "Software\Wrye Flash" "Nehrim Path"
         ReadRegStr $Path_Skyrim HKLM "Software\Wrye Flash" "Skyrim Path"
         ReadRegStr $Path_Ex1 HKLM "Software\Wrye Flash" "Extra Path 1"
