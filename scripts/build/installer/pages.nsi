@@ -59,30 +59,8 @@
 
         ; Standalone states
         ${NSD_GetState} $Check_NV_Exe $CheckState_NV_Exe
-        ${NSD_GetState} $Check_Nehrim_Exe_Remove $CheckState_Nehrim_Exe_Remove
-        ${NSD_GetState} $Check_Skyrim_Exe_Remove $CheckState_Skyrim_Exe_Remove
-        ${NSD_GetState} $Check_Ex1_Exe_Remove $CheckState_Ex1_Exe_Remove
-        ${NSD_GetState} $Check_Ex2_Exe_Remove $CheckState_Ex2_Exe_Remove
         ${If} $CheckState_NV_Exe == ${BST_CHECKED}
         ${AndIf} $CheckState_NV == ${BST_CHECKED}
-            StrCpy $ExeVersionInstall $True
-        ${Endif}
-        ${If} $CheckState_Nehrim_Exe_Remove == ${BST_CHECKED}
-        ${AndIf} $CheckState_Nehrim_Remove == ${BST_CHECKED}
-            StrCpy $ExeVersionInstall $True
-        ${Endif}
-        ${If} $CheckState_Skyrim_Exe_Remove == ${BST_CHECKED}
-        ${AndIf} $CheckState_Skyrim_Remove == ${BST_CHECKED}
-            StrCpy $ExeVersionInstall $True
-        ${EndIf}
-        ${If} $CheckState_Ex1_Exe_Remove == ${BST_CHECKED}
-        ${AndIf} $CheckState_Extra_Remove == ${BST_CHECKED}
-        ${AndIf} $CheckState_Ex1_Remove == ${BST_CHECKED}
-            StrCpy $ExeVersionInstall $True
-        ${Endif}
-        ${If} $CheckState_Ex2_Exe_Remove == ${BST_CHECKED}
-        ${AndIf} $CheckState_Extra_Remove == ${BST_CHECKED}
-        ${AndIf} $CheckState_Ex2_Remove == ${BST_CHECKED}
             StrCpy $ExeVersionInstall $True
         ${Endif}
     FunctionEnd
@@ -96,30 +74,6 @@
         StrCpy $1 $Empty
         ${If} $CheckState_NV == ${BST_CHECKED}
             ${StrLoc} $0 $Path_NV "$PROGRAMFILES\" ">"
-            ${If} "0" == $0
-                StrCpy $1 $True
-            ${Endif}
-        ${Endif}
-        ${If} $CheckState_Nehrim_Remove == ${BST_CHECKED}
-            ${StrLoc} $0 $Path_Nehrim_Remove "$PROGRAMFILES\" ">"
-            ${If} "0" == $0
-                StrCpy $1 $True
-            ${Endif}
-        ${Endif}
-        ${If} $CheckState_Skyrim_Remove == ${BST_CHECKED}
-            ${StrLoc} $0 $Path_Skyrim_Remove "$PROGRAMFILES\" ">"
-            ${If} "0" == $0
-                StrCpy $1 $True
-            ${EndIf}
-        ${EndIf}
-        ${If} $CheckState_Ex1_Remove == ${BST_CHECKED}
-            ${StrLoc} $0 $Path_Ex1_Remove "$PROGRAMFILES\" ">"
-            ${If} "0" == $0
-                StrCpy $1 $True
-            ${Endif}
-        ${Endif}
-        ${If} $CheckState_Ex2_Remove == ${BST_CHECKED}
-            ${StrLoc} $0 $Path_Ex2_Remove "$PROGRAMFILES\" ">"
             ${If} "0" == $0
                 StrCpy $1 $True
             ${Endif}
