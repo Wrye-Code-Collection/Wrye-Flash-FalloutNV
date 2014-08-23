@@ -148,50 +148,10 @@
                 ExecShell "open" "$Path_NV\Mopy\Wrye Flash.exe"
             ${EndIf}
         ${EndIf}
-        ${If} $CheckState_Nehrim_Remove == ${BST_CHECKED}
-            SetOutPath "$Path_Nehrim_Remove\Mopy"
-            ${If} $CheckState_Nehrim_Py_Remove == ${BST_CHECKED}
-                ExecShell "open" '"$Path_Nehrim_Remove\Mopy\Wrye Flash Launcher.pyw"'
-            ${ElseIf} $CheckState_Nehrim_Exe_Remove == ${BST_CHECKED}
-                ExecShell "open" "$Path_Nehrim_Remove\Mopy\Wrye Flash.exe"
-            ${EndIf}
-        ${EndIf}
-        ${If} $CheckState_Skyrim_Remove == ${BST_CHECKED}
-            SetOutPath "$Path_Skyrim_Remove\Mopy"
-            ${If} $CheckState_Skyrim_Py_Remove == ${BST_CHECKED}
-                ExecShell "open" '"%Path_Skyrim_Remove\Mopy\Wrye Flash Launcher.pyw"'
-            ${ElseIf} $CheckState_Skyrim_Exe_Remove == ${BST_CHECKED}
-                ExecShell "open" "$Path_Skyrim_Remove\Mopy\Wrye Flash.exe"
-            ${EndIf}
-        ${EndIf}
-        ${If} $CheckState_Ex1_Remove == ${BST_CHECKED}
-            SetOutPath "$Path_Ex1_Remove\Mopy"
-            ${If} $CheckState_Ex1_Py_Remove == ${BST_CHECKED}
-                ExecShell "open" '"$Path_Ex1_Remove\Mopy\Wrye Flash Launcher.pyw"'
-            ${ElseIf} $CheckState_Ex1_Exe_Remove == ${BST_CHECKED}
-                ExecShell "open" "$Path_Ex1_Remove\Mopy\Wrye Flash.exe"
-            ${EndIf}
-        ${EndIf}
-        ${If} $CheckState_Ex2_Remove == ${BST_CHECKED}
-            SetOutPath "$Path_Ex2_Remove\Mopy"
-            ${If} $CheckState_Ex2_Py_Remove == ${BST_CHECKED}
-                ExecShell "open" '"$Path_Ex2_Remove\Mopy\Wrye Flash Launcher.pyw"'
-            ${ElseIf} $CheckState_Ex2_Exe_Remove == ${BST_CHECKED}
-                ExecShell "open" "$Path_Ex2_Remove\Mopy\Wrye Flash.exe"
-            ${EndIf}
-        ${EndIf}
         ${NSD_GetState} $Check_Readme $0
         ${If} $0 == ${BST_CHECKED}
             ${If} $Path_NV != $Empty
                 ExecShell "open" "$Path_NV\Mopy\Docs\Wrye Flash General Readme.html"
-            ${ElseIf} $Path_Nehrim_Remove != $Empty
-                ExecShell "open" "$Path_Nehrim_Remove\Mopy\Docs\Wrye Flash General Readme.html"
-            ${ElseIf} $Path_Skyrim_Remove != $Empty
-                ExecShell "open" "$Path_Skyrim_Remove\Mopy\Docs\Wrye Flash General Readme.html"
-            ${ElseIf} $Path_Ex1_Remove != $Empty
-                ExecShell "open" "$Path_Ex1_Remove\Mopy\Docs\Wrye Flash General Readme.html"
-            ${ElseIf} $Path_Ex2_Remove != $Empty
-                ExecShell "open" "$Path_Ex2_Remove\Mopy\Docs\Wrye Flash General Readme.html"
             ${EndIf}
         ${EndIf}
         ${NSD_GetState} $Check_DeleteOldFiles $0
@@ -199,18 +159,6 @@
             ${If} $Path_NV != $Empty
                 !insertmacro RemoveOldFiles "$Path_NV"
             ${EndIf}
-            ${If} $Path_Nehrim_Remove != $Empty
-                !insertmacro RemoveOldFiles "$Path_Nehrim_Remove"
-            ${EndIf}
-            ${If} $Path_Skyrim_Remove != $Empty
-                !insertmacro RemoveOldFiles "$Path_Skyrim_Remove"
-            ${EndIf}
-            ${If} $Path_Ex1_Remove != $Empty
-                !insertmacro RemoveOldFiles "$Path_Ex1_Remove"
-            ${EndIf}
-            ${If} $Path_Ex2_Remove != $Empty
-                !insertmacro RemoveOldFiles "$Path_Ex2_Remove"
-                ${EndIf}
         ${EndIf}
     FunctionEnd
 
