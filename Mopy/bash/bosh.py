@@ -36399,7 +36399,7 @@ def initDirs(bashIni, personal, localAppData, falloutPath):
         # saves related stuff.
         msg = balt.fill(_('Wrye Bash cannot access the following paths:'))
         msg += '\n\n'+ '\n'.join([' * '+dir.s for dir in badPermissions]) + '\n\n'
-        msg += balt.fill(_('See: "Wrye Fash.html, Installation - Windows Vista/7" for information on how to solve this problem.'))
+        msg += balt.fill(_('See: "Wrye Flash.html, Installation - Windows Vista/7" for information on how to solve this problem.'))
         raise PermissionError(msg)
 
     # create bash user folders, keep these in order
