@@ -245,7 +245,8 @@ def CreateStandaloneExe(args, file_version):
     for file in os.listdir(os.path.join(mopy, u'bash')):
         if file.lower()[-3:] == u'.py':
             if file.lower() != u'__init__.py':
-                includes.append("'bash.game.%s'" % file[:-3])
+                # includes.append("'bash.game.%s'" % file[:-3])
+                includes.append("'bash.%s'" % file[:-3])
     includes = u','.join(includes)
 
     try:
