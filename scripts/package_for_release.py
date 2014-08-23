@@ -146,11 +146,13 @@ def CreateStandaloneExe(version, file_version, pipe=None):
 
     # Determine the extra includes needed (because py2exe wont automatically detect these)
     includes = []
-    for file in os.listdir(os.path.join(mopy,'bash','game')):
-        if file.lower()[-3:] == '.py':
-            if file.lower() != '__init__.py':
-                includes.append("'bash.game.%s'" % file[:-3])
-    includes = ','.join(includes)
+
+    #No game folder for Fallout Version
+    #for file in os.listdir(os.path.join(mopy,'bash','game')):
+    #    if file.lower()[-3:] == '.py':
+    #        if file.lower() != '__init__.py':
+    #            includes.append("'bash.game.%s'" % file[:-3])
+    #includes = ','.join(includes)
 
     # Write the setup script
     file = open(script, 'r')
