@@ -9,7 +9,7 @@
         ;  GameName - name of the game files are being installed for.  This is used for registry entries
         ;  GameTemplate - name of the game that the template files are coming from (for example, Nehrim uses FalloutNV files for templates)
         ;  GameDir - base directory for the game (one folder up from the Data directory)
-        ;  RegValuePy - Registry value for the python version (Usually of the form $Reg_Value_OB_Py)
+        ;  RegValuePy - Registry value for the python version (Usually of the form $Reg_Value_NV_Py)
         ;  RegValueExe - Registry value for the standalone version
         ;  RegPath - Name of the registry string that will hold the path installing to
         ;  DoPython - Install python version of Wrye Flash (should be {BST_CHECKED} for true - this allows you to simple pass the state of the checkbox)
