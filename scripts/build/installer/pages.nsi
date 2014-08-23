@@ -46,45 +46,14 @@
 
         ; Game paths
         ${NSD_GetText} $PathDialogue_NV $Path_NV
-        ${NSD_GetText} $PathDialogue_Nehrim_Remove $Path_Nehrim_Remove
-        ${NSD_GetText} $PathDialogue_Skyrim_Remove $Path_Skyrim_Remove
-        ${NSD_GetText} $PathDialogue_Ex1_Remove $Path_Ex1_Remove
-        ${NSD_GetText} $PathDialogue_Ex2_Remove $Path_Ex2_Remove
 
         ; Game states
         ${NSD_GetState} $Check_NV $CheckState_NV
-        ${NSD_GetState} $Check_Nehrim_Remove $CheckState_Nehrim_Remove
-        ${NSD_GetState} $Check_Skyrim_Remove $CheckState_Skyrim_Remove
-        ${NSD_GetState} $Check_Extra_Remove $CheckState_Extra_Remove
-        ${NSD_GetState} $Check_Ex1_Remove $CheckState_Ex1_Remove
-        ${NSD_GetState} $Check_Ex2_Remove $CheckState_Ex2_Remove
 
         ; Python states
         ${NSD_GetState} $Check_NV_Py $CheckState_NV_Py
-        ${NSD_GetState} $Check_Nehrim_Py_Remove $CheckState_Nehrim_Py_Remove
-        ${NSD_GetState} $Check_Skyrim_Py_Remove $CheckState_Skyrim_Py_Remove
-        ${NSD_GetState} $Check_Ex1_Py_Remove $CheckState_Ex1_Py_Remove
-        ${NSD_GetState} $Check_Ex2_Py_Remove $CheckState_Ex2_Py_Remove
         ${If} $CheckState_NV_Py == ${BST_CHECKED}
         ${AndIf} $CheckState_NV == ${BST_CHECKED}
-            StrCpy $PythonVersionInstall $True
-        ${Endif}
-        ${If} $CheckState_Nehrim_Py_Remove == ${BST_CHECKED}
-        ${AndIf} $CheckState_Nehrim_Remove == ${BST_CHECKED}
-            StrCpy $PythonVersionInstall $True
-        ${Endif}
-        ${If} $CheckState_Skyrim_Py_Remove == ${BST_CHECKED}
-        ${AndIf} $CheckState_Skyrim_Remove == ${BST_CHECKED}
-            StrCpy $PythonVersionInstall $True
-        ${EndIf}
-        ${If} $CheckState_Ex1_Py_Remove == ${BST_CHECKED}
-        ${AndIf} $CheckState_Extra_Remove == ${BST_CHECKED}
-        ${AndIf} $CheckState_Ex1_Remove == ${BST_CHECKED}
-            StrCpy $PythonVersionInstall $True
-        ${Endif}
-        ${If} $CheckState_Ex2_Py_Remove == ${BST_CHECKED}
-        ${AndIf} $CheckState_Extra_Remove == ${BST_CHECKED}
-        ${AndIf} $CheckState_Ex2_Remove == ${BST_CHECKED}
             StrCpy $PythonVersionInstall $True
         ${Endif}
 
