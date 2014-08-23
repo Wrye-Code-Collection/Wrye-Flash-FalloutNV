@@ -190,54 +190,6 @@
                 nsDialogs::OnClick $Browse_NV $Function_Browse
             IntOp $0 $0 + 13
         ${EndIf}
-        ${If} $Path_Nehrim_Remove != $Empty
-            ${NSD_CreateCheckBox} 0 $0u 100% 13u "Nehrim"
-                Pop $Check_Nehrim_Remove
-                ${NSD_SetState} $Check_Nehrim_Remove $CheckState_Nehrim_Remove
-            IntOp $0 $0 + 13
-            ${NSD_CreateDirRequest} 0 $0u 90% 13u "$Path_Nehrim_Remove"
-                Pop $PathDialogue_Nehrim_Remove
-            ${NSD_CreateBrowseButton} -10% $0u 5% 13u "..."
-                Pop $Browse_Nehrim_Remove
-                nsDialogs::OnClick $Browse_Nehrim_Remove $Function_Browse
-            IntOp $0 $0 + 13
-        ${EndIf}
-        ${If} $Path_Skyrim_Remove != $Empty
-            ${NSD_CreateCheckBox} 0 $0u 100% 13u "&Skyrim"
-                Pop $Check_Skyrim_Remove
-                ${NSD_SetState} $Check_Skyrim_Remove $CheckState_Skyrim_Remove
-            IntOp $0 $0 + 13
-            ${NSD_CreateDirRequest} 0 $0u 90% 13u "$Path_Skyrim_Remove"
-                Pop $PathDialogue_Skyrim_Remove
-            ${NSD_CreateBrowseButton} -10% %0u 5% 13u "..."
-                Pop $Browse_Skyrim_Remove
-                nsDialogs::OnClick $Browse_Skyrim_Remove $Function_Browse
-            IntOp $0 $0 + 13
-        ${EndIf}
-        ${If} $Path_Ex1_Remove != $Empty
-            ${NSD_CreateCheckBox} 0 $0u 100% 13u "Extra Location 1"
-                Pop $Check_Ex1_Remove
-                ${NSD_SetState} $Check_Ex1_Remove $CheckState_Ex1_Remove
-            IntOp $0 $0 + 13
-            ${NSD_CreateDirRequest} 0 $0u 90% 13u "$Path_Ex1_Remove"
-                Pop $PathDialogue_Ex1_Remove
-            ${NSD_CreateBrowseButton} -10% $0u 5% 13u "..."
-                Pop $Browse_Ex1_Remove
-                nsDialogs::OnClick $Browse_Ex1_Remove $Function_Browse
-            IntOp $0 $0 + 13
-        ${EndIf}
-        ${If} $Path_Ex2_Remove != $Empty
-            ${NSD_CreateCheckBox} 0 $0u 100% 13u "Extra Location 2"
-                Pop $Check_Ex2_Remove
-                ${NSD_SetState} $Check_Ex2_Remove $CheckState_Ex2_Remove
-            IntOp $0 $0 + 13
-            ${NSD_CreateDirRequest} 0 $0u 90% 13u "$Path_Ex2_Remove"
-                Pop $PathDialogue_Ex2_Remove
-            ${NSD_CreateBrowseButton} -10% $0u 5% 13u "..."
-                Pop $Browse_Ex2_Remove
-                nsDialogs::OnClick $Browse_Ex2_Remove $Function_Browse
-            IntOp $0 $0 + 13
-        ${EndIf}
         ;${NSD_CreateCheckBox} 0 $0u 100% 13u "Uninstall userfiles/Bash data."
         ;    Pop $Check_RemoveUserFiles
         ;    ${NSD_SetState} $Check_RemoveUserFiles ${BST_CHECKED}
@@ -246,14 +198,5 @@
 
     Function un.PAGE_SELECT_GAMES_Leave
         ${NSD_GetText} $PathDialogue_NV $Path_NV
-        ${NSD_GetText} $PathDialogue_Nehrim_Remove $Path_Nehrim_Remove
-        ${NSD_GetText} $PathDialogue_Skyrim_Remove $Path_Skyrim_Remove
-        ${NSD_GetText} $PathDialogue_Ex1_Remove $Path_Ex1_Remove
-        ${NSD_GetText} $PathDialogue_Ex2_Remove $Path_Ex2_Remove
         ${NSD_GetState} $Check_NV $CheckState_NV
-        ${NSD_GetState} $Check_Nehrim_Remove $CheckState_Nehrim_Remove
-        ${NSD_GetState} $Check_Skyrim_Remove $CheckState_Skyrim_Remove
-        ${NSD_GetState} $Check_Extra_Remove $CheckState_Extra_Remove
-        ${NSD_GetState} $Check_Ex1_Remove $CheckState_Ex1_Remove
-        ${NSD_GetState} $Check_Ex2_Remove $CheckState_Ex2_Remove
     FunctionEnd
