@@ -446,14 +446,6 @@
         Pop $0
         ${If} $0 == $Browse_NV
             StrCpy $1 $PathDialogue_NV
-        ${ElseIf} $0 == $Browse_Nehrim_Remove
-            StrCpy $1 $PathDialogue_Nehrim_Remove
-        ${ElseIf} $0 == $Browse_Skyrim_Remove
-            StrCpy $1 $PathDialogue_Skyrim_Remove
-        ${ElseIf} $0 == $Browse_Ex1
-            StrCpy $1 $PathDialogue_Ex1
-        ${ElseIf} $0 == $Browse_Ex2
-            StrCpy $1 $PathDialogue_Ex2
         ${EndIf}
         ${NSD_GetText} $1 $Function_DirPrompt
         nsDialogs::SelectFolderDialog /NOUNLOAD "Please select a target directory" $Function_DirPrompt
@@ -465,35 +457,6 @@
 
         ${NSD_SetText} $1 $0
     FunctionEnd
-
-    Function OnClick_Extra
-        Pop $0
-        ${NSD_GetState} $0 $CheckState_Extra
-        ${If} $CheckState_Extra == ${BST_UNCHECKED}
-            ShowWindow $Check_Ex1 ${SW_HIDE}
-            ShowWindow $Check_Ex1_Py ${SW_HIDE}
-            ShowWindow $Check_Ex1_Exe ${SW_HIDE}
-            ShowWindow $PathDialogue_Ex1 ${SW_HIDE}
-            ShowWindow $Browse_Ex1 ${SW_HIDE}
-            ShowWindow $Check_Ex2 ${SW_HIDE}
-            ShowWindow $Check_Ex2_Py ${SW_HIDE}
-            ShowWindow $Check_Ex2_Exe ${SW_HIDE}
-            ShowWindow $PathDialogue_Ex2 ${SW_HIDE}
-            ShowWindow $Browse_Ex2 ${SW_HIDE}
-        ${Else}
-            ShowWindow $Check_Ex1 ${SW_SHOW}
-            ShowWindow $Check_Ex1_Py ${SW_SHOW}
-            ShowWindow $Check_Ex1_Exe ${SW_SHOW}
-            ShowWindow $PathDialogue_Ex1 ${SW_SHOW}
-            ShowWindow $Browse_Ex1 ${SW_SHOW}
-            ShowWindow $Check_Ex2 ${SW_SHOW}
-            ShowWindow $Check_Ex2_Py ${SW_SHOW}
-            ShowWindow $Check_Ex2_Exe ${SW_SHOW}
-            ShowWindow $PathDialogue_Ex2 ${SW_SHOW}
-            ShowWindow $Browse_Ex2 ${SW_SHOW}
-        ${EndIf}
-    FunctionEnd
-
 
 ;-------------------------------- The Installation Sections:
 
