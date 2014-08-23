@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-# Python script to package up the the various Wrye Bash
+# Python script to package up the the various Wrye Flash
 # files into archives for release.
 import subprocess
 import os
@@ -48,7 +48,7 @@ except:
     have_py2exe = False
 
 
-#--GetVersionInfo: Gets version information about Wrye Bash
+#--GetVersionInfo: Gets version information about Wrye Flash
 def GetVersionInfo(padding=4):
     '''Gets version information from Mopy\bash\bass.py, returns
        a tuple: (version, file_version).  For example, a
@@ -91,7 +91,7 @@ def VerifyPy2Exe():
 
 #--Create the standard manual installer version
 def BuildManualVersion(version, pipe=None):
-    archive = os.path.join(dest, 'Wrye Bash %s - Python Source.7z' % version)
+    archive = os.path.join(dest, 'Wrye Flash %s - Python Source.7z' % version)
     cmd_7z = [exe7z, 'a', '-mx9', '-xr!.svn', '-xr!Microsoft.VC80.CRT', '-xr!*.pyc', '-xr!*.pyo', archive,'Mopy']
     subprocess.call(cmd_7z, stdout=pipe, stderr=pipe)
 
@@ -102,7 +102,7 @@ def BuildStandaloneVersion(version, file_version, pipe=None):
         CleanupStandaloneFiles()
 
 def CleanupStandaloneFiles():
-    rm(os.path.join(mopy, 'Wrye Bash.exe'))
+    rm(os.path.join(mopy, 'Wrye Flash.exe'))
     rm(os.path.join(mopy, 'w9xpopen.exe'))
 
 #--Create just the exe for the StandAlone veresion
@@ -121,7 +121,7 @@ def CreateStandaloneExe(version, file_version, pipe=None):
     icon = os.path.join(wbsa, 'bash.ico')
     manifest = os.path.join(wbsa, 'manifest.template')
     script = os.path.join(wbsa, 'setup.template')
-    exe = os.path.join(mopy, 'Wrye Bash.exe')
+    exe = os.path.join(mopy, 'Wrye Flash.exe')
     w9xexe = os.path.join(mopy, 'w9xpopen.exe')
     setup = os.path.join(mopy, 'setup.py')
     #--For l10n
@@ -179,7 +179,7 @@ def CreateStandaloneExe(version, file_version, pipe=None):
 
     # Copy the exe's to the Mopy folder
     dist = os.path.join(mopy, 'dist')
-    mv(os.path.join(dist, 'Wrye Bash Launcher.exe'), exe)
+    mv(os.path.join(dist, 'Wrye Flash Launcher.exe'), exe)
     mv(os.path.join(dist, 'w9xpopen.exe'), w9xexe)
     
     # Clean up the py2exe directories
@@ -198,14 +198,14 @@ def CreateStandaloneExe(version, file_version, pipe=None):
     rm(os.path.join(wbsa, 'ResHacker.ini'))
     rm(os.path.join(wbsa, 'ResHacker.log'))
     rm(setup)
-    rm(os.path.join(mopy, 'Wrye Bash.upx'))
+    rm(os.path.join(mopy, 'Wrye Flash.upx'))
 
     return True
 
 
 #--Package up all the files for the StandAlone version    
 def PackStandaloneVersion(version, pipe=None):
-    archive = os.path.join(dest, 'Wrye Bash %s - Standalone Executable.7z' % version)
+    archive = os.path.join(dest, 'Wrye Flash %s - Standalone Executable.7z' % version)
     cmd_7z = [exe7z, 'a', '-mx9',
               '-xr!.svn',   # Skip '.svn' dirs
               '-xr!Microsoft.VC80.CRT', # Skip MSVC runtime for the manual archive install
@@ -222,7 +222,7 @@ def BuildInstallerVersion(version, file_version, nsis=None, pipe=None):
         print >> pipe, " Could not find python module '_winreg', aborting Installer creation."
         return
 
-    script = os.path.join(scripts, 'build', 'Wrye Bash.nsi')
+    script = os.path.join(scripts, 'build', 'Wrye Flash.nsi')
     if not os.path.exists(script):
         print " Could not find nsis script '%s', aborting Installer creation." % script
         print >> pipe, " Could not find nsis script '%s', aborting Installer creation." % script
@@ -232,7 +232,7 @@ def BuildInstallerVersion(version, file_version, nsis=None, pipe=None):
         if nsis is None:
             nsis = _winreg.QueryValue(_winreg.HKEY_LOCAL_MACHINE, r'Software\NSIS')
         nsis = os.path.join(nsis, 'makensis.exe')
-        subprocess.call([nsis, '/NOCD', '/DWB_NAME=Wrye Bash %s' % version, '/DWB_FILEVERSION=%s' % file_version, script], shell=True, stdout=pipe, stderr=pipe)
+        subprocess.call([nsis, '/NOCD', '/DWB_NAME=Wrye Flash %s' % version, '/DWB_FILEVERSION=%s' % file_version, script], shell=True, stdout=pipe, stderr=pipe)
     except:
         print " Could not find 'makensis.exe', aborting Installer creation."
         print >> pipe, " Could not find 'makensis.exe', aborting Installer creation."
@@ -244,7 +244,7 @@ if __name__ == '__main__':
                         action='store_true',
                         default=False,
                         dest='wbsa',
-                        help='Build and package the standalone version of Wrye Bash'
+                        help='Build and package the standalone version of Wrye Flash'
                         )
     parser.add_option('-e', '--exe',
                         action='store_true',
@@ -256,13 +256,13 @@ if __name__ == '__main__':
                         action='store_true',
                         default=False,
                         dest='manual',
-                        help='Package the manual version of Wrye Bash'
+                        help='Package the manual version of Wrye Flash'
                         )
     parser.add_option('-i', '--installer',
                         action='store_true',
                         default=False,
                         dest='installer',
-                        help='Build the installer version of Wrye Bash'
+                        help='Build the installer version of Wrye Flash'
                         )
     parser.add_option('-n', '--nsis',
                         default=None,

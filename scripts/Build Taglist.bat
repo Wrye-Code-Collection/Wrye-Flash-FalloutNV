@@ -1,5 +1,5 @@
 @echo off
-title Wrye Bash Taglist Generator
+title Wrye Flash Taglist Generator
 echo.
 echo.
 
