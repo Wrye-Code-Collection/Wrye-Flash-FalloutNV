@@ -251,30 +251,6 @@
                 StrCpy $1 $True
             ${Endif}
         ${Endif}
-        ${If} $CheckState_Nehrim_Remove == ${BST_CHECKED}
-            ${StrLoc} $0 $Path_Nehrim_Remove "$PROGRAMFILES\" ">"
-            ${If} "0" == $0
-                StrCpy $1 $True
-            ${Endif}
-        ${Endif}
-        ${If} $CheckState_Skyrim_Remove == ${BST_CHECKED}
-            ${StrLoc} $0 $Path_Skyrim_Remove "$PROGRAMFILES\" ">"
-            ${If} "0" == $0
-                StrCpy $1 $True
-            ${EndIf}
-        ${EndIf}
-        ${If} $CheckState_Ex1 == ${BST_CHECKED}
-            ${StrLoc} $0 $Path_Ex1 "$PROGRAMFILES\" ">"
-            ${If} "0" == $0
-                StrCpy $1 $True
-            ${Endif}
-        ${Endif}
-        ${If} $CheckState_Ex2 == ${BST_CHECKED}
-            ${StrLoc} $0 $Path_Ex2 "$PROGRAMFILES\" ">"
-            ${If} "0" == $0
-                StrCpy $1 $True
-            ${Endif}
-        ${Endif}
 
         ${If} $1 == $Empty
             ; nothing installed in program files: skip this page
@@ -291,7 +267,7 @@
         Pop $Label
         SetCtlColors $Label "FF0000" "transparent"
 
-        ${NSD_CreateLabel} 0 24 100% 128u "This is a very common cause of problems when using Wrye Flash. Highly recommended that you stop this installation now, reinstall (Oblivion/Skyrim/Steam) into another directory outside of Program Files, such as C:\Games\Oblivion, and install Wrye Flash at that location.$\n$\nThe problems with installing in Program Files stem from a feature of Windows that did not exist when Oblivion was released: User Access Controls (UAC).  If you continue with the install into Program Files, you may have trouble starting or using Wrye Flash, as it may not be able to access its own files."
+        ${NSD_CreateLabel} 0 24 100% 128u "This is a very common cause of problems when using Wrye Flash. Highly recommended that you stop this installation now, reinstall (FalloutNV/Steam) into another directory outside of Program Files, such as C:\Games\FalloutNV, and install Wrye Flash at that location.$\n$\nThe problems with installing in Program Files stem from a feature of Windows that did not exist when Oblivion was released: User Access Controls (UAC).  If you continue with the install into Program Files, you may have trouble starting or using Wrye Flash, as it may not be able to access its own files."
         Pop $Label
 
         nsDialogs::Show
