@@ -578,7 +578,7 @@
         Delete "$SMPROGRAMS\Wrye Flash\*oblivion*"
     !macroend
 
-    !macro UninstallBash GamePath GameName
+    !macro UninstallFlash GamePath GameName
         !insertmacro RemoveOldFiles "${GamePath}"
         !insertmacro RemoveCurrentFiles "${GamePath}"
         !insertmacro RemoveRegistryEntries "${GameName}"
