@@ -93,17 +93,17 @@ Unicode true
     Function un.onInit
         StrCpy $Empty ""
         StrCpy $True "True"
-        ReadRegStr $Path_NV              HKLM "Software\Wrye Flash" "FalloutNV Path"
-        ReadRegStr $Reg_Value_NV_Py      HKLM "Software\Wrye Flash" "FalloutNV Python Version"
-        ReadRegStr $Reg_Value_NV_Exe     HKLM "Software\Wrye Flash" "FalloutNV Standalone Version"
+        ReadRegStr $Path_NV              HKLM "Software\Wrye FlashNV" "FalloutNV Path"
+        ReadRegStr $Reg_Value_NV_Py      HKLM "Software\Wrye FlashNV" "FalloutNV Python Version"
+        ReadRegStr $Reg_Value_NV_Exe     HKLM "Software\Wrye FlashNV" "FalloutNV Standalone Version"
     FunctionEnd
 
     Function .onInit
         StrCpy $Empty ""
         StrCpy $True "True"
-        ReadRegStr $Path_NV              HKLM "Software\Wrye Flash" "FalloutNV Path"
-        ReadRegStr $Reg_Value_NV_Py      HKLM "Software\Wrye Flash" "FalloutNV Python Version"
-        ReadRegStr $Reg_Value_NV_Exe     HKLM "Software\Wrye Flash" "FalloutNV Standalone Version"
+        ReadRegStr $Path_NV              HKLM "Software\Wrye FlashNV" "FalloutNV Path"
+        ReadRegStr $Reg_Value_NV_Py      HKLM "Software\Wrye FlashNV" "FalloutNV Python Version"
+        ReadRegStr $Reg_Value_NV_Exe     HKLM "Software\Wrye FlashNV" "FalloutNV Standalone Version"
 
         StrCpy $MinVersion_Comtypes '0.6.2'
         StrCpy $MinVersion_wx '2.8.12'

@@ -14,22 +14,22 @@
 
 
         ;If it is a complete uninstall remove the shared data:
-        ReadRegStr $Path_NV HKLM "Software\Wrye Flash" "FalloutNV Path"
+        ReadRegStr $Path_NV HKLM "Software\Wrye FlashNV" "FalloutNV Path"
         ${If} $Path_NV == $Empty
-            DeleteRegKey HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\Wrye Flash"
-            ReadRegStr $0 HKLM "Software\Wrye Flash" "Installer Path"
-            DeleteRegKey HKLM "SOFTWARE\Wrye Flash"
+            DeleteRegKey HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\Wrye FlashNV"
+            ReadRegStr $0 HKLM "Software\Wrye FlashNV" "Installer Path"
+            DeleteRegKey HKLM "SOFTWARE\Wrye FlashNV"
             ;Delete stupid Windows created registry keys:
-            DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\App Management\ARPCache\Wrye Flash"
-            DeleteRegValue HKCR "Local Settings\Software\Microsoft\Windows\Shell\MuiCache" "$COMMONFILES\Wrye Flash\Uninstall.exe"
-            DeleteRegValue HKCU "Software\Classes\Local Settings\Software\Microsoft\Windows\Shell\MuiCache" "$COMMONFILES\Wrye Flash\Uninstall.exe"
-            DeleteRegValue HKCU "Software\Microsoft\Windows\ShellNoRoam\MuiCache" "$COMMONFILES\Wrye Flash\Uninstall.exe"
+            DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\App Management\ARPCache\Wrye FlashNV"
+            DeleteRegValue HKCR "Local Settings\Software\Microsoft\Windows\Shell\MuiCache" "$COMMONFILES\Wrye FlashNV\Uninstall.exe"
+            DeleteRegValue HKCU "Software\Classes\Local Settings\Software\Microsoft\Windows\Shell\MuiCache" "$COMMONFILES\Wrye FlashNV\Uninstall.exe"
+            DeleteRegValue HKCU "Software\Microsoft\Windows\ShellNoRoam\MuiCache" "$COMMONFILES\Wrye FlashNV\Uninstall.exe"
             DeleteRegValue HKCR "Local Settings\Software\Microsoft\Windows\Shell\MuiCache" "$0"
             DeleteRegValue HKCU "Software\Classes\Local Settings\Software\Microsoft\Windows\Shell\MuiCache" "$0"
             DeleteRegValue HKCU "Software\Microsoft\Windows\ShellNoRoam\MuiCache" "$0"
-            Delete "$SMPROGRAMS\Wrye Flash\*.*"
-            RMDir "$SMPROGRAMS\Wrye Flash"
-            Delete "$COMMONFILES\Wrye Flash\*.*"
-            RMDir "$COMMONFILES\Wrye Flash"
+            Delete "$SMPROGRAMS\Wrye FlashNV\*.*"
+            RMDir "$SMPROGRAMS\Wrye FlashNV"
+            Delete "$COMMONFILES\Wrye FlashNV\*.*"
+            RMDir "$COMMONFILES\Wrye FlashNV"
         ${EndIf}
         SectionEnd
