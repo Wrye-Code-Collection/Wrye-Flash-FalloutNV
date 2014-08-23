@@ -532,18 +532,22 @@
                 ; SetOutPath "$Path_NV\Mopy\templates"
                 ; File /r "Mopy\templates\*.*"
 
-                SetOutPath $Path_NV\Data
+                ;SetOutPath $Path_NV\Data
                 ; no archive invalidation exists users should use NMM or FOMM
                 ; File /r "Mopy\templates\FalloutNV\ArchiveInvalidationInvalidated!.bsa"
                 ; taglist for BOSS
                 ; do not copy Bash_Groups.csv because it's for oblivion
+                SetOutPath $Path_NV\Data
+                SetOutPath $Path_NV\Data\Bash Patches
                 SetOutPath "$Path_NV\Data\Bash Patches"
                 File /r "Data\Bash Patches\taglist.txt"
                 ; Documentation aside from the main file in the Mopy folder
                 ; TODO Move the main Doc file to the Docs folder
+                SetOutPath $Path_NV\Data\Docs
                 SetOutPath "$Path_NV\Data\Docs"
                 File /r "Data\Docs\*.*"
                 ; INI Tweaks
+                SetOutPath $Path_NV\Data\INI Tweaks
                 SetOutPath "$Path_NV\Data\INI Tweaks"
                 File /r "Data\INI Tweaks\*.*"
 
