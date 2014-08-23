@@ -57,7 +57,7 @@ Unicode true
     Var Check_Readme
     Var Check_DeleteOldFiles
     Var Function_Browse
-    Var Function_Extra
+    ; Var Function_Extra
     Var Function_DirPrompt
     Var unFunction_Browse
     Var Python_Path
