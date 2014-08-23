@@ -678,12 +678,14 @@
                 SetOutPath $Path_NV\Mopy
                 File /r /x "*.svn*" /x "*.bat" /x "*.py*" /x "w9xpopen.exe" /x "Wrye Flash.exe" "Mopy\*.*"
                 SetOutPath $Path_NV\Data
-                File /r "Mopy\templates\Oblivion\ArchiveInvalidationInvalidated!.bsa"
-                SetOutPath "$Path_NV\Mopy\Bash Patches\Oblivion"
-                File /r "Mopy\Bash Patches\Oblivion\*.*"
+                ; no archive invalidation exists users should use NMM or FOMM
+                ; File /r "Mopy\templates\Oblivion\ArchiveInvalidationInvalidated!.bsa"
+                SetOutPath "$Path_NV\Mopy\Bash Patches"
+                File /r "Mopy\Bash Patches\*.*"
                 SetOutPath $Path_NV\Data\Docs
-                SetOutPath "$Path_NV\Mopy\INI Tweaks\Oblivion"
-                File /r "Mopy\INI Tweaks\Oblivion\*.*"
+                File /r "Data\Docs\*.*"
+                SetOutPath "$Path_NV\Mopy\INI Tweaks"
+                File /r "Mopy\INI Tweaks\*.*"
                 ; Write the installation path into the registry
                 WriteRegStr HKLM "SOFTWARE\Wrye Flash" "FalloutNV Path" "$Path_NV"
                 ${If} $CheckState_NV_Py == ${BST_CHECKED}
@@ -708,137 +710,13 @@
                 ${EndIf}
             ${EndIf}
         ${EndIf}
-        ${If} $CheckState_Nehrim_Remove == ${BST_CHECKED}
-            ; Install resources:
-            ${If} Path_Nehrim_Remove != $Empty
-                SetOutPath $Path_Nehrim_Remove\Mopy
-                File /r /x "*.svn*" /x "*.bat" /x "*.py*" /x "w9xpopen.exe" /x "Wrye Flash.exe" "Mopy\*.*"
-                SetOutPath $Path_Nehrim_Remove\Data
-                File /r "Mopy\templates\Oblivion\ArchiveInvalidationInvalidated!.bsa"
-                SetOutPath "$Path_Nehrim_Remove\Mopy\Bash Patches\Oblivion"
-                File /r "Mopy\Bash Patches\Oblivion\*.*"
-                SetOutPath $Path_Nehrim_Remove\Data\Docs
-                SetOutPath "$Path_Nehrim_Remove\Mopy\INI Tweaks\Oblivion"
-                File /r "Mopy\INI Tweaks\Oblivion\*.*"
-                ; Write the installation path into the registry
-                WriteRegStr HKLM "SOFTWARE\Wrye Flash" "Nehrim Path" "$Path_Nehrim_Remove"
-                ${If} $CheckState_Nehrim_Py_Remove == ${BST_CHECKED}
-                    SetOutPath "$Path_Nehrim_Remove\Mopy"
-                    File /r "Mopy\*.py" "Mopy\*.pyw" "Mopy\*.bat"
-                    ; Write the installation path into the registry
-                    WriteRegStr HKLM "SOFTWARE\Wrye Flash" "Nehrim Python Version" "True"
-                ${Else}
-                    ${If} $Reg_Value_Nehrim_Py_Remove == $Empty ; ie don't overwrite it if it is installed but just not being installed that way this time.
-                        WriteRegStr HKLM "SOFTWARE\Wrye Flash" "Nehrim Python Version" ""
-                    ${EndIf}
-                ${EndIf}
-                ${If} $CheckState_Nehrim_Exe_Remove == ${BST_CHECKED}
-                    SetOutPath "$Path_Nehrim_Remove\Mopy"
-                    File "Mopy\w9xpopen.exe" "Mopy\Wrye Flash.exe"
-                    ; Write the installation path into the registry
-                    WriteRegStr HKLM "SOFTWARE\Wrye Flash" "Nehrim Standalone Version" "True"
-                ${Else}
-                    ${If} $Reg_Value_Nehrim_Exe_Remove == $Empty ; ie don't overwrite it if it is installed but just not being installed that way this time.
-                        WriteRegStr HKLM "SOFTWARE\Wrye Flash" "Nehrim Standalone Version" ""
-                    ${EndIf}
-                ${EndIf}
-            ${EndIf}
-        ${EndIf}
-        ${If} $CheckState_Skyrim_Remove == ${BST_CHECKED}
-            ; Install resources:
-            ${If} Path_Skyrim_Remove != $Empty
-                SetOutPath $Path_Skyrim_Remove\Mopy
-                File /r /x "*.svn*" /x "*.bat" /x "*.py*" /x "w9xpopen.exe" /x "Wrye Flash.exe" "Mopy\*.*"
-                SetOutPath "$Path_Skyrim_Remove\Mopy\Bash Patches\Skyrim"
-                File /r "Mopy\Bash Patches\Skyrim\*.*"
-                SetOutPath $Path_Skyrim_Remove\Data\Docs
-                SetOutPath "$Path_Skyrim_Remove\Mopy\INI Tweaks\Skyrim"
-                File /r "Mopy\INI Tweaks\Skyrim\*.*"
-                ; Write the installation path into the registry
-                WriteRegStr HKLM "SOFTWARE\Wrye Flash" "Skyrim Path" "$Path_Skyrim_Remove"
-                ${If} $CheckState_Skyrim_Remove == ${BST_CHECKED}
-                    SetOutPath "$Path_Skyrim_Remove\Mopy"
-                    File /r "Mopy\*.py" "Mopy\*.pyw" "Mopy\*.bat"
-                    ; Write the installation path into the registry
-                    WriteRegStr HKLM "SOFTWARE\Wrye Flash" "Skyrim Python Version" "True"
-                ${ElseIf} $Reg_Value_Skyrim_Py_Remove == $Empty ; id don't overwrite it if it is installed but just not being installed that way this time.
-                    WriteRegStr HKLM "SOFTWARE\Wrye Flash" "Skyrim Python Version" ""
-                ${EndIf}
-                ${If} $CheckState_Skyrim_Exe_Remove == ${BST_CHECKED}
-                    SetOutPath "$Path_Skyrim_Remove\Mopy"
-                    File "Mopy\w9xpopen.exe" "Mopy\Wrye Flash.exe"
-                    ; Write the installation path into the registry
-                    WriteRegStr HKLM "SOFTWARE\Wrye Flash" "Skyrim Standalone Version" "True"
-                ${ElseIf} $Reg_Value_Skyrim_Exe_Remove == $Empty ; ie don't overwrite it if it is installed but just not being installed that way this time.
-                    WriteRegStr HKLM "SOFTWARE\Wrye Flash" "Skyrim Standalond Version" ""
-                ${EndIf}
-            ${EndIf}
-        ${EndIf}
-        ${If} $CheckState_Ex1 == ${BST_CHECKED}
-            ; Install resources:
-            ${If} Path_Ex1 != $Empty
-                SetOutPath $Path_Ex1\Mopy
-                File /r /x "*.svn*" /x "*.bat" /x "*.py*" /x "w9xpopen.exe" /x "Wrye Flash.exe" "Mopy\*.*"
-                ; Write the installation path into the registry
-                WriteRegStr HKLM "SOFTWARE\Wrye Flash" "Extra Path 1" "$Path_Ex1"
-                ${If} $CheckState_Ex1_Py == ${BST_CHECKED}
-                    SetOutPath "$Path_Ex1\Mopy"
-                    File /r "Mopy\*.py" "Mopy\*.pyw" "Mopy\*.bat"
-                    ; Write the installation path into the registry
-                    WriteRegStr HKLM "SOFTWARE\Wrye Flash" "Extra Path 1 Python Version" "True"
-                ${Else}
-                    ${If} $Reg_Value_Ex1_Py == $Empty ; ie don't overwrite it if it is installed but just not being installed that way this time.
-                        WriteRegStr HKLM "SOFTWARE\Wrye Flash" "Extra Path 1 Python Version" ""
-                    ${EndIf}
-                ${EndIf}
-                ${If} $CheckState_Ex1_Exe == ${BST_CHECKED}
-                    SetOutPath "$Path_Ex1\Mopy"
-                    File "Mopy\w9xpopen.exe" "Mopy\Wrye Flash.exe"
-                    ; Write the installation path into the registry
-                    WriteRegStr HKLM "SOFTWARE\Wrye Flash" "Extra Path 1 Standalone Version" "True"
-                ${Else}
-                    ${If} $Reg_Value_Ex1_Exe == $Empty ; ie don't overwrite it if it is installed but just not being installed that way this time.
-                        WriteRegStr HKLM "SOFTWARE\Wrye Flash" "Extra Path 1 Standalone Version" ""
-                    ${EndIf}
-                ${EndIf}
-            ${EndIf}
-        ${EndIf}
-        ${If} $CheckState_Ex2 == ${BST_CHECKED}
-            ; Install resources:
-            ${If} Path_Ex2 != $Empty
-                SetOutPath $Path_Ex2\Mopy
-                File /r /x "*.svn*" /x "*.bat" /x "*.py*" /x "w9xpopen.exe" /x "Wrye Flash.exe" "Mopy\*.*"
-                ; Write the installation path into the registry
-                WriteRegStr HKLM "SOFTWARE\Wrye Flash" "Extra Path 2" "$Path_Ex2"
-                ${If} $CheckState_Ex2_Py == ${BST_CHECKED}
-                    SetOutPath "$Path_Ex2\Mopy"
-                    File /r "Mopy\*.py" "Mopy\*.pyw" "Mopy\*.bat"
-                    ; Write the installation path into the registry
-                    WriteRegStr HKLM "SOFTWARE\Wrye Flash" "Extra Path 2 Python Version" "True"
-                ${Else}
-                    ${If} $Reg_Value_Ex2_Py == $Empty ; ie don't overwrite it if it is installed but just not being installed that way this time.
-                        WriteRegStr HKLM "SOFTWARE\Wrye Flash" "Extra Path 2 Python Version" ""
-                    ${EndIf}
-                ${EndIf}
-                ${If} $CheckState_Ex2_Exe == ${BST_CHECKED}
-                    SetOutPath "$Path_Ex2\Mopy"
-                    File "Mopy\w9xpopen.exe" "Mopy\Wrye Flash.exe"
-                    ; Write the installation path into the registry
-                    WriteRegStr HKLM "SOFTWARE\Wrye Flash" "Extra Path 2 Standalone Version" "True"
-                ${Else}
-                    ${If} $Reg_Value_Ex2_Exe == $Empty ; ie don't overwrite it if it is installed but just not being installed that way this time.
-                        WriteRegStr HKLM "SOFTWARE\Wrye Flash" "Extra Path 2 Standalone Version" ""
-                    ${EndIf}
-                ${EndIf}
-            ${EndIf}
-        ${EndIf}
         ; Write the uninstall keys for Windows
         SetOutPath "$COMMONFILES\Wrye Flash"
         WriteRegStr HKLM "Software\Wrye Flash" "Installer Path" "$EXEPATH"
         WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\Wrye Flash" "DisplayName" "Wrye Flash"
         WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\Wrye Flash" "UninstallString" '"$COMMONFILES\Wrye Flash\uninstall.exe"'
-        WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\Wrye Flash" "URLInfoAbout" 'http://oblivion.nexusmods.com/mods/22368'
-        WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\Wrye Flash" "HelpLink" 'http://forums.bethsoft.com/topic/1376871-rel-wrye-bash/'
+        WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\Wrye Flash" "URLInfoAbout" 'http://www.nexusmods.com/newvegas/mods/35003'
+        WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\Wrye Flash" "HelpLink" 'http://forums.bethsoft.com/topic/1234195-relz-wrye-flash-nv/'
         WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\Wrye Flash" "Publisher" 'Wrye & Wrye Flash Development Team'
         WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\Wrye Flash" "DisplayVersion" '${WB_FILEVERSION}'
         WriteRegDWORD HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\Wrye Flash" "NoModify" 1
