@@ -1,5 +1,5 @@
 ; pages.nsi
-; Custom pages for the Wrye Bash NSIS installer / uninstaller
+; Custom pages for the Wrye Flash NSIS installer / uninstaller
 
 
 ;---------------------------- Install Locations Page
@@ -14,18 +14,18 @@
             Abort
         ${EndIf}
 
-        ${NSD_CreateLabel} 0 0 100% 24u "Select which Game(s)/Extra location(s) which you would like to install Wrye Bash for.$\nAlso select which version(s) to install (Standalone exe (default) and/or Python version)."
+        ${NSD_CreateLabel} 0 0 100% 24u "Select which Game(s)/Extra location(s) which you would like to install Wrye Flash for.$\nAlso select which version(s) to install (Standalone exe (default) and/or Python version)."
             Pop $Label
             IntOp $0 0 + 25
         ${If} $Path_OB != $Empty
             ${NSD_CreateCheckBox} 0 $0u 30% 13u "Install for Oblivion"
                 Pop $Check_OB
                 ${NSD_SetState} $Check_OB $CheckState_OB
-            ${NSD_CreateCheckBox} 30% $0u 40% 13u "Wrye Bash [Standalone]"
+            ${NSD_CreateCheckBox} 30% $0u 40% 13u "Wrye Flash [Standalone]"
                 Pop $Check_OB_Exe
                 ${NSD_AddStyle} $Check_OB_Exe ${WS_GROUP}
                 ${NSD_SetState} $Check_OB_Exe  $CheckState_OB_Exe
-            ${NSD_CreateCheckBox} 70% $0u 30% 13u "Wrye Bash [Python]"
+            ${NSD_CreateCheckBox} 70% $0u 30% 13u "Wrye Flash [Python]"
                 Pop $Check_OB_Py
 ;                ${NSD_SetState} $Check_OB_Py  $CheckState_OB_Py
             IntOp $0 $0 + 13
@@ -40,11 +40,11 @@
             ${NSD_CreateCheckBox} 0 $0u 30% 13u "Install for Nehrim"
                 Pop $Check_Nehrim
                 ${NSD_SetState} $Check_Nehrim $CheckState_Nehrim
-            ${NSD_CreateCheckBox} 30% $0u 40% 13u "Wrye Bash [Standalone]"
+            ${NSD_CreateCheckBox} 30% $0u 40% 13u "Wrye Flash [Standalone]"
                 Pop $Check_Nehrim_Exe
                 ${NSD_AddStyle} $Check_Nehrim_Exe ${WS_GROUP}
                 ${NSD_SetState} $Check_Nehrim_Exe  $CheckState_Nehrim_Exe
-            ${NSD_CreateCheckBox} 70% $0u 30% 13u "Wrye Bash [Python]"
+            ${NSD_CreateCheckBox} 70% $0u 30% 13u "Wrye Flash [Python]"
                 Pop $Check_Nehrim_Py
 ;                ${NSD_SetState} $Check_Nehrim_Py  $CheckState_Nehrim_Py
             IntOp $0 $0 + 13
@@ -59,11 +59,11 @@
             ${NSD_CreateCheckBox} 0 $0u 30% 13u "Install for Skyrim"
                 Pop $Check_Skyrim
                 ${NSD_SetState} $Check_Skyrim $CheckState_Skyrim
-            ${NSD_CreateCheckBox} 30% $0u 40% 13u "Wrye Bash [Standalone]"
+            ${NSD_CreateCheckBox} 30% $0u 40% 13u "Wrye Flash [Standalone]"
                 Pop $Check_Skyrim_Exe
                 ${NSD_AddStyle} $Check_Skyrim_Exe ${WS_GROUP}
                 ${NSD_SetState} $Check_Skyrim_Exe $CheckState_Skyrim_Exe
-            ${NSD_CreateCheckBox} 70% $0u 30% 13u "Wrye Bash [Python]"
+            ${NSD_CreateCheckBox} 70% $0u 30% 13u "Wrye Flash [Python]"
                 Pop $Check_Skyrim_Py
 ;                ${NSD_SetState} $Check_Skyrim_Py $CheckState_Skyrim_Py
             IntOp $0 $0 + 13
@@ -82,11 +82,11 @@
             ${NSD_CreateCheckBox} 0 $0u 30% 13u "Extra Location #1:"
                 Pop $Check_Ex1
                 ${NSD_SetState} $Check_Ex1 $CheckState_Ex1
-                ${NSD_CreateCheckBox} 30% $0u 40% 13u "Wrye Bash [Standalone]"
+                ${NSD_CreateCheckBox} 30% $0u 40% 13u "Wrye Flash [Standalone]"
                     Pop $Check_Ex1_Exe
                     ${NSD_AddStyle} $Check_Ex1_Exe ${WS_GROUP}
                     ${NSD_SetState} $Check_Ex1_Exe  $CheckState_Ex1_Exe
-                ${NSD_CreateCheckBox} 70% $0u 30% 13u "Wrye Bash [Python]"
+                ${NSD_CreateCheckBox} 70% $0u 30% 13u "Wrye Flash [Python]"
                     Pop $Check_Ex1_Py
 ;                    ${NSD_SetState} $Check_Ex1_Py  $CheckState_Ex1_Py
                 IntOp $0 $0 + 13
@@ -99,11 +99,11 @@
             ${NSD_CreateCheckBox} 0 $0u 30% 13u "Extra Location #2:"
                 Pop $Check_Ex2
                 ${NSD_SetState} $Check_Ex2 $CheckState_Ex2
-                ${NSD_CreateCheckBox} 30% $0u 40% 13u "Wrye Bash [Standalone]"
+                ${NSD_CreateCheckBox} 30% $0u 40% 13u "Wrye Flash [Standalone]"
                     Pop $Check_Ex2_Exe
                     ${NSD_AddStyle} $Check_Ex2_Exe ${WS_GROUP}
                     ${NSD_SetState} $Check_Ex2_Exe  $CheckState_Ex2_Exe
-                ${NSD_CreateCheckBox} 70% $0u 30% 13u "Wrye Bash [Python]"
+                ${NSD_CreateCheckBox} 70% $0u 30% 13u "Wrye Flash [Python]"
                     Pop $Check_Ex2_Py
 ;                    ${NSD_SetState} $Check_Ex2_Py  $CheckState_Ex2_Py
                 IntOp $0 $0 + 13
@@ -255,11 +255,11 @@
             Abort
         ${EndIf}
 
-        ${NSD_CreateLabel} 0 0 100% 24u "You are attempting to install Wrye Bash into the Program Files directory."
+        ${NSD_CreateLabel} 0 0 100% 24u "You are attempting to install Wrye Flash into the Program Files directory."
         Pop $Label
         SetCtlColors $Label "FF0000" "transparent"
 
-        ${NSD_CreateLabel} 0 24 100% 128u "This is a very common cause of problems when using Wrye Bash. Highly recommended that you stop this installation now, reinstall (Oblivion/Skyrim/Steam) into another directory outside of Program Files, such as C:\Games\Oblivion, and install Wrye Bash at that location.$\n$\nThe problems with installing in Program Files stem from a feature of Windows that did not exist when Oblivion was released: User Access Controls (UAC).  If you continue with the install into Program Files, you may have trouble starting or using Wrye Bash, as it may not be able to access its own files."
+        ${NSD_CreateLabel} 0 24 100% 128u "This is a very common cause of problems when using Wrye Flash. Highly recommended that you stop this installation now, reinstall (Oblivion/Skyrim/Steam) into another directory outside of Program Files, such as C:\Games\Oblivion, and install Wrye Flash at that location.$\n$\nThe problems with installing in Program Files stem from a feature of Windows that did not exist when Oblivion was released: User Access Controls (UAC).  If you continue with the install into Program Files, you may have trouble starting or using Wrye Flash, as it may not be able to access its own files."
         Pop $Label
 
         nsDialogs::Show
@@ -273,11 +273,11 @@
     Function PAGE_FINISH
         !insertmacro MUI_HEADER_TEXT $(PAGE_FINISH_TITLE) $(PAGE_FINISH_SUBTITLE)
 
-        ReadRegStr $Path_OB HKLM "Software\Wrye Bash" "Oblivion Path"
-        ReadRegStr $Path_Nehrim HKLM "Software\Wrye Bash" "Nehrim Path"
-        ReadRegStr $Path_Skyrim HKLM "Software\Wrye Bash" "Skyrim Path"
-        ReadRegStr $Path_Ex1 HKLM "Software\Wrye Bash" "Extra Path 1"
-        ReadRegStr $Path_Ex2 HKLM "Software\Wrye Bash" "Extra Path 2"
+        ReadRegStr $Path_OB HKLM "Software\Wrye Flash" "Oblivion Path"
+        ReadRegStr $Path_Nehrim HKLM "Software\Wrye Flash" "Nehrim Path"
+        ReadRegStr $Path_Skyrim HKLM "Software\Wrye Flash" "Skyrim Path"
+        ReadRegStr $Path_Ex1 HKLM "Software\Wrye Flash" "Extra Path 1"
+        ReadRegStr $Path_Ex2 HKLM "Software\Wrye Flash" "Extra Path 2"
 
         nsDialogs::Create 1018
             Pop $Dialog
@@ -286,7 +286,7 @@
         ${EndIf}
 
         IntOp $0 0 + 0
-        ${NSD_CreateLabel} 0 0 100% 16u "Please select which Wrye Bash installation(s), if any, you would like to run right now:"
+        ${NSD_CreateLabel} 0 0 100% 16u "Please select which Wrye Flash installation(s), if any, you would like to run right now:"
             Pop $Label
         IntOp $0 0 + 17
         ${If} $Path_OB != $Empty
@@ -336,55 +336,55 @@
         ${If} $CheckState_OB == ${BST_CHECKED}
             SetOutPath "$Path_OB\Mopy"
             ${If} $CheckState_OB_Py == ${BST_CHECKED}
-                ExecShell "open" '"$Path_OB\Mopy\Wrye Bash Launcher.pyw"'
+                ExecShell "open" '"$Path_OB\Mopy\Wrye Flash Launcher.pyw"'
             ${ElseIf} $CheckState_OB_Exe == ${BST_CHECKED}
-                ExecShell "open" "$Path_OB\Mopy\Wrye Bash.exe"
+                ExecShell "open" "$Path_OB\Mopy\Wrye Flash.exe"
             ${EndIf}
         ${EndIf}
         ${If} $CheckState_Nehrim == ${BST_CHECKED}
             SetOutPath "$Path_Nehrim\Mopy"
             ${If} $CheckState_Nehrim_Py == ${BST_CHECKED}
-                ExecShell "open" '"$Path_Nehrim\Mopy\Wrye Bash Launcher.pyw"'
+                ExecShell "open" '"$Path_Nehrim\Mopy\Wrye Flash Launcher.pyw"'
             ${ElseIf} $CheckState_Nehrim_Exe == ${BST_CHECKED}
-                ExecShell "open" "$Path_Nehrim\Mopy\Wrye Bash.exe"
+                ExecShell "open" "$Path_Nehrim\Mopy\Wrye Flash.exe"
             ${EndIf}
         ${EndIf}
         ${If} $CheckState_Skyrim == ${BST_CHECKED}
             SetOutPath "$Path_Skyrim\Mopy"
             ${If} $CheckState_Skyrim_Py == ${BST_CHECKED}
-                ExecShell "open" '"%Path_Skyrim\Mopy\Wrye Bash Launcher.pyw"'
+                ExecShell "open" '"%Path_Skyrim\Mopy\Wrye Flash Launcher.pyw"'
             ${ElseIf} $CheckState_Skyrim_Exe == ${BST_CHECKED}
-                ExecShell "open" "$Path_Skyrim\Mopy\Wrye Bash.exe"
+                ExecShell "open" "$Path_Skyrim\Mopy\Wrye Flash.exe"
             ${EndIf}
         ${EndIf}
         ${If} $CheckState_Ex1 == ${BST_CHECKED}
             SetOutPath "$Path_Ex1\Mopy"
             ${If} $CheckState_Ex1_Py == ${BST_CHECKED}
-                ExecShell "open" '"$Path_Ex1\Mopy\Wrye Bash Launcher.pyw"'
+                ExecShell "open" '"$Path_Ex1\Mopy\Wrye Flash Launcher.pyw"'
             ${ElseIf} $CheckState_Ex1_Exe == ${BST_CHECKED}
-                ExecShell "open" "$Path_Ex1\Mopy\Wrye Bash.exe"
+                ExecShell "open" "$Path_Ex1\Mopy\Wrye Flash.exe"
             ${EndIf}
         ${EndIf}
         ${If} $CheckState_Ex2 == ${BST_CHECKED}
             SetOutPath "$Path_Ex2\Mopy"
             ${If} $CheckState_Ex2_Py == ${BST_CHECKED}
-                ExecShell "open" '"$Path_Ex2\Mopy\Wrye Bash Launcher.pyw"'
+                ExecShell "open" '"$Path_Ex2\Mopy\Wrye Flash Launcher.pyw"'
             ${ElseIf} $CheckState_Ex2_Exe == ${BST_CHECKED}
-                ExecShell "open" "$Path_Ex2\Mopy\Wrye Bash.exe"
+                ExecShell "open" "$Path_Ex2\Mopy\Wrye Flash.exe"
             ${EndIf}
         ${EndIf}
         ${NSD_GetState} $Check_Readme $0
         ${If} $0 == ${BST_CHECKED}
             ${If} $Path_OB != $Empty
-                ExecShell "open" "$Path_OB\Mopy\Docs\Wrye Bash General Readme.html"
+                ExecShell "open" "$Path_OB\Mopy\Docs\Wrye Flash General Readme.html"
             ${ElseIf} $Path_Nehrim != $Empty
-                ExecShell "open" "$Path_Nehrim\Mopy\Docs\Wrye Bash General Readme.html"
+                ExecShell "open" "$Path_Nehrim\Mopy\Docs\Wrye Flash General Readme.html"
             ${ElseIf} $Path_Skyrim != $Empty
-                ExecShell "open" "$Path_Skyrim\Mopy\Docs\Wrye Bash General Readme.html"
+                ExecShell "open" "$Path_Skyrim\Mopy\Docs\Wrye Flash General Readme.html"
             ${ElseIf} $Path_Ex1 != $Empty
-                ExecShell "open" "$Path_Ex1\Mopy\Docs\Wrye Bash General Readme.html"
+                ExecShell "open" "$Path_Ex1\Mopy\Docs\Wrye Flash General Readme.html"
             ${ElseIf} $Path_Ex2 != $Empty
-                ExecShell "open" "$Path_Ex2\Mopy\Docs\Wrye Bash General Readme.html"
+                ExecShell "open" "$Path_Ex2\Mopy\Docs\Wrye Flash General Readme.html"
             ${EndIf}
         ${EndIf}
         ${NSD_GetState} $Check_DeleteOldFiles $0
@@ -419,7 +419,7 @@
             Abort
             ${EndIf}
 
-        ${NSD_CreateLabel} 0 0 100% 8u "Please select which game(s)/extra location(s) and version(s) to uninstall Wrye Bash from:"
+        ${NSD_CreateLabel} 0 0 100% 8u "Please select which game(s)/extra location(s) and version(s) to uninstall Wrye Flash from:"
         Pop $Label
 
         IntOp $0 0 + 9

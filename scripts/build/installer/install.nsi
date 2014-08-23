@@ -1,5 +1,5 @@
 ; install.nsi
-; Installation script for Wrye Bash NSIS installer.
+; Installation script for Wrye Flash NSIS installer.
 
 
 ;-------------------------------- The Installation Sections:
@@ -142,7 +142,7 @@
         ${EndIf}
     SectionEnd
 
-    Section "Wrye Bash" Main
+    Section "Wrye Flash" Main
         SectionIn RO
 
         ${If} $CheckState_OB == ${BST_CHECKED}
@@ -176,38 +176,38 @@
             ${EndIf}
         ${EndIf}
         ; Write the uninstall keys for Windows
-        SetOutPath "$COMMONFILES\Wrye Bash"
-        WriteRegStr HKLM "Software\Wrye Bash" "Installer Path" "$EXEPATH"
-        WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\Wrye Bash" "DisplayName" "Wrye Bash"
-        WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\Wrye Bash" "UninstallString" '"$COMMONFILES\Wrye Bash\uninstall.exe"'
-        WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\Wrye Bash" "URLInfoAbout" 'http://oblivion.nexusmods.com/mods/22368'
-        WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\Wrye Bash" "HelpLink" 'http://forums.bethsoft.com/topic/1376871-rel-wrye-bash/'
-        WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\Wrye Bash" "Publisher" 'Wrye & Wrye Bash Development Team'
-        WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\Wrye Bash" "DisplayVersion" '${WB_FILEVERSION}'
-        WriteRegDWORD HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\Wrye Bash" "NoModify" 1
-        WriteRegDWORD HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\Wrye Bash" "NoRepair" 1
-        CreateDirectory "$COMMONFILES\Wrye Bash"
-        WriteUninstaller "$COMMONFILES\Wrye Bash\uninstall.exe"
+        SetOutPath "$COMMONFILES\Wrye Flash"
+        WriteRegStr HKLM "Software\Wrye Flash" "Installer Path" "$EXEPATH"
+        WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\Wrye Flash" "DisplayName" "Wrye Flash"
+        WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\Wrye Flash" "UninstallString" '"$COMMONFILES\Wrye Flash\uninstall.exe"'
+        WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\Wrye Flash" "URLInfoAbout" 'http://oblivion.nexusmods.com/mods/22368'
+        WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\Wrye Flash" "HelpLink" 'http://forums.bethsoft.com/topic/1376871-rel-wrye-bash/'
+        WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\Wrye Flash" "Publisher" 'Wrye & Wrye Flash Development Team'
+        WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\Wrye Flash" "DisplayVersion" '${WB_FILEVERSION}'
+        WriteRegDWORD HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\Wrye Flash" "NoModify" 1
+        WriteRegDWORD HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\Wrye Flash" "NoRepair" 1
+        CreateDirectory "$COMMONFILES\Wrye Flash"
+        WriteUninstaller "$COMMONFILES\Wrye Flash\uninstall.exe"
     SectionEnd
 
     Section "Start Menu Shortcuts" Shortcuts_SM
 
-        CreateDirectory "$SMPROGRAMS\Wrye Bash"
-        CreateShortCut "$SMPROGRAMS\Wrye Bash\Uninstall.lnk" "$COMMONFILES\Wrye Bash\uninstall.exe" "" "$COMMONFILES\Wrye Bash\uninstall.exe" 0
+        CreateDirectory "$SMPROGRAMS\Wrye Flash"
+        CreateShortCut "$SMPROGRAMS\Wrye Flash\Uninstall.lnk" "$COMMONFILES\Wrye Flash\uninstall.exe" "" "$COMMONFILES\Wrye Flash\uninstall.exe" 0
 
         ${If} $CheckState_OB == ${BST_CHECKED}
             ${If} Path_OB != $Empty
                 SetOutPath $Path_OB\Mopy
                 ${If} $CheckState_OB_Py == ${BST_CHECKED}
-                    CreateShortCut "$SMPROGRAMS\Wrye Bash\Wrye Bash - Oblivion.lnk" "$Path_OB\Mopy\Wrye Bash Launcher.pyw" "" "$Path_OB\Mopy\bash\images\bash_32.ico" 0
-                    CreateShortCut "$SMPROGRAMS\Wrye Bash\Wrye Bash - Oblivion (Debug Log).lnk" "$Path_OB\Mopy\Wrye Bash Debug.bat" "" "$Path_OB\Mopy\bash\images\bash_32.ico" 0
+                    CreateShortCut "$SMPROGRAMS\Wrye Flash\Wrye Flash - Oblivion.lnk" "$Path_OB\Mopy\Wrye Flash Launcher.pyw" "" "$Path_OB\Mopy\bash\images\bash_32.ico" 0
+                    CreateShortCut "$SMPROGRAMS\Wrye Flash\Wrye Flash - Oblivion (Debug Log).lnk" "$Path_OB\Mopy\Wrye Flash Debug.bat" "" "$Path_OB\Mopy\bash\images\bash_32.ico" 0
                     ${If} $CheckState_OB_Exe == ${BST_CHECKED}
-                        CreateShortCut "$SMPROGRAMS\Wrye Bash\Wrye Bash (Standalone) - Oblivion.lnk" "$Path_OB\Mopy\Wrye Bash.exe"
-                        CreateShortCut "$SMPROGRAMS\Wrye Bash\Wrye Bash (Standalone) - Oblivion (Debug Log).lnk" "$Path_OB\Mopy\Wrye Bash.exe" "-d"
+                        CreateShortCut "$SMPROGRAMS\Wrye Flash\Wrye Flash (Standalone) - Oblivion.lnk" "$Path_OB\Mopy\Wrye Flash.exe"
+                        CreateShortCut "$SMPROGRAMS\Wrye Flash\Wrye Flash (Standalone) - Oblivion (Debug Log).lnk" "$Path_OB\Mopy\Wrye Flash.exe" "-d"
                     ${EndIf}
                 ${ElseIf} $CheckState_OB_Exe == ${BST_CHECKED}
-                    CreateShortCut "$SMPROGRAMS\Wrye Bash\Wrye Bash - Oblivion.lnk" "$Path_OB\Mopy\Wrye Bash.exe"
-                    CreateShortCut "$SMPROGRAMS\Wrye Bash\Wrye Bash - Oblivion (Debug Log).lnk" "$Path_OB\Mopy\Wrye Bash.exe" "-d"
+                    CreateShortCut "$SMPROGRAMS\Wrye Flash\Wrye Flash - Oblivion.lnk" "$Path_OB\Mopy\Wrye Flash.exe"
+                    CreateShortCut "$SMPROGRAMS\Wrye Flash\Wrye Flash - Oblivion (Debug Log).lnk" "$Path_OB\Mopy\Wrye Flash.exe" "-d"
                 ${EndIf}
             ${EndIf}
         ${EndIf}
@@ -215,15 +215,15 @@
             ${If} Path_Nehrim != $Empty
                 SetOutPath $Path_Nehrim\Mopy
                 ${If} $CheckState_Nehrim_Py == ${BST_CHECKED}
-                    CreateShortCut "$SMPROGRAMS\Wrye Bash\Wrye Bash - Nehrim.lnk" "$Path_Nehrim\Mopy\Wrye Bash Launcher.pyw" "" "$Path_Nehrim\Mopy\bash\images\bash_32.ico" 0
-                    CreateShortCut "$SMPROGRAMS\Wrye Bash\Wrye Bash - Nehrim (Debug Log).lnk" "$Path_Nehrim\Mopy\Wrye Bash Debug.bat" "" "$Path_Nehrim\Mopy\bash\images\bash_32.ico" 0
+                    CreateShortCut "$SMPROGRAMS\Wrye Flash\Wrye Flash - Nehrim.lnk" "$Path_Nehrim\Mopy\Wrye Flash Launcher.pyw" "" "$Path_Nehrim\Mopy\bash\images\bash_32.ico" 0
+                    CreateShortCut "$SMPROGRAMS\Wrye Flash\Wrye Flash - Nehrim (Debug Log).lnk" "$Path_Nehrim\Mopy\Wrye Flash Debug.bat" "" "$Path_Nehrim\Mopy\bash\images\bash_32.ico" 0
                     ${If} $CheckState_Nehrim_Exe == ${BST_CHECKED}
-                        CreateShortCut "$SMPROGRAMS\Wyre Bash\Wrye Bash (Standalone) - Nehrim.lnk" "$Path_Nehrim\Mopy\Wrye Bash.exe"
-                        CreateShortCut "$SMPROGRAMS\Wrye Bash\Wrye Bash (Standalone) - Nehrim (Debug Log).lnk" "$Path_Nehrim\Mopy\Wrye Bash.exe" "-d"
+                        CreateShortCut "$SMPROGRAMS\Wyre Bash\Wrye Flash (Standalone) - Nehrim.lnk" "$Path_Nehrim\Mopy\Wrye Flash.exe"
+                        CreateShortCut "$SMPROGRAMS\Wrye Flash\Wrye Flash (Standalone) - Nehrim (Debug Log).lnk" "$Path_Nehrim\Mopy\Wrye Flash.exe" "-d"
                     ${EndIf}
                 ${ElseIf} $CheckState_Nehrim_Exe == ${BST_CHECKED}
-                    CreateShortCut "$SMPROGRAMS\Wyre Bash\Wrye Bash - Nehrim.lnk" "$Path_Nehrim\Mopy\Wrye Bash.exe"
-                    CreateShortCut "$SMPROGRAMS\Wyre Bash\Wrye Bash - Nehrim (Debug Log).lnk" "$Path_Nehrim\Mopy\Wrye Bash.exe" "-d"
+                    CreateShortCut "$SMPROGRAMS\Wyre Bash\Wrye Flash - Nehrim.lnk" "$Path_Nehrim\Mopy\Wrye Flash.exe"
+                    CreateShortCut "$SMPROGRAMS\Wyre Bash\Wrye Flash - Nehrim (Debug Log).lnk" "$Path_Nehrim\Mopy\Wrye Flash.exe" "-d"
                 ${EndIf}
             ${EndIf}
         ${EndIf}
@@ -231,15 +231,15 @@
             ${If} Path_Skyrim != $Empty
                 SetOutPath $Path_Skyrim\Mopy
                 ${If} $CheckState_Skyrim_Py == ${BST_CHECKED}
-                    CreateShortCut "$SMPROGRAMS\Wrye Bash\Wrye Bash - Skyrim.lnk" "$Path_Skyrim\Mopy\Wrye Bash Launcher.pyw" "" "$Path_Skyrim\Mopy\bash\images\bash_32.ico" 0
-                    CreateShortCut "$SMPROGRAMS\Wrye Bash\Wrye Bash - Skyrim (Debug Log).lnk" "$Path_Skyrim\Mopy\Wrye Bash Debug.bat" "" "$Path_Skyrim\Mopy\bash\images\bash_32.ico" 0
+                    CreateShortCut "$SMPROGRAMS\Wrye Flash\Wrye Flash - Skyrim.lnk" "$Path_Skyrim\Mopy\Wrye Flash Launcher.pyw" "" "$Path_Skyrim\Mopy\bash\images\bash_32.ico" 0
+                    CreateShortCut "$SMPROGRAMS\Wrye Flash\Wrye Flash - Skyrim (Debug Log).lnk" "$Path_Skyrim\Mopy\Wrye Flash Debug.bat" "" "$Path_Skyrim\Mopy\bash\images\bash_32.ico" 0
                     ${If} $CheckState_Skyrim_Exe == ${BST_CHECKED}
-                        CreateShortCut "$SMPROGRAMS\Wrye Bash\Wrye Bash (Standalone) - Skyrim.lnk" "$Path_Skyrim\Mopy\Wrye Bash.exe"
-                        CreateShortCut "$SMPROGRAMS\Wrye Bash\Wrye Bash (Standalone) - Skyrim (Debug Log).lnk" "$Path_Skyrim\Mopy\Wrye Bash.exe" "-d"
+                        CreateShortCut "$SMPROGRAMS\Wrye Flash\Wrye Flash (Standalone) - Skyrim.lnk" "$Path_Skyrim\Mopy\Wrye Flash.exe"
+                        CreateShortCut "$SMPROGRAMS\Wrye Flash\Wrye Flash (Standalone) - Skyrim (Debug Log).lnk" "$Path_Skyrim\Mopy\Wrye Flash.exe" "-d"
                     ${EndIf}
                 ${ElseIf} $CheckState_Skyrim_Exe == ${BST_CHECKED}
-                    CreateShortCut "$SMPROGRAMS\Wrye Bash\Wrye Bash - Skyrim.lnk" "$Path_Skyrim\Mopy\Wrye Bash.exe"
-                    CreateShortCut "$SMPROGRAMS\Wrye Bash\Wrye Bash - Skyrim (Debug Log).lnk" "$Path_Skyrim\Mopy\Wrye Bash.exe" "-d"
+                    CreateShortCut "$SMPROGRAMS\Wrye Flash\Wrye Flash - Skyrim.lnk" "$Path_Skyrim\Mopy\Wrye Flash.exe"
+                    CreateShortCut "$SMPROGRAMS\Wrye Flash\Wrye Flash - Skyrim (Debug Log).lnk" "$Path_Skyrim\Mopy\Wrye Flash.exe" "-d"
                 ${EndIf}
             ${EndIf}
         ${EndIf}
@@ -247,15 +247,15 @@
             ${If} Path_Ex1 != $Empty
                 SetOutPath $Path_Ex1\Mopy
                 ${If} $CheckState_Ex1_Py == ${BST_CHECKED}
-                    CreateShortCut "$SMPROGRAMS\Wrye Bash\Wrye Bash - Extra 1.lnk" "$Path_Ex1\Mopy\Wrye Bash Launcher.pyw" "" "$Path_Ex1\Mopy\bash\images\bash_32.ico" 0
-                    CreateShortCut "$SMPROGRAMS\Wrye Bash\Wrye Bash - Extra 1 (Debug Log).lnk" "$Path_Ex1\Mopy\Wrye Bash Debug.bat" "" "$Path_Ex1\Mopy\bash\images\bash_32.ico" 0
+                    CreateShortCut "$SMPROGRAMS\Wrye Flash\Wrye Flash - Extra 1.lnk" "$Path_Ex1\Mopy\Wrye Flash Launcher.pyw" "" "$Path_Ex1\Mopy\bash\images\bash_32.ico" 0
+                    CreateShortCut "$SMPROGRAMS\Wrye Flash\Wrye Flash - Extra 1 (Debug Log).lnk" "$Path_Ex1\Mopy\Wrye Flash Debug.bat" "" "$Path_Ex1\Mopy\bash\images\bash_32.ico" 0
                     ${If} $CheckState_Ex1_Exe == ${BST_CHECKED}
-                        CreateShortCut "$SMPROGRAMS\Wrye Bash\Wrye Bash (Standalone) - Extra 1.lnk" "$Path_Ex1\Mopy\Wrye Bash.exe"
-                        CreateShortCut "$SMPROGRAMS\Wrye Bash\Wrye Bash (Standalone) - Extra 1 (Debug Log).lnk" "$Path_Ex1\Mopy\Wrye Bash.exe" "-d"
+                        CreateShortCut "$SMPROGRAMS\Wrye Flash\Wrye Flash (Standalone) - Extra 1.lnk" "$Path_Ex1\Mopy\Wrye Flash.exe"
+                        CreateShortCut "$SMPROGRAMS\Wrye Flash\Wrye Flash (Standalone) - Extra 1 (Debug Log).lnk" "$Path_Ex1\Mopy\Wrye Flash.exe" "-d"
                     ${EndIf}
                 ${ElseIf} $CheckState_Ex1_Exe == ${BST_CHECKED}
-                    CreateShortCut "$SMPROGRAMS\Wrye Bash\Wrye Bash - Extra 1.lnk" "$Path_Ex1\Mopy\Wrye Bash.exe"
-                    CreateShortCut "$SMPROGRAMS\Wrye Bash\Wrye Bash - Extra 1 (Debug Log).lnk" "$Path_Ex1\Mopy\Wrye Bash.exe" "-d"
+                    CreateShortCut "$SMPROGRAMS\Wrye Flash\Wrye Flash - Extra 1.lnk" "$Path_Ex1\Mopy\Wrye Flash.exe"
+                    CreateShortCut "$SMPROGRAMS\Wrye Flash\Wrye Flash - Extra 1 (Debug Log).lnk" "$Path_Ex1\Mopy\Wrye Flash.exe" "-d"
                 ${EndIf}
             ${EndIf}
         ${EndIf}
@@ -263,15 +263,15 @@
             ${If} Path_Ex2 != $Empty
                 SetOutPath $Path_Ex2\Mopy
                 ${If} $CheckState_Ex2_Py == ${BST_CHECKED}
-                    CreateShortCut "$SMPROGRAMS\Wrye Bash\Wrye Bash - Extra 2.lnk" "$Path_Ex2\Mopy\Wrye Bash Launcher.pyw" "" "$Path_Ex2\Mopy\bash\images\bash_32.ico" 0
-                    CreateShortCut "$SMPROGRAMS\Wrye Bash\Wrye Bash - Extra 2 (Debug Log).lnk" "$Path_Ex2\Mopy\Wrye Bash Debug.bat" "" "$Path_Ex2\Mopy\bash\images\bash_32.ico" 0
+                    CreateShortCut "$SMPROGRAMS\Wrye Flash\Wrye Flash - Extra 2.lnk" "$Path_Ex2\Mopy\Wrye Flash Launcher.pyw" "" "$Path_Ex2\Mopy\bash\images\bash_32.ico" 0
+                    CreateShortCut "$SMPROGRAMS\Wrye Flash\Wrye Flash - Extra 2 (Debug Log).lnk" "$Path_Ex2\Mopy\Wrye Flash Debug.bat" "" "$Path_Ex2\Mopy\bash\images\bash_32.ico" 0
                     ${If} $CheckState_Ex2_Exe == ${BST_CHECKED}
-                        CreateShortCut "$SMPROGRAMS\Wrye Bash\Wrye Bash (Standalone) - Extra 2.lnk" "$Path_Ex2\Mopy\Wrye Bash.exe"
-                        CreateShortCut "$SMPROGRAMS\Wrye Bash\Wrye Bash (Standalone) - Extra 2 (Debug Log).lnk" "$Path_Ex2\Mopy\Wrye Bash.exe" "-d"
+                        CreateShortCut "$SMPROGRAMS\Wrye Flash\Wrye Flash (Standalone) - Extra 2.lnk" "$Path_Ex2\Mopy\Wrye Flash.exe"
+                        CreateShortCut "$SMPROGRAMS\Wrye Flash\Wrye Flash (Standalone) - Extra 2 (Debug Log).lnk" "$Path_Ex2\Mopy\Wrye Flash.exe" "-d"
                     ${EndIf}
                 ${ElseIf} $CheckState_Ex2_Exe == ${BST_CHECKED}
-                    CreateShortCut "$SMPROGRAMS\Wrye Bash\Wrye Bash - Extra 2.lnk" "$Path_Ex2\Mopy\Wrye Bash.exe"
-                    CreateShortCut "$SMPROGRAMS\Wrye Bash\Wrye Bash - Extra 2 (Debug Log).lnk" "$Path_Ex2\Mopy\Wrye Bash.exe" "-d"
+                    CreateShortCut "$SMPROGRAMS\Wrye Flash\Wrye Flash - Extra 2.lnk" "$Path_Ex2\Mopy\Wrye Flash.exe"
+                    CreateShortCut "$SMPROGRAMS\Wrye Flash\Wrye Flash - Extra 2 (Debug Log).lnk" "$Path_Ex2\Mopy\Wrye Flash.exe" "-d"
                 ${EndIf}
             ${EndIf}
         ${EndIf}
