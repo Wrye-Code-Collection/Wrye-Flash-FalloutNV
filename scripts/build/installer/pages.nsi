@@ -6,7 +6,7 @@
     Function PAGE_INSTALLLOCATIONS
         !insertmacro MUI_HEADER_TEXT $(PAGE_INSTALLLOCATIONS_TITLE) $(PAGE_INSTALLLOCATIONS_SUBTITLE)
         GetFunctionAddress $Function_Browse OnClick_Browse
-        GetFunctionAddress $Function_Extra OnClick_Extra
+        ; GetFunctionAddress $Function_Extra OnClick_Extra
         nsDialogs::Create 1018
             Pop $Dialog
 
