@@ -680,10 +680,18 @@
                 SetOutPath $Path_NV\Data
                 ; no archive invalidation exists users should use NMM or FOMM
                 ; File /r "Mopy\templates\Oblivion\ArchiveInvalidationInvalidated!.bsa"
-                SetOutPath "$Path_NV\Mopy\Bash Patches"
-                File /r "Mopy\Bash Patches\*.*"
-                SetOutPath $Path_NV\Data\Docs
+                ; taglist for BOSS
+                ; do not copy Bash_Groups.csv because it's for oblivion
+                SetOutPath "$Path_NV\Data\Bash Patches"
+                File /r "Data\Bash Patches\taglist.txt"
+                ; empty Bash patches
+                SetOutPath "$Path_NV\Mopy\templates"
+                File /r "Mopy\templates\*.*"
+                ; Documentation aside from the main file in the Mopy folder
+                ; TODO Move the main Doc file to the Docs folder
+                SetOutPath "$Path_NV\Data\Docs"
                 File /r "Data\Docs\*.*"
+                ; INI Tweaks
                 SetOutPath "$Path_NV\Mopy\INI Tweaks"
                 File /r "Mopy\INI Tweaks\*.*"
                 ; Write the installation path into the registry
