@@ -136,41 +136,17 @@
     Function un.onInit
         StrCpy $Empty ""
         StrCpy $True "True"
-        ReadRegStr $Path_NV              HKLM "Software\Wrye Flash" "Oblivion Path"
-        ReadRegStr $Path_Nehrim_Remove          HKLM "Software\Wrye Flash" "Nehrim Path"
-        ReadRegStr $Path_Skyrim_Remove          HKLM "Software\Wrye Flash" "Skyrim Path"
-        ReadRegStr $Path_Ex1             HKLM "Software\Wrye Flash" "Extra Path 1"
-        ReadRegStr $Path_Ex2             HKLM "Software\Wrye Flash" "Extra Path 2"
-        ReadRegStr $Reg_Value_NV_Py      HKLM "Software\Wrye Flash" "Oblivion Python Version"
-        ReadRegStr $Reg_Value_Nehrim_Py_Remove  HKLM "Software\Wrye Flash" "Nehrim Python Version"
-        ReadRegStr $Reg_Value_Skyrim_Py_Remove  HKLM "Software\Wrye Flash" "Skyrim Python Version"
-        ReadRegStr $Reg_Value_Ex1_Py     HKLM "Software\Wrye Flash" "Extra Path 1 Python Version"
-        ReadRegStr $Reg_Value_Ex2_Py     HKLM "Software\Wrye Flash" "Extra Path 2 Python Version"
-        ReadRegStr $Reg_Value_NV_Exe     HKLM "Software\Wrye Flash" "Oblivion Standalone Version"
-        ReadRegStr $Reg_Value_Nehrim_Exe_Remove HKLM "Software\Wrye Flash" "Nehrim Standalone Version"
-        ReadRegStr $Reg_Value_Skyrim_Exe_Remove HKLM "Software\Wrye Flash" "Skyrim Standalone Version"
-        ReadRegStr $Reg_Value_Ex1_Exe    HKLM "Software\Wrye Flash" "Extra Path 1 Standalone Version"
-        ReadRegStr $Reg_Value_Ex2_Exe    HKLM "Software\Wrye Flash" "Extra Path 2 Standalone Version"
+        ReadRegStr $Path_NV              HKLM "Software\Wrye Flash" "FalloutNV Path"
+        ReadRegStr $Reg_Value_NV_Py      HKLM "Software\Wrye Flash" "FalloutNV Python Version"
+        ReadRegStr $Reg_Value_NV_Exe     HKLM "Software\Wrye Flash" "FalloutNV Standalone Version"
     FunctionEnd
 
     Function .onInit
         StrCpy $Empty ""
         StrCpy $True "True"
-        ReadRegStr $Path_NV              HKLM "Software\Wrye Flash" "Oblivion Path"
-        ReadRegStr $Path_Nehrim_Remove          HKLM "Software\Wrye Flash" "Nehrim Path"
-        ReadRegStr $Path_Skyrim_Remove          HKLM "Software\Wrye Flash" "Skyrim Path"
-        ReadRegStr $Path_Ex1             HKLM "Software\Wrye Flash" "Extra Path 1"
-        ReadRegStr $Path_Ex2             HKLM "Software\Wrye Flash" "Extra Path 2"
-        ReadRegStr $Reg_Value_NV_Py      HKLM "Software\Wrye Flash" "Oblivion Python Version"
-        ReadRegStr $Reg_Value_Nehrim_Py_Remove  HKLM "Software\Wrye Flash" "Nehrim Python Version"
-        ReadRegStr $Reg_Value_Skyrim_Py_Remove  HKLM "Software\Wrye Flash" "Skyrim Python Version"
-        ReadRegStr $Reg_Value_Ex1_Py     HKLM "Software\Wrye Flash" "Extra Path 1 Python Version"
-        ReadRegStr $Reg_Value_Ex2_Py     HKLM "Software\Wrye Flash" "Extra Path 2 Python Version"
-        ReadRegStr $Reg_Value_NV_Exe     HKLM "Software\Wrye Flash" "Oblivion Standalone Version"
-        ReadRegStr $Reg_Value_Nehrim_Exe_Remove HKLM "Software\Wrye Flash" "Nehrim Standalone Version"
-        ReadRegStr $Reg_Value_Skyrim_Exe_Remove HKLM "Software\Wrye Flash" "Skyrim Standalone Version"
-        ReadRegStr $Reg_Value_Ex1_Exe    HKLM "Software\Wrye Flash" "Extra Path 1 Standalone Version"
-        ReadRegStr $Reg_Value_Ex2_Exe    HKLM "Software\Wrye Flash" "Extra Path 2 Standalone Version"
+        ReadRegStr $Path_NV              HKLM "Software\Wrye Flash" "FalloutNV Path"
+        ReadRegStr $Reg_Value_NV_Py      HKLM "Software\Wrye Flash" "FalloutNV Python Version"
+        ReadRegStr $Reg_Value_NV_Exe     HKLM "Software\Wrye Flash" "FalloutNV Standalone Version"
 
         StrCpy $MinVersion_Comtypes '0.6.2'
         StrCpy $MinVersion_wx '2.8.12'
@@ -180,40 +156,13 @@
         StrCpy $Python_pywin32 "1"
 
         ${If} $Path_NV == $Empty
-            ReadRegStr $Path_NV HKLM "Software\Bethesda Softworks\Oblivion" "Installed Path"
+            ReadRegStr $Path_NV HKLM "Software\Bethesda Softworks\FalloutNV" "Installed Path"
             ${If} $Path_NV == $Empty
-                ReadRegStr $Path_NV HKLM "SOFTWARE\Wow6432Node\Bethesda Softworks\Oblivion" "Installed Path"
+                ReadRegStr $Path_NV HKLM "SOFTWARE\Wow6432Node\Bethesda Softworks\FalloutNV" "Installed Path"
             ${EndIf}
         ${EndIf}
         ${If} $Path_NV != $Empty
             StrCpy $CheckState_NV ${BST_CHECKED}
-        ${EndIf}
-
-        ${If} $Path_Nehrim_Remove == $Empty
-            ReadRegStr $Path_Nehrim_Remove HKLM "SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Nehrim - At Fate's Edge_is1" "InstallLocation"
-        ${EndIf}
-        ${If} $Path_Nehrim_Remove != $Empty
-            StrCpy $CheckState_Nehrim_Remove ${BST_CHECKED}
-        ${EndIf}
-
-        ${If} $Path_Skyrim_Remove == $Empty
-            ReadRegStr $Path_Skyrim_Remove HKLM "Software\Bethesda Softworks\Skyrim" "Installed Path"
-            ${If} $Path_Skyrim_Remove == $Empty
-                ReadRegStr $Path_Skyrim_Remove HKLM "SOFTWARE\Wow6432Node\Bethesda Softworks\Skyrim" "Installed Path"
-            ${EndIf}
-        ${EndIf}
-        ${If} $Path_Skyrim_Remove != $Empty
-            StrCpy $CheckState_Skyrim_Remove ${BST_CHECKED}
-        ${EndIf}
-
-        ${If} $Path_Ex1 != $Empty
-            StrCpy $CheckState_Extra ${BST_CHECKED}
-            StrCpy $CheckState_Ex1 ${BST_CHECKED}
-        ${EndIf}
-
-        ${If} $Path_Ex2 != $Empty
-            StrCpy $CheckState_Extra ${BST_CHECKED}
-            StrCpy $CheckState_Ex2 ${BST_CHECKED}
         ${EndIf}
 
         ${If} $Reg_Value_NV_Exe == $True
@@ -222,38 +171,6 @@
         ${EndIf}
         ${If} $Reg_Value_NV_Py == $True
             StrCpy $CheckState_NV_Py ${BST_CHECKED}
-        ${EndIf}
-
-        ${If} $Reg_Value_Nehrim_Exe_Remove == $True
-        ${OrIf} $Reg_Value_Nehrim_Py_Remove != $True
-            StrCpy $CheckState_Nehrim_Exe_Remove ${BST_CHECKED}
-        ${EndIf}
-        ${If} $Reg_Value_Nehrim_Py_Remove == $True
-            StrCpy $CheckState_Nehrim_Py_Remove ${BST_CHECKED}
-        ${EndIf}
-
-        ${If} $Reg_Value_Skyrim_Exe_Remove == $True
-        ${OrIf} $Reg_Value_Skyrim_Py_Remove != $True
-            StrCpy $CheckState_Skyrim_Exe_Remove ${BST_CHECKED}
-        ${EndIf}
-        ${If} $Reg_Value_Skyrim_Py_Remove == $True
-            StrCpy $CheckState_Skyrim_Py_Remove ${BST_CHECKED}
-        ${EndIf}
-
-        ${If} $Reg_Value_Ex1_Exe == $True
-        ${OrIf} $Reg_Value_Ex1_Py != $True
-            StrCpy $CheckState_Ex1_Exe ${BST_CHECKED}
-        ${EndIf}
-
-        ${If} $Reg_Value_Ex1_Py == $True
-            StrCpy $CheckState_Ex1_Py ${BST_CHECKED}
-        ${EndIf}
-        ${If} $Reg_Value_Ex2_Exe == $True
-        ${OrIf} $Reg_Value_Ex2_Py != $True
-            StrCpy $CheckState_Ex2_Exe ${BST_CHECKED}
-        ${EndIf}
-        ${If} $Reg_Value_Ex2_Py == $True
-            StrCpy $CheckState_Ex2_Py ${BST_CHECKED}
         ${EndIf}
     FunctionEnd
 
@@ -528,7 +445,7 @@
     Function PAGE_FINISH
         !insertmacro MUI_HEADER_TEXT $(PAGE_FINISH_TITLE) $(PAGE_FINISH_SUBTITLE)
 
-        ReadRegStr $Path_NV HKLM "Software\Wrye Flash" "Oblivion Path"
+        ReadRegStr $Path_NV HKLM "Software\Wrye Flash" "FalloutNV Path"
         ReadRegStr $Path_Nehrim_Remove HKLM "Software\Wrye Flash" "Nehrim Path"
         ReadRegStr $Path_Skyrim_Remove HKLM "Software\Wrye Flash" "Skyrim Path"
         ReadRegStr $Path_Ex1 HKLM "Software\Wrye Flash" "Extra Path 1"
@@ -1477,7 +1394,7 @@
                 SetOutPath "$Path_NV\Mopy\INI Tweaks\Oblivion"
                 File /r "Mopy\INI Tweaks\Oblivion\*.*"
                 ; Write the installation path into the registry
-                WriteRegStr HKLM "SOFTWARE\Wrye Flash" "Oblivion Path" "$Path_NV"
+                WriteRegStr HKLM "SOFTWARE\Wrye Flash" "FalloutNV Path" "$Path_NV"
                 ${If} $CheckState_NV_Py == ${BST_CHECKED}
                     SetOutPath "$Path_NV\Mopy"
                     File /r "Mopy\*.py" "Mopy\*.pyw" "Mopy\*.bat"
@@ -1851,7 +1768,7 @@
         ; Remove files and Directories - Directories are only deleted if empty.
         ${If} $CheckState_NV == ${BST_CHECKED}
             ${If} $Path_NV != $Empty
-                DeleteRegValue HKLM "SOFTWARE\Wrye Flash" "Oblivion Path"
+                DeleteRegValue HKLM "SOFTWARE\Wrye Flash" "FalloutNV Path"
                 DeleteRegValue HKLM "SOFTWARE\Wrye Flash" "Oblivion Python Version"
                 DeleteRegValue HKLM "SOFTWARE\Wrye Flash" "Oblivion Standalone Version"
                 ;First delete OLD version files:
@@ -2975,7 +2892,7 @@
 
 
         ;If it is a complete uninstall remove the shared data:
-        ReadRegStr $Path_NV HKLM "Software\Wrye Flash" "Oblivion Path"
+        ReadRegStr $Path_NV HKLM "Software\Wrye Flash" "FalloutNV Path"
         ReadRegStr $Path_Nehrim_Remove HKLM "Software\Wrye Flash" "Nehrim Path"
         ReadRegStr $Path_Skyrim_Remove HKLM "Software\Wrye Flash" "Skyrim Path"
         ReadRegStr $Path_Ex1 HKLM "Software\Wrye Flash" "Extra Path 1"
