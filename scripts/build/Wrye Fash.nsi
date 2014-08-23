@@ -78,23 +78,23 @@
     Var CheckState_Ex1_Exe
     Var CheckState_Ex2_Exe
     Var Reg_Value_NV_Py
-    Var Reg_Value_Nehrim_Py
-    Var Reg_Value_Skyrim_Py
+    Var Reg_Value_Nehrim_Py_Remove
+    Var Reg_Value_Skyrim_Py_Remove
     Var Reg_Value_Ex1_Py
     Var Reg_Value_Ex2_Py
-    Var Reg_Value_OB_Exe
-    Var Reg_Value_Nehrim_Exe
-    Var Reg_Value_Skyrim_Exe
+    Var Reg_Value_NV_Exe
+    Var Reg_Value_Nehrim_Exe_Remove
+    Var Reg_Value_Skyrim_Exe_Remove
     Var Reg_Value_Ex1_Exe
     Var Reg_Value_Ex2_Exe
-    Var PathDialogue_OB
-    Var PathDialogue_Nehrim
-    Var PathDialogue_Skyrim
+    Var PathDialogue_NV
+    Var PathDialogue_Nehrim_Remove
+    Var PathDialogue_Skyrim_Remove
     Var PathDialogue_Ex1
     Var PathDialogue_Ex2
-    Var Browse_OB
-    Var Browse_Nehrim
-    Var Browse_Skyrim
+    Var Browse_NV
+    Var Browse_Nehrim_Remove
+    Var Browse_Skyrim_Remove
     Var Browse_Ex1
     Var Browse_Ex2
     Var Check_Readme
@@ -142,13 +142,13 @@
         ReadRegStr $Path_Ex1             HKLM "Software\Wrye Flash" "Extra Path 1"
         ReadRegStr $Path_Ex2             HKLM "Software\Wrye Flash" "Extra Path 2"
         ReadRegStr $Reg_Value_NV_Py      HKLM "Software\Wrye Flash" "Oblivion Python Version"
-        ReadRegStr $Reg_Value_Nehrim_Py  HKLM "Software\Wrye Flash" "Nehrim Python Version"
-        ReadRegStr $Reg_Value_Skyrim_Py  HKLM "Software\Wrye Flash" "Skyrim Python Version"
+        ReadRegStr $Reg_Value_Nehrim_Py_Remove  HKLM "Software\Wrye Flash" "Nehrim Python Version"
+        ReadRegStr $Reg_Value_Skyrim_Py_Remove  HKLM "Software\Wrye Flash" "Skyrim Python Version"
         ReadRegStr $Reg_Value_Ex1_Py     HKLM "Software\Wrye Flash" "Extra Path 1 Python Version"
         ReadRegStr $Reg_Value_Ex2_Py     HKLM "Software\Wrye Flash" "Extra Path 2 Python Version"
-        ReadRegStr $Reg_Value_OB_Exe     HKLM "Software\Wrye Flash" "Oblivion Standalone Version"
-        ReadRegStr $Reg_Value_Nehrim_Exe HKLM "Software\Wrye Flash" "Nehrim Standalone Version"
-        ReadRegStr $Reg_Value_Skyrim_Exe HKLM "Software\Wrye Flash" "Skyrim Standalone Version"
+        ReadRegStr $Reg_Value_NV_Exe     HKLM "Software\Wrye Flash" "Oblivion Standalone Version"
+        ReadRegStr $Reg_Value_Nehrim_Exe_Remove HKLM "Software\Wrye Flash" "Nehrim Standalone Version"
+        ReadRegStr $Reg_Value_Skyrim_Exe_Remove HKLM "Software\Wrye Flash" "Skyrim Standalone Version"
         ReadRegStr $Reg_Value_Ex1_Exe    HKLM "Software\Wrye Flash" "Extra Path 1 Standalone Version"
         ReadRegStr $Reg_Value_Ex2_Exe    HKLM "Software\Wrye Flash" "Extra Path 2 Standalone Version"
     FunctionEnd
@@ -162,13 +162,13 @@
         ReadRegStr $Path_Ex1             HKLM "Software\Wrye Flash" "Extra Path 1"
         ReadRegStr $Path_Ex2             HKLM "Software\Wrye Flash" "Extra Path 2"
         ReadRegStr $Reg_Value_NV_Py      HKLM "Software\Wrye Flash" "Oblivion Python Version"
-        ReadRegStr $Reg_Value_Nehrim_Py  HKLM "Software\Wrye Flash" "Nehrim Python Version"
-        ReadRegStr $Reg_Value_Skyrim_Py  HKLM "Software\Wrye Flash" "Skyrim Python Version"
+        ReadRegStr $Reg_Value_Nehrim_Py_Remove  HKLM "Software\Wrye Flash" "Nehrim Python Version"
+        ReadRegStr $Reg_Value_Skyrim_Py_Remove  HKLM "Software\Wrye Flash" "Skyrim Python Version"
         ReadRegStr $Reg_Value_Ex1_Py     HKLM "Software\Wrye Flash" "Extra Path 1 Python Version"
         ReadRegStr $Reg_Value_Ex2_Py     HKLM "Software\Wrye Flash" "Extra Path 2 Python Version"
-        ReadRegStr $Reg_Value_OB_Exe     HKLM "Software\Wrye Flash" "Oblivion Standalone Version"
-        ReadRegStr $Reg_Value_Nehrim_Exe HKLM "Software\Wrye Flash" "Nehrim Standalone Version"
-        ReadRegStr $Reg_Value_Skyrim_Exe HKLM "Software\Wrye Flash" "Skyrim Standalone Version"
+        ReadRegStr $Reg_Value_NV_Exe     HKLM "Software\Wrye Flash" "Oblivion Standalone Version"
+        ReadRegStr $Reg_Value_Nehrim_Exe_Remove HKLM "Software\Wrye Flash" "Nehrim Standalone Version"
+        ReadRegStr $Reg_Value_Skyrim_Exe_Remove HKLM "Software\Wrye Flash" "Skyrim Standalone Version"
         ReadRegStr $Reg_Value_Ex1_Exe    HKLM "Software\Wrye Flash" "Extra Path 1 Standalone Version"
         ReadRegStr $Reg_Value_Ex2_Exe    HKLM "Software\Wrye Flash" "Extra Path 2 Standalone Version"
 
@@ -216,7 +216,7 @@
             StrCpy $CheckState_Ex2 ${BST_CHECKED}
         ${EndIf}
 
-        ${If} $Reg_Value_OB_Exe == $True
+        ${If} $Reg_Value_NV_Exe == $True
         ${OrIf} $Reg_Value_NV_Py != $True
             StrCpy $CheckState_NV_Exe ${BST_CHECKED}
         ${EndIf}
@@ -224,19 +224,19 @@
             StrCpy $CheckState_NV_Py ${BST_CHECKED}
         ${EndIf}
 
-        ${If} $Reg_Value_Nehrim_Exe == $True
-        ${OrIf} $Reg_Value_Nehrim_Py != $True
+        ${If} $Reg_Value_Nehrim_Exe_Remove == $True
+        ${OrIf} $Reg_Value_Nehrim_Py_Remove != $True
             StrCpy $CheckState_Nehrim_Exe_Remove ${BST_CHECKED}
         ${EndIf}
-        ${If} $Reg_Value_Nehrim_Py == $True
+        ${If} $Reg_Value_Nehrim_Py_Remove == $True
             StrCpy $CheckState_Nehrim_Py_Remove ${BST_CHECKED}
         ${EndIf}
 
-        ${If} $Reg_Value_Skyrim_Exe == $True
-        ${OrIf} $Reg_Value_Skyrim_Py != $True
+        ${If} $Reg_Value_Skyrim_Exe_Remove == $True
+        ${OrIf} $Reg_Value_Skyrim_Py_Remove != $True
             StrCpy $CheckState_Skyrim_Exe_Remove ${BST_CHECKED}
         ${EndIf}
-        ${If} $Reg_Value_Skyrim_Py == $True
+        ${If} $Reg_Value_Skyrim_Py_Remove == $True
             StrCpy $CheckState_Skyrim_Py_Remove ${BST_CHECKED}
         ${EndIf}
 
@@ -286,10 +286,10 @@
 ;                ${NSD_SetState} $Check_NV_Py  $CheckState_NV_Py
             IntOp $0 $0 + 13
             ${NSD_CreateDirRequest} 0 $0u 90% 13u "$Path_NV"
-                Pop $PathDialogue_OB
+                Pop $PathDialogue_NV
             ${NSD_CreateBrowseButton} -10% $0u 5% 13u "..."
-                Pop $Browse_OB
-                nsDialogs::OnClick $Browse_OB $Function_Browse
+                Pop $Browse_NV
+                nsDialogs::OnClick $Browse_NV $Function_Browse
             IntOp $0 $0 + 13
         ${EndIf}
         ${If} $Path_Nehrim_Remove != $Empty
@@ -305,10 +305,10 @@
 ;                ${NSD_SetState} $Check_Nehrim_Py_Remove  $CheckState_Nehrim_Py_Remove
             IntOp $0 $0 + 13
             ${NSD_CreateDirRequest} 0 $0u 90% 13u "$Path_Nehrim_Remove"
-                Pop $PathDialogue_Nehrim
+                Pop $PathDialogue_Nehrim_Remove
             ${NSD_CreateBrowseButton} -10% $0u 5% 13u "..."
-                Pop $Browse_Nehrim
-                nsDialogs::OnClick $Browse_Nehrim $Function_Browse
+                Pop $Browse_Nehrim_Remove
+                nsDialogs::OnClick $Browse_Nehrim_Remove $Function_Browse
             IntOp $0 $0 + 13
         ${EndIf}
         ${If} $Path_Skyrim_Remove != $Empty
@@ -324,10 +324,10 @@
 ;                ${NSD_SetState} $Check_Skyrim_Py_Remove $CheckState_Skyrim_Py_Remove
             IntOp $0 $0 + 13
             ${NSD_CreateDirRequest} 0 $0u 90% 13u "$Path_Skyrim_Remove"
-                Pop $PathDialogue_Skyrim
+                Pop $PathDialogue_Skyrim_Remove
             ${NSD_CreateBrowseButton} -10% $0u 5% 13u "..."
-                Pop $Browse_Skyrim
-                nsDialogs::OnClick $Browse_Skyrim $Function_Browse
+                Pop $Browse_Skyrim_Remove
+                nsDialogs::OnClick $Browse_Skyrim_Remove $Function_Browse
             IntOp $0 $0 + 13
         ${EndIf}
         ${NSD_CreateCheckBox} 0 $0u 100% 13u "Install to extra locations"
@@ -389,9 +389,9 @@
         StrCpy $ExeVersionInstall $Empty
 
         ; Game paths
-        ${NSD_GetText} $PathDialogue_OB $Path_NV
-        ${NSD_GetText} $PathDialogue_Nehrim $Path_Nehrim_Remove
-        ${NSD_GetText} $PathDialogue_Skyrim $Path_Skyrim_Remove
+        ${NSD_GetText} $PathDialogue_NV $Path_NV
+        ${NSD_GetText} $PathDialogue_Nehrim_Remove $Path_Nehrim_Remove
+        ${NSD_GetText} $PathDialogue_Skyrim_Remove $Path_Skyrim_Remove
         ${NSD_GetText} $PathDialogue_Ex1 $Path_Ex1
         ${NSD_GetText} $PathDialogue_Ex2 $Path_Ex2
 
@@ -1199,12 +1199,12 @@
 ;-------------------------------- Auxilliary Functions
     Function OnClick_Browse
         Pop $0
-        ${If} $0 == $Browse_OB
-            StrCpy $1 $PathDialogue_OB
-        ${ElseIf} $0 == $Browse_Nehrim
-            StrCpy $1 $PathDialogue_Nehrim
-        ${ElseIf} $0 == $Browse_Skyrim
-            StrCpy $1 $PathDialogue_Skyrim
+        ${If} $0 == $Browse_NV
+            StrCpy $1 $PathDialogue_NV
+        ${ElseIf} $0 == $Browse_Nehrim_Remove
+            StrCpy $1 $PathDialogue_Nehrim_Remove
+        ${ElseIf} $0 == $Browse_Skyrim_Remove
+            StrCpy $1 $PathDialogue_Skyrim_Remove
         ${ElseIf} $0 == $Browse_Ex1
             StrCpy $1 $PathDialogue_Ex1
         ${ElseIf} $0 == $Browse_Ex2
@@ -1494,7 +1494,7 @@
                     ; Write the installation path into the registry
                     WriteRegStr HKLM "SOFTWARE\Wrye Flash" "Oblivion Standalone Version" "True"
                 ${Else}
-                    ${If} $Reg_Value_OB_Exe == $Empty ; ie don't overwrite it if it is installed but just not being installed that way this time.
+                    ${If} $Reg_Value_NV_Exe == $Empty ; ie don't overwrite it if it is installed but just not being installed that way this time.
                         WriteRegStr HKLM "SOFTWARE\Wrye Flash" "Oblivion Standalone Version" ""
                     ${EndIf}
                 ${EndIf}
@@ -1520,7 +1520,7 @@
                     ; Write the installation path into the registry
                     WriteRegStr HKLM "SOFTWARE\Wrye Flash" "Nehrim Python Version" "True"
                 ${Else}
-                    ${If} $Reg_Value_Nehrim_Py == $Empty ; ie don't overwrite it if it is installed but just not being installed that way this time.
+                    ${If} $Reg_Value_Nehrim_Py_Remove == $Empty ; ie don't overwrite it if it is installed but just not being installed that way this time.
                         WriteRegStr HKLM "SOFTWARE\Wrye Flash" "Nehrim Python Version" ""
                     ${EndIf}
                 ${EndIf}
@@ -1530,7 +1530,7 @@
                     ; Write the installation path into the registry
                     WriteRegStr HKLM "SOFTWARE\Wrye Flash" "Nehrim Standalone Version" "True"
                 ${Else}
-                    ${If} $Reg_Value_Nehrim_Exe == $Empty ; ie don't overwrite it if it is installed but just not being installed that way this time.
+                    ${If} $Reg_Value_Nehrim_Exe_Remove == $Empty ; ie don't overwrite it if it is installed but just not being installed that way this time.
                         WriteRegStr HKLM "SOFTWARE\Wrye Flash" "Nehrim Standalone Version" ""
                     ${EndIf}
                 ${EndIf}
@@ -1553,7 +1553,7 @@
                     File /r "Mopy\*.py" "Mopy\*.pyw" "Mopy\*.bat"
                     ; Write the installation path into the registry
                     WriteRegStr HKLM "SOFTWARE\Wrye Flash" "Skyrim Python Version" "True"
-                ${ElseIf} $Reg_Value_Skyrim_Py == $Empty ; id don't overwrite it if it is installed but just not being installed that way this time.
+                ${ElseIf} $Reg_Value_Skyrim_Py_Remove == $Empty ; id don't overwrite it if it is installed but just not being installed that way this time.
                     WriteRegStr HKLM "SOFTWARE\Wrye Flash" "Skyrim Python Version" ""
                 ${EndIf}
                 ${If} $CheckState_Skyrim_Exe_Remove == ${BST_CHECKED}
@@ -1561,7 +1561,7 @@
                     File "Mopy\w9xpopen.exe" "Mopy\Wrye Flash.exe"
                     ; Write the installation path into the registry
                     WriteRegStr HKLM "SOFTWARE\Wrye Flash" "Skyrim Standalone Version" "True"
-                ${ElseIf} $Reg_Value_Skyrim_Exe == $Empty ; ie don't overwrite it if it is installed but just not being installed that way this time.
+                ${ElseIf} $Reg_Value_Skyrim_Exe_Remove == $Empty ; ie don't overwrite it if it is installed but just not being installed that way this time.
                     WriteRegStr HKLM "SOFTWARE\Wrye Flash" "Skyrim Standalond Version" ""
                 ${EndIf}
             ${EndIf}
@@ -1747,10 +1747,10 @@
                 ${NSD_SetState} $Check_NV $CheckState_NV
             IntOp $0 $0 + 13
             ${NSD_CreateDirRequest} 0 $0u 90% 13u "$Path_NV"
-                Pop $PathDialogue_OB
+                Pop $PathDialogue_NV
             ${NSD_CreateBrowseButton} -10% $0u 5% 13u "..."
-                Pop $Browse_OB
-                nsDialogs::OnClick $Browse_OB $Function_Browse
+                Pop $Browse_NV
+                nsDialogs::OnClick $Browse_NV $Function_Browse
             IntOp $0 $0 + 13
         ${EndIf}
         ${If} $Path_Nehrim_Remove != $Empty
@@ -1759,10 +1759,10 @@
                 ${NSD_SetState} $Check_Nehrim_Remove $CheckState_Nehrim_Remove
             IntOp $0 $0 + 13
             ${NSD_CreateDirRequest} 0 $0u 90% 13u "$Path_Nehrim_Remove"
-                Pop $PathDialogue_Nehrim
+                Pop $PathDialogue_Nehrim_Remove
             ${NSD_CreateBrowseButton} -10% $0u 5% 13u "..."
-                Pop $Browse_Nehrim
-                nsDialogs::OnClick $Browse_Nehrim $Function_Browse
+                Pop $Browse_Nehrim_Remove
+                nsDialogs::OnClick $Browse_Nehrim_Remove $Function_Browse
             IntOp $0 $0 + 13
         ${EndIf}
         ${If} $Path_Skyrim_Remove != $Empty
@@ -1771,10 +1771,10 @@
                 ${NSD_SetState} $Check_Skyrim_Remove $CheckState_Skyrim_Remove
             IntOp $0 $0 + 13
             ${NSD_CreateDirRequest} 0 $0u 90% 13u "$Path_Skyrim_Remove"
-                Pop $PathDialogue_Skyrim
+                Pop $PathDialogue_Skyrim_Remove
             ${NSD_CreateBrowseButton} -10% %0u 5% 13u "..."
-                Pop $Browse_Skyrim
-                nsDialogs::OnClick $Browse_Skyrim $Function_Browse
+                Pop $Browse_Skyrim_Remove
+                nsDialogs::OnClick $Browse_Skyrim_Remove $Function_Browse
             IntOp $0 $0 + 13
         ${EndIf}
         ${If} $Path_Ex1 != $Empty
@@ -1808,9 +1808,9 @@
     FunctionEnd
 
     Function un.PAGE_SELECT_GAMES_Leave
-        ${NSD_GetText} $PathDialogue_OB $Path_NV
-        ${NSD_GetText} $PathDialogue_Nehrim $Path_Nehrim_Remove
-        ${NSD_GetText} $PathDialogue_Skyrim $Path_Skyrim_Remove
+        ${NSD_GetText} $PathDialogue_NV $Path_NV
+        ${NSD_GetText} $PathDialogue_Nehrim_Remove $Path_Nehrim_Remove
+        ${NSD_GetText} $PathDialogue_Skyrim_Remove $Path_Skyrim_Remove
         ${NSD_GetText} $PathDialogue_Ex1 $Path_Ex1
         ${NSD_GetText} $PathDialogue_Ex2 $Path_Ex2
         ${NSD_GetState} $Check_NV $CheckState_NV
@@ -1823,12 +1823,12 @@
 
     Function un.OnClick_Browse
         Pop $0
-        ${If} $0 == $Browse_OB
-            StrCpy $1 $PathDialogue_OB
-        ${ElseIf} $0 == $Browse_Nehrim
-            StrCpy $1 $PathDialogue_Nehrim
-        ${ElseIf} $0 == $Browse_Skyrim
-            StrCpy $1 $PathDialogue_Skyrim
+        ${If} $0 == $Browse_NV
+            StrCpy $1 $PathDialogue_NV
+        ${ElseIf} $0 == $Browse_Nehrim_Remove
+            StrCpy $1 $PathDialogue_Nehrim_Remove
+        ${ElseIf} $0 == $Browse_Skyrim_Remove
+            StrCpy $1 $PathDialogue_Skyrim_Remove
         ${ElseIf} $0 == $Browse_Ex1
             StrCpy $1 $PathDialogue_Ex1
         ${ElseIf} $0 == $Browse_Ex2
