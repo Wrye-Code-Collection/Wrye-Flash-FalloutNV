@@ -109,10 +109,6 @@
         !insertmacro MUI_HEADER_TEXT $(PAGE_FINISH_TITLE) $(PAGE_FINISH_SUBTITLE)
 
         ReadRegStr $Path_NV HKLM "Software\Wrye Flash" "FalloutNV Path"
-        ReadRegStr $Path_Nehrim_Remove HKLM "Software\Wrye Flash" "Nehrim Path"
-        ReadRegStr $Path_Skyrim_Remove HKLM "Software\Wrye Flash" "Skyrim Path"
-        ReadRegStr $Path_Ex1_Remove HKLM "Software\Wrye Flash" "Extra Path 1"
-        ReadRegStr $Path_Ex2_Remove HKLM "Software\Wrye Flash" "Extra Path 2"
 
         nsDialogs::Create 1018
             Pop $Dialog
@@ -129,26 +125,6 @@
                 Pop $Check_NV
             IntOp $0 $0 + 9
         ${EndIf}
-        ${If} $Path_Nehrim_Remove != $Empty
-            ${NSD_CreateCheckBox} 0 $0u 100% 8u "Nehrim"
-                Pop $Check_Nehrim_Remove
-            IntOp $0 $0 + 9
-        ${EndIf}
-        ${If} $Path_Skyrim_Remove != $Empty
-            ${NSD_CreateCheckBox} 0 $0u 100% 8u "Skyrim"
-                Pop $Check_Skyrim_Remove
-            IntOp $0 $0 + 9
-        ${EndIf}
-        ${If} $Path_Ex1_Remove != $Empty
-            ${NSD_CreateCheckBox} 0 $0u 100% 8u $Path_Ex1_Remove
-                Pop $Check_Ex1_Remove
-            IntOp $0 $0 + 9
-        ${EndIf}
-        ${If} $Path_Ex2_Remove != $Empty
-            ${NSD_CreateCheckBox} 0 $0u 100% 8u $Path_Ex2_Remove
-                Pop $Check_Ex2_Remove
-            IntOp $0 $0 + 9
-        ${EndIf}
         IntOp $0 $0 + 9
         IntOp $1 0 + 0
         ${NSD_CreateCheckBox} $1% $0u 25% 8u "View Readme"
@@ -163,10 +139,6 @@
 
     Function PAGE_FINISH_Leave
         ${NSD_GetState} $Check_NV $CheckState_NV
-        ${NSD_GetState} $Check_Nehrim_Remove $CheckState_Nehrim_Remove
-        ${NSD_GetState} $Check_Skyrim_Remove $CheckState_Skyrim_Remove
-        ${NSD_GetState} $Check_Ex1_Remove $CheckState_Ex1_Remove
-        ${NSD_GetState} $Check_Ex2_Remove $CheckState_Ex2_Remove
 
         ${If} $CheckState_NV == ${BST_CHECKED}
             SetOutPath "$Path_NV\Mopy"
