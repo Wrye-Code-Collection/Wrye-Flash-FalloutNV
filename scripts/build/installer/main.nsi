@@ -154,14 +154,6 @@ Unicode true
         Pop $0
         ${If} $0 == $Browse_NV
             StrCpy $1 $PathDialogue_NV
-        ${ElseIf} $0 == $Browse_Nehrim_Remove
-            StrCpy $1 $PathDialogue_Nehrim_Remove
-        ${ElseIf} $0 == $Browse_Skyrim_Remove
-            StrCpy $1 $PathDialogue_Skyrim_Remove
-        ${ElseIf} $0 == $Browse_Ex1_Remove
-            StrCpy $1 $PathDialogue_Ex1_Remove
-        ${ElseIf} $0 == $Browse_Ex2_Remove
-            StrCpy $1 $PathDialogue_Ex2_Remove
         ${EndIf}
         ${NSD_GetText} $1 $Function_DirPrompt
         nsDialogs::SelectFolderDialog /NOUNLOAD "Please select a target directory" $Function_DirPrompt
