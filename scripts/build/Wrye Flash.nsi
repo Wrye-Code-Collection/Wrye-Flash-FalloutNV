@@ -145,7 +145,7 @@
             Pop $Label
             IntOp $0 0 + 25
         ${If} $Path_NV != $Empty
-            ${NSD_CreateCheckBox} 0 $0u 30% 13u "Install for Oblivion"
+            ${NSD_CreateCheckBox} 0 $0u 30% 13u "Install for FalloutNV"
                 Pop $Check_NV
                 ${NSD_SetState} $Check_NV $CheckState_NV
             ${NSD_CreateCheckBox} 30% $0u 40% 13u "Wrye Flash [Standalone]"
@@ -221,7 +221,7 @@
         Pop $Label
         SetCtlColors $Label "FF0000" "transparent"
 
-        ${NSD_CreateLabel} 0 24 100% 128u "This is a very common cause of problems when using Wrye Flash. Highly recommended that you stop this installation now, reinstall (FalloutNV/Steam) into another directory outside of Program Files, such as C:\Games\FalloutNV, and install Wrye Flash at that location.$\n$\nThe problems with installing in Program Files stem from a feature of Windows that did not exist when Oblivion was released: User Access Controls (UAC).  If you continue with the install into Program Files, you may have trouble starting or using Wrye Flash, as it may not be able to access its own files."
+        ${NSD_CreateLabel} 0 24 100% 128u "This is a very common cause of problems when using Wrye Flash. Highly recommended that you stop this installation now, reinstall (FalloutNV/Steam) into another directory outside of Program Files, such as C:\Games\FalloutNV, and install Wrye Flash at that location.$\n$\nThe problems with installing in Program Files stem from a feature of Windows that did not exist when FalloutNV was released: User Access Controls (UAC).  If you continue with the install into Program Files, you may have trouble starting or using Wrye Flash, as it may not be able to access its own files."
         Pop $Label
 
         nsDialogs::Show
@@ -247,7 +247,7 @@
             Pop $Label
         IntOp $0 0 + 17
         ${If} $Path_NV != $Empty
-            ${NSD_CreateCheckBox} 0 $0u 100% 8u "Oblivion"
+            ${NSD_CreateCheckBox} 0 $0u 100% 8u "FalloutNV"
                 Pop $Check_NV
             IntOp $0 $0 + 9
         ${EndIf}
@@ -524,44 +524,49 @@
             ; Install resources:
             ${If} Path_NV != $Empty
                 SetOutPath $Path_NV\Mopy
-                File /r /x "*.svn*" /x "*.bat" /x "*.py*" /x "w9xpopen.exe" /x "Wrye Flash.exe" "Mopy\*.*"
+                File /r /x "*.git*" /x "*.bat" /x "*.py*" /x "w9xpopen.exe" /x "Wrye Flash.exe" "Mopy\*.*"
+                ; empty Bash patches
+                ; SetOutPath "$Path_NV\Mopy\templates"
+                ; File /r "Mopy\templates\*.*"
+                ; Wizard Images
+                ; SetOutPath "$Path_NV\Mopy\templates"
+                ; File /r "Mopy\templates\*.*"
+
                 SetOutPath $Path_NV\Data
                 ; no archive invalidation exists users should use NMM or FOMM
-                ; File /r "Mopy\templates\Oblivion\ArchiveInvalidationInvalidated!.bsa"
+                ; File /r "Mopy\templates\FalloutNV\ArchiveInvalidationInvalidated!.bsa"
                 ; taglist for BOSS
                 ; do not copy Bash_Groups.csv because it's for oblivion
                 SetOutPath "$Path_NV\Data\Bash Patches"
                 File /r "Data\Bash Patches\taglist.txt"
-                ; empty Bash patches
-                SetOutPath "$Path_NV\Mopy\templates"
-                File /r "Mopy\templates\*.*"
                 ; Documentation aside from the main file in the Mopy folder
                 ; TODO Move the main Doc file to the Docs folder
                 SetOutPath "$Path_NV\Data\Docs"
                 File /r "Data\Docs\*.*"
                 ; INI Tweaks
-                SetOutPath "$Path_NV\Mopy\INI Tweaks"
-                File /r "Mopy\INI Tweaks\*.*"
+                SetOutPath "$Path_NV\Data\INI Tweaks"
+                File /r "Data\INI Tweaks\*.*"
+
                 ; Write the installation path into the registry
                 WriteRegStr HKLM "SOFTWARE\Wrye Flash" "FalloutNV Path" "$Path_NV"
                 ${If} $CheckState_NV_Py == ${BST_CHECKED}
                     SetOutPath "$Path_NV\Mopy"
                     File /r "Mopy\*.py" "Mopy\*.pyw" "Mopy\*.bat"
                     ; Write the installation path into the registry
-                    WriteRegStr HKLM "SOFTWARE\Wrye Flash" "Oblivion Python Version" "True"
+                    WriteRegStr HKLM "SOFTWARE\Wrye Flash" "FalloutNV Python Version" "True"
                 ${Else}
                     ${If} $Reg_Value_NV_Py == $Empty ; ie don't overwrite it if it is installed but just not being installed that way this time.
-                        WriteRegStr HKLM "SOFTWARE\Wrye Flash" "Oblivion Python Version" ""
+                        WriteRegStr HKLM "SOFTWARE\Wrye Flash" "FalloutNV Python Version" ""
                     ${EndIf}
                 ${EndIf}
                 ${If} $CheckState_NV_Exe == ${BST_CHECKED}
                     SetOutPath "$Path_NV\Mopy"
                     File "Mopy\w9xpopen.exe" "Mopy\Wrye Flash.exe"
                     ; Write the installation path into the registry
-                    WriteRegStr HKLM "SOFTWARE\Wrye Flash" "Oblivion Standalone Version" "True"
+                    WriteRegStr HKLM "SOFTWARE\Wrye Flash" "FalloutNV Standalone Version" "True"
                 ${Else}
                     ${If} $Reg_Value_NV_Exe == $Empty ; ie don't overwrite it if it is installed but just not being installed that way this time.
-                        WriteRegStr HKLM "SOFTWARE\Wrye Flash" "Oblivion Standalone Version" ""
+                        WriteRegStr HKLM "SOFTWARE\Wrye Flash" "FalloutNV Standalone Version" ""
                     ${EndIf}
                 ${EndIf}
             ${EndIf}
@@ -590,15 +595,15 @@
             ${If} Path_NV != $Empty
                 SetOutPath $Path_NV\Mopy
                 ${If} $CheckState_NV_Py == ${BST_CHECKED}
-                    CreateShortCut "$SMPROGRAMS\Wrye Flash\Wrye Flash - Oblivion.lnk" "$Path_NV\Mopy\Wrye Flash Launcher.pyw" "" "$Path_NV\Mopy\bash\images\bash_32.ico" 0
-                    CreateShortCut "$SMPROGRAMS\Wrye Flash\Wrye Flash - Oblivion (Debug Log).lnk" "$Path_NV\Mopy\Wrye Flash Debug.bat" "" "$Path_NV\Mopy\bash\images\bash_32.ico" 0
+                    CreateShortCut "$SMPROGRAMS\Wrye Flash\Wrye Flash - FalloutNV.lnk" "$Path_NV\Mopy\Wrye Flash Launcher.pyw" "" "$Path_NV\Mopy\bash\images\bash_32.ico" 0
+                    CreateShortCut "$SMPROGRAMS\Wrye Flash\Wrye Flash - FalloutNV (Debug Log).lnk" "$Path_NV\Mopy\Wrye Flash Debug.bat" "" "$Path_NV\Mopy\bash\images\bash_32.ico" 0
                     ${If} $CheckState_NV_Exe == ${BST_CHECKED}
-                        CreateShortCut "$SMPROGRAMS\Wrye Flash\Wrye Flash (Standalone) - Oblivion.lnk" "$Path_NV\Mopy\Wrye Flash.exe"
-                        CreateShortCut "$SMPROGRAMS\Wrye Flash\Wrye Flash (Standalone) - Oblivion (Debug Log).lnk" "$Path_NV\Mopy\Wrye Flash.exe" "-d"
+                        CreateShortCut "$SMPROGRAMS\Wrye Flash\Wrye Flash (Standalone) - FalloutNV.lnk" "$Path_NV\Mopy\Wrye Flash.exe"
+                        CreateShortCut "$SMPROGRAMS\Wrye Flash\Wrye Flash (Standalone) - FalloutNV (Debug Log).lnk" "$Path_NV\Mopy\Wrye Flash.exe" "-d"
                     ${EndIf}
                 ${ElseIf} $CheckState_NV_Exe == ${BST_CHECKED}
-                    CreateShortCut "$SMPROGRAMS\Wrye Flash\Wrye Flash - Oblivion.lnk" "$Path_NV\Mopy\Wrye Flash.exe"
-                    CreateShortCut "$SMPROGRAMS\Wrye Flash\Wrye Flash - Oblivion (Debug Log).lnk" "$Path_NV\Mopy\Wrye Flash.exe" "-d"
+                    CreateShortCut "$SMPROGRAMS\Wrye Flash\Wrye Flash - FalloutNV.lnk" "$Path_NV\Mopy\Wrye Flash.exe"
+                    CreateShortCut "$SMPROGRAMS\Wrye Flash\Wrye Flash - FalloutNV (Debug Log).lnk" "$Path_NV\Mopy\Wrye Flash.exe" "-d"
                 ${EndIf}
             ${EndIf}
         ${EndIf}
@@ -620,7 +625,7 @@
 
         IntOp $0 0 + 9
         ${If} $Path_NV != $Empty
-            ${NSD_CreateCheckBox} 0 $0u 100% 13u "&Oblivion"
+            ${NSD_CreateCheckBox} 0 $0u 100% 13u "&FalloutNV"
                 Pop $Check_NV
                 ${NSD_SetState} $Check_NV $CheckState_NV
             IntOp $0 $0 + 13
@@ -696,7 +701,6 @@
                 Delete "$Path_NV\Data\INI Tweaks\Save Backups, 3.ini"
                 Delete "$Path_NV\Data\INI Tweaks\Save Backups, 5.ini"
                 RMDir  "$Path_NV\Data\INI Tweaks"
-                RMDir  "$Path_NV\Mopy\bash"
                 Delete "$Path_NV\Mopy\bash\__init__.py"
                 Delete "$Path_NV\Mopy\bash\balt.py"
                 Delete "$Path_NV\Mopy\bash\bapi.py"
@@ -710,16 +714,13 @@
                 Delete "$Path_NV\Mopy\bash\bosh.py"
                 Delete "$Path_NV\Mopy\bash\bush.py"
                 Delete "$Path_NV\Mopy\bash\cint.py"
-                Delete "$Path_NV\Mopy\bash\compiled"
                 Delete "$Path_NV\Mopy\bash\compiled\7z.dll"
                 Delete "$Path_NV\Mopy\bash\compiled\7z.exe"
                 Delete "$Path_NV\Mopy\bash\compiled\7zUnicode.exe"
                 Delete "$Path_NV\Mopy\bash\compiled\boss32.dll"
                 Delete "$Path_NV\Mopy\bash\compiled\boss64.dll"
                 Delete "$Path_NV\Mopy\bash\compiled\lzma.exe"
-                Delete "$Path_NV\Mopy\bash\db"
                 Delete "$Path_NV\Mopy\bash\db\FalloutNV_ids.pkl"
-                Delete "$Path_NV\Mopy\bash\images"
                 Delete "$Path_NV\Mopy\bash\images\3dsmax16.png"
                 Delete "$Path_NV\Mopy\bash\images\3dsmax24.png"
                 Delete "$Path_NV\Mopy\bash\images\3dsmax32.png"
@@ -1151,35 +1152,40 @@
                 Delete "$Path_NV\Mopy\bash\images\xnview24.png"
                 Delete "$Path_NV\Mopy\bash\images\xnview32.png"
                 Delete "$Path_NV\Mopy\bash\images\zoom_on.png"
-                Delete "$Path_NV\Mopy\bash\l10n"
                 Delete "$Path_NV\Mopy\bash\l10n\de.txt"
                 Delete "$Path_NV\Mopy\bash\l10n\Italian.txt"
                 Delete "$Path_NV\Mopy\bash\l10n\Japanese.txt"
                 Delete "$Path_NV\Mopy\bash\l10n\pt_opt.txt"
                 Delete "$Path_NV\Mopy\bash\l10n\Russian.txt"
                 Delete "$Path_NV\Mopy\bash\ScriptParser.py"
+                RMDir  "$Path_NV\Mopy\bash\compiled"
+                RMDir  "$Path_NV\Mopy\bash\l10n"
+                RMDir  "$Path_NV\Mopy\bash\db"
+                RMDir  "$Path_NV\Mopy\bash\images"
+                RMDir  "$Path_NV\Mopy\bash"
                 Delete "$Path_NV\Mopy\bash_default.ini"
                 Delete "$Path_NV\Mopy\license.txt"
-                Delete "$Path_NV\Mopy\templates"
                 Delete "$Path_NV\Mopy\templates\Bashed Patch, 0.esp"
                 Delete "$Path_NV\Mopy\templates\Blank.esp"
-                Delete "$Path_NV\Mopy\Wizard Images"
+                RMDir  "$Path_NV\Mopy\templates"
                 Delete "$Path_NV\Mopy\Wizard Images\EnglishUSA.jpg"
                 Delete "$Path_NV\Mopy\Wizard Images\French.jpg"
                 Delete "$Path_NV\Mopy\Wizard Images\German.jpg"
                 Delete "$Path_NV\Mopy\Wizard Images\Italian.jpg"
                 Delete "$Path_NV\Mopy\Wizard Images\No.jpg"
                 Delete "$Path_NV\Mopy\Wizard Images\Yes.jpg"
+                RMDir  "$Path_NV\Mopy\Wizard Images"
                 Delete "$Path_NV\Mopy\WizardDocs.txt"
                 Delete "$Path_NV\Mopy\wizards.html"
                 Delete "$Path_NV\Mopy\wizards.txt"
-                Delete "$Path_NV\Mopy\Wrye Bash Debug.bat"
-                Delete "$Path_NV\Mopy\Wrye Bash Launcher.pyw"
-                Delete "$Path_NV\Mopy\Wrye Bash.html"
+                Delete "$Path_NV\Mopy\Wrye Flash Debug.bat"
+                Delete "$Path_NV\Mopy\Wrye Flash Launcher.pyw"
+                Delete "$Path_NV\Mopy\Wrye Flash.html"
                 Delete "$Path_NV\Mopy\Wrye Bash.txt"
                 Delete "$Path_NV\Mopy\Wrye Flash.txt"
                 RMDir  "$Path_NV\Mopy"
-                Delete "$SMPROGRAMS\Wrye Flash\*oblivion*"
+                ; what does this line do?
+                Delete "$SMPROGRAMS\Wrye Flash\*falloutnv*"
             ${EndIf}
         ${EndIf}
 
