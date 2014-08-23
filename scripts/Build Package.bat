@@ -1,5 +1,5 @@
 @Echo off
-title Wrye Bash Release Build Script v2
+title Wrye Flash Release Build Script v2
 
 :Choice
 CLS
@@ -7,9 +7,9 @@ ECHO.
 ECHO.
 ECHO.
 ECHO Type a, Build and package the Installer and Manual packages
-ECHO Type i, Build just the Installer version of Wrye Bash
-ECHO Type w, Build and package the Standalone version of Wrye Bash
-ECHO Type m, Build and package the Source version of Wrye Bash
+ECHO Type i, Build just the Installer version of Wrye Flash
+ECHO Type w, Build and package the Standalone version of Wrye Flash
+ECHO Type m, Build and package the Source version of Wrye Flash
 ECHO Type h, Help
 ECHO Type q, Quit
 ECHO.
@@ -33,18 +33,18 @@ GOTO Choice
 CLS
 ECHO.
 ECHO.
-ECHO                                    Wrye Bash Release Build Help
+ECHO                                    Wrye Flash Release Build Help
 ECHO -----------------------------------------------------------------------
 ECHO            You need help? Here's a few coins go phone someone :)
 ECHO.
 ECHO If this script fails to produce the desired packages you will need ..
 ECHO Nullsoft Scriptable Install System (NSIS) - installed
 ECHO You will also need Python 2.7.3, wxPython, comtypes, pywin32 and py2exe
-ECHO Also copy from the svn Wrye Bash\scripts\zipextimporter.py into ..
+ECHO Also copy from the GitHub scripts\zipextimporter.py into ..
 ECHO "C:\Python27\Lib\site-packages\" .. In here (overwrite the old one).
 ECHO.
 ECHO After making your choice, you will find the new builds on completion in
-ECHO svn "Wrye Bash\scripts\Dist\"
+ECHO "scripts\Dist\"
 ECHO.
 ECHO     end of help. No, really, thats it. Go home, nothing to see here
 ECHO -----------------------------------------------------------------------
@@ -58,7 +58,7 @@ CLS
 ECHO.
 ECHO.
 ECHO.
-ECHO                    Building Wrye Bash packages, patience Avatar ...
+ECHO                    Building Wrye Flash packages, patience Avatar ...
 ECHO.
 "C:\Python27\python.exe" package_for_release.py
 ECHO.
@@ -72,7 +72,7 @@ CLS
 ECHO.
 ECHO.
 ECHO.
-ECHO                    Building Wrye Bash packages, patience Avatar ...
+ECHO                    Building Wrye Flash packages, patience Avatar ...
 ECHO.
 "C:\Python27\python.exe" package_for_release.py -i
 ECHO.
@@ -86,7 +86,7 @@ CLS
 ECHO.
 ECHO.
 ECHO.
-ECHO                    Building Wrye Bash packages, patience Avatar ...
+ECHO                    Building Wrye Flash packages, patience Avatar ...
 ECHO.
 "C:\Python27\python.exe" package_for_release.py -w
 ECHO.
@@ -100,7 +100,7 @@ CLS
 ECHO.
 ECHO.
 ECHO.
-ECHO                    Building Wrye Bash packages, patience Avatar ...
+ECHO                    Building Wrye Flash packages, patience Avatar ...
 ECHO.
 "C:\Python27\python.exe" package_for_release.py -m
 ECHO.

@@ -1,8 +1,8 @@
 @echo off
-title Wrye Bash Release Build Script
+title Wrye Flash Release Build Script
 echo.
 echo.
-echo. Building Wrye Bash packages, patience Avatar....
+echo. Building Wrye Flash packages, patience Avatar....
 
 echo.
 echo.

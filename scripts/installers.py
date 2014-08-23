@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 #
 #==============================================================================
-# This script reproduces minimal code from Wrye Bash's 'bash\bolt' and
+# This script reproduces minimal code from Wrye Flash's 'bash\bolt' and
 # 'bash\bosh' modules, to read the InstallersData pickle file 'Installers.dat'.
 # This allows recovery of information in the event that the actual installer
 # were deleted, but the .dat file is still intact.  It will retrieve the
@@ -36,7 +36,7 @@ def _unicode(s):
     except UnicodeError: return unicode(s,'mbcs')
 
 # Regex's used to trick cPickle into using this module's classes, instead of
-# the Wrye Bash modules (which aren't present anyway).
+# the Wrye Flash modules (which aren't present anyway).
 reTransSubOld = re.compile(u'^(bolt|bosh)$',re.U).sub
 reTransSubNew = re.compile(u'^bash\.(bolt|bosh)$',re.U).sub
 
@@ -54,7 +54,7 @@ class Translator:
         return self.reSub(r'__main__',s)
 
 
-#--Fake Wrye Bash classes -----------------------------------------------------
+#--Fake Wrye Flash classes -----------------------------------------------------
 
 class Installer(object):
     # Need to reproduce 'persistent' since it's used to read and write the

@@ -31,16 +31,16 @@ RT_MANIFEST = 24
 
 class Target:
     def __init__(self, script):
-        self.name = 'Wrye Bash'
-        self.description = 'Wrye Bash'
+        self.name = 'Wrye Flash'
+        self.description = 'Wrye Flash'
         self.version = '%(version)s'
-        self.author = 'Wrye Bash development team'
-        self.url = 'http://tesnexus.com/downloads/file.php?id=22368'
+        self.author = 'Wrye Flash development team'
+        self.url = 'http://www.nexusmods.com/newvegas/mods/35003/'
         self.download_url = self.url
         self.script = script
         if manifest is not None:
             self.other_resources = [(RT_MANIFEST, 1, manifest)]
-windows = Target('Wrye Bash Launcher.pyw')
+windows = Target('Wrye Flash Launcher.pyw')
 
 setup(
     windows = [windows],

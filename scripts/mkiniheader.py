@@ -130,7 +130,7 @@ def remove_one_trailing_space(lines):
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description='The Wrye Bash INI file header generator.')
+    parser = argparse.ArgumentParser(description='The Wrye Flash INI file header generator.')
     parser.add_argument('verStr', metavar='VERSION', type=str, help='the version string')
 
     options = parser.parse_args()
@@ -144,6 +144,7 @@ if __name__ == "__main__":
         elif '7' == char: seven(_lines)
         elif '8' == char: eight(_lines)
         elif '9' == char: nine(_lines)
+        elif '0' == char: zero(_lines)
         elif '.' == char: dot(_lines)
         else: print "unhandled character: '%s'" % char
 
