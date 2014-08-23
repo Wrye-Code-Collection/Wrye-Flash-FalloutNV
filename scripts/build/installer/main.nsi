@@ -139,17 +139,17 @@ Unicode true
     Function un.onInit
         StrCpy $Empty ""
         StrCpy $True "True"
-        ReadRegStr $Path_OB              HKLM "Software\Wrye Flash" "Oblivion Path"
+        ReadRegStr $Path_OB              HKLM "Software\Wrye Flash" "FalloutNV Path"
         ReadRegStr $Path_Nehrim          HKLM "Software\Wrye Flash" "Nehrim Path"
         ReadRegStr $Path_Skyrim          HKLM "Software\Wrye Flash" "Skyrim Path"
         ReadRegStr $Path_Ex1             HKLM "Software\Wrye Flash" "Extra Path 1"
         ReadRegStr $Path_Ex2             HKLM "Software\Wrye Flash" "Extra Path 2"
-        ReadRegStr $Reg_Value_OB_Py      HKLM "Software\Wrye Flash" "Oblivion Python Version"
+        ReadRegStr $Reg_Value_OB_Py      HKLM "Software\Wrye Flash" "FalloutNV Python Version"
         ReadRegStr $Reg_Value_Nehrim_Py  HKLM "Software\Wrye Flash" "Nehrim Python Version"
         ReadRegStr $Reg_Value_Skyrim_Py  HKLM "Software\Wrye Flash" "Skyrim Python Version"
         ReadRegStr $Reg_Value_Ex1_Py     HKLM "Software\Wrye Flash" "Extra Path 1 Python Version"
         ReadRegStr $Reg_Value_Ex2_Py     HKLM "Software\Wrye Flash" "Extra Path 2 Python Version"
-        ReadRegStr $Reg_Value_OB_Exe     HKLM "Software\Wrye Flash" "Oblivion Standalone Version"
+        ReadRegStr $Reg_Value_OB_Exe     HKLM "Software\Wrye Flash" "FalloutNV Standalone Version"
         ReadRegStr $Reg_Value_Nehrim_Exe HKLM "Software\Wrye Flash" "Nehrim Standalone Version"
         ReadRegStr $Reg_Value_Skyrim_Exe HKLM "Software\Wrye Flash" "Skyrim Standalone Version"
         ReadRegStr $Reg_Value_Ex1_Exe    HKLM "Software\Wrye Flash" "Extra Path 1 Standalone Version"
@@ -159,17 +159,17 @@ Unicode true
     Function .onInit
         StrCpy $Empty ""
         StrCpy $True "True"
-        ReadRegStr $Path_OB              HKLM "Software\Wrye Flash" "Oblivion Path"
+        ReadRegStr $Path_OB              HKLM "Software\Wrye Flash" "FalloutNV Path"
         ReadRegStr $Path_Nehrim          HKLM "Software\Wrye Flash" "Nehrim Path"
         ReadRegStr $Path_Skyrim          HKLM "Software\Wrye Flash" "Skyrim Path"
         ReadRegStr $Path_Ex1             HKLM "Software\Wrye Flash" "Extra Path 1"
         ReadRegStr $Path_Ex2             HKLM "Software\Wrye Flash" "Extra Path 2"
-        ReadRegStr $Reg_Value_OB_Py      HKLM "Software\Wrye Flash" "Oblivion Python Version"
+        ReadRegStr $Reg_Value_OB_Py      HKLM "Software\Wrye Flash" "FalloutNV Python Version"
         ReadRegStr $Reg_Value_Nehrim_Py  HKLM "Software\Wrye Flash" "Nehrim Python Version"
         ReadRegStr $Reg_Value_Skyrim_Py  HKLM "Software\Wrye Flash" "Skyrim Python Version"
         ReadRegStr $Reg_Value_Ex1_Py     HKLM "Software\Wrye Flash" "Extra Path 1 Python Version"
         ReadRegStr $Reg_Value_Ex2_Py     HKLM "Software\Wrye Flash" "Extra Path 2 Python Version"
-        ReadRegStr $Reg_Value_OB_Exe     HKLM "Software\Wrye Flash" "Oblivion Standalone Version"
+        ReadRegStr $Reg_Value_OB_Exe     HKLM "Software\Wrye Flash" "FalloutNV Standalone Version"
         ReadRegStr $Reg_Value_Nehrim_Exe HKLM "Software\Wrye Flash" "Nehrim Standalone Version"
         ReadRegStr $Reg_Value_Skyrim_Exe HKLM "Software\Wrye Flash" "Skyrim Standalone Version"
         ReadRegStr $Reg_Value_Ex1_Exe    HKLM "Software\Wrye Flash" "Extra Path 1 Standalone Version"
@@ -183,9 +183,9 @@ Unicode true
         StrCpy $Python_pywin32 "1"
 
         ${If} $Path_OB == $Empty
-            ReadRegStr $Path_OB HKLM "Software\Bethesda Softworks\Oblivion" "Installed Path"
+            ReadRegStr $Path_OB HKLM "Software\Bethesda Softworks\FalloutNV" "Installed Path"
             ${If} $Path_OB == $Empty
-                ReadRegStr $Path_OB HKLM "SOFTWARE\Wow6432Node\Bethesda Softworks\Oblivion" "Installed Path"
+                ReadRegStr $Path_OB HKLM "SOFTWARE\Wow6432Node\Bethesda Softworks\FalloutNV" "Installed Path"
             ${EndIf}
         ${EndIf}
         ${If} $Path_OB != $Empty
