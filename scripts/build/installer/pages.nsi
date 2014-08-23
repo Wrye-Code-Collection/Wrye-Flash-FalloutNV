@@ -108,7 +108,7 @@
     Function PAGE_FINISH
         !insertmacro MUI_HEADER_TEXT $(PAGE_FINISH_TITLE) $(PAGE_FINISH_SUBTITLE)
 
-        ReadRegStr $Path_NV HKLM "Software\Wrye Flash" "FalloutNV Path"
+        ReadRegStr $Path_NV HKLM "Software\Wrye FlashNV" "FalloutNV Path"
 
         nsDialogs::Create 1018
             Pop $Dialog
