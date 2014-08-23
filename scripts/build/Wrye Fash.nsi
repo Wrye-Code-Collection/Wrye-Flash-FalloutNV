@@ -219,74 +219,21 @@
 
         ; Game paths
         ${NSD_GetText} $PathDialogue_NV $Path_NV
-        ${NSD_GetText} $PathDialogue_Nehrim_Remove $Path_Nehrim_Remove
-        ${NSD_GetText} $PathDialogue_Skyrim_Remove $Path_Skyrim_Remove
-        ${NSD_GetText} $PathDialogue_Ex1 $Path_Ex1
-        ${NSD_GetText} $PathDialogue_Ex2 $Path_Ex2
 
         ; Game states
         ${NSD_GetState} $Check_NV $CheckState_NV
-        ${NSD_GetState} $Check_Nehrim_Remove $CheckState_Nehrim_Remove
-        ${NSD_GetState} $Check_Skyrim_Remove $CheckState_Skyrim_Remove
-        ${NSD_GetState} $Check_Extra $CheckState_Extra
-        ${NSD_GetState} $Check_Ex1 $CheckState_Ex1
-        ${NSD_GetState} $Check_Ex2 $CheckState_Ex2
 
         ; Python states
         ${NSD_GetState} $Check_NV_Py $CheckState_NV_Py
-        ${NSD_GetState} $Check_Nehrim_Py_Remove $CheckState_Nehrim_Py_Remove
-        ${NSD_GetState} $Check_Skyrim_Py_Remove $CheckState_Skyrim_Py_Remove
-        ${NSD_GetState} $Check_Ex1_Py $CheckState_Ex1_Py
-        ${NSD_GetState} $Check_Ex2_Py $CheckState_Ex2_Py
         ${If} $CheckState_NV_Py == ${BST_CHECKED}
         ${AndIf} $CheckState_NV == ${BST_CHECKED}
-            StrCpy $PythonVersionInstall $True
-        ${Endif}
-        ${If} $CheckState_Nehrim_Py_Remove == ${BST_CHECKED}
-        ${AndIf} $CheckState_Nehrim_Remove == ${BST_CHECKED}
-            StrCpy $PythonVersionInstall $True
-        ${Endif}
-        ${If} $CheckState_Skyrim_Py_Remove == ${BST_CHECKED}
-        ${AndIf} $CheckState_Skyrim_Remove == ${BST_CHECKED}
-            StrCpy $PythonVersionInstall $True
-        ${EndIf}
-        ${If} $CheckState_Ex1_Py == ${BST_CHECKED}
-        ${AndIf} $CheckState_Extra == ${BST_CHECKED}
-        ${AndIf} $CheckState_Ex1 == ${BST_CHECKED}
-            StrCpy $PythonVersionInstall $True
-        ${Endif}
-        ${If} $CheckState_Ex2_Py == ${BST_CHECKED}
-        ${AndIf} $CheckState_Extra == ${BST_CHECKED}
-        ${AndIf} $CheckState_Ex2 == ${BST_CHECKED}
             StrCpy $PythonVersionInstall $True
         ${Endif}
 
         ; Standalone states
         ${NSD_GetState} $Check_NV_Exe $CheckState_NV_Exe
-        ${NSD_GetState} $Check_Nehrim_Exe_Remove $CheckState_Nehrim_Exe_Remove
-        ${NSD_GetState} $Check_Skyrim_Exe_Remove $CheckState_Skyrim_Exe_Remove
-        ${NSD_GetState} $Check_Ex1_Exe $CheckState_Ex1_Exe
-        ${NSD_GetState} $Check_Ex2_Exe $CheckState_Ex2_Exe
         ${If} $CheckState_NV_Exe == ${BST_CHECKED}
         ${AndIf} $CheckState_NV == ${BST_CHECKED}
-            StrCpy $ExeVersionInstall $True
-        ${Endif}
-        ${If} $CheckState_Nehrim_Exe_Remove == ${BST_CHECKED}
-        ${AndIf} $CheckState_Nehrim_Remove == ${BST_CHECKED}
-            StrCpy $ExeVersionInstall $True
-        ${Endif}
-        ${If} $CheckState_Skyrim_Exe_Remove == ${BST_CHECKED}
-        ${AndIf} $CheckState_Skyrim_Remove == ${BST_CHECKED}
-            StrCpy $ExeVersionInstall $True
-        ${EndIf}
-        ${If} $CheckState_Ex1_Exe == ${BST_CHECKED}
-        ${AndIf} $CheckState_Extra == ${BST_CHECKED}
-        ${AndIf} $CheckState_Ex1 == ${BST_CHECKED}
-            StrCpy $ExeVersionInstall $True
-        ${Endif}
-        ${If} $CheckState_Ex2_Exe == ${BST_CHECKED}
-        ${AndIf} $CheckState_Extra == ${BST_CHECKED}
-        ${AndIf} $CheckState_Ex2 == ${BST_CHECKED}
             StrCpy $ExeVersionInstall $True
         ${Endif}
     FunctionEnd
