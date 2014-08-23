@@ -23,7 +23,9 @@
         ${If} ${DoAII} == true
             ; Some games don't use ArchiveInvalidationInvalidated
             SetOutPath "${GameDir}\Data"
-            File /r "Mopy\templates\FalloutNV\ArchiveInvalidationInvalidated!.bsa"
+            ; ArchiveInvalidationInvalidated!.bsa not included
+            ; TODO copy one from NMM or FOMM
+            ; File /r "Mopy\templates\FalloutNV\ArchiveInvalidationInvalidated!.bsa"
         ${EndIf}
         WriteRegStr HKLM "SOFTWARE\Wrye Flash" "${RegPath}" "${GameDir}"
         ${If} ${DoPython} == ${BST_CHECKED}
