@@ -1,4 +1,4 @@
-; Wrye Bash.nsi
+; Wrye Flash.nsi
 Unicode true
 
 ;-------------------------------- Includes:
@@ -15,7 +15,7 @@ Unicode true
 
     ; Variables are defined by the packaging script; just define failsafe values
     !ifndef WB_NAME
-        !define WB_NAME "Wrye Bash (version unknown)"
+        !define WB_NAME "Wrye Flash (version unknown)"
     !endif
     !ifndef WB_FILEVERSION
         !define WB_FILEVERSION "0.0.0.0"
@@ -28,8 +28,8 @@ Unicode true
     ; Request application privileges for Windows Vista
     RequestExecutionLevel admin
     VIProductVersion ${WB_FILEVERSION}
-    VIAddVersionKey /LANG=1033 "ProductName" "Wrye Bash"
-    VIAddVersionKey /LANG=1033 "CompanyName" "Wrye Bash development team"
+    VIAddVersionKey /LANG=1033 "ProductName" "Wrye Flash"
+    VIAddVersionKey /LANG=1033 "CompanyName" "Wrye Flash development team"
     VIAddVersionKey /LANG=1033 "LegalCopyright" "© Wrye"
     VIAddVersionKey /LANG=1033 "FileDescription" "Installer for ${WB_NAME}"
     VIAddVersionKey /LANG=1033 "FileVersion" "${WB_FILEVERSION}"
@@ -139,41 +139,41 @@ Unicode true
     Function un.onInit
         StrCpy $Empty ""
         StrCpy $True "True"
-        ReadRegStr $Path_OB              HKLM "Software\Wrye Bash" "Oblivion Path"
-        ReadRegStr $Path_Nehrim          HKLM "Software\Wrye Bash" "Nehrim Path"
-        ReadRegStr $Path_Skyrim          HKLM "Software\Wrye Bash" "Skyrim Path"
-        ReadRegStr $Path_Ex1             HKLM "Software\Wrye Bash" "Extra Path 1"
-        ReadRegStr $Path_Ex2             HKLM "Software\Wrye Bash" "Extra Path 2"
-        ReadRegStr $Reg_Value_OB_Py      HKLM "Software\Wrye Bash" "Oblivion Python Version"
-        ReadRegStr $Reg_Value_Nehrim_Py  HKLM "Software\Wrye Bash" "Nehrim Python Version"
-        ReadRegStr $Reg_Value_Skyrim_Py  HKLM "Software\Wrye Bash" "Skyrim Python Version"
-        ReadRegStr $Reg_Value_Ex1_Py     HKLM "Software\Wrye Bash" "Extra Path 1 Python Version"
-        ReadRegStr $Reg_Value_Ex2_Py     HKLM "Software\Wrye Bash" "Extra Path 2 Python Version"
-        ReadRegStr $Reg_Value_OB_Exe     HKLM "Software\Wrye Bash" "Oblivion Standalone Version"
-        ReadRegStr $Reg_Value_Nehrim_Exe HKLM "Software\Wrye Bash" "Nehrim Standalone Version"
-        ReadRegStr $Reg_Value_Skyrim_Exe HKLM "Software\Wrye Bash" "Skyrim Standalone Version"
-        ReadRegStr $Reg_Value_Ex1_Exe    HKLM "Software\Wrye Bash" "Extra Path 1 Standalone Version"
-        ReadRegStr $Reg_Value_Ex2_Exe    HKLM "Software\Wrye Bash" "Extra Path 2 Standalone Version"
+        ReadRegStr $Path_OB              HKLM "Software\Wrye Flash" "Oblivion Path"
+        ReadRegStr $Path_Nehrim          HKLM "Software\Wrye Flash" "Nehrim Path"
+        ReadRegStr $Path_Skyrim          HKLM "Software\Wrye Flash" "Skyrim Path"
+        ReadRegStr $Path_Ex1             HKLM "Software\Wrye Flash" "Extra Path 1"
+        ReadRegStr $Path_Ex2             HKLM "Software\Wrye Flash" "Extra Path 2"
+        ReadRegStr $Reg_Value_OB_Py      HKLM "Software\Wrye Flash" "Oblivion Python Version"
+        ReadRegStr $Reg_Value_Nehrim_Py  HKLM "Software\Wrye Flash" "Nehrim Python Version"
+        ReadRegStr $Reg_Value_Skyrim_Py  HKLM "Software\Wrye Flash" "Skyrim Python Version"
+        ReadRegStr $Reg_Value_Ex1_Py     HKLM "Software\Wrye Flash" "Extra Path 1 Python Version"
+        ReadRegStr $Reg_Value_Ex2_Py     HKLM "Software\Wrye Flash" "Extra Path 2 Python Version"
+        ReadRegStr $Reg_Value_OB_Exe     HKLM "Software\Wrye Flash" "Oblivion Standalone Version"
+        ReadRegStr $Reg_Value_Nehrim_Exe HKLM "Software\Wrye Flash" "Nehrim Standalone Version"
+        ReadRegStr $Reg_Value_Skyrim_Exe HKLM "Software\Wrye Flash" "Skyrim Standalone Version"
+        ReadRegStr $Reg_Value_Ex1_Exe    HKLM "Software\Wrye Flash" "Extra Path 1 Standalone Version"
+        ReadRegStr $Reg_Value_Ex2_Exe    HKLM "Software\Wrye Flash" "Extra Path 2 Standalone Version"
     FunctionEnd
 
     Function .onInit
         StrCpy $Empty ""
         StrCpy $True "True"
-        ReadRegStr $Path_OB              HKLM "Software\Wrye Bash" "Oblivion Path"
-        ReadRegStr $Path_Nehrim          HKLM "Software\Wrye Bash" "Nehrim Path"
-        ReadRegStr $Path_Skyrim          HKLM "Software\Wrye Bash" "Skyrim Path"
-        ReadRegStr $Path_Ex1             HKLM "Software\Wrye Bash" "Extra Path 1"
-        ReadRegStr $Path_Ex2             HKLM "Software\Wrye Bash" "Extra Path 2"
-        ReadRegStr $Reg_Value_OB_Py      HKLM "Software\Wrye Bash" "Oblivion Python Version"
-        ReadRegStr $Reg_Value_Nehrim_Py  HKLM "Software\Wrye Bash" "Nehrim Python Version"
-        ReadRegStr $Reg_Value_Skyrim_Py  HKLM "Software\Wrye Bash" "Skyrim Python Version"
-        ReadRegStr $Reg_Value_Ex1_Py     HKLM "Software\Wrye Bash" "Extra Path 1 Python Version"
-        ReadRegStr $Reg_Value_Ex2_Py     HKLM "Software\Wrye Bash" "Extra Path 2 Python Version"
-        ReadRegStr $Reg_Value_OB_Exe     HKLM "Software\Wrye Bash" "Oblivion Standalone Version"
-        ReadRegStr $Reg_Value_Nehrim_Exe HKLM "Software\Wrye Bash" "Nehrim Standalone Version"
-        ReadRegStr $Reg_Value_Skyrim_Exe HKLM "Software\Wrye Bash" "Skyrim Standalone Version"
-        ReadRegStr $Reg_Value_Ex1_Exe    HKLM "Software\Wrye Bash" "Extra Path 1 Standalone Version"
-        ReadRegStr $Reg_Value_Ex2_Exe    HKLM "Software\Wrye Bash" "Extra Path 2 Standalone Version"
+        ReadRegStr $Path_OB              HKLM "Software\Wrye Flash" "Oblivion Path"
+        ReadRegStr $Path_Nehrim          HKLM "Software\Wrye Flash" "Nehrim Path"
+        ReadRegStr $Path_Skyrim          HKLM "Software\Wrye Flash" "Skyrim Path"
+        ReadRegStr $Path_Ex1             HKLM "Software\Wrye Flash" "Extra Path 1"
+        ReadRegStr $Path_Ex2             HKLM "Software\Wrye Flash" "Extra Path 2"
+        ReadRegStr $Reg_Value_OB_Py      HKLM "Software\Wrye Flash" "Oblivion Python Version"
+        ReadRegStr $Reg_Value_Nehrim_Py  HKLM "Software\Wrye Flash" "Nehrim Python Version"
+        ReadRegStr $Reg_Value_Skyrim_Py  HKLM "Software\Wrye Flash" "Skyrim Python Version"
+        ReadRegStr $Reg_Value_Ex1_Py     HKLM "Software\Wrye Flash" "Extra Path 1 Python Version"
+        ReadRegStr $Reg_Value_Ex2_Py     HKLM "Software\Wrye Flash" "Extra Path 2 Python Version"
+        ReadRegStr $Reg_Value_OB_Exe     HKLM "Software\Wrye Flash" "Oblivion Standalone Version"
+        ReadRegStr $Reg_Value_Nehrim_Exe HKLM "Software\Wrye Flash" "Nehrim Standalone Version"
+        ReadRegStr $Reg_Value_Skyrim_Exe HKLM "Software\Wrye Flash" "Skyrim Standalone Version"
+        ReadRegStr $Reg_Value_Ex1_Exe    HKLM "Software\Wrye Flash" "Extra Path 1 Standalone Version"
+        ReadRegStr $Reg_Value_Ex2_Exe    HKLM "Software\Wrye Flash" "Extra Path 2 Standalone Version"
 
         StrCpy $MinVersion_Comtypes '0.6.2'
         StrCpy $MinVersion_wx '2.8.12'
@@ -348,16 +348,16 @@ Unicode true
 ;-------------------------------- Descriptions/Subtitles/Language Strings:
   ;Language strings
   !insertmacro MUI_LANGUAGE "English"
-  LangString DESC_Main ${LANG_ENGLISH} "The main Wrye Bash files."
+  LangString DESC_Main ${LANG_ENGLISH} "The main Wrye Flash files."
   LangString DESC_Shortcuts_SM ${LANG_ENGLISH} "Start Menu shortcuts for the uninstaller and each launcher."
-  LangString DESC_Prereq ${LANG_ENGLISH} "The files that Wrye Bash requires to run."
+  LangString DESC_Prereq ${LANG_ENGLISH} "The files that Wrye Flash requires to run."
   LangString PAGE_INSTALLLOCATIONS_TITLE ${LANG_ENGLISH} "Installation Location(s)"
-  LangString PAGE_INSTALLLOCATIONS_SUBTITLE ${LANG_ENGLISH} "Please select main installation path for Wrye Bash and, if desired, extra locations in which to install Wrye Bash."
+  LangString PAGE_INSTALLLOCATIONS_SUBTITLE ${LANG_ENGLISH} "Please select main installation path for Wrye Flash and, if desired, extra locations in which to install Wrye Flash."
   LangString PAGE_CHECK_LOCATIONS_TITLE ${LANG_ENGLISH} "Installation Location Check"
   LangString PAGE_CHECK_LOCATIONS_SUBTITLE ${LANG_ENGLISH} "A risky installation location has been detected."
   LangString PAGE_REQUIREMENTS_TITLE ${LANG_ENGLISH} "Installation Prerequisites"
   LangString PAGE_REQUIREMENTS_SUBTITLE ${LANG_ENGLISH} "Checking for requirements"
-  LangString unPAGE_SELECT_GAMES_SUBTITLE ${LANG_ENGLISH} "Please select which locations you want to uninstall Wrye Bash from."
+  LangString unPAGE_SELECT_GAMES_SUBTITLE ${LANG_ENGLISH} "Please select which locations you want to uninstall Wrye Flash from."
   LangString PAGE_FINISH_TITLE ${LANG_ENGLISH} "Finished installing ${WB_NAME}"
   LangString PAGE_FINISH_SUBTITLE ${LANG_ENGLISH} "Please select post-install tasks."
 

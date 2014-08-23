@@ -1,5 +1,5 @@
 ; macros.nsh
-; Install/Uninstall macros for Wrye Bash NSIS installer.
+; Install/Uninstall macros for Wrye Flash NSIS installer.
 
 
 ; Prevent redefining the macro if included multiple times
@@ -12,43 +12,43 @@
         ;  RegValuePy - Registry value for the python version (Usually of the form $Reg_Value_OB_Py)
         ;  RegValueExe - Registry value for the standalone version
         ;  RegPath - Name of the registry string that will hold the path installing to
-        ;  DoPython - Install python version of Wrye Bash (should be {BST_CHECKED} for true - this allows you to simple pass the state of the checkbox)
-        ;  DoExe - Install the standalone version of Wrye Bash (should be {BST_CHECKED} for true)
+        ;  DoPython - Install python version of Wrye Flash (should be {BST_CHECKED} for true - this allows you to simple pass the state of the checkbox)
+        ;  DoExe - Install the standalone version of Wrye Flash (should be {BST_CHECKED} for true)
         ;  IsExtra - true or false: if false, template files are not installed (since we don't know which type of game it is)
         ;  DoAII - true or false: if true, installs the ArchiveInvalidationInvalidated files (Oblivion based games)
 
         ; Install common files
         SetOutPath "${GameDir}\Mopy"
-        File /r /x "*.bat" /x "*.py*" /x "w9xpopen.exe" /x "Wrye Bash.exe" "Mopy\*.*"
+        File /r /x "*.bat" /x "*.py*" /x "w9xpopen.exe" /x "Wrye Flash.exe" "Mopy\*.*"
         ${If} ${DoAII} == true
             ; Some games don't use ArchiveInvalidationInvalidated
             SetOutPath "${GameDir}\Data"
             File /r "Mopy\templates\Oblivion\ArchiveInvalidationInvalidated!.bsa"
         ${EndIf}
-        WriteRegStr HKLM "SOFTWARE\Wrye Bash" "${RegPath}" "${GameDir}"
+        WriteRegStr HKLM "SOFTWARE\Wrye Flash" "${RegPath}" "${GameDir}"
         ${If} ${DoPython} == ${BST_CHECKED}
             ; Install Python only files
             SetOutPath "${GameDir}\Mopy"
             File /r "Mopy\*.py" "Mopy\*.pyw" "Mopy\*.bat"
             ; Write the installation path into the registry
-            WriteRegStr HKLM "SOFTWARE\Wrye Bash" "${GameName} Python Version" "True"
+            WriteRegStr HKLM "SOFTWARE\Wrye Flash" "${GameName} Python Version" "True"
         ${ElseIf} ${RegValuePy} == $Empty
             ; Only write this entry if it's never been installed before
-            WriteRegStr HKLM "SOFTWARE\Wrye Bash" "${GameName} Python Version" ""
+            WriteRegStr HKLM "SOFTWARE\Wrye Flash" "${GameName} Python Version" ""
         ${EndIf}
         ${If} ${DoExe} == ${BST_CHECKED}
             ; Install the standalone only files
             SetOutPath "${GameDir}\Mopy"
-            File "Mopy\Wrye Bash.exe"
+            File "Mopy\Wrye Flash.exe"
             ${IfNot} ${AtLeastWinXP}
                 # Running earlier than WinXP, need w9xpopen
                 File "Mopy\w9xpopen.exe"
             ${EndIf}
             ; Write the installation path into the registry
-            WriteRegStr HKLM "SOFTWARE\Wrye Bash" "${GameName} Standalone Version" "True"
+            WriteRegStr HKLM "SOFTWARE\Wrye Flash" "${GameName} Standalone Version" "True"
         ${ElseIf} ${RegValueExe} == $Empty
             ; Only write this entry if it's never been installed before
-            WriteRegStr HKLM "SOFTWARE\Wrye Bash" "${GameName} Standalone Version" ""
+            WriteRegStr HKLM "SOFTWARE\Wrye Flash" "${GameName} Standalone Version" ""
         ${EndIf}
     !macroend
 
@@ -57,9 +57,9 @@
         ; Paramters:
         ;  GameName -  name of the game to remove registry entries for
         
-        DeleteRegValue HKLM "SOFTWARE\Wrye Bash" "${GameName} Path"
-        DeleteRegValue HKLM "SOFTWARE\Wrye Bash" "${GameName} Python Version"
-        DeleteRegValue HKLM "SOFTWARE\Wrye Bash" "${GameName} Standalone Version"
+        DeleteRegValue HKLM "SOFTWARE\Wrye Flash" "${GameName} Path"
+        DeleteRegValue HKLM "SOFTWARE\Wrye Flash" "${GameName} Python Version"
+        DeleteRegValue HKLM "SOFTWARE\Wrye Flash" "${GameName} Standalone Version"
     !macroend
 
 
@@ -152,11 +152,11 @@
         Delete "${Path}\Mopy\bosh.p*"
         Delete "${Path}\Mopy\bush.p*"
         Delete "${Path}\Mopy\cint.p*"
-        Delete "${Path}\Mopy\Wrye Bash Debug.p*"
+        Delete "${Path}\Mopy\Wrye Flash Debug.p*"
         Delete "${Path}\Mopy\gpl.txt"
         Delete "${Path}\Mopy\lzma.exe"
-        Delete "${Path}\Mopy\Wrye Bash.txt"
-        Delete "${Path}\Mopy\Wrye Bash.exe.log"
+        Delete "${Path}\Mopy\Wrye Flash.txt"
+        Delete "${Path}\Mopy\Wrye Flash.exe.log"
         Delete "${Path}\Mopy\wizards.txt"
         Delete "${Path}\Mopy\patch_option_reference.txt"
         RMDir /r "${Path}\Mopy\Data"
@@ -575,7 +575,7 @@
         RMDir "${Path}\Data\INI Tweaks"
         RMDir "${Path}\Data\Docs"
         RMDir "${Path}\Data\Bash Patches"
-        Delete "$SMPROGRAMS\Wrye Bash\*oblivion*"
+        Delete "$SMPROGRAMS\Wrye Flash\*oblivion*"
     !macroend
 
     !macro UninstallBash GamePath GameName

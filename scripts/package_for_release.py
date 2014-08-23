@@ -2,28 +2,28 @@
 # -*- coding: utf-8 -*-
 #
 # GPL License and Copyright Notice ============================================
-#  This file is part of Wrye Bash.
+#  This file is part of Wrye Flash.
 #
-#  Wrye Bash is free software; you can redistribute it and/or
+#  Wrye Flash is free software; you can redistribute it and/or
 #  modify it under the terms of the GNU General Public License
 #  as published by the Free Software Foundation; either version 2
 #  of the License, or (at your option) any later version.
 #
-#  Wrye Bash is distributed in the hope that it will be useful,
+#  Wrye Flash is distributed in the hope that it will be useful,
 #  but WITHOUT ANY WARRANTY; without even the implied warranty of
 #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #  GNU General Public License for more details.
 #
 #  You should have received a copy of the GNU General Public License
-#  along with Wrye Bash; if not, write to the Free Software Foundation,
+#  along with Wrye Flash; if not, write to the Free Software Foundation,
 #  Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #
-#  Wrye Bash copyright (C) 2005-2009 Wrye, 2010-2014 Wrye Bash Team
+#  Wrye Flash copyright (C) 2005-2009 Wrye, 2010-2014 Wrye Flash Team
 #  https://github.com/wrye-bash
 #
 # =============================================================================
 
-"""Python script to package up the various Wrye Bash files into archives for
+"""Python script to package up the various Wrye Flash files into archives for
    release.  More detailed help can be found by passing the --help or -h
    command line arguments.
 
@@ -169,7 +169,7 @@ def VerifyPy2Exe():
 def BuildManualVersion(args, all_files):
     """Creates the standard python manual install version"""
     version = args.version
-    archive = os.path.join(dest, u'Wrye Bash %s - Python Source.7z' % version)
+    archive = os.path.join(dest, u'Wrye Flash %s - Python Source.7z' % version)
     listFile = os.path.join(dest, u'manual_list.txt')
     with open(listFile, 'wb') as out:
         # We want every file for the manual version
@@ -191,7 +191,7 @@ def BuildStandaloneVersion(args, file_version):
 
 def CleanupStandaloneFiles():
     """Removes standalone exe files that are not needed after packaging"""
-    rm(os.path.join(mopy, u'Wrye Bash.exe'))
+    rm(os.path.join(mopy, u'Wrye Flash.exe'))
     rm(os.path.join(mopy, u'w9xpopen.exe'))
 
 
@@ -214,7 +214,7 @@ def CreateStandaloneExe(args, file_version):
     icon = os.path.join(wbsa, u'bash.ico')
     manifest = os.path.join(wbsa, u'manifest.template')
     script = os.path.join(wbsa, u'setup.template')
-    exe = os.path.join(mopy, u'Wrye Bash.exe')
+    exe = os.path.join(mopy, u'Wrye Flash.exe')
     w9xexe = os.path.join(mopy, u'w9xpopen.exe')
     setup = os.path.join(mopy, u'setup.py')
     #--For l10n
@@ -279,7 +279,7 @@ def CreateStandaloneExe(args, file_version):
         os.chdir(root)
 
         # Copy the exe's to the Mopy folder
-        mv(os.path.join(dist, u'Wrye Bash Launcher.exe'), exe)
+        mv(os.path.join(dist, u'Wrye Flash Launcher.exe'), exe)
         mv(os.path.join(dist, u'w9xpopen.exe'), w9xexe)
 
         # Insert the icon
@@ -304,7 +304,7 @@ def CreateStandaloneExe(args, file_version):
         rm(os.path.join(wbsa, u'ResHacker.ini'))
         rm(os.path.join(wbsa, u'ResHacker.log'))
         rm(setup)
-        rm(os.path.join(mopy, u'Wrye Bash.upx'))
+        rm(os.path.join(mopy, u'Wrye Flash.upx'))
 
     return True
 
@@ -314,7 +314,7 @@ def PackStandaloneVersion(args, all_files):
     version = args.version
     archive = os.path.join(
                   dest,
-                  u'Wrye Bash %s - Standalone Executable.7z' % version
+                  u'Wrye Flash %s - Standalone Executable.7z' % version
                   )
 
     listFile = os.path.join(dest, u'standalone_list.txt')
@@ -326,7 +326,7 @@ def PackStandaloneVersion(args, all_files):
                                                        u'.pyw',
                                                        u'.bat')
                      ]
-        all_files.extend([u'Mopy\\Wrye Bash.exe',
+        all_files.extend([u'Mopy\\Wrye Flash.exe',
                           u'Mopy\\w9xPopen.exe'])
         for file in all_files:
             out.write(file)
@@ -442,7 +442,7 @@ def BuildInstallerVersion(args, all_files, file_version):
             # Build the installer
             lprint(" Calling makensis.exe...")
             ret = subprocess.call([nsis, '/NOCD',
-                                   '/DWB_NAME=Wrye Bash %s' % args.version,
+                                   '/DWB_NAME=Wrye Flash %s' % args.version,
                                    '/DWB_FILEVERSION=%s' % file_version,
                                    script],
                                   shell=True, stdout=pipe, stderr=pipe)
@@ -471,14 +471,14 @@ def ShowTutorial():
                                    replace_whitespace=False)
     lines = [
         '',
-        wrapper.fill('This is the packaging script for Wrye Bash. It can be '
-                     'used to build all versions of Wrye Bash that are '
+        wrapper.fill('This is the packaging script for Wrye Flash. It can be '
+                     'used to build all versions of Wrye Flash that are '
                      'released:'),
         list.fill('''Manual install (archive) of the Python version'''),
         list.fill('''Manual install (archive) of the Standalone version'''),
         list.fill('''Automated Installer'''),
         '',
-        wrapper.fill('In addition to the default requirements to run Wrye Bash'
+        wrapper.fill('In addition to the default requirements to run Wrye Flash'
                      ' in Python mode, you will need five additional things:'),
         list.fill('NSIS: Used to create the Automated Installer. The latest '
                   '3.x release is recommended, as the instructions below for '
@@ -495,7 +495,7 @@ def ShowTutorial():
         list.fill('Modified zipextimporter.py:  Copy the modified version from'
                   " this directory into your Python's Lib\\site-packages "
                   'directory.  This is needed for custom zipextimporter '
-                  'functionality that the Wrye Bash Standalone uses.'),
+                  'functionality that the Wrye Flash Standalone uses.'),
         list.fill('GitPython: This is used to parse the repository information'
                   ' to ensure non-repo files are not included in the built'
                   ' packages.  Get version 0.2.0 or newer. In addition, this '
@@ -608,10 +608,10 @@ def GetNonRepoFiles(repo_files):
     # We can ignore .pyc and .pyo files, since the NSIS scripts skip those
     all_files = (x for x in all_files
                  if os.path.splitext(x)[1] not in (u'.pyc', u'.pyo'))
-    # We can also ignore w9xpopen and Wrye Bash.exe, for the same reason
+    # We can also ignore w9xpopen and Wrye Flash.exe, for the same reason
     all_files = [x for x in all_files
                  if os.path.basename(x) not in (u'w9xpopen.exe',
-                                                u'wrye bash.exe')]
+                                                u'Wrye Flash.exe')]
     all_dirs = [os.path.normcase(os.path.normpath(x)) for x in all_dirs]
     # Pick out every file that doesn't belong
     non_repo.extend((x for x in all_files if x not in repo_files))
@@ -634,7 +634,7 @@ def GetNonRepoFiles(repo_files):
 def main():
     parser = argparse.ArgumentParser(
         description='''
-        Packaging script for Wrye Bash, used to create the release modules.
+        Packaging script for Wrye Flash, used to create the release modules.
 
         If you need more detailed help beyond what is listed below, use the
         --tutorial or -t switch.
@@ -649,7 +649,7 @@ def main():
         action='store',
         type=str,
         dest='version',
-        help='''Specifies the release number for Wrye Bash that you are
+        help='''Specifies the release number for Wrye Flash that you are
                 packaging.''',
         )
     wbsa_group = parser.add_mutually_exclusive_group()
@@ -658,7 +658,7 @@ def main():
         action='store_true',
         default=False,
         dest='wbsa',
-        help='''Build and package the standalone version of Wrye Bash''',
+        help='''Build and package the standalone version of Wrye Flash''',
         )
     wbsa_group.add_argument(
         '-e', '--exe',
@@ -673,21 +673,21 @@ def main():
         action='store_true',
         default=False,
         dest='manual',
-        help='''Package the manual install Python version of Wrye Bash''',
+        help='''Package the manual install Python version of Wrye Flash''',
         )
     parser.add_argument(
         '-i', '--installer',
         action='store_true',
         default=False,
         dest='installer',
-        help='''Build the installer version of Wrye Bash.''',
+        help='''Build the installer version of Wrye Flash.''',
         )
     parser.add_argument(
         '-a', '--all',
         action='store_true',
         default=False,
         dest='all',
-        help='''Build and package all version of Wrye Bash. This is equivalent
+        help='''Build and package all version of Wrye Flash. This is equivalent
                 to -w -i -m''',
         )
     parser.add_argument(

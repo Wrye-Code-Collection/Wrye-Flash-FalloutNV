@@ -35,7 +35,7 @@ class Target:
         self.description = 'Wrye Bash'
         self.version = '%(version)s'
         self.author = 'Wrye Bash development team'
-        self.url = 'http://tesnexus.com/downloads/file.php?id=22368'
+        self.url = 'http://www.nexusmods.com/newvegas/mods/35003'
         self.download_url = self.url
         self.script = script
         if manifest is not None:
