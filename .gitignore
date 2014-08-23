@@ -237,7 +237,7 @@ Data/*.esp.backup.*
 Data/*.esm.save.*
 Data/*.esp.save.*
 Mopy/bash/l10n/*.pkl
-Mopy/bash/db/*.pkl
+## Mopy/bash/db/*.pkl
 NVJP/
 Redists/
 *.pyc
