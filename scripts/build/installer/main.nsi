@@ -94,40 +94,16 @@ Unicode true
         StrCpy $Empty ""
         StrCpy $True "True"
         ReadRegStr $Path_NV              HKLM "Software\Wrye Flash" "FalloutNV Path"
-        ReadRegStr $Path_Nehrim_Remove          HKLM "Software\Wrye Flash" "Nehrim Path"
-        ReadRegStr $Path_Skyrim_Remove          HKLM "Software\Wrye Flash" "Skyrim Path"
-        ReadRegStr $Path_Ex1_Remove             HKLM "Software\Wrye Flash" "Extra Path 1"
-        ReadRegStr $Path_Ex2_Remove             HKLM "Software\Wrye Flash" "Extra Path 2"
         ReadRegStr $Reg_Value_NV_Py      HKLM "Software\Wrye Flash" "FalloutNV Python Version"
-        ReadRegStr $Reg_Value_Nehrim_Py_Remove  HKLM "Software\Wrye Flash" "Nehrim Python Version"
-        ReadRegStr $Reg_Value_Skyrim_Py_Remove  HKLM "Software\Wrye Flash" "Skyrim Python Version"
-        ReadRegStr $Reg_Value_Ex1_Py_Remove     HKLM "Software\Wrye Flash" "Extra Path 1 Python Version"
-        ReadRegStr $Reg_Value_Ex2_Py_Remove     HKLM "Software\Wrye Flash" "Extra Path 2 Python Version"
         ReadRegStr $Reg_Value_NV_Exe     HKLM "Software\Wrye Flash" "FalloutNV Standalone Version"
-        ReadRegStr $Reg_Value_Nehrim_Exe_Remove HKLM "Software\Wrye Flash" "Nehrim Standalone Version"
-        ReadRegStr $Reg_Value_Skyrim_Exe_Remove HKLM "Software\Wrye Flash" "Skyrim Standalone Version"
-        ReadRegStr $Reg_Value_Ex1_Exe_Remove    HKLM "Software\Wrye Flash" "Extra Path 1 Standalone Version"
-        ReadRegStr $Reg_Value_Ex2_Exe_Remove    HKLM "Software\Wrye Flash" "Extra Path 2 Standalone Version"
     FunctionEnd
 
     Function .onInit
         StrCpy $Empty ""
         StrCpy $True "True"
         ReadRegStr $Path_NV              HKLM "Software\Wrye Flash" "FalloutNV Path"
-        ReadRegStr $Path_Nehrim_Remove          HKLM "Software\Wrye Flash" "Nehrim Path"
-        ReadRegStr $Path_Skyrim_Remove          HKLM "Software\Wrye Flash" "Skyrim Path"
-        ReadRegStr $Path_Ex1_Remove             HKLM "Software\Wrye Flash" "Extra Path 1"
-        ReadRegStr $Path_Ex2_Remove             HKLM "Software\Wrye Flash" "Extra Path 2"
         ReadRegStr $Reg_Value_NV_Py      HKLM "Software\Wrye Flash" "FalloutNV Python Version"
-        ReadRegStr $Reg_Value_Nehrim_Py_Remove  HKLM "Software\Wrye Flash" "Nehrim Python Version"
-        ReadRegStr $Reg_Value_Skyrim_Py_Remove  HKLM "Software\Wrye Flash" "Skyrim Python Version"
-        ReadRegStr $Reg_Value_Ex1_Py_Remove     HKLM "Software\Wrye Flash" "Extra Path 1 Python Version"
-        ReadRegStr $Reg_Value_Ex2_Py_Remove     HKLM "Software\Wrye Flash" "Extra Path 2 Python Version"
         ReadRegStr $Reg_Value_NV_Exe     HKLM "Software\Wrye Flash" "FalloutNV Standalone Version"
-        ReadRegStr $Reg_Value_Nehrim_Exe_Remove HKLM "Software\Wrye Flash" "Nehrim Standalone Version"
-        ReadRegStr $Reg_Value_Skyrim_Exe_Remove HKLM "Software\Wrye Flash" "Skyrim Standalone Version"
-        ReadRegStr $Reg_Value_Ex1_Exe_Remove    HKLM "Software\Wrye Flash" "Extra Path 1 Standalone Version"
-        ReadRegStr $Reg_Value_Ex2_Exe_Remove    HKLM "Software\Wrye Flash" "Extra Path 2 Standalone Version"
 
         StrCpy $MinVersion_Comtypes '0.6.2'
         StrCpy $MinVersion_wx '2.8.12'
@@ -146,33 +122,6 @@ Unicode true
             StrCpy $CheckState_NV ${BST_CHECKED}
         ${EndIf}
 
-        ${If} $Path_Nehrim_Remove == $Empty
-            ReadRegStr $Path_Nehrim_Remove HKLM "SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Nehrim - At Fate's Edge_is1" "InstallLocation"
-        ${EndIf}
-        ${If} $Path_Nehrim_Remove != $Empty
-            StrCpy $CheckState_Nehrim_Remove ${BST_CHECKED}
-        ${EndIf}
-
-        ${If} $Path_Skyrim_Remove == $Empty
-            ReadRegStr $Path_Skyrim_Remove HKLM "Software\Bethesda Softworks\Skyrim" "Installed Path"
-            ${If} $Path_Skyrim_Remove == $Empty
-                ReadRegStr $Path_Skyrim_Remove HKLM "SOFTWARE\Wow6432Node\Bethesda Softworks\Skyrim" "Installed Path"
-            ${EndIf}
-        ${EndIf}
-        ${If} $Path_Skyrim_Remove != $Empty
-            StrCpy $CheckState_Skyrim_Remove ${BST_CHECKED}
-        ${EndIf}
-
-        ${If} $Path_Ex1_Remove != $Empty
-            StrCpy $CheckState_Extra_Remove ${BST_CHECKED}
-            StrCpy $CheckState_Ex1_Remove ${BST_CHECKED}
-        ${EndIf}
-
-        ${If} $Path_Ex2_Remove != $Empty
-            StrCpy $CheckState_Extra_Remove ${BST_CHECKED}
-            StrCpy $CheckState_Ex2_Remove ${BST_CHECKED}
-        ${EndIf}
-
         ${If} $Reg_Value_NV_Exe == $True
         ${OrIf} $Reg_Value_NV_Py != $True
             StrCpy $CheckState_NV_Exe ${BST_CHECKED}
@@ -181,37 +130,6 @@ Unicode true
             StrCpy $CheckState_NV_Py ${BST_CHECKED}
         ${EndIf}
 
-        ${If} $Reg_Value_Nehrim_Exe_Remove == $True
-        ${OrIf} $Reg_Value_Nehrim_Py_Remove != $True
-            StrCpy $CheckState_Nehrim_Exe_Remove ${BST_CHECKED}
-        ${EndIf}
-        ${If} $Reg_Value_Nehrim_Py_Remove == $True
-            StrCpy $CheckState_Nehrim_Py_Remove ${BST_CHECKED}
-        ${EndIf}
-
-        ${If} $Reg_Value_Skyrim_Exe_Remove == $True
-        ${OrIf} $Reg_Value_Skyrim_Py_Remove != $True
-            StrCpy $CheckState_Skyrim_Exe_Remove ${BST_CHECKED}
-        ${EndIf}
-        ${If} $Reg_Value_Skyrim_Py_Remove == $True
-            StrCpy $CheckState_Skyrim_Py_Remove ${BST_CHECKED}
-        ${EndIf}
-
-        ${If} $Reg_Value_Ex1_Exe_Remove == $True
-        ${OrIf} $Reg_Value_Ex1_Py_Remove != $True
-            StrCpy $CheckState_Ex1_Exe_Remove ${BST_CHECKED}
-        ${EndIf}
-
-        ${If} $Reg_Value_Ex1_Py_Remove == $True
-            StrCpy $CheckState_Ex1_Py_Remove ${BST_CHECKED}
-        ${EndIf}
-        ${If} $Reg_Value_Ex2_Exe_Remove == $True
-        ${OrIf} $Reg_Value_Ex2_Py_Remove != $True
-            StrCpy $CheckState_Ex2_Exe_Remove ${BST_CHECKED}
-        ${EndIf}
-        ${If} $Reg_Value_Ex2_Py_Remove == $True
-            StrCpy $CheckState_Ex2_Py_Remove ${BST_CHECKED}
-        ${EndIf}
     FunctionEnd
 
 
