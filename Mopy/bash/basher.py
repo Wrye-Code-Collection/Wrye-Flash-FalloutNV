@@ -14373,9 +14373,9 @@ class App_Help(Link):
 
     def Execute(self,event):
         """Handle menu selection."""
-        html = bosh.dirs['mopy'].join('Wrye Fash.html')
+        html = bosh.dirs['mopy'].join('Wrye Flash.html')
         if not html.exists():
-            bolt.WryeText.genHtml(bosh.dirs['mopy'].join('Wrye Fash.txt').s, None, bosh.dirs['mopy'])
+            bolt.WryeText.genHtml(bosh.dirs['mopy'].join('Wrye Flash.txt').s, None, bosh.dirs['mopy'])
         html.start()
 
 #------------------------------------------------------------------------------

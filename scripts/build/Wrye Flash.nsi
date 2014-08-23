@@ -323,7 +323,7 @@
         ${NSD_GetState} $Check_Readme $0
         ${If} $0 == ${BST_CHECKED}
             ${If} $Path_NV != $Empty
-                ExecShell "open" "$Path_NV\Mopy\Wrye Fash.html"
+                ExecShell "open" "$Path_NV\Mopy\Wrye Flash.html"
             ${EndIf}
         ${EndIf}
         ${NSD_GetState} $Check_DeleteOldFiles $0
