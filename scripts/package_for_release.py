@@ -613,7 +613,9 @@ def GetNonRepoFiles(repo_files):
     # We can also ignore w9xpopen and Wrye Flash.exe, for the same reason
     all_files = [x for x in all_files
                  if os.path.basename(x) not in (u'w9xpopen.exe',
-                                                u'wrye flash.exe')]
+                                                u'wrye flash.exe',
+                                                u'Wrye Flash.exe',
+                                                u'Wrye Flash.EXE')]
     all_dirs = [os.path.normcase(os.path.normpath(x)) for x in all_dirs]
     # Pick out every file that doesn't belong
     non_repo.extend((x for x in all_files if x not in repo_files))
