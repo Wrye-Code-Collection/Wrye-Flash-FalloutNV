@@ -39,64 +39,18 @@
     Var Empty
     Var True
     Var Path_NV
-    Var Path_Nehrim_Remove
-    Var Path_Skyrim_Remove
-    Var Path_Ex1
-    Var Path_Ex2
 
     ;Game specific Data:
     Var Check_NV
-    Var Check_Nehrim_Remove
-    Var Check_Skyrim_Remove
-    Var Check_Extra
-    Var Check_Ex1
-    Var Check_Ex2
     Var CheckState_NV
-    Var CheckState_Nehrim_Remove
-    Var CheckState_Skyrim_Remove
-    Var CheckState_Extra
-    Var CheckState_Ex1
-    Var CheckState_Ex2
     Var Check_NV_Py
-    Var Check_Nehrim_Py_Remove
-    Var Check_Skyrim_Py_Remove
-    Var Check_Ex1_Py
-    Var Check_Ex2_Py
     Var CheckState_NV_Py
-    Var CheckState_Nehrim_Py_Remove
-    Var CheckState_Skyrim_Py_Remove
-    Var CheckState_Ex1_Py
-    Var CheckState_Ex2_Py
     Var Check_NV_Exe
-    Var Check_Nehrim_Exe_Remove
-    Var Check_Skyrim_Exe_Remove
-    Var Check_Ex1_Exe
-    Var Check_Ex2_Exe
     Var CheckState_NV_Exe
-    Var CheckState_Nehrim_Exe_Remove
-    Var CheckState_Skyrim_Exe_Remove
-    Var CheckState_Ex1_Exe
-    Var CheckState_Ex2_Exe
     Var Reg_Value_NV_Py
-    Var Reg_Value_Nehrim_Py_Remove
-    Var Reg_Value_Skyrim_Py_Remove
-    Var Reg_Value_Ex1_Py
-    Var Reg_Value_Ex2_Py
     Var Reg_Value_NV_Exe
-    Var Reg_Value_Nehrim_Exe_Remove
-    Var Reg_Value_Skyrim_Exe_Remove
-    Var Reg_Value_Ex1_Exe
-    Var Reg_Value_Ex2_Exe
     Var PathDialogue_NV
-    Var PathDialogue_Nehrim_Remove
-    Var PathDialogue_Skyrim_Remove
-    Var PathDialogue_Ex1
-    Var PathDialogue_Ex2
     Var Browse_NV
-    Var Browse_Nehrim_Remove
-    Var Browse_Skyrim_Remove
-    Var Browse_Ex1
-    Var Browse_Ex2
     Var Check_Readme
     Var Check_DeleteOldFiles
     Var Function_Browse
