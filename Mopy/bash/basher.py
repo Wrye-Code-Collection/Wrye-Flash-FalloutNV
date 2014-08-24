@@ -1,27 +1,27 @@
 # -*- coding: utf-8 -*-
 #
 # GPL License and Copyright Notice ============================================
-#  This file is part of Wrye Bash.
+#  This file is part of Wrye Flash.
 #
-#  Wrye Bash is free software; you can redistribute it and/or
+#  Wrye Flash is free software; you can redistribute it and/or
 #  modify it under the terms of the GNU General Public License
 #  as published by the Free Software Foundation; either version 2
 #  of the License, or (at your option) any later version.
 #
-#  Wrye Bash is distributed in the hope that it will be useful,
+#  Wrye Flash is distributed in the hope that it will be useful,
 #  but WITHOUT ANY WARRANTY; without even the implied warranty of
 #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #  GNU General Public License for more details.
 #
 #  You should have received a copy of the GNU General Public License
-#  along with Wrye Bash; if not, write to the Free Software Foundation,
+#  along with Wrye Flash; if not, write to the Free Software Foundation,
 #  Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #
-#  Wrye Bash copyright (C) 2005, 2006, 2007, 2008, 2009 Wrye
+#  Wrye Flash copyright (C) 2005, 2006, 2007, 2008, 2009 Wrye
 #
 # =============================================================================
 
-"""This module provides the GUI interface for Wrye Bash. (However, the Wrye
+"""This module provides the GUI interface for Wrye Flash. (However, the Wrye
 Bash application is actually launched by the bash module.)
 
 The module is generally organized starting with lower level elements, working
@@ -127,13 +127,13 @@ settingDefaults = {
     'bash.page':1,
     #--BSA Redirection
     'bash.bsaRedirection':False,
-    #--Wrye Bash: Load Lists
+    #--Wrye Flash: Load Lists
     'bash.loadLists.data': {
         'Bethesda ESMs': [
             GPath('FalloutNV.esm'),
             ],
         },
-    #--Wrye Bash: Statistics
+    #--Wrye Flash: Statistics
     'bash.fileStats.cols': ['Type','Count','Size'],
     'bash.fileStats.sort': 'Type',
     'bash.fileStats.colReverse': {
@@ -149,13 +149,13 @@ settingDefaults = {
         'Count':1,
         'Size':1,
         },
-    #--Wrye Bash: Group and Rating
+    #--Wrye Flash: Group and Rating
     'bash.mods.autoGhost':False,
     'bash.mods.groups': [x[0] for x in bush.baloGroups],
     'bash.mods.ratings': ['+','1','2','3','4','5','=','~'],
     'bash.balo.autoGroup': True,
     'bash.balo.full': False,
-    #--Wrye Bash: Col (Sort) Names
+    #--Wrye Flash: Col (Sort) Names
     'bash.colNames': {
         'Activation Status': _('Activation Status'),
         'Author': _('Author'),
@@ -185,7 +185,7 @@ settingDefaults = {
         'Status': _('Status'),
         'Subject': _('Subject'),
         },
-    #--Wrye Bash: Masters
+    #--Wrye Flash: Masters
     'bash.masters.cols': ['File','Num', 'Current Order'],
     'bash.masters.esmsFirst': 1,
     'bash.masters.selectedFirst': 0,
@@ -199,7 +199,7 @@ settingDefaults = {
     'bash.masters.colAligns': {
         'Save Order':1,
         },
-    #--Wrye Bash: Mod Docs
+    #--Wrye Flash: Mod Docs
     'bash.modDocs.show': False,
     'bash.modDocs.size': (300,400),
     'bash.modDocs.pos': wx.DefaultPosition,
@@ -247,10 +247,10 @@ settingDefaults = {
     'bash.installers.badDlls':{},
     'bash.installers.onDropFiles.action':None,
     'bash.installers.commentsSplitterSashPos':0,
-    #--Wrye Bash: Wizards
+    #--Wrye Flash: Wizards
     'bash.wizard.size': (600,500),
     'bash.wizard.pos': wx.DefaultPosition,
-    #--Wrye Bash: INI Tweaks
+    #--Wrye Flash: INI Tweaks
     'bash.ini.cols': ['File','Installer'],
     'bash.ini.sort': 'File',
     'bash.ini.colReverse': {},
@@ -262,7 +262,7 @@ settingDefaults = {
     'bash.ini.colAligns': {},
     'bash.ini.choices': {},
     'bash.ini.choice': 0,
-    #--Wrye Bash: Mods
+    #--Wrye Flash: Mods
     'bash.mods.cols': ['File','Load Order','Rating','Group','Installer','Modified','Size','Author','CRC', 'Activation Status'],
     'bash.mods.esmsFirst': 1,
     'bash.mods.selectedFirst': 0,
@@ -286,7 +286,7 @@ settingDefaults = {
         },
     'bash.mods.renames': {},
     'bash.mods.scanDirty': False,
-    #--Wrye Bash: Saves
+    #--Wrye Flash: Saves
     'bash.saves.cols': ['File','Modified','Size','PlayTime','Player','Cell'],
     'bash.saves.sort': 'Modified',
     'bash.saves.colReverse': {
@@ -304,7 +304,7 @@ settingDefaults = {
         'Size':1,
         'PlayTime':1,
         },
-    #Wrye Bash: BSAs
+    #Wrye Flash: BSAs
     'bash.BSAs.cols': ['File','Modified','Size'],
     'bash.BSAs.colAligns': {
         'Size':1,
@@ -319,7 +319,7 @@ settingDefaults = {
         'Size':75,
         },
     'bash.BSAs.sort': 'File',
-    #--Wrye Bash: Replacers
+    #--Wrye Flash: Replacers
     'bash.replacers.show':False,
     'bash.replacers.cols': ['File'],
     'bash.replacers.sort': 'File',
@@ -330,7 +330,7 @@ settingDefaults = {
         },
     'bash.replacers.colAligns': {},
     'bash.replacers.autoChecked':False,
-    #--Wrye Bash: Screens
+    #--Wrye Flash: Screens
     'bash.screens.cols': ['File'],
     'bash.screens.sort': 'File',
     'bash.screens.colReverse': {
@@ -344,7 +344,7 @@ settingDefaults = {
     'bash.screens.colAligns': {},
     'bash.screens.jpgQuality': 95,
     'bash.screens.jpgCustomQuality': 75,
-    #--Wrye Bash: Messages
+    #--Wrye Flash: Messages
     'bash.messages.cols': ['Subject','Author','Date'],
     'bash.messages.sort': 'Date',
     'bash.messages.colReverse': {
@@ -355,7 +355,7 @@ settingDefaults = {
         'Date':150,
         },
     'bash.messages.colAligns': {},
-    #--Wrye Bash: People
+    #--Wrye Flash: People
     'bash.people.cols': ['Name','Karma','Header'],
     'bash.people.sort': 'Name',
     'bash.people.colReverse': {},
@@ -3011,7 +3011,7 @@ class InstallersList(balt.Tank):
             return
         action = settings['bash.installers.onDropFiles.action']
         if action not in ['COPY','MOVE']:
-            message = _('You have dragged the following files into Wrye Bash:\n')
+            message = _('You have dragged the following files into Wrye Flash:\n')
             for file in filenames:
                 message += ' * ' + file.s + '\n'
             message += '\n'
@@ -4844,7 +4844,7 @@ class BashFrame(wx.Frame):
             wxver = wx.version()
             deprint(wxver)
             if not 'unicode' in wxver.lower() and not '2.9' in wxver:
-                balt.showWarning(bashFrame,_("Warning you appear to be using a non-unicode version of wxPython (%s) but have set Wrye Bash to unicode mode, this may cause problems, it is reccomended you use a unicode version of wPython instead.") % wxver)
+                balt.showWarning(bashFrame,_("Warning you appear to be using a non-unicode version of wxPython (%s) but have set Wrye Flash to unicode mode, this may cause problems, it is recommended you use a unicode version of wPython instead.") % wxver)
 
     def SetTitle(self,title=None):
         """Set title. Set to default if no title supplied."""
@@ -6044,7 +6044,7 @@ class PatchDialog(wx.Dialog):
         self.SetOkEnable()
 
     def UpdateConfig(self,patchConfigs,event=None):
-        if not balt.askYes(self.parent,_("Wrye Bash detects that the selected file was saved in Bash's %s mode, do you want Wrye Bash to attempt to adjust the configuration on import to work with %s mode (Good chance there will be a few mistakes)? (Otherwise this import will have no effect.)" % (['CBash','Python'][self.doCBash], ['Python','CBash'][self.doCBash]))): return
+        if not balt.askYes(self.parent,_("Wrye Flash detects that the selected file was saved in Flash's %s mode, do you want Wrye Flash to attempt to adjust the configuration on import to work with %s mode (Good chance there will be a few mistakes)? (Otherwise this import will have no effect.)" % (['CBash','Python'][self.doCBash], ['Python','CBash'][self.doCBash]))): return
         if not self.doCBash:
             bosh.CBash_PatchFile.patchTime = bosh.PatchFile.patchTime
         else:
@@ -7649,7 +7649,7 @@ class Installers_AvoidOnStart(BoolLink):
     def __init__(self): BoolLink.__init__(self,
                                           _('Avoid at Startup'),
                                           'bash.installers.fastStart',
-                                          _("Toggles Wrye Bash to avoid the Installers tab on startup, avoiding unnecessary data scanning.")
+                                          _("Toggles Wrye Flash to avoid the Installers tab on startup, avoiding unnecessary data scanning.")
                                           )
 
 #------------------------------------------------------------------------------
@@ -9866,7 +9866,7 @@ class User_BackupSettings(Link):
     """Saves Bash's settings and user data.."""
     def AppendToMenu(self,menu,window,data):
         Link.AppendToMenu(self,menu,window,data)
-        menuItem = wx.MenuItem(menu,self.id,_('Backup Settings...'),help="Backup all of Wrye Bash's settings/data to an archive file.",kind=wx.ITEM_CHECK)
+        menuItem = wx.MenuItem(menu,self.id,_('Backup Settings...'),help="Backup all of Wrye Flash's settings/data to an archive file.",kind=wx.ITEM_CHECK)
         menu.AppendItem(menuItem)
 
     def Execute(self,event):
@@ -9911,7 +9911,7 @@ class User_RestoreSettings(Link):
     """Saves Bash's settings and user data.."""
     def AppendToMenu(self,menu,window,data):
         Link.AppendToMenu(self,menu,window,data)
-        menuItem = wx.MenuItem(menu,self.id,_('Restore Settings...'),help="Restore all of Wrye Bash's settings/data from a backup archive file.",kind=wx.ITEM_CHECK)
+        menuItem = wx.MenuItem(menu,self.id,_('Restore Settings...'),help="Restore all of Wrye Flash's settings/data from a backup archive file.",kind=wx.ITEM_CHECK)
         menu.AppendItem(menuItem)
 
     def Execute(self,event):
@@ -9930,7 +9930,7 @@ class User_SaveSettings(Link):
     """Saves Bash's settings and user data.."""
     def AppendToMenu(self,menu,window,data):
         Link.AppendToMenu(self,menu,window,data)
-        menuItem = wx.MenuItem(menu,self.id,_('Save Settings'),help="Save all of Wrye Bash's settings/data now.",kind=wx.ITEM_CHECK)
+        menuItem = wx.MenuItem(menu,self.id,_('Save Settings'),help="Save all of Wrye Flash's settings/data now.",kind=wx.ITEM_CHECK)
         menu.AppendItem(menuItem)
 
     def Execute(self,event):
@@ -11537,7 +11537,7 @@ class Mod_Patch_Update(Link):
             return
         if self.CBashMismatch: 
             if not balt.askContinue(self.window,
-                    _("The patch you are rebuilding (%s) was created in %s mode.  You are trying to rebuild it using %s mode.  Wrye Bash will attempt to import your settings over, however some may not be copied correctly.")
+                    _("The patch you are rebuilding (%s) was created in %s mode.  You are trying to rebuild it using %s mode.  Wrye Flash will attempt to import your settings over, however some may not be copied correctly.")
                         % (self.data[0].s,['CBash','Python'][self.doCBash],['Python','CBash'][self.doCBash]),
                     'bash.patch.CBashMismatch'):
                 return
@@ -11562,7 +11562,7 @@ class Mod_Patch_Update(Link):
             deactivate = [x for x in ActivePriortoPatch if 'Deactivate' in bosh.modInfos[x].getBashTags() and not 'Filter' in bosh.modInfos[x].getBashTags()]
             if deactivate: message += _("The following mods are tagged 'Deactivate'. These should be deactivated before building the patch, and then imported into the patch during build.\n*%s") % ('\n* '.join(x.s for x in deactivate)) + '\n\n'
             if unfiltered: message += _("The following mods are tagged 'Filter'. These should be deactivated before building the patch, and then merged into the patch during build.\n*%s") % ('\n* '.join(x.s for x in unfiltered)) + '\n\n'
-            if merge: message += _("The following mods are mergeable. While it is not important to Wrye Bash functionality or the end contents of the bashed patch, it is suggest that they be deactivated and merged into the patch; this (helps) avoid the  Fallout maximum esp/m limit.\n*%s") % ('\n* '.join(x.s for x in merge)) + '\n\n'
+            if merge: message += _("The following mods are mergeable. While it is not important to Wrye Flash functionality or the end contents of the bashed patch, it is suggest that they be deactivated and merged into the patch; this (helps) avoid the  Fallout maximum esp/m limit.\n*%s") % ('\n* '.join(x.s for x in merge)) + '\n\n'
             if noMerge: message += _("The following mods are tagged 'NoMerge'. These should be deactivated before building the patch and imported according to tag(s), and preferences.\n*%s") % ('\n* '.join(x.s for x in noMerge)) + '\n\n'
         if message:
             message += 'Automatically deactivate those mods now?'
@@ -12604,7 +12604,7 @@ class Mod_UndeleteRefs(Link):
 
 #------------------------------------------------------------------------------
 class Mod_ScanDirty(Link):
-    """Give detailed printout of what Wrye Bash is detecting as UDR and ITM records"""
+    """Give detailed printout of what Wrye Flash is detecting as UDR and ITM records"""
     def AppendToMenu(self,menu,window,data):
         Link.AppendToMenu(self,menu,window,data)
         if settings['bash.CBashEnabled']:
@@ -13347,7 +13347,7 @@ class Save_RepairFactions(Link):
 
     def Execute(self,event):
         debug = False
-        message = _('This will (mostly) repair faction membership errors due to Wrye Bash v 105 bug and/or faction changes in underlying mods.\n\nWARNING! This repair is NOT perfect! Do not use it unless you have to!')
+        message = _('This will (mostly) repair faction membership errors due to Wrye Flash v 105 bug and/or faction changes in underlying mods.\n\nWARNING! This repair is NOT perfect! Do not use it unless you have to!')
         if not balt.askContinue(self.window,message,'bash.repairFactions.continue',_('Update NPC Levels')):
             return
         question = _("Restore dropped factions too? WARNING: This may involve clicking through a LOT of yes/no dialogs.")
