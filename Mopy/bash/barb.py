@@ -235,7 +235,7 @@ class BackupSettings(BaseBackupSettings):
         #returns False if same app version or old version == 0 (as in not previously installed) or user cancels
         if basher.settings['bash.readme'][1] == '0': return False
         return not self.SameAppVersion() and self.PromptConfirm(
-            _('A different version of Wrye Bash was previously installed.\n') +
+            _('A different version of Wrye Flash was previously installed.\n') +
             _('Previous Version: %s\n') % (basher.settings['bash.readme'][1]) +
             _('Current Version: %s\n') % (self.verApp) +
             _('Do you want to create a backup of your Bash settings before they are overwritten?'))
@@ -245,7 +245,7 @@ class BackupSettings(BaseBackupSettings):
         return not askYes(self.parent,
             _('You did not create a backup of the Bash settings.\n') +
             _('If you continue, your current settings may be overwritten.\n') +
-            _('Do you want to quit Wrye Bash now?'),
+            _('Do you want to quit Wrye Flash now?'),
             _('No backup created!'))
 
     def PromptQuit(self):
@@ -253,7 +253,7 @@ class BackupSettings(BaseBackupSettings):
         return askYes(self.parent,
             _('There was an error while trying to backup the Bash settings!\n') +
             _('If you continue, your current settings may be overwritten.\n') +
-            _('Do you want to quit Wrye Bash now?'),
+            _('Do you want to quit Wrye Flash now?'),
             _('Unable to create backup!'))
 
     def WarnFailed(self):
@@ -413,7 +413,7 @@ class RestoreSettings(BaseBackupSettings):
             _('Your Bash settings have been successfuly restored.\n') +
             _('Backup Path: %s\n') % (self.dir.join(self.archive).s) +
             _('\n') +
-            _('Before the settings can take effect, Wrye Bash must restart.\n') +
+            _('Before the settings can take effect, Wrye Flash must restart.\n') +
             _('Click OK to restart now.'),
             _('Bash Settings Restored'))
 
