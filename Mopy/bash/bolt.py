@@ -766,7 +766,7 @@ class SkipError(BoltError):
 
 #------------------------------------------------------------------------------
 class PermissionError(BoltError):
-    """Wrye Bash doesn't have permission to access the specified file/directory."""
+    """Wrye Flash doesn't have permission to access the specified file/directory."""
     def __init__(self,message=None):
         message = message or _('Access is denied.')
         BoltError.__init__(self,message)
@@ -1311,7 +1311,7 @@ class Path(object):
                 try:
                     return cmp(Encode(self._cs), Encode(other._cs))
                 except UnicodeError:
-                    deprint("Wrye Bash Unicode mode is currently %s" % (['off.','on.'][bUseUnicode]))
+                    deprint("Wrye Flash Unicode mode is currently %s" % (['off.','on.'][bUseUnicode]))
                     deprint("unrecovered Unicode error when dealing with %s - presuming non equal." % (self._cs))
                     return False
         else:
@@ -1321,7 +1321,7 @@ class Path(object):
                 try:
                     return cmp(Encode(self._cs), Encode(Path.getCase(other)))
                 except UnicodeError:
-                    deprint("Wrye Bash Unicode mode is currently %s." % (['off','on'][bUseUnicode]))
+                    deprint("Wrye Flash Unicode mode is currently %s." % (['off','on'][bUseUnicode]))
                     deprint("unrecovered Unicode error when dealing with %s - presuming non equal.'" % (self._cs))
                     return False
 
