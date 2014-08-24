@@ -1,23 +1,23 @@
 # -*- coding: utf-8 -*-
 #
 # GPL License and Copyright Notice ============================================
-#  This file is part of Wrye Bash.
+#  This file is part of Wrye Flash.
 #
-#  Wrye Bash is free software; you can redistribute it and/or
+#  Wrye Flash is free software; you can redistribute it and/or
 #  modify it under the terms of the GNU General Public License
 #  as published by the Free Software Foundation; either version 2
 #  of the License, or (at your option) any later version.
 #
-#  Wrye Bash is distributed in the hope that it will be useful,
+#  Wrye Flash is distributed in the hope that it will be useful,
 #  but WITHOUT ANY WARRANTY; without even the implied warranty of
 #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #  GNU General Public License for more details.
 #
 #  You should have received a copy of the GNU General Public License
-#  along with Wrye Bash; if not, write to the Free Software Foundation,
+#  along with Wrye Flash; if not, write to the Free Software Foundation,
 #  Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #
-#  Wrye Bash copyright (C) 2005, 2006, 2007, 2008, 2009 Wrye
+#  Wrye Flash copyright (C) 2005, 2006, 2007, 2008, 2009 Wrye
 #
 # =============================================================================
 
@@ -743,7 +743,7 @@ def createTagList(inPath='masterlist.txt',outPath='taglist.txt'):
         elif line.startswith(r"? Masterlist Information: $Revision: "):
             revision = int(line[37:42])
     ins.close()
-    tagList = '\ Taglist for Wrye Bash; derived from BOSS Masterlist revision %i.\n' % (revision) + '\% A Bashed Patch suggestion for the mod above.\n\n'
+    tagList = '\ Taglist for Wrye Flash; derived from BOSS Masterlist revision %i.\n' % (revision) + '\% A Bashed Patch suggestion for the mod above.\n\n'
     for mod in sorted(tags,key=str.lower):
         tagList += mod + '\n'
         tagList += tags[mod] + '\n'
