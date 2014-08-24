@@ -1,23 +1,23 @@
 # -*- coding: utf-8 -*-
 #
 # GPL License and Copyright Notice ============================================
-#  This file is part of Wrye Bash.
+#  This file is part of Wrye Flash.
 #
-#  Wrye Bash is free software; you can redistribute it and/or
+#  Wrye Flash is free software; you can redistribute it and/or
 #  modify it under the terms of the GNU General Public License
 #  as published by the Free Software Foundation; either version 2
 #  of the License, or (at your option) any later version.
 #
-#  Wrye Bash is distributed in the hope that it will be useful,
+#  Wrye Flash is distributed in the hope that it will be useful,
 #  but WITHOUT ANY WARRANTY; without even the implied warranty of
 #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #  GNU General Public License for more details.
 #
 #  You should have received a copy of the GNU General Public License
-#  along with Wrye Bash; if not, write to the Free Software Foundation,
+#  along with Wrye Flash; if not, write to the Free Software Foundation,
 #  Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #
-#  Wrye Bash copyright (C) 2005, 2006, 2007, 2008, 2009 Wrye
+#  Wrye Flash copyright (C) 2005, 2006, 2007, 2008, 2009 Wrye
 #
 # =============================================================================
 
@@ -10519,7 +10519,7 @@ class ModInfo(FileInfo):
         self.writeHeader()
 
     def writeAuthorWB(self):
-        """Marks author field with " [wb]" to indicate Wrye Bash modification."""
+        """Marks author field with " [wb]" to indicate Wrye Flash modification."""
         author = self.header.author
         if '[wm]' not in author and len(author) <= 27:
             self.writeAuthor(author+' [wb]')
@@ -12222,7 +12222,7 @@ class ConfigHelpers:
 
         
         bapi.Init(dirs['compiled'].s)
-        # That didn't work - Wrye Bash isn't installed correctly
+        # That didn't work - Wrye Flash isn't installed correctly
         if not bapi.BAPI:
             raise bolt.BoltError('The BOSS API could not be loaded.')
             
@@ -12280,7 +12280,7 @@ class ConfigHelpers:
         #--No masterlist, use the taglist
         taglist = dirs['mods'].join('Bash Patches','taglist.txt')
         if not taglist.exists():
-            raise bolt.BoltError('Data\\Bash Patches\\taglist.txt could not be found.  Please ensure Wrye Bash is installed correctly.')
+            raise bolt.BoltError('Data\\Bash Patches\\taglist.txt could not be found.  Please ensure Wrye Flash is installed correctly.')
         try:
             self.tagCache = {}
             boss.Load(taglist.s)
@@ -13073,7 +13073,7 @@ class Installer(object):
                     date = apFile.mtime
                     done += size
                 except WindowsError:
-                    deprint(_('Failed to calculate crc for %s - please report this and or try the unicode build of Wrye Bash.') % (apFile.s))
+                    deprint(_('Failed to calculate crc for %s - please report this and or try the unicode build of Wrye Flash.') % (apFile.s))
                     continue
                 new_sizeCrcDate[rpFile] = (size,crc,date)
         old_sizeCrcDate.clear()
@@ -21028,8 +21028,8 @@ class CBash_PatchFile(ObModFile):
             print _("Please copy this entire message and report it on the current official thread at "
                     "http://forums.bethsoft.com/index.php?/forum/25-mods/.\n Also with:\n1. Your OS:"
                     "\n2. Your installed MS Visual C++ redistributable versions:\n3. Your system RAM "
-                    "amount:\n4. How much memory Python.exe\pythonw.exe or Wrye Bash.exe is using\n5."
-                    " and finally... if restarting Wrye Bash and trying again and building the CBash "
+                    "amount:\n4. How much memory Python.exe\pythonw.exe or Wrye Flash.exe is using\n5."
+                    " and finally... if restarting Wrye Flash and trying again and building the CBash "
                     "Bashed Patch right away works fine\n")
             print ObCollection.Debug_DumpModFiles()
             raise StateError()
@@ -36440,7 +36440,7 @@ def initDirs(bashIni, personal, localAppData, falloutPath):
         # TODO: make this gracefully degrade.  IE, if only the BAIN paths are
         # bad, just disable BAIN.  If only the saves path is bad, just disable
         # saves related stuff.
-        msg = balt.fill(_('Wrye Bash cannot access the following paths:'))
+        msg = balt.fill(_('Wrye Flash cannot access the following paths:'))
         msg += '\n\n'+ '\n'.join([' * '+dir.s for dir in badPermissions]) + '\n\n'
         msg += balt.fill(_('See: "Wrye Flash.html, Installation - Windows Vista/7" for information on how to solve this problem.'))
         raise PermissionError(msg)
@@ -36634,7 +36634,7 @@ def initLogFile():
             os.remove(inisettings['LogFile'].s)
     else:
         log = inisettings['LogFile'].open("a")
-        log.write(_('%s Wrye Bash ini file read, Keep Log level: %d, initialized.\r\n') % (datetime.datetime.now(),inisettings['KeepLog']))
+        log.write(_('%s Wrye Flash ini file read, Keep Log level: %d, initialized.\r\n') % (datetime.datetime.now(),inisettings['KeepLog']))
         log.close()
 
 def initBosh(personal='',localAppData='',falloutPath=''):
@@ -36656,7 +36656,7 @@ def initSettings(readOnly=False):
             dirs['userApp'].join('bash config.pkl'),
             readOnly))
     except cPickle.UnpicklingError, err:
-        usebck = balt.askYes(None,_("Error reading the Bash Settings database (the error is: '%s'). This is probably not recoverable with the current file. Do you want to try the backup BashSettings.dat? (It will have all your UI choices of the time before last that you used Wrye Bash." %(err)),_("Settings Load Error"))
+        usebck = balt.askYes(None,_("Error reading the Bash Settings database (the error is: '%s'). This is probably not recoverable with the current file. Do you want to try the backup BashSettings.dat? (It will have all your UI choices of the time before last that you used Wrye Flash." %(err)),_("Settings Load Error"))
         if usebck:
             try:
                 settings = bolt.Settings(PickleDict(
@@ -36664,7 +36664,7 @@ def initSettings(readOnly=False):
                     dirs['userApp'].join('bash config.pkl'),
                     readOnly))
             except cPickle.UnpicklingError, err:
-                delete = balt.askYes(None,_("Error reading the BackupBash Settings database (the error is: '%s'). This is probably not recoverable with the current file. Do you want to delete the corrupted settings and load Wrye Bash without your saved UI settings?. (Otherwise Wrye Bash wo't start up)" %(err)),_("Settings Load Error"))
+                delete = balt.askYes(None,_("Error reading the BackupBash Settings database (the error is: '%s'). This is probably not recoverable with the current file. Do you want to delete the corrupted settings and load Wrye Flash without your saved UI settings?. (Otherwise Wrye Bash wo't start up)" %(err)),_("Settings Load Error"))
                 if delete:
                     dirs['saveBase'].join('BashSettings.dat').remove()
                     settings = bolt.Settings(PickleDict(
