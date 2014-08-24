@@ -2904,7 +2904,7 @@ if __name__ == '__main__' and len(sys.argv) > 1:
     def genHtml(*args,**keywords):
         """Wtxt to html. Just pass through to WryeText.genHtml."""
         if not len(args):
-            args = ["Wrye Bash.txt"]
+            args = ["Wrye Flash.txt"]
         WryeText.genHtml(*args,**keywords)
 
     #--Command Handler --------------------------------------------------------
