@@ -38,6 +38,23 @@ Additionally, Wrye Bash comes packaged with the following programs:
 {{CONTENTS=0}}
 **All versions by Wrye team and or Valda unless otherwise noted.**
 
+=== 16.0 [4/3/2014]
+* Fix for getNorm to wirk with 2.7.8
+* Renaming occurances of Wrye Bash to Wrye Flash
+* Release of first standalone version of Wrye Flash
+
+=== 15.9 [4/3/2014]
+* Fixed ESCE in MGEF preventing Project Nevada - Med-X Fix.esp from working with Wrye Flash
+
+=== 15.8 [4/3/2014]
+* Fixed RDMD in REGN preventing Tale of Two Wastelands from working with Wrye Flash
+
+=== 15.7 [3/17/2014]
+* Fixed SOUN and MSET errors that prevented merging them into the Bash Patch. Digital_Nightmare.esp should merge properly now.
+
+=== 15.6 [3/15/2014]
+* Fixed some attributes that cause errors in routines when building Bash patch.  i.e. MreRegn
+
 === 15.5 [12/05/2012]
 * Fixed a parse error when reading the EVE FNV.esp.
 
@@ -160,4 +177,3 @@ Additionally, Wrye Bash comes packaged with the following programs:
 === 1 [10/22/2010]
 * Branch from Wrye Flash 21.
 * Only BAIN works.
-
