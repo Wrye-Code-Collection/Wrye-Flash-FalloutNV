@@ -43,6 +43,7 @@ Additionally, Wrye Bash comes packaged with the following programs:
 * Renaming occurrences of Wrye Bash to Wrye Flash
 * Release of first standalone version of Wrye Flash
 * updated version number in bash_default.ini
+* updated IPDS Data had 11 items defined instead of 12
 
 === 15.9 [4/3/2014]
 * Fixed ESCE in MGEF preventing Project Nevada - Med-X Fix.esp from working with Wrye Flash
