@@ -20,46 +20,14 @@ import sys
 import os
 import _winreg
 
-sys.path.append('../Mopy/bash')
+sys.path.append('..\\Mopy\\bash')
 
 import bapi
 
-bapiDir = u'../Mopy/bash/compiled'
+bapiDir = u'..\\Mopy\\bash\\compiled'
 
 # Detect games.
-oblivionDir = None
-skyrimDir = None
-fallout3Dir = None
 falloutNVDir = None
-
-# Detect Oblivion.
-try:
-    key = _winreg.OpenKey(_winreg.HKEY_LOCAL_MACHINE, u'Software\\Bethesda Softworks\\Oblivion', 0, _winreg.KEY_READ|_winreg.KEY_WOW64_32KEY)
-    value = _winreg.QueryValueEx(key,u'Installed Path')
-    if value[1] == _winreg.REG_SZ and os.path.exists(value[0]):
-        oblivionDir = value[0]
-        print u'Found Oblivion.'
-except:
-    raise
-#Detect Skyrim.
-try:
-    key = _winreg.OpenKey(_winreg.HKEY_LOCAL_MACHINE, u'Software\\Bethesda Softworks\\Skyrim', 0, _winreg.KEY_READ|_winreg.KEY_WOW64_32KEY)
-    value = _winreg.QueryValueEx(key,u'Installed Path')
-    if value[1] == _winreg.REG_SZ and os.path.exists(value[0]):
-        skyrimDir = value[0]
-        print u'Found Skyrim.'
-except:
-    raise
-    
-#Detect Fallout3.
-try:
-    key = _winreg.OpenKey(_winreg.HKEY_LOCAL_MACHINE, u'Software\\Bethesda Softworks\\Fallout3', 0, _winreg.KEY_READ|_winreg.KEY_WOW64_32KEY)
-    value = _winreg.QueryValueEx(key,u'Installed Path')
-    if value[1] == _winreg.REG_SZ and os.path.exists(value[0]):
-        fallout3Dir = value[0]
-        print u'Found Fallout3.'
-except:
-    raise
 
 #Detect FalloutNV.
 try:
@@ -89,62 +57,14 @@ if bapi.BAPI:
 else:
     raise Exception("Couldn't load BOSS API.")
 
-if oblivionDir:
-    # Convert Oblivion masterlist.
-    if bossDir and os.path.exists(bossDir + u'/Oblivion/masterlist.txt'):
-       masterlistDir = bossDir + u'/Oblivion/masterlist.txt'
-    else:
-       masterlistDir = u'../Mopy/taglist/Oblivion/masterlist.txt'
-    print u'Getting masterlist from %s' % masterlistDir
-    taglistDir = u'../Mopy/taglist/Oblivion/taglist.txt'
-    if os.path.exists(masterlistDir):
-        boss = bapi.BossDb(oblivionDir,bapi.BOSS_API_GAME_OBLIVION)
-        boss.Load(masterlistDir)
-        boss.DumpMinimal(taglistDir,True)
-        print u'Oblivion masterlist converted.'
-    else:
-        print u'Error: Oblivion masterlist not found.'
-    
-if skyrimDir:
-    # Convert Skyrim masterlist.
-    if bossDir and os.path.exists(bossDir + u'/Skyrim/masterlist.txt'):
-       masterlistDir = bossDir + u'/Skyrim/masterlist.txt'
-    else:
-       masterlistDir = u'../Mopy/taglist/Skyrim/masterlist.txt'
-    print u'Getting masterlist from %s' % masterlistDir
-    taglistDir = u'../Mopy/taglist/Skyrim/taglist.txt'
-    if os.path.exists(masterlistDir):
-        boss = bapi.BossDb(skyrimDir,bapi.BOSS_API_GAME_SKYRIM)
-        boss.Load(masterlistDir)
-        boss.DumpMinimal(taglistDir,True)
-        print u'Skyrim masterlist converted.'
-    else:
-        print u'Error: Skyrim masterlist not found.'
-    
-if fallout3Dir:
-    # Convert Fallout 3 masterlist.
-    if bossDir and os.path.exists(bossDir + u'/Fallout 3/masterlist.txt'):
-       masterlistDir = bossDir + u'/Fallout 3/masterlist.txt'
-    else:
-       masterlistDir = u'../Mopy/taglist/Fallout 3/masterlist.txt'
-    print u'Getting masterlist from %s' % masterlistDir
-    taglistDir = u'../Mopy/taglist/Fallout 3/taglist.txt'
-    if os.path.exists(masterlistDir):
-        boss = bapi.BossDb(fallout3Dir,bapi.BOSS_API_GAME_FALLOUT3)
-        boss.Load(masterlistDir)
-        boss.DumpMinimal(taglistDir,True)
-        print u'Fallout 3 masterlist converted.'
-    else:
-        print u'Error: Fallout 3 masterlist not found.'
-    
 if falloutNVDir:
     # Convert Fallout New Vegas masterlist.
-    if bossDir and os.path.exists(bossDir + u'/Fallout New Vegas/masterlist.txt'):
-       masterlistDir = bossDir + u'/Fallout New Vegas/masterlist.txt'
+    if bossDir and os.path.exists(bossDir + u'\\Fallout New Vegas\\masterlist.txt'):
+       masterlistDir = bossDir + u'\\Fallout New Vegas\\masterlist.txt'
     else:
-       masterlistDir = u'../Mopy/taglist/Fallout New Vegas/masterlist.txt'
+       masterlistDir = u'C:\\BOSS\\Fallout New Vegas\\masterlist.txt'
     print u'Getting masterlist from %s' % masterlistDir
-    taglistDir = u'../Mopy/taglist/Fallout New Vegas/taglist.txt'
+    taglistDir = u'..\Data\\Bash Patches\\taglist.txt'
     if os.path.exists(masterlistDir):
         boss = bapi.BossDb(falloutNVDir,bapi.BOSS_API_GAME_FALLOUTNV)
         boss.Load(masterlistDir)
