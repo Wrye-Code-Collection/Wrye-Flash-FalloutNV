@@ -36621,7 +36621,7 @@ def initSettings(readOnly=False):
                     dirs['userApp'].join('bash config.pkl'),
                     readOnly))
             except cPickle.UnpicklingError, err:
-                delete = balt.askYes(None,_("Error reading the BackupBash Settings database (the error is: '%s'). This is probably not recoverable with the current file. Do you want to delete the corrupted settings and load Wrye Flash without your saved UI settings?. (Otherwise Wrye Bash wo't start up)" %(err)),_("Settings Load Error"))
+                delete = balt.askYes(None,_("Error reading the BackupBash Settings database (the error is: '%s'). This is probably not recoverable with the current file. Do you want to delete the corrupted settings and load Wrye Flash without your saved UI settings?. (Otherwise Wrye Flash won't start up)" %(err)),_("Settings Load Error"))
                 if delete:
                     dirs['saveBase'].join('BashSettings.dat').remove()
                     settings = bolt.Settings(PickleDict(
@@ -36630,7 +36630,7 @@ def initSettings(readOnly=False):
                     readOnly))
                 else:raise
         else:
-            delete = balt.askYes(None,_("Do you want to delete the corrupted settings and load Wrye Bash without your saved UI settings?. (Otherwise Wrye Bash wo't start up)"),_("Settings Load Error"))
+            delete = balt.askYes(None,_("Do you want to delete the corrupted settings and load Wrye Flash without your saved UI settings?. (Otherwise Wrye Flash won't start up)"),_("Settings Load Error"))
             if delete:
                 dirs['saveBase'].join('BashSettings.dat').remove()
                 settings = bolt.Settings(PickleDict(
