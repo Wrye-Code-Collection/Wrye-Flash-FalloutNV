@@ -38,6 +38,10 @@ Additionally, Wrye Bash comes packaged with the following programs:
 {{CONTENTS=0}}
 **All versions by Wrye team and or Valda unless otherwise noted.**
 
+=== 16.1 [10/4/2014]
+* Updated CellImporter
+* Added ALCH to SoundPatcher
+
 === 16.0 [8/23/2014]
 * Fix for getNorm to work with 2.7.8
 * Renaming occurrences of Wrye Bash to Wrye Flash
