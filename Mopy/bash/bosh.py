@@ -25939,6 +25939,8 @@ class SoundPatcher(ImportPatcher):
             recAttrs_class[recClass] = ('soundLevel','sound1','sound2')
         for recClass in (MreProj,):
             recAttrs_class[recClass] = ('sound','soundCountDown','soundDisable','soundLevel')
+        for recClass in (MreAlch,):
+            recAttrs_class[recClass] = ('soundPickUp','soundDrop','soundConsume'),
         for recClass in (MreAspc,):
             recAttrs_class[recClass] = ('soundLooping','useSoundFromRegion','environmentType')
         for recClass in (MreWeap,):
