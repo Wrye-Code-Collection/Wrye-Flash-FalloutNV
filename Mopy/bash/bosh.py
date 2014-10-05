@@ -25947,7 +25947,7 @@ class SoundPatcher(ImportPatcher):
             recAttrs_class[recClass] = ('soundGunShot3D','soundGunShot2D','soundGunShot3DLooping','soundMeleeSwingGunNoAmmo',
                                         'soundBlock','soundMod1Shoot3Ds','soundMod1Shoot2D','soundLevel')
         #--Needs Longs
-        self.longTypes = set(('MGEF','ACTI','TACT','LIGH','WTHR','CONT','DOOR','EXPL','IPCT','PROJ','ASPC','WEAP','REGN'))
+        self.longTypes = set(('MGEF','ALCH','ACTI','TACT','LIGH','WTHR','CONT','DOOR','EXPL','IPCT','PROJ','ASPC','WEAP','REGN'))
 
     def initData(self,progress):
         """Get sounds from source files."""
