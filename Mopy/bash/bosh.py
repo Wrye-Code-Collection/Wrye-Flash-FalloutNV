@@ -144,16 +144,16 @@ installersWindow = None
 allTags = sorted((
     'Body-F', 'Body-M', 'Body-Size-M', 'Body-Size-F', 'C.Acoustic', 'C.Climate',
     'C.Encounter', 'C.ImageSpace', 'C.Light', 'C.LTemplate', 'C.Music', 'C.Name',
-    'C.RecordFlags', 'C.Owner', 'C.Water','Deactivate', 'Delev', 'Eyes',
-    'Factions', 'Relations', 'Filter', 'Graphics', 'Hair', 'IIM', 'Invent', 
-    'Names', 'NoMerge', 'NpcFaces', 'R.Relations', 'Relev', 'Scripts', 
-    'ScriptContents', 'Sound', 'Stats', 'Voice-F', 'Voice-M', 'R.Teeth', 'R.Mouth',
-    'R.Ears', 'R.Head', 'R.Attributes-F', 'R.Attributes-M', 'R.Skills', 
+    'C.RecordFlags', 'C.Owner', 'C.Water', 'Deactivate', 'Delev', 'Eyes',
+    'Factions', 'Relations', 'Filter', 'Graphics', 'Hair', 'IIM', 'Invent',
+    'Names', 'NoMerge', 'NpcFaces', 'R.Relations', 'Relev', 'Scripts',
+    'ScriptContents', 'Sound', 'Stats', 'Voice-F', 'Voice-M', 'R.Teeth',
+    'R.Mouth', 'R.Ears', 'R.Head', 'R.Attributes-F', 'R.Attributes-M', 'R.Skills',
     'R.Description', 'Roads', 'Actors.Anims', 'Actors.AIData', 'Actors.DeathItem',
     'Actors.AIPackages', 'Actors.AIPackagesForceAdd', 'Actors.Stats', 'Actors.ACBS',
-    'NPC.Class', 'Actors.CombatStyle', 'Creatures.Blood', 'NPC.Race','Actors.Skeleton',
-    'NpcFacesForceFullImport', 'MustBeActiveIfImported', 'Deflst', 'Destructible',
-    'WeaponMods',
+    'NPC.Class', 'Actors.CombatStyle', 'Creatures.Blood', 'NPC.Race',
+    'Actors.Skeleton', 'NpcFacesForceFullImport', 'MustBeActiveIfImported', 'Deflst',
+    'Destructible', 'WeaponMods',
 ))
 
 allTagsSet = set(allTags)
@@ -2237,7 +2237,7 @@ class MreAlch(MelRecord,MreHasEffects):
                   'corner1X','corner1Y','corner1Z'),
         MelFull0(),
         MelModel(),
-        MelString('ICON','largeIconPath'),
+        MelString('ICON','iconPath'),
         MelString('MICO','smallIconPath'),
         MelFid('SCRI','script'),
         MelDestructible(),
@@ -2280,7 +2280,7 @@ class MreAmmo(MelRecord):
                   'corner1X','corner1Y','corner1Z'),
         MelString('FULL','full'),
         MelModel(),
-        MelString('ICON','largeIconPath'),
+        MelString('ICON','iconPath'),
         MelString('MICO','smallIconPath'),
         MelFid('SCRI','script'),
         MelDestructible(),
@@ -2362,11 +2362,11 @@ class MreArmo(MelRecord):
         MelStruct('BMDT','=2I',(_flags,'bipedFlags',0L),(_generalFlags,'generalFlags',0L)),
         MelModel('maleBody'),
         MelModel('maleWorld',2),
-        MelString('ICON','maleLargeIconPath'),
+        MelString('ICON','maleIconPath'),
         MelString('MICO','maleSmallIconPath'),
         MelModel('femaleBody',3),
         MelModel('femaleWorld',4),
-        MelString('ICO2','femaleLargeIconPath'),
+        MelString('ICO2','femaleIconPath'),
         MelString('MIC2','femaleSmallIconPath'),
         MelString('BMCT','ragdollConstraintTemplate'),
         MelDestructible(),
@@ -2395,7 +2395,7 @@ class MreBook(MelRecord):
                   'corner1X','corner1Y','corner1Z'),
         MelString('FULL','full'),
         MelModel(),
-        MelString('ICON','largeIconPath'),
+        MelString('ICON','iconPath'),
         MelString('MICO','smallIconPath'),
         MelFid('SCRI','script'),
         MelString('DESC','text'),
@@ -3331,7 +3331,7 @@ class MreKeym(MelRecord):
                   'corner1X','corner1Y','corner1Z'),
         MelString('FULL','full'),
         MelModel(),
-        MelString('ICON','largeIconPath'),
+        MelString('ICON','iconPath'),
         MelString('MICO','smallIconPath'),
         MelFid('SCRI','script'),
         MelDestructible(),
@@ -3519,6 +3519,7 @@ class MreMgef(MelRecord):
                 if callable(action): value = action(value)
                 setter(attr,value)
             if self._debug: print unpacked
+
     melSet = MelSet(
         MelString('EDID','eid'),
         MelString('FULL','full'),
@@ -3529,9 +3530,10 @@ class MreMgef(MelRecord):
             (_flags,'flags'),'baseCost',(FID,'associated'),'school','resistValue','unk1',
             (FID,'light',0),'projectileSpeed',(FID,'effectShader',0),(FID,'objectDisplayShader',0),
             (FID,'castingSound',0),(FID,'boltSound',0),(FID,'hitSound',0),(FID,'areaSound',0),
-            ('cefEnchantment',0.0),('cefBarter',0.0),'archType','actorValue'),
-        MelStructA('ESCE','4s','counterEffects','effect'),
-        )
+            ('cefEnchantment',0.0),('cefBarter',0.0),'archType','actorValue',),
+        MelGroups('counterEffects',
+            MelOptStruct('ESCE','I',(FID,'counterEffectCode',0)),),
+    )
     __slots__ = MelRecord.__slots__ + melSet.getSlotsUsed()
 
 #------------------------------------------------------------------------------
@@ -3545,7 +3547,7 @@ class MreMisc(MelRecord):
                   'corner1X','corner1Y','corner1Z'),
         MelString('FULL','full'),
         MelModel(),
-        MelString('ICON','largeIconPath'),
+        MelString('ICON','iconPath'),
         MelString('MICO','smallIconPath'),
         MelFid('SCRI','script'),
         MelDestructible(),
@@ -3706,6 +3708,8 @@ class MreNpc(MreActor):
         else:
             self.model.modPath = r"Characters\_Male\skeleton.nif"
         #--FNAM
+		# Needs Updating for Fallout New Vegas
+		# American
         fnams = {
             0x23fe9 : 0x3cdc ,#--Argonian
             0x224fc : 0x1d48 ,#--Breton
@@ -4165,6 +4169,7 @@ class MreRace(MelRecord):
         MelString('EDID','eid'),
         MelString('FULL','full'),
         MelString('DESC','text'),
+        MelStructs('XNAM','I2i','relations',(FID,'faction'),'mod','groupCombatReaction'),
         MelStruct('DATA','14b2s4fI','skill1','skill1Boost','skill2','skill2Boost',
                   'skill3','skill3Boost','skill4','skill4Boost','skill5','skill5Boost',
                   'skill6','skill6Boost','skill7','skill7Boost',('unused1',null2),
@@ -4412,6 +4417,8 @@ class MreRegn(MelRecord):
         ( 1,'cloudy'),
         ( 2,'rainy'),
         ( 3,'snowy'),))
+    rdatFlags = Flags(0L,Flags.getNames(
+        ( 0,'Override'),))
 
     ####Lazy hacks to correctly read/write regn data
     class MelRegnStructA(MelStructA):
@@ -4465,7 +4472,7 @@ class MreRegn(MelRecord):
 
     melSet = MelSet(
         MelString('EDID','eid'),
-        MelString('ICON','largeIconPath'),
+        MelString('ICON','iconPath'),
         MelString('MICO','smallIconPath'),
         MelStruct('RCLR','3Bs','mapRed','mapBlue','mapGreen',('unused1',null1)),
         MelFid('WNAM','worldspace'),
@@ -4473,13 +4480,17 @@ class MreRegn(MelRecord):
             MelStruct('RPLI','I','edgeFalloff'),
             MelStructA('RPLD','2f','points','posX','posY')),
         MelGroups('entries',
-            MelStruct('RDAT', 'I2B2s','entryType', (_flags,'flags'), 'priority', ('unused1',null2)), ####flags actually an enum...
+            # entryType is an Enum,
+            # rdatFlags should probably be used here since FNVEdit shows only one flag for RDAT
+            MelStruct('RDAT', 'I2B2s','entryType', (_flags,'flags'), 'priority', ('unused1',null2)),
             MelRegnStructA('RDOT', 'IH2sf4B2H4s4f3H2s4s', 'objects', (FID,'objectId'), 'parentIndex',
                 ('unused1',null2), 'density', 'clustering', 'minSlope', 'maxSlope',
                 (obflags, 'flags'), 'radiusWRTParent', 'radius', ('unk1',null4),
                 'maxHeight', 'sink', 'sinkVar', 'sizeVar', 'angleVarX',
                 'angleVarY',  'angleVarZ', ('unused2',null2), ('unk2',null4)),
             MelRegnString('RDMP', 'mapName'),
+            MelRegnStructA('RDGS', 'I4s', 'grass', ('unknown',null4)),
+            MelRegnOptStruct('RDMD', 'I', 'musicType'),
             MelFid('RDMO','music'),
             MelFid('RDSI','incidentalMediaSet'),
             MelFids('RDSB','battleMediaSets'),
@@ -4579,8 +4590,38 @@ class MreSlgm(MelRecord):
 class MreSoun(MelRecord):
     """Sound record."""
     classType = 'SOUN'
-    _flags = Flags(0L,Flags.getNames('randomFrequencyShift', 'playAtRandom',
-        'environmentIgnored', 'randomLocation', 'loop','menuSound', '2d', '360LFE'))
+
+    # {0x0001} 'Random Frequency Shift',
+    # {0x0002} 'Play At Random',
+    # {0x0004} 'Environment Ignored',
+    # {0x0008} 'Random Location',
+    # {0x0010} 'Loop',
+    # {0x0020} 'Menu Sound',
+    # {0x0040} '2D',
+    # {0x0080} '360 LFE',
+    # {0x0100} 'Dialogue Sound',
+    # {0x0200} 'Envelope Fast',
+    # {0x0400} 'Envelope Slow',
+    # {0x0800} '2D Radius',
+    # {0x1000} 'Mute When Submerged',
+    # {0x2000} 'Start at Random Position'
+    _flags = Flags(0L,Flags.getNames(
+            'randomFrequencyShift',
+            'playAtRandom',
+            'environmentIgnored',
+            'randomLocation',
+            'loop',
+            'menuSound',
+            'twoD',
+            'three60LFE',
+            'dialogueSound',
+            'envelopeFast',
+            'envelopeSlow',
+            'twoDRadius',
+            'muteWhenSubmerged',
+            'startatRandomPosition',
+        ))
+
     class MelSounSndx(MelStruct):
         """SNDX is a reduced version of SNDD. Allow it to read in, but not set defaults or write."""
         def loadData(self,record,ins,type,size,readId):
@@ -4592,11 +4633,13 @@ class MreSoun(MelRecord):
             record.point4 = 0
             record.reverb = 0
             record.priority = 0
-            record.unknown = "\0"*8
+            record.xLoc = 0
+            record.yLoc = 0
         def getSlotsUsed(self):
             return ()
         def setDefault(self,record): return
         def dumpData(self,record,out): return
+
     melSet = MelSet(
         MelString('EDID','eid'),
         MelStruct('OBND','=6h',
@@ -4604,11 +4647,11 @@ class MreSoun(MelRecord):
                   'corner1X','corner1Y','corner1Z'),
         MelString('FNAM','soundFile'),
         MelStruct('RNAM','B','_rnam'),
-        MelOptStruct('SNDD','=2BbsIh2B6HI8s',('minDistance',None), ('maxDistance',None), ('freqAdjustment',None), ('unused1',null1),
-            (_flags,'flags',None),('staticAtten',None),('stopTime',None),('startTime',None),
-            ('point0',0),('point1',0),('point2',0),('point3',0),('point4',0),('reverb',0),('priority',0),'unknown'),
-        MelSounSndx('SNDX','=2BbsIh2B',('minDistance',None), ('maxDistance',None), ('freqAdjustment',None), ('unused1',null1),
-            (_flags,'flags',None),('staticAtten',None),('stopTime',None),('startTime',None),),
+        MelOptStruct('SNDD','=2BbsIh2B6h3i',('minDistance',0), ('maxDistance',0), ('freqAdjustment',0), ('unused1',''),
+            (_flags,'flags',0L),('staticAtten',0),('stopTime',0),('startTime',0),
+            ('point0',0),('point1',0),('point2',0),('point3',0),('point4',0),('reverb',0),('priority',0), ('xLoc',0), ('yLoc',0),),
+        MelSounSndx('SNDX','=2BbsIh2B',('minDistance',0), ('maxDistance',0), ('freqAdjustment',0), ('unused1',''),
+            (_flags,'flags',0L),('staticAtten',0),('stopTime',0),('startTime',0),),
         MelBase('ANAM','_anam'), #--Should be a struct. Maybe later.
         MelBase('GNAM','_gnam'), #--Should be a struct. Maybe later.
         MelBase('HNAM','_hnam'), #--Should be a struct. Maybe later.
@@ -4887,7 +4930,7 @@ class MreWeap(MelRecord):
                   'corner1X','corner1Y','corner1Z'),
         MelString('FULL','full'),
         MelModel('model'),
-        MelString('ICON','largeIconPath'),
+        MelString('ICON','iconPath'),
         MelString('MICO','smallIconPath'),
         MelFid('SCRI','script'),
         MelFid('EITM','effect'),
@@ -5057,7 +5100,7 @@ class MreMicn(MelRecord):
     classType = 'MICN'
     melSet = MelSet(
         MelString('EDID','eid'),
-        MelString('ICON','largeIconPath'),
+        MelString('ICON','iconPath'),
         MelString('MICO','smallIconPath'),
         )
     __slots__ = MelRecord.__slots__ + melSet.getSlotsUsed()
@@ -5241,7 +5284,7 @@ class MrePerk(MelRecord):
         MelString('EDID','eid'),
         MelString('FULL','full'),
         MelString('DESC','description'),
-        MelString('ICON','largeIconPath'),
+        MelString('ICON','iconPath'),
         MelString('MICO','smallIconPath'),
         MelConditions(),
         MelGroup('_data',
@@ -5614,7 +5657,7 @@ class MreNote(MelRecord):
                   'corner1X','corner1Y','corner1Z'),
         MelString('FULL','full'),
         MelModel(),
-        MelString('ICON','largeIconPath'),
+        MelString('ICON','iconPath'),
         MelString('MICO','smallIconPath'),
         MelFid('YNAM','soundPickUp'),
         MelFid('ZNAM','soundDrop'),
@@ -5688,7 +5731,7 @@ class MreAvif(MelRecord):
         MelString('EDID','eid'),
         MelString('FULL','full'),
         MelString('DESC','description'),
-        MelString('ICON','largeIconPath'),
+        MelString('ICON','iconPath'),
         MelString('MICO','smallIconPath'),
         MelString('ANAM','shortName'),
     )
@@ -5926,11 +5969,11 @@ class MreArma(MelRecord):
         MelStruct('BMDT','=2I',(_flags,'bipedFlags',0L),(_generalFlags,'generalFlags',0L)),
         MelModel('maleBody'),
         MelModel('maleWorld',2),
-        MelString('ICON','maleLargeIconPath'),
+        MelString('ICON','maleIconPath'),
         MelString('MICO','maleSmallIconPath'),
         MelModel('femaleBody',3),
         MelModel('femaleWorld',4),
-        MelString('ICO2','femaleLargeIconPath'),
+        MelString('ICO2','femaleIconPath'),
         MelString('MIC2','femaleSmallIconPath'),
         MelStruct('ETYP','I',(_etype,'etype',0L)),
         MelStruct('DATA','IIf','value','health','weight'),
@@ -5968,7 +6011,7 @@ class MreImod(MelRecord):
                   'corner1X','corner1Y','corner1Z'),
         MelString('FULL','full'),
         MelModel(),
-        MelString('ICON','largeIconPath'),
+        MelString('ICON','iconPath'),
         MelString('MICO','smallIconPath'),
         MelFid('SCRI','script'),
         MelString('DESC','description'),
@@ -5986,7 +6029,7 @@ class MreRepu(MelRecord):
     melSet = MelSet(
         MelString('EDID','eid'),
         MelString('FULL','full'),
-        MelString('ICON','largeIconPath'),
+        MelString('ICON','iconPath'),
         MelString('MICO','smallIconPath'),
         MelStruct('DATA','I','value'),
         )
@@ -6058,7 +6101,7 @@ class MreChip(MelRecord):
                   'corner1X','corner1Y','corner1Z'),
         MelString('FULL','full'),
         MelModel(),
-        MelString('ICON','largeIconPath'),
+        MelString('ICON','iconPath'),
         MelString('MICO','smallIconPath'),
         MelDestructible(),
         MelFid('YNAM','soundPickUp'),
@@ -6108,12 +6151,12 @@ class MreMset(MelRecord):
         MelString('EDID','eid'),
         MelString('FULL','full'),
         MelStruct('NAM1','I','type'),
-        MelString('NAM2','I','nam2'),
-        MelString('NAM3','I','nam3'),
-        MelString('NAM4','I','nam4'),
-        MelString('NAM5','I','nam5'),
-        MelString('NAM6','I','nam6'),
-        MelString('NAM7','I','nam7'),
+        MelString('NAM2','nam2'),
+        MelString('NAM3','nam3'),
+        MelString('NAM4','nam4'),
+        MelString('NAM5','nam5'),
+        MelString('NAM6','nam6'),
+        MelString('NAM7','nam7'),
         MelStruct('NAM8','f','nam8'),
         MelStruct('NAM9','f','nam9'),
         MelStruct('NAM0','f','nam0'),
@@ -6131,8 +6174,8 @@ class MreMset(MelRecord):
         MelStruct('ENAM','f','enam'),
         MelStruct('FNAM','f','fnam'),
         MelStruct('GNAM','f','gnam'),
-        MelFid('HNAM','I','hnam'),
-        MelFid('INAM','I','inam'),
+        MelOptStruct('HNAM','I',(FID,'hnam')),
+        MelOptStruct('INAM','I',(FID,'inam')),
         MelBase('DATA','data'),
         )
     __slots__ = MelRecord.__slots__ + melSet.getSlotsUsed()
@@ -6199,7 +6242,7 @@ class MreCcrd(MelRecord):
                   'corner1X','corner1Y','corner1Z'),
         MelString('FULL','full'),
         MelModel(),
-        MelString('ICON','largeIconPath'),
+        MelString('ICON','iconPath'),
         MelString('MICO','smallIconPath'),
         MelFid('SCRI','script'),
         MelFid('YNAM','soundPickUp'),
@@ -6222,7 +6265,7 @@ class MreCmny(MelRecord):
                   'corner1X','corner1Y','corner1Z'),
         MelString('FULL','full'),
         MelModel(),
-        MelString('ICON','largeIconPath'),
+        MelString('ICON','iconPath'),
         MelString('MICO','smallIconPath'),
         MelFid('YNAM','soundPickUp'),
         MelFid('ZNAM','soundDrop'),
@@ -12184,12 +12227,12 @@ class ConfigHelpers:
         except ImportError:
             pass
 
-        
+
         bapi.Init(dirs['compiled'].s)
         # That didn't work - Wrye Flash isn't installed correctly
         if not bapi.BAPI:
             raise bolt.BoltError('The BOSS API could not be loaded.')
-            
+
 
         global boss
         #boss = bapi.BossDb(GPath(dirs['mods'].s).s,bush.game.name)
@@ -17689,15 +17732,15 @@ class CompleteItemData:
         """Initialize."""
         self.type_stats = {'ALCH':{},'AMMO':{},'ARMO':{},'ARMA':{},'BOOK':{},'INGR':{},'KEYM':{},'LIGH':{},'MISC':{},'WEAP':{}}
         self.type_attrs = {
-            'ALCH':('eid', 'full', 'weight', 'value', 'largeIconPath', 'smallIconPath'),
-            'AMMO':('eid', 'full', 'weight', 'value', 'speed', 'clipRounds', 'projPerShot', 'largeIconPath', 'smallIconPath'),
-            'ARMO':('eid', 'full', 'weight', 'value', 'health', 'ar', 'dt', 'maleLargeIconPath', 'maleSmallIconPath', 'femaleLargeIconPath', 'femaleSmallIconPath'),
-            'ARMA':('eid', 'full', 'weight', 'value', 'health', 'ar', 'dt', 'maleLargeIconPath', 'maleSmallIconPath', 'femaleLargeIconPath', 'femaleSmallIconPath'),
-            'BOOK':('eid', 'full', 'weight', 'value', 'largeIconPath', 'smallIconPath'),
+            'ALCH':('eid', 'full', 'weight', 'value', 'iconPath', 'smallIconPath'),
+            'AMMO':('eid', 'full', 'weight', 'value', 'speed', 'clipRounds', 'projPerShot', 'iconPath', 'smallIconPath'),
+            'ARMO':('eid', 'full', 'weight', 'value', 'health', 'ar', 'dt', 'maleIconPath', 'maleSmallIconPath', 'femaleIconPath', 'femaleSmallIconPath'),
+            'ARMA':('eid', 'full', 'weight', 'value', 'health', 'ar', 'dt', 'maleIconPath', 'maleSmallIconPath', 'femaleIconPath', 'femaleSmallIconPath'),
+            'BOOK':('eid', 'full', 'weight', 'value', 'iconPath', 'smallIconPath'),
             'INGR':('eid', 'full', 'weight', 'value', 'iconPath'),
-            'KEYM':('eid', 'full', 'weight', 'value', 'largeIconPath', 'smallIconPath'),
+            'KEYM':('eid', 'full', 'weight', 'value', 'iconPath', 'smallIconPath'),
             'LIGH':('eid', 'full', 'weight', 'value', 'duration','iconPath'),
-            'MISC':('eid', 'full', 'weight', 'value', 'largeIconPath', 'smallIconPath'),
+            'MISC':('eid', 'full', 'weight', 'value', 'iconPath', 'smallIconPath'),
             'WEAP':('eid', 'full', 'weight', 'value', 'health', 'damage','clipsize',
                     'animationMultiplier','reach','ammoUse','minSpread','spread','sightFov','baseVatsToHitChance','projectileCount',
                     'minRange','maxRange','animationAttackMultiplier','fireRate','overrideActionPoint','rumbleLeftMotorStrength',
@@ -17707,7 +17750,7 @@ class CompleteItemData:
                     'strengthReq','regenRate','killImpulse','impulseDist','skillReq',
                     'criticalDamage','criticalMultiplier',
                     'vatsSkill','vatsDamMult','vatsAp',
-                    'largeIconPath', 'smallIconPath'),
+                    'iconPath', 'smallIconPath'),
             }
         self.aliases = aliases or {} #--For aliasing mod fulls
 
@@ -22682,21 +22725,21 @@ class GraphicsPatcher(ImportPatcher):
         for recClass in (MreLigh,):
             recAttrs_class[recClass] = ('iconPath','model')
         for recClass in (MreMicn,):
-            recAttrs_class[recClass] = ('largeIconPath','smallIconPath')
+            recAttrs_class[recClass] = ('iconPath','smallIconPath')
         for recClass in (MreRepu,):
-            recAttrs_class[recClass] = ('largeIconPath','smallIconPath')
+            recAttrs_class[recClass] = ('iconPath','smallIconPath')
         for recClass in (MreCsno,):
             recAttrs_class[recClass] = ('chipModels','slotMachineModel','blackjackTableModel','rouletteTableModel','slotReelTextures','blackjackDecks')
         for recClass in (MreAlch, MreAmmo, MreAppa, MreBook, MreIngr, MreKeym, MreMisc, MreSgst, MreSlgm, MreTree, MreCmny, MreImod, MreChip):
-            recAttrs_class[recClass] = ('largeIconPath','smallIconPath','model')
+            recAttrs_class[recClass] = ('iconPath','smallIconPath','model')
         for recClass in (MreNote,):
-            recAttrs_class[recClass] = ('largeIconPath','smallIconPath','model','texture')
+            recAttrs_class[recClass] = ('iconPath','smallIconPath','model','texture')
         for recClass in (MreCcrd,):
-            recAttrs_class[recClass] = ('largeIconPath','smallIconPath','model','textureFace','textureBack')
+            recAttrs_class[recClass] = ('iconPath','smallIconPath','model','textureFace','textureBack')
         for recClass in (MreWeap,):
-            recAttrs_class[recClass] = ('largeIconPath','smallIconPath','model','shellCasingModel','scopeModel','worldModel','firstPersonModel','animationType','gripAnimation','reloadAnimation','modelWithMods','firstPersonModelWithMods')
+            recAttrs_class[recClass] = ('iconPath','smallIconPath','model','shellCasingModel','scopeModel','worldModel','firstPersonModel','animationType','gripAnimation','reloadAnimation','modelWithMods','firstPersonModelWithMods')
         for recClass in (MreArmo, MreArma, MreClot):
-            recAttrs_class[recClass] = ('maleBody','maleWorld','maleLargeIconPath','maleSmallIconPath','femaleBody','femaleWorld','femaleLargeIconPath','femaleSmallIconPath','flags')
+            recAttrs_class[recClass] = ('maleBody','maleWorld','maleIconPath','maleSmallIconPath','femaleBody','femaleWorld','femaleIconPath','femaleSmallIconPath','flags')
         for recClass in (MreCrea,):
             recAttrs_class[recClass] = ('model','bodyParts','nift_p','bodyPartData','impactDataset')
         for recClass in (MreMgef,):
