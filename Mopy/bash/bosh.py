@@ -141,15 +141,20 @@ noSolidExts = set(('.zip',))
 settings = None
 installersWindow = None
 
-allTags = sorted(('Body-F', 'Body-M', 'Body-Size-M', 'Body-Size-F', 'C.Climate', 'C.Light', 'C.Music', 'C.Name', 'C.RecordFlags',
-                  'C.Owner', 'C.Water','Deactivate', 'Delev', 'Eyes', 'Factions', 'Relations', 'Filter', 'Graphics', 'Hair',
-                  'IIM', 'Invent', 'Names', 'NoMerge', 'NpcFaces', 'R.Relations', 'Relev', 'Scripts', 'ScriptContents', 'Sound',
-                  'Stats', 'Voice-F', 'Voice-M', 'R.Teeth', 'R.Mouth', 'R.Ears', 'R.Head', 'R.Attributes-F',
-                  'R.Attributes-M', 'R.Skills', 'R.Description', 'Roads', 'Actors.Anims',
-                  'Actors.AIData', 'Actors.DeathItem', 'Actors.AIPackages', 'Actors.AIPackagesForceAdd', 'Actors.Stats',
-                  'Actors.ACBS', 'NPC.Class', 'Actors.CombatStyle', 'Creatures.Blood',
-                  'NPC.Race','Actors.Skeleton', 'NpcFacesForceFullImport', 'MustBeActiveIfImported',
-                  'Deflst', 'Destructible', 'WeaponMods'))
+allTags = sorted((
+    'Body-F', 'Body-M', 'Body-Size-M', 'Body-Size-F', 'C.Acoustic', 'C.Climate',
+    'C.Encounter', 'C.ImageSpace', 'C.Light', 'C.LTemplate', 'C.Music', 'C.Name',
+    'C.RecordFlags', 'C.Owner', 'C.Water','Deactivate', 'Delev', 'Eyes',
+    'Factions', 'Relations', 'Filter', 'Graphics', 'Hair', 'IIM', 'Invent', 
+    'Names', 'NoMerge', 'NpcFaces', 'R.Relations', 'Relev', 'Scripts', 
+    'ScriptContents', 'Sound', 'Stats', 'Voice-F', 'Voice-M', 'R.Teeth', 'R.Mouth',
+    'R.Ears', 'R.Head', 'R.Attributes-F', 'R.Attributes-M', 'R.Skills', 
+    'R.Description', 'Roads', 'Actors.Anims', 'Actors.AIData', 'Actors.DeathItem',
+    'Actors.AIPackages', 'Actors.AIPackagesForceAdd', 'Actors.Stats', 'Actors.ACBS',
+    'NPC.Class', 'Actors.CombatStyle', 'Creatures.Blood', 'NPC.Race','Actors.Skeleton',
+    'NpcFacesForceFullImport', 'MustBeActiveIfImported', 'Deflst', 'Destructible',
+    'WeaponMods',
+))
 
 allTagsSet = set(allTags)
 oldTags = sorted(('Merge',))
