@@ -144,16 +144,16 @@ installersWindow = None
 allTags = sorted((
     'Body-F', 'Body-M', 'Body-Size-M', 'Body-Size-F', 'C.Acoustic', 'C.Climate',
     'C.Encounter', 'C.ImageSpace', 'C.Light', 'C.LTemplate', 'C.Music', 'C.Name',
-    'C.RecordFlags', 'C.Owner', 'C.Water','Deactivate', 'Delev', 'Eyes',
-    'Factions', 'Relations', 'Filter', 'Graphics', 'Hair', 'IIM', 'Invent', 
-    'Names', 'NoMerge', 'NpcFaces', 'R.Relations', 'Relev', 'Scripts', 
-    'ScriptContents', 'Sound', 'Stats', 'Voice-F', 'Voice-M', 'R.Teeth', 'R.Mouth',
-    'R.Ears', 'R.Head', 'R.Attributes-F', 'R.Attributes-M', 'R.Skills', 
+    'C.RecordFlags', 'C.Owner', 'C.Water', 'Deactivate', 'Delev', 'Eyes',
+    'Factions', 'Relations', 'Filter', 'Graphics', 'Hair', 'IIM', 'Invent',
+    'Names', 'NoMerge', 'NpcFaces', 'R.Relations', 'Relev', 'Scripts',
+    'ScriptContents', 'Sound', 'Stats', 'Voice-F', 'Voice-M', 'R.Teeth',
+    'R.Mouth', 'R.Ears', 'R.Head', 'R.Attributes-F', 'R.Attributes-M', 'R.Skills',
     'R.Description', 'Roads', 'Actors.Anims', 'Actors.AIData', 'Actors.DeathItem',
     'Actors.AIPackages', 'Actors.AIPackagesForceAdd', 'Actors.Stats', 'Actors.ACBS',
-    'NPC.Class', 'Actors.CombatStyle', 'Creatures.Blood', 'NPC.Race','Actors.Skeleton',
-    'NpcFacesForceFullImport', 'MustBeActiveIfImported', 'Deflst', 'Destructible',
-    'WeaponMods',
+    'NPC.Class', 'Actors.CombatStyle', 'Creatures.Blood', 'NPC.Race',
+    'Actors.Skeleton', 'NpcFacesForceFullImport', 'MustBeActiveIfImported', 'Deflst',
+    'Destructible', 'WeaponMods',
 ))
 
 allTagsSet = set(allTags)
@@ -4480,7 +4480,7 @@ class MreRegn(MelRecord):
             MelStruct('RPLI','I','edgeFalloff'),
             MelStructA('RPLD','2f','points','posX','posY')),
         MelGroups('entries',
-            # entryType is an Enum, 
+            # entryType is an Enum,
             # rdatFlags should probably be used here since FNVEdit shows only one flag for RDAT
             MelStruct('RDAT', 'I2B2s','entryType', (_flags,'flags'), 'priority', ('unused1',null2)),
             MelRegnStructA('RDOT', 'IH2sf4B2H4s4f3H2s4s', 'objects', (FID,'objectId'), 'parentIndex',
@@ -12227,12 +12227,12 @@ class ConfigHelpers:
         except ImportError:
             pass
 
-        
+
         bapi.Init(dirs['compiled'].s)
         # That didn't work - Wrye Flash isn't installed correctly
         if not bapi.BAPI:
             raise bolt.BoltError('The BOSS API could not be loaded.')
-            
+
 
         global boss
         #boss = bapi.BossDb(GPath(dirs['mods'].s).s,bush.game.name)
