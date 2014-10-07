@@ -22413,8 +22413,8 @@ class CellImporter(ImportPatcher):
     text = _("Import cells (climate, lighting, and water) from source mods.")
     tip = text
     autoRe = re.compile(r"^UNDEFINED$",re.I)
-    autoKey = (u'C.Acoustic',u'C.Climate',u'C.Encounter',u'C.ImageSpace',u'C.Light',
-    u'C.LTemplate',u'C.Music',u'C.Name',u'C.Owner',u'C.RecordFlags',u'C.Water',)#,u'C.Maps')
+    autoKey = ('C.Acoustic','C.Climate','C.Encounter','C.ImageSpace','C.Light',
+    'C.LTemplate','C.Music','C.Name','C.Owner','C.RecordFlags','C.Water',)#,'C.Maps')
     defaultItemCheck = inisettings['AutoItemCheck'] #--GUI: Whether new items are checked by default or not.
 
     #--Patch Phase ------------------------------------------------------------
@@ -22425,34 +22425,35 @@ class CellImporter(ImportPatcher):
         self.sourceMods = self.getConfigChecked()
         self.isActive = bool(self.sourceMods)
         self.recAttrs = {
-            u'C.Acoustic': ('acousticSpace',),
-            u'C.Climate': ('climate',),
-            u'C.Encounter': ('encounterZone',),
-            u'C.ImageSpace': ('imageSpace',),
-            u'C.Light': ('ambientRed','ambientGreen','ambientBlue','unused1',
+            'C.Acoustic': ('acousticSpace',),
+            'C.Climate': ('climate',),
+            'C.Encounter': ('encounterZone',),
+            'C.ImageSpace': ('imageSpace',),
+            'C.Light': ('ambientRed','ambientGreen','ambientBlue','unused1',
                         'directionalRed','directionalGreen','directionalBlue','unused2',
                         'fogRed','fogGreen','fogBlue','unused3',
                         'fogNear','fogFar','directionalXY','directionalZ',
-                        'directionalFade','fogClip',),
-            u'C.LTemplate': ('lightTemplate',),
-            u'C.Music': ('music',),
-            u'C.Name': ('full',),
-            u'C.Owner': ('ownership',),
-            u'C.RecordFlags': ('flags1',), # Yes seems funky but thats the way it is
-            u'C.Water': ('water','waterHeight',),
+                        'directionalFade','fogClip','fogPower',
+                        'lightTemplate','lightInheritFlags'),
+            'C.LTemplate': ('lightTemplate',),
+            'C.Music': ('music',),
+            'C.Name': ('full',),
+            'C.Owner': ('ownership',),
+            'C.RecordFlags': ('flags1',), # Yes seems funky but thats the way it is
+            'C.Water': ('water','waterHeight',),
             }
         self.recFlags = {
-            u'C.Acoustic': '',
-            u'C.Climate': 'behaveLikeExterior',
-            u'C.Encounter': '',
-            u'C.ImageSpace': '',
-            u'C.Light': '',
-            u'C.LTemplate': '',
-            u'C.Music': '',
-            u'C.Name': '',
-            u'C.Owner': 'publicPlace',
-            u'C.RecordFlags': '',
-            u'C.Water': 'hasWater',
+            'C.Acoustic': '',
+            'C.Climate': 'behaveLikeExterior',
+            'C.Encounter': '',
+            'C.ImageSpace': '',
+            'C.Light': '',
+            'C.LTemplate': '',
+            'C.Music': '',
+            'C.Name': '',
+            'C.Owner': 'publicPlace',
+            'C.RecordFlags': '',
+            'C.Water': 'hasWater',
             }
 
     def getReadClasses(self):
