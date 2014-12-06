@@ -2226,6 +2226,22 @@ class MreActi(MelRecord):
     __slots__ = MelRecord.__slots__ + melSet.getSlotsUsed()
 
 #------------------------------------------------------------------------------
+class MreAddn(MelRecord):
+    """Addon"""
+    classType = 'ADDN'
+    melSet = MelSet(
+        MelString('EDID','eid'),
+        MelStruct('OBND','=6h',
+                  'boundX1','boundY1','boundZ1',
+                  'boundX2','boundY2','boundZ2'),
+        MelModel(),
+        MelStruct('DATA','i','nodeIndex'),
+        MelOptStruct('SNAM','I',(FID,'ambientSound')),
+        MelStruct('DNAM','H2s','mastPartSysCap','unknown',),
+        )
+    __slots__ = MelRecord.__slots__ + melSet.getSlotsUsed()
+
+#------------------------------------------------------------------------------
 class MreAlch(MelRecord,MreHasEffects):
     """ALCH (potion) record."""
     classType = 'ALCH'
