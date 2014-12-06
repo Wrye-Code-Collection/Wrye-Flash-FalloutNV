@@ -38,6 +38,9 @@ Additionally, Wrye Bash comes packaged with the following programs:
 {{CONTENTS=0}}
 **All versions by Wrye team and or Valda unless otherwise noted.**
 
+=== 16.3 [12/5/2014]
+* Added ADDN records (MreAddn)
+
 === 16.2 [10/4/2014]
 * Removed Unicode declarations from CellImporter
 
