@@ -40,7 +40,7 @@ Additionally, Wrye Bash comes packaged with the following programs:
 
 === 16.4 [12/5/2014]
 * Updated MreAchr, MreAcre, MreAlch, MreAmmo, MreArma, MreArmo, MreBook, MreBptd, MreClas, MreCrea, MreCsty, MreDebr, MreDial, MreEczn, MreEfsh, MreEnch, MreExpl, MreFact, MreFlst, MreIdle, MreIdle, MreImad, MreInfo,  MreIngr, MreIpct, MreKeym, MreLigh, MreLsct, MreLtex, MreMesg, MreMgef, MreMset, MreNavi, MreNpc, MreProj, MrePwat, MreRegn, MreSoun, MreSpel, MreStat, MreTerm, MreTxst, MreWatr, MreWeap, MreWthr
-* Added MreCams, MreCobj, MreCpth, MreImgs, MreLgtm, MrePgre, MrePmis, MreRads, MreRgdl, MreScol, 
+* Added MreCams, MreCobj, MreCpth, MreImgs, MreLgtm, MrePgre, MrePmis, MreRads, MreRgdl, MreScol,
 
 === 16.3 [12/5/2014]
 * Added ADDN records (MreAddn)
