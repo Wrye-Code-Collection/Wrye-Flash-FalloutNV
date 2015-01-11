@@ -5458,7 +5458,7 @@ class MreQust(MelRecord):
             return self.data[key]
 
     class MelQustData(MelStruct):
-        """Handle older trucated DATA for QUST subrecord."""
+        """Handle older truncated DATA for QUST subrecord."""
         def loadData(self,record,ins,type,size,readId):
             if size == 8:
                 MelStruct.loadData(self,record,ins,type,size,readId)
