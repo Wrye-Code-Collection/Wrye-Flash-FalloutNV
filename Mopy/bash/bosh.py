@@ -2839,7 +2839,8 @@ class MreChal(MelRecord):
         MelString('FULL','full'),
         MelFid('SCRI','script'),
         MelString('DESC','description'),
-        MelStruct('DATA','2IB3sI2s2s4s','type','threshold','flags','unused','interval','dependOnType1','dependOnType2','dependOnType3'),
+        MelStruct('DATA','4I2s2s4s','type','threshold','flags','interval',
+                  'dependOnType1','dependOnType2','dependOnType3'),
         MelFid('SNAM','dependOnType4'),
         MelFid('XNAM','dependOnType5'),
         )
