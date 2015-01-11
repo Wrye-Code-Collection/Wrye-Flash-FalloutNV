@@ -6168,6 +6168,23 @@ class MreSlgm(MelRecord):
     __slots__ = MelRecord.__slots__ + melSet.getSlotsUsed()
 
 #------------------------------------------------------------------------------
+class MreScol(MelRecord):
+    """Static Collection"""
+    classType = 'SCOL'
+    melSet = MelSet(
+        MelString('EDID','eid'),
+        MelStruct('OBND','=6h',
+                  'boundX1','boundY1','boundZ1',
+                  'boundX2','boundY2','boundZ2'),
+        MelModel(),
+        MelGroups('parts',
+            MelFid('ONAM','static'),
+            MelStructA('DATA','=7f','placement',('posX',None),('posY',None),('posZ',None),('rotX',None),('rotY',None),('rotZ',None),('scale',None),),
+        ),
+    )
+    __slots__ = MelRecord.__slots__ + melSet.getSlotsUsed()
+
+#------------------------------------------------------------------------------
 class MreSlpd(MelRecord):
     """Sleep deprivation stage record."""
     classType = 'SLPD'
