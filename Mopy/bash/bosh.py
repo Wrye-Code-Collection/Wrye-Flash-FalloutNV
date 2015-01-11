@@ -4723,6 +4723,7 @@ class MreNpc(MreActor):
         (12,'noBloodDecal'),
         (20,'noVATSMelee'),
         (22,'canBeAllRaces'),
+        (23,'autocalcService'),
         (26,'noKnockDown'),
         (27,'notPushable'),
         (30,'noRotatingHeadTrack'),))
@@ -4741,21 +4742,7 @@ class MreNpc(MreActor):
         (14,'training'),
         (16,'recharge'),
         (17,'repair'),))
-    aiTrainSkill = Flags(0L,Flags.getNames(
-        (0,'barter'),
-        (1,'bigGuns'),
-        (2,'energyWeapons'),
-        (3,'explosives'),
-        (4,'lockpick'),
-        (5,'medicine'),
-        (6,'meleeWeapons'),
-        (7,'none'),
-        (8,'repair'),
-        (9,'science'),
-        (10,'smallGuns'),
-        (11,'sneak'),
-        (12,'throwing'),
-        (13,'unarmed'),))
+    aggroflags = Flags(0L,Flags.getNames('aggroRadiusBehavior',))
     #--Mel NPC DATA
     class MelNpcData(MelStruct):
         """Convert npc stats into skills, health, attributes."""
@@ -4795,16 +4782,15 @@ class MreNpc(MreActor):
     #--Mel Set
     melSet = MelSet(
         MelString('EDID','eid'),
-        MelString('FULL','full'),
         MelStruct('OBND','=6h',
                   'boundX1','boundY1','boundZ1',
                   'boundX2','boundY2','boundZ2'),
+        MelString('FULL','full'),
         MelModel(),
-        MelStruct('ACBS','=I2Hh3Hf2H',
-            (_flags,'flags',0L),'fatigue','barterGold',
-            ('level',1),'calcMin','calcMax','speedMultiplier','karma','dispotionBase','templateFlags'),
-        MelStructs('SNAM','=IB3s','factions',
-            (FID,'faction',None),'rank',('unused1','ODB')),
+        MelStruct('ACBS','=I2Hh3Hf2H',(_flags,'flags',0L),'fatigue','barterGold',
+                 ('level',1),'calcMin','calcMax','speedMultiplier','karma',
+                 'dispotionBase','templateFlags'),
+        MelStructs('SNAM','=IB3s','factions',(FID,'faction',None),'rank',('unused1','ODB')),
         MelFid('INAM','deathItem'),
         MelFid('VTCK','voice'),
         MelFid('TPLT','template'),
@@ -4819,10 +4805,23 @@ class MreNpc(MreActor):
             MelStruct('CNTO','Ii',(FID,'item',None),('count',1)),
             MelOptStruct('COED','IIf',(FID,'owner',None),(FID,'glob',None),('condition',1.0)),
         ),
-        MelStruct('AIDT','=5B2I3Bi',
-            ('aggression',5),('confidence',50),('energyLevel',50),('responsibility',50),('mood',0L),
-            (aiService,'services',0L),(aiTrainSkill,'trainSkill',0L),'trainLevel','assistance',
-            'aggroRadiusBehavior','aggroRadius'),
+        MelStruct('AIDT','=5B3sIbBbBi',
+        #0:Unaggressive,1:Aggressive,2:Very Aggressive,3:Frenzied
+        ('aggression',0),
+        #0:Cowardly,1:Cautious,2:Average,3:Brave,4:Foolhardy
+        ('confidence',2),
+        ('energyLevel',50),('responsibility',50),
+        #0:Neutral,1:Afraid,2:Annoyed,3:Cocky,4:Drugged,5:Pleasant,6:Angry,7:Sad
+        ('mood',0),
+        ('unused_aidt',null3),(aiService,'services',0L),
+        #-1:None,0:Barter,1:Big Guns (obsolete),2:Energy Weapons,3:Explosives
+        #4:Lockpick,5:Medicine,6:Melee Weapons,7:Repair,8:Science,9:Guns,10:Sneak
+        #11:Speech,12:Survival,13:Unarmed,
+        ('trainSkill',-1),
+        'trainLevel',
+        #0:Helps Nobody,1:Helps Allies,2:Helps Friends and Allies
+        ('assistance',0),
+        (aggroflags,'aggroRadiusBehavior',0L),'aggroRadius'),
         MelFids('PKID','aiPackages'),
         MelStrings('KFFZ','animations'),
         MelFid('CNAM','iclass'),
@@ -4855,8 +4854,8 @@ class MreNpc(MreActor):
         else:
             self.model.modPath = r"Characters\_Male\skeleton.nif"
         #--FNAM
-		# Needs Updating for Fallout New Vegas
-		# American
+        # Needs Updating for Fallout New Vegas
+        # American
         fnams = {
             0x23fe9 : 0x3cdc ,#--Argonian
             0x224fc : 0x1d48 ,#--Breton
