@@ -3468,10 +3468,11 @@ class MreEfsh(MelRecord):
                 unpacked = ins.unpack('B3s3I3Bs9f3Bs8f5I19f3Bs3Bs3Bs11fI',size,readId)
             elif size == 244:
                 unpacked = ins.unpack('B3s3I3Bs9f3Bs8f5I19f3Bs3Bs3Bs11f',size,readId)
+            # Size of Test Plugin and FormID 00000144 in FalloutNV.esm
             elif size == 224:
                 unpacked = ins.unpack('B3s3I3Bs9f3Bs8f5I19f3Bs3Bs3Bs6f',size,readId)
             else:
-                raise "Unexpected size encountered for EFSH subrecord: %s" % size
+                raise "Unexpected size encountered for EFSH:DATA subrecord: %s" % size
             unpacked += self.defaults[len(unpacked):]
             setter = record.__setattr__
             for attr,value,action in zip(self.attrs,unpacked,self.actions):
@@ -3484,13 +3485,14 @@ class MreEfsh(MelRecord):
         MelString('ICO2','particleTexture'),
         MelString('NAM7','holesTexture'),
         MelEfshData('DATA','B3s3I3Bs9f3Bs8f5I19f3Bs3Bs3Bs11fI5f3Bsf2I6f',
-            (_flags,'flags'),('unused1',null3),'memSBlend',
-            'memBlendOp','memZFunc','fillRed','fillGreen','fillBlue',
+            (_flags,'flags'),('unused1',null3),
+            ('memSBlend',5),('memBlendOp',1),('memZFunc',3),
+            'fillRed','fillGreen','fillBlue',
             ('unused2',null1),'fillAIn','fillAFull','fillAOut','fillAPRatio',
             'fillAAmp','fillAFreq','fillAnimSpdU','fillAnimSpdV','edgeOff',
             'edgeRed','edgeGreen','edgeBlue',('unused3',null1),'edgeAIn',
             'edgeAFull','edgeAOut','edgeAPRatio','edgeAAmp','edgeAFreq',
-            'fillAFRatio','edgeAFRatio','memDBlend',('partSBlend',5),
+            'fillAFRatio','edgeAFRatio',('memDBlend',6),('partSBlend',5),
             ('partBlendOp',1),('partZFunc',4),('partDBlend',6),('partBUp',0.0),
             ('partBFull',0.0),('partBDown',0.0),('partBFRatio',1.0),
             ('partBPRatio',1.0),('partLTime',1.0),('partLDelta',0.0),
