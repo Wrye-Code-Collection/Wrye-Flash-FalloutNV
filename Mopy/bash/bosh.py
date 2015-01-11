@@ -5528,7 +5528,7 @@ class MreRace(MelRecord):
     think of."""
 
     classType = 'RACE'
-    _flags = Flags(0L,Flags.getNames('playable','child'))
+    _flags = Flags(0L,Flags.getNames('playable', None, 'child'))
 
     class MelRaceVoices(MelStruct):
         """Set voices to zero, if equal race fid. If both are zero, then don't skip dump."""
