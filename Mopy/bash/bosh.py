@@ -6348,7 +6348,7 @@ class MreTerm(MelRecord):
     _menuFlags = Flags(0L,Flags.getNames('addNote','forceRedraw'))
     _variableFlags = Flags(0L,Flags.getNames('isLongOrShort'))
     class MelTermDnam(MelStruct):
-        """Handle older trucated DNAM for TERM subrecord."""
+        """Handle older truncated DNAM for TERM subrecord."""
         def loadData(self,record,ins,type,size,readId):
             if size == 4:
                 MelStruct.loadData(self,record,ins,type,size,readId)
@@ -6375,18 +6375,21 @@ class MreTerm(MelRecord):
         MelString('DESC','description'),
         MelFid('SNAM','soundLooping'),
         MelFid('PNAM','passwordNote'),
-        MelTermDnam('DNAM','BBH','baseHackingDifficulty',(_flags,'flags'),'serverType'),
+        MelTermDnam('DNAM','BBBs','baseHackingDifficulty',(_flags,'flags'),
+                    'serverType','unused1',),
         MelGroups('menuItems',
             MelString('ITXT','itemText'),
             MelString('RNAM','resultText'),
             MelStruct('ANAM','B',(_menuFlags,'menuFlags')),
             MelFid('INAM','displayNote'),
             MelFid('TNAM','subMenu'),
-            MelStruct('SCHR','4s4I',('unused1',null4),'numRefs','compiledSize','lastIndex','scriptType'),
+            MelStruct('SCHR','4s4I',('unused2',null4),'numRefs','compiledSize',
+                      'lastIndex','scriptType'),
             MelBase('SCDA','compiled_p'),
             MelString('SCTX','scriptText'),
             MelGroups('vars',
-                MelStruct('SLSD','I12sB7s','index',('unused1',null4+null4+null4),(_variableFlags,'flags',0L),('unused2',null4+null3)),
+                MelStruct('SLSD','I12sB7s','index',('unused3',null4+null4+null4),
+                         (_variableFlags,'flags',0L),('unused4',null4+null3)),
                 MelString('SCVR','name')),
             MelScrxen('SCRV/SCRO','references'),
             MelConditions(),
