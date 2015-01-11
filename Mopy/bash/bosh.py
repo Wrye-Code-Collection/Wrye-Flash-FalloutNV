@@ -34580,7 +34580,7 @@ class FidListsMerger(SpecialPatcher,ListPatcher):
             for type in self.listTypes:
                 for levList in getattr(modFile,type).getActiveRecords():
                     masterItems = self.masterItems.setdefault(levList.fid,{})
-                    masterItems[modName] = set(levList.fids)
+                    masterItems[modName] = set(levList.formIDInList)
             self.mastersScanned.add(modName)
         #--Deflst setup
         configChoice = self.configChoices.get(modName,tuple())
@@ -34593,7 +34593,7 @@ class FidListsMerger(SpecialPatcher,ListPatcher):
                 listId = newLevList.fid
                 isListOwner = (listId[0] == modName)
                 #--Items, deflsts sets
-                newLevList.items = items = set(newLevList.fids)
+                newLevList.items = items = set(newLevList.formIDInList)
                 if not isListOwner:
                     #--Deflsts: all items in masters minus current items
                     newLevList.deflsts = deflsts = set()
