@@ -3438,7 +3438,8 @@ class MreEczn(MelRecord):
     _flags = Flags(0L,Flags.getNames('neverResets','matchPCBelowMinimumLevel'))
     melSet = MelSet(
         MelString('EDID','eid'),
-        MelStruct('DATA','=I2b2B',(FID,'owner',None),'rank','minimumLevel',(_flags,'flags',0L),('unused1',null1)),
+        MelStruct('DATA','=I2bBs',(FID,'owner',None),'rank','minimumLevel',
+                  (_flags,'flags',0L),('unused1',null1)),
         )
     __slots__ = MelRecord.__slots__ + melSet.getSlotsUsed()
 
