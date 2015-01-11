@@ -6768,13 +6768,17 @@ class MreWeap(MelRecord):
 class MreWrld(MelRecord):
     """Worldspace record."""
     classType = 'WRLD'
-    _flags = Flags(0L,Flags.getNames('smallWorld','noFastTravel','oblivionWorldspace',None,'noLODWater','noLODNoise','noAllowNPCFallDamage'))
+    _flags = Flags(0L,Flags.getNames('smallWorld','noFastTravel','oblivionWorldspace',None,
+        'noLODWater','noLODNoise','noAllowNPCFallDamage'))
+    pnamFlags = Flags(0L,Flags.getNames(
+        'useLandData','useLODData','useMapData','useWaterData','useClimateData',
+        'useImageSpaceData',None,'needsWaterAdjustment'))
     melSet = MelSet(
         MelString('EDID','eid'),
         MelString('FULL','full'),
         MelFid('XEZN','encounterZone'),
         MelFid('WNAM','parent'),
-        MelOptStruct('PNAM','BB','parentFlags',('unknownff',0xff)),
+        MelOptStruct('PNAM','BB',(pnamFlags,'parentFlags',0L),('unknownff',0xff)),
         MelFid('CNAM','climate'),
         MelFid('NAM2','water'),
         MelFid('NAM3','waterType'),
