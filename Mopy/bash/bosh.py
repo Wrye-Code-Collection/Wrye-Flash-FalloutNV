@@ -4378,7 +4378,7 @@ class MreMesg(MelRecord):
     melSet = MelSet(
         MelString('EDID','eid'),
         MelString('DESC','description'),
-        MelLString('FULL','full'),
+        MelString('FULL','full'),
         MelFid('INAM','icon'),
         MelBase('NAM0', 'unused_0'),
         MelBase('NAM1', 'unused_1'),
