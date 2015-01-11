@@ -5772,6 +5772,7 @@ class MreRcpe(MelRecord):
 
 #------------------------------------------------------------------------------
 class MreRefr(MelRecord):
+    """Placed Object"""
     classType = 'REFR'
     _flags = Flags(0L,Flags.getNames('visible', 'canTravelTo'))
     _parentFlags = Flags(0L,Flags.getNames('oppositeParent'))
@@ -5780,7 +5781,7 @@ class MreRefr(MelRecord):
     _destinationFlags = Flags(0L,Flags.getNames('noAlarm'))
     _variableFlags = Flags(0L,Flags.getNames('isLongOrShort'))
     class MelRefrXloc(MelOptStruct):
-        """Handle older trucated XLOC for REFR subrecord."""
+        """Handle older truncated XLOC for REFR subrecord."""
         def loadData(self,record,ins,type,size,readId):
             if size == 20:
                 MelStruct.loadData(self,record,ins,type,size,readId)
@@ -5904,7 +5905,7 @@ class MreRefr(MelRecord):
             ),
         MelString('XATO','activationPrompt'),
         MelOptStruct('XESP','IB3s',(FID,'parent'),(_parentFlags,'parentFlags'),('unused6',null3)),
-        MelOptStruct('XEMI','I',(FID,'emitance')),
+        MelOptStruct('XEMI','I',(FID,'emittance')),
         MelFid('XMBR','multiboundReference'),
         MelOptStruct('XACT','I',(_actFlags,'actFlags',0L)), ####Action Flag
         MelBase('ONAM','onam_p'), ####Open by Default, wbEmpty
