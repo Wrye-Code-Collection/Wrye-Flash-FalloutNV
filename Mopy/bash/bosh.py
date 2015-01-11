@@ -4489,9 +4489,18 @@ class MreMisc(MelRecord):
 class MreMset(MelRecord):
     """Media Set."""
     classType = 'MSET'
+    _flags = Flags(0L,Flags.getNames(
+        ( 0,'dayOuter'),
+        ( 1,'dayMiddle'),
+        ( 2,'dayInner'),
+        ( 3,'nightOuter'),
+        ( 4,'nightMiddle'),
+        ( 5,'nightInner'),
+        ))
     melSet = MelSet(
         MelString('EDID','eid'),
         MelString('FULL','full'),
+        #-1:'No Set',0:'Battle Set',1:'Location Set',2:'Dungeon Set',3:'Incidental Set'
         MelStruct('NAM1','I','type'),
         MelString('NAM2','nam2'),
         MelString('NAM3','nam3'),
@@ -4511,7 +4520,7 @@ class MreMset(MelRecord):
         MelStruct('MNAM','f','mnam'),
         MelStruct('NNAM','f','nnam'),
         MelStruct('ONAM','f','onam'),
-        MelStruct('PNAM','B','enableFlags'),
+        MelStruct('PNAM','B',(_flags,'enableFlags'),),
         MelStruct('DNAM','f','dnam'),
         MelStruct('ENAM','f','enam'),
         MelStruct('FNAM','f','fnam'),
@@ -4519,7 +4528,7 @@ class MreMset(MelRecord):
         MelOptStruct('HNAM','I',(FID,'hnam')),
         MelOptStruct('INAM','I',(FID,'inam')),
         MelBase('DATA','data'),
-        )
+    )
     __slots__ = MelRecord.__slots__ + melSet.getSlotsUsed()
 
 #------------------------------------------------------------------------------
