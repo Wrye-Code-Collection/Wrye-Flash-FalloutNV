@@ -88,8 +88,8 @@ SET PYTHON=%PYPATH%python.exe
 :FOUNDPYTHON
 ECHO Found Python at '%PYTHON%' >%OUTFILE%
 ECHO Found Python at '%PYTHON%'
-ECHO Launching Wrye Flash 15.9 in debug mode >>%OUTFILE%
-ECHO Launching Wrye Flash 15.9 in debug mode
+ECHO Launching Wrye Flash 16.4 in debug mode >>%OUTFILE%
+ECHO Launching Wrye Flash 16.4 in debug mode
 "%PYTHON%" "Wrye Flash Launcher.pyw" -d %1 %2 %3 %4 %5 %6 %7 %8 %9 >>%OUTFILE% 2>&1
 
 
