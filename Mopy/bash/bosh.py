@@ -4045,7 +4045,10 @@ class MreInfo(MelRecord):
     """Info (dialog entry) record."""
     classType = 'INFO'
     _flags = Flags(0,Flags.getNames(
-        'goodbye','random','sayOnce','runImmediately','infoRefusal','randomEnd','runForRumors','sayOnceADay','alwaysDarken'))
+        'goodbye','random','sayOnce','runImmediately','infoRefusal','randomEnd',
+        'runForRumors','speechChallenge',))
+    _flags2 = Flags(0,Flags.getNames(
+        'sayOnceADay','alwaysDarken',None,None,'lowIntelligence','highIntelligence',))
     _variableFlags = Flags(0L,Flags.getNames('isLongOrShort'))
     class MelInfoData(MelStruct):
         """Support older 2 byte version."""
@@ -4068,7 +4071,7 @@ class MreInfo(MelRecord):
                 MelStruct.dumpData(self,record,out)
     #--MelSet
     melSet = MelSet(
-        MelInfoData('DATA','HH','dialType',(_flags,'flags')),
+        MelInfoData('DATA','HH','dialType','nextSpeaker',(_flags,'flags'),(_flags2,'flagsInfo'),),
         MelFid('QSTI','quests'),
         MelFid('TPIC','topic'),
         MelFid('PNAM','prevInfo'),
