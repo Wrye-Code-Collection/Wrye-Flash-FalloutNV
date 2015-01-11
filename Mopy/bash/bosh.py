@@ -20949,15 +20949,16 @@ class PatchFile(ModFile):
     #--Class
     mergeClasses = (
         MreActi, MreAddn, MreAlch, MreAloc, MreAmef, MreAmmo, MreAnio, MreAppa, MreArma, MreArmo,
-        MreAspc, MreAvif, MreBook, MreBptd, MreBsgn, MreCcrd, MreCdck, MreChal, MreChip, MreClas,
-        MreClmt, MreClot, MreCmny, MreCont, MreCrea, MreCsno, MreCsty, MreDebr, MreDehy, MreDobj,
-        MreDoor, MreEczn, MreEfsh, MreEnch, MreExpl, MreEyes, MreFact, MreFlor, MreFlst, MreFurn,
-        MreGlob, MreGras, MreHair, MreHdpt, MreHung, MreIdle, MreIdlm, MreImad, MreImod, MreIngr,
-        MreIpct, MreIpds, MreKeym, MreLigh, MreLscr, MreLsct, MreLtex, MreLvlc, MreLvli, MreLvln,
-        MreLvsp, MreMgef, MreMicn, MreMisc, MreMset, MreMstt, MreMusc, MreNote, MreNpc, MrePack,
-        MrePerk, MreProj, MrePwat, MreQust, MreRace, MreRcct, MreRcpe, MreRegn, MreRepu, MreSbsp,
-        MreScpt, MreSgst, MreSkil, MreSlgm, MreSlpd, MreSoun, MreSpel, MreStat, MreTact, MreTerm,
-        MreTree, MreTxst, MreVtyp, MreWatr, MreWeap, MreWthr,
+        MreAspc, MreAvif, MreBook, MreBptd, MreBsgn, MreCams, MreCcrd, MreCdck, MreChal, MreChip,
+        MreClas, MreClmt, MreClot, MreCmny, MreCobj, MreCont, MreCpth, MreCrea, MreCsno, MreCsty,
+        MreDebr, MreDehy, MreDobj, MreDoor, MreEczn, MreEfsh, MreEnch, MreExpl, MreEyes, MreFact,
+        MreFlor, MreFlst, MreFurn, MreGlob, MreGras, MreHair, MreHdpt, MreHung, MreIdle, MreIdlm,
+        MreImad, MreImgs, MreImod, MreIngr, MreIpct, MreIpds, MreKeym, MreLgtm, MreLigh, MreLscr,
+        MreLsct, MreLtex, MreLvlc, MreLvli, MreLvln, MreLvsp, MreMgef, MreMicn, MreMisc, MreMset,
+        MreMstt, MreMusc, MreNote, MreNpc, MrePack, MrePerk, MreProj, MrePwat, MreQust, MreRace,
+        MreRads, MreRcct, MreRcpe, MreRegn, MreRepu, MreRgdl, MreSbsp, MreScol, MreScpt, MreSgst,
+        MreSkil, MreSlgm, MreSlpd, MreSoun, MreSpel, MreStat, MreTact, MreTerm, MreTree, MreTxst,
+        MreVtyp, MreWatr, MreWeap, MreWthr,
         )
 
     @staticmethod
