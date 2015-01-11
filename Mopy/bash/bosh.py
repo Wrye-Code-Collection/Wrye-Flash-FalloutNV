@@ -4161,13 +4161,23 @@ class MreIngr(MelRecord,MreHasEffects):
 class MreIpct(MelRecord):
     """Impact record."""
     classType = 'IPCT'
+
+    DecalDataFlags = Flags(0L,Flags.getNames(
+            (0, 'parallax'),
+            (0, 'alphaBlending'),
+            (0, 'alphaTesting'),
+            (0, 'noSubtextures'),
+        ))
+
     melSet = MelSet(
         MelString('EDID','eid'),
         MelModel(),
-        MelStruct('DATA','fIffII','effectDuration','effectOrientation','angleThreshold','placementRadius',
-                  'soundLevel','flags'),
-        MelOptStruct('DODT','7fBB2s3Bs','minWidth','maxWidth','minHeight','maxHeight','depth','shininess',
-                     'parallaxScale','parallaxPasses','decalFlags',('unused1',null2),'red','green','blue',('unused2',null1)),
+        MelStruct('DATA','fIffII','effectDuration','effectOrientation',
+                  'angleThreshold','placementRadius','soundLevel','flags'),
+        MelOptStruct('DODT','7fBB2s3Bs','minWidth','maxWidth','minHeight',
+                     'maxHeight','depth','shininess','parallaxScale',
+                     'parallaxPasses',(DecalDataFlags,'flags',0L),
+                     ('unused1',null2),'red','green','blue',('unused2',null1)),
         MelFid('DNAM','textureSet'),
         MelFid('SNAM','sound1'),
         MelFid('NAM1','sound2'),
