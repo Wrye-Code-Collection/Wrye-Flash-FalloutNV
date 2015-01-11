@@ -4261,6 +4261,23 @@ class MreKeym(MelRecord):
 ##    )
 ##    __slots__ = MelRecord.__slots__ + melSet.getSlotsUsed()
 #------------------------------------------------------------------------------
+class MreLgtm(MelRecord):
+    """Lgtm Item"""
+    classType = 'LGTM'
+
+    melSet = MelSet(
+        MelString('EDID','eid'),
+        MelStruct('DATA','3Bs3Bs3Bs2f2i3f',
+            'redLigh','greenLigh','blueLigh','unknownLigh',
+            'redDirect','greenDirect','blueDirect','unknownDirect',
+            'redFog','greenFog','blueFog','unknownFog',
+            'fogNear','fogFar',
+            'dirRotXY','dirRotZ',
+            'directionalFade','fogClipDist','fogPower',),
+        )
+    __slots__ = MelRecord.__slots__ + melSet.getSlotsUsed()
+
+#------------------------------------------------------------------------------
 class MreLigh(MelRecord):
     """Light source record."""
     classType = 'LIGH'
