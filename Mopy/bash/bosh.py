@@ -3521,11 +3521,12 @@ class MreEfsh(MelRecord):
 class MreEnch(MelRecord,MreHasEffects):
     """Enchantment (Object Effect) record."""
     classType = 'ENCH'
-    _flags = Flags(0L,Flags.getNames('noAutoCalc'))
+    _flags = Flags(0L,Flags.getNames('noAutoCalc','autoCalculate','hideEffect'))
     melSet = MelSet(
         MelString('EDID','eid'),
         MelFull0(), #--At least one mod has this. Odd.
-        MelStruct('ENIT','3IB3s','itemType','chargeAmount','enchantCost',(_flags,'flags',0L),('unused1',null3)),
+        MelStruct('ENIT','3IB3s','itemType','chargeAmount','enchantCost',
+                 (_flags,'flags',0L),('unused1',null3)),
         #--itemType = 0: Scroll, 1: Staff, 2: Weapon, 3: Apparel
         MelEffects(),
         )
