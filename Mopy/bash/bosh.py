@@ -27092,7 +27092,7 @@ class DestructiblePatcher(ImportPatcher):
         recFidAttrs_class = self.recFidAttrs_class = {}
         for recClass in (MreActi,MreAlch,MreAmmo,MreBook,MreCont,MreCrea,MreDoor,MreFurn,MreKeym,MreMisc,MreNpc,MreWeap,MreProj,MreMstt,MreTerm,MreTact,MreImod):
             recAttrs_class[recClass] = ('destructible',)
-        self.longTypes = set(('ACTI','ALCH','AMMO','BOOK','CONT','CREA','DOOR','FURN','KEYM','MISC','NPC','WEAP','PROJ','MSTT','TERM','TACT','IMOD'))
+        self.longTypes = set(('ACTI','ALCH','AMMO','BOOK','CONT','CREA','DOOR','FURN','KEYM','MISC','NPC_','WEAP','PROJ','MSTT','TERM','TACT','IMOD'))
         #self.longTypes = set(('ACTI','ALCH','AMMO','ARMO','BOOK','CONT','CREA','DEBR','DIAL','DOOR','ENCH','EXPL','FACT','FLOR','FLST','FURN','INFO','INGR','IPDS','KEYM','LIGH','MGEF','MISC','MSTT','NOTE','NPC_','PROJ','QUST','REFR','SCPT','SOUN','SPEL','STAT','TERM','TXST','WATR','WEAP','TACT','IMOD','CHIP'))
 
     def initData(self,progress):
