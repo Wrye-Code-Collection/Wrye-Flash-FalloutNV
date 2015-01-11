@@ -3871,8 +3871,9 @@ class MreIdle(MelRecord):
 class MreIdlm(MelRecord):
     """Idle marker record."""
     classType = 'IDLM'
+    _flags = Flags(0L,Flags.getNames('runInSequence',None,'doOnce'))
     class MelIdlmIdlc(MelStruct):
-        """Handle older trucated IDLC for IDLM subrecord."""
+        """Handle older truncated IDLC for IDLM subrecord."""
         def loadData(self,record,ins,type,size,readId):
             if size == 4:
                 MelStruct.loadData(self,record,ins,type,size,readId)
@@ -3880,7 +3881,7 @@ class MreIdlm(MelRecord):
             elif size == 1:
                 unpacked = ins.unpack('B',size,readId)
             else:
-                raise "Unexpected size encountered for TERM:DNAM subrecord: %s" % size
+                raise "Unexpected size encountered for IDLM:IDLC subrecord: %s" % size
             unpacked += self.defaults[len(unpacked):]
             setter = record.__setattr__
             for attr,value,action in zip(self.attrs,unpacked,self.actions):
@@ -3892,7 +3893,7 @@ class MreIdlm(MelRecord):
         MelStruct('OBND','=6h',
                   'boundX1','boundY1','boundZ1',
                   'boundX2','boundY2','boundZ2'),
-        MelStruct('IDLF','B','flags'),
+        MelStruct('IDLF','B',(_flags,'flags')),
         MelIdlmIdlc('IDLC','B3s','animationCount',('unused',null3)),
         MelStruct('IDLT','f','idleTimerSetting'),
         MelFidList('IDLA','animations'),
