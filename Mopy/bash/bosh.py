@@ -3968,6 +3968,79 @@ class MreImad(MelRecord):
     __slots__ = MelRecord.__slots__ + melSet.getSlotsUsed()
 
 #------------------------------------------------------------------------------
+class MreImgs(MelRecord):
+    """Imgs Item"""
+    classType = 'IMGS'
+
+    _flags = Flags(0L,Flags.getNames(
+        'saturation',
+        'contrast',
+        'tint',
+        'brightness'
+    ))
+
+    # Original Size 152 Bytes, FNVEdit says it can be 132 or 148 also
+    class MelDnamData(MelStruct):
+        """Handle older truncated DNAM for IMGS subrecord."""
+        def loadData(self,record,ins,type,size,readId):
+            if size == 152:
+                MelStruct.loadData(self,record,ins,type,size,readId)
+                return
+            elif size == 148:
+                unpacked = ins.unpack('33f4s4s4s4s',size,readId)
+            elif size == 132:
+                unpacked = ins.unpack('33f',size,readId)
+            else:
+                raise "Unexpected size encountered for IMGS:DNAM subrecord: %s" % size
+            unpacked += self.defaults[len(unpacked):]
+            setter = record.__setattr__
+            for attr,value,action in zip(self.attrs,unpacked,self.actions):
+                if callable(action): value = action(value)
+                setter(attr,value)
+            if self._debug: print unpacked, record.flags.getTrueAttrs()
+
+    melSet = MelSet(
+        MelString('EDID','eid'),
+        MelDnamData('DNAM','33f4s4s4s4sB3s','eyeAdaptSpeed','blurRadius','blurPasses',
+                  'emissiveMult','targetLUM','upperLUMClamp','brightScale',
+                  'brightClamp','lumRampNoTex','lumRampMin','lumRampMax',
+                  'sunlightDimmer','grassDimmer','treeDimmer','skinDimmer',
+                  'bloomBlurRadius','bloomAlphaMultInterior',
+                  'bloomAlphaMultExterior','getHitBlurRadius',
+                  'getHitBlurDampingConstant','getHitDampingConstant',
+                  'nightEyeTintRed','nightEyeTintGreen','nightEyeTintBlue',
+                  'nightEyeBrightness','cinematicSaturation',
+                  'cinematicAvgLumValue','cinematicValue',
+                  'cinematicBrightnessValue','cinematicTintRed',
+                  'cinematicTintGreen','cinematicTintBlue','cinematicTintValue',
+                  ('unused1',null4),('unused2',null4),('unused3',null4),('unused4',null4),
+                  (_flags,'flags'),('unused5',null3)),
+        )
+    __slots__ = MelRecord.__slots__ + melSet.getSlotsUsed()
+
+#------------------------------------------------------------------------------
+class MreImod(MelRecord):
+    """Item mod."""
+    classType = 'IMOD'
+    melSet = MelSet(
+        MelString('EDID','eid'),
+        MelStruct('OBND','=6h',
+                  'boundX1','boundY1','boundZ1',
+                  'boundX2','boundY2','boundZ2'),
+        MelString('FULL','full'),
+        MelModel(),
+        MelString('ICON','iconPath'),
+        MelString('MICO','smallIconPath'),
+        MelFid('SCRI','script'),
+        MelString('DESC','description'),
+        MelDestructible(),
+        MelFid('YNAM','pickupSound'),
+        MelFid('ZNAM','dropSound'),
+        MelStruct('DATA','If','value','weight'),
+        )
+    __slots__ = MelRecord.__slots__ + melSet.getSlotsUsed()
+
+#------------------------------------------------------------------------------
 class MreInfo(MelRecord):
     """Info (dialog entry) record."""
     classType = 'INFO'
@@ -4038,28 +4111,6 @@ class MreInfo(MelRecord):
         MelFid('ANAM','speaker'),
         MelFid('KNAM','acterValuePeak'),
         MelStruct('DNAM', 'I', 'speechChallenge')
-        )
-    __slots__ = MelRecord.__slots__ + melSet.getSlotsUsed()
-
-#------------------------------------------------------------------------------
-class MreImod(MelRecord):
-    """Item mod."""
-    classType = 'IMOD'
-    melSet = MelSet(
-        MelString('EDID','eid'),
-        MelStruct('OBND','=6h',
-                  'boundX1','boundY1','boundZ1',
-                  'boundX2','boundY2','boundZ2'),
-        MelString('FULL','full'),
-        MelModel(),
-        MelString('ICON','iconPath'),
-        MelString('MICO','smallIconPath'),
-        MelFid('SCRI','script'),
-        MelString('DESC','description'),
-        MelDestructible(),
-        MelFid('YNAM','pickupSound'),
-        MelFid('ZNAM','dropSound'),
-        MelStruct('DATA','If','value','weight'),
         )
     __slots__ = MelRecord.__slots__ + melSet.getSlotsUsed()
 
