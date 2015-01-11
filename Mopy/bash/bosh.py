@@ -5292,6 +5292,57 @@ class MrePgre(MelRecord):
     __slots__ = MelRecord.__slots__ + melSet.getSlotsUsed()
 
 #------------------------------------------------------------------------------
+class MrePmis(MelRecord):
+    """Placed Missile"""
+    classType = 'PMIS'
+    _flags = Flags(0L,Flags.getNames('oppositeParent'))
+    _variableFlags = Flags(0L,Flags.getNames('isLongOrShort'))
+    _watertypeFlags = Flags(0L,Flags.getNames('reflection','refraction'))
+    melSet=MelSet(
+        MelString('EDID','eid'),
+        MelFid('NAME','base'),
+        MelFid('XEZN','encounterZone'),
+        MelBase('XRGD','ragdollData'),
+        MelBase('XRGB','ragdollBipedData'),
+        MelGroup('patrolData',
+            MelStruct('XPRD','f','idleTime'),
+            MelBase('XPPA','patrolScriptMarker'),
+            MelFid('INAM', 'idle'),
+            MelStruct('SCHR','4s4I',('unused1',null4),'numRefs','compiledSize','lastIndex','scriptType'),
+            MelBase('SCDA','compiled_p'),
+            MelString('SCTX','scriptText'),
+            MelGroups('vars',
+                MelStruct('SLSD','I12sB7s','index',('unused1',null4+null4+null4),(_variableFlags,'flags',0L),('unused2',null4+null3)),
+                MelString('SCVR','name')),
+            MelScrxen('SCRV/SCRO','references'),
+            MelFid('TNAM','topic'),
+            ),
+        MelOwnership(),
+        MelStruct('XCNT','i','count'),
+        MelStruct('XRDS','f','radius',),
+        MelStruct('XHLP','f','health',),
+        MelGroups('reflectedRefractedBy',
+            MelStruct('XPWR','2I',(FID,'waterReference'),(_watertypeFlags,'waterFlags',0L),),
+        ),
+        MelStructs('XDCR','II','linkedDecals',(FID,'reference'),'unknown'),
+        MelFid('XLKR','linkedReference'),
+        MelOptStruct('XCLP','8B','linkStartColorRed','linkStartColorGreen','linkStartColorBlue',('linkColorUnused1',null1),
+                     'linkEndColorRed','linkEndColorGreen','linkEndColorBlue',('linkColorUnused2',null1)),
+        MelGroup('activateParents',
+            MelStruct('XAPD','B','flags'),
+            MelStructs('XAPR','If','activateParentRefs',(FID,'reference'),'delay')
+            ),
+        MelString('XATO','activationPrompt'),
+        MelOptStruct('XESP','IB3s',(FID,'parent'),(_flags,'parentFlags'),('unused1',null3)),
+        MelOptStruct('XEMI','I',(FID,'emittance')),
+        MelFid('XMBR','multiboundReference'),
+        MelBase('XIBS','ignoredBySandbox'),
+        MelOptStruct('XSCL','f',('scale',1.0)),
+        MelOptStruct('DATA','=6f',('posX',None),('posY',None),('posZ',None),('rotX',None),('rotY',None),('rotZ',None)),
+    )
+    __slots__ = MelRecord.__slots__ + melSet.getSlotsUsed()
+
+#------------------------------------------------------------------------------
 class MreProj(MelRecord):
     """Projectile record."""
     classType = 'PROJ'
