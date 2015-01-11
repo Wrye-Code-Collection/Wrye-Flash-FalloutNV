@@ -3969,7 +3969,7 @@ class MreImad(MelRecord):
 
 #------------------------------------------------------------------------------
 class MreImgs(MelRecord):
-    """Imgs Item"""
+    """Image Space"""
     classType = 'IMGS'
 
     _flags = Flags(0L,Flags.getNames(
