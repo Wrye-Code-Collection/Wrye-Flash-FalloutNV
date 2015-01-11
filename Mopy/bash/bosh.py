@@ -4429,40 +4429,28 @@ class MreMgef(MelRecord):
         (26,'boltType'),
         (27,'noHitEffect'),))
 
-    #--Mel NPC DATA
-    class MelMgefData(MelStruct):
-        """Handle older trucated DATA for DARK subrecord."""
-        def loadData(self,record,ins,type,size,readId):
-            if size == 72:
-                MelStruct.loadData(self,record,ins,type,size,readId)
-                return
-            elif size == 36:
-                #--Else is data for DARK record, read it all.
-                unpacked = ins.unpack('IfIiiH2sIfI',size,readId)
-            else:
-                raise ModError(ins.inName,_('Unexpected size encountered for MGEF:DATA subrecord: ')+str(size))
-            unpacked += self.defaults[len(unpacked):]
-            setter = record.__setattr__
-            for attr,value,action in zip(self.attrs,unpacked,self.actions):
-                if callable(action): value = action(value)
-                setter(attr,value)
-            if self._debug: print unpacked
-
     melSet = MelSet(
         MelString('EDID','eid'),
         MelString('FULL','full'),
         MelString('DESC','text'),
         MelString('ICON','iconPath'),
         MelModel(),
-        MelMgefData('DATA','IfIiiIIf6I2fII',
-            (_flags,'flags'),'baseCost',(FID,'associated'),'school','resistValue','unk1',
-            (FID,'light',0),'projectileSpeed',(FID,'effectShader',0),(FID,'objectDisplayShader',0),
-            (FID,'castingSound',0),(FID,'boltSound',0),(FID,'hitSound',0),(FID,'areaSound',0),
-            ('cefEnchantment',0.0),('cefBarter',0.0),'archType','actorValue',),
+        MelStruct('DATA','IfI2iH2sIf6I2fIi',
+            (_flags,'flags'),'baseCost',(FID,'associated'),'school','resistValue',
+            'counterEffectCount',('unused1',null2),(FID,'light',0),'projectileSpeed',
+            (FID,'effectShader',0),(FID,'objectDisplayShader',0),
+            (FID,'castingSound',0),(FID,'boltSound',0),(FID,'hitSound',0),
+            (FID,'areaSound',0),('cefEnchantment',0.0),('cefBarter',0.0),
+            'archType','actorValue'),
         MelGroups('counterEffects',
             MelOptStruct('ESCE','I',(FID,'counterEffectCode',0)),),
-    )
+        )
     __slots__ = MelRecord.__slots__ + melSet.getSlotsUsed()
+
+    def dumpData(self,out):
+        counterEffects = self.counterEffects
+        self.counterEffectCount = len(counterEffects) if counterEffects else 0
+        MelRecord.dumpData(self,out)
 
 #------------------------------------------------------------------------------
 class MreMicn(MelRecord):
