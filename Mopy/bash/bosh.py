@@ -6271,7 +6271,7 @@ class MreSoun(MelRecord):
 
 #------------------------------------------------------------------------------
 class MreSpel(MelRecord,MreHasEffects):
-    """Spell record."""
+    """Actor Effect"""
     classType = 'SPEL'
     class SpellFlags(Flags):
         """For SpellFlags, immuneSilence activates bits 1 AND 3."""
@@ -6281,7 +6281,8 @@ class MreSpel(MelRecord,MreHasEffects):
             if index == 1:
                 setter(self,3,value)
     flags = SpellFlags(0L,Flags.getNames('noAutoCalc', 'immuneToSilence',
-        'startSpell', None,'ignoreLOS','scriptEffectAlwaysApplies','disallowAbsorbReflect','touchExplodesWOTarget'))
+        'startSpell',None,'ignoreLOS','scriptEffectAlwaysApplies',
+        'disallowAbsorbReflect','touchExplodesWOTarget'))
     melSet = MelSet(
         MelString('EDID','eid'),
         MelFull0(),
@@ -26379,7 +26380,7 @@ class SoundPatcher(ImportPatcher):
         for recClass in (MreProj,):
             recAttrs_class[recClass] = ('sound','soundCountDown','soundDisable','soundLevel')
         for recClass in (MreSoun,):
-            recAttrs_class[recClass] = ('soundFile', 'minDistance', 'maxDistance', 'freqAdjustment',
+            recAttrs_class[recClass] = ('soundFile', 'minDist', 'maxDist', 'freqAdj',
                                         'flags', 'staticAtten', 'stopTime', 'startTime', 'point0', 'point1',
                                         'point2', 'point3', 'point4', 'reverb', 'priority', 'xLoc', 'yLoc',)
         for recClass in (MreTact,):
