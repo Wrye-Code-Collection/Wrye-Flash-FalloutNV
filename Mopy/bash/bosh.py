@@ -2887,42 +2887,35 @@ class MreClas(MelRecord):
         (14,'training'),
         (16,'recharge'),
         (17,'repair'),))
-    aiTeaches = Flags(0L,Flags.getNames(
-        (0,'barter'),
-        (1,'bigGuns'),
-        (2,'energyWeapons'),
-        (3,'explosives'),
-        (4,'lockpick'),
-        (5,'medicine'),
-        (6,'meleeWeapons'),
-        (7,'none'),
-        (8,'repair'),
-        (9,'science'),
-        (10,'smallGuns'),
-        (11,'sneak'),
-        (12,'throwing'),
-        (13,'unarmed'),))
-    class MelClasData(MelStruct):
-        """Handle older trucated DATA for CLAS subrecords."""
-    #     def loadData(self,record,ins,type,size,readId):
-    #         if size == 52:
-    #             MelStruct.loadData(self,record,ins,type,size,readId)
-    #             return
-    #         #--Else 42 byte record (skips trainSkill, trainLevel,unused1...
-    #         unpacked = ins.unpack('2iI7i2I',size,readId)
-    #         unpacked += self.defaults[len(unpacked):]
-    #         setter = record.__setattr__
-    #         for attr,value,action in zip(self.attrs,unpacked,self.actions):
-    #             if callable(action): value = action(value)
-    #             setter(attr,value)
-    #         if self._debug: print unpacked, record.flags.getTrueAttrs()
+
+        # trainSkill
+        # -1, None
+        #  0, Barter
+        #  1, Big Guns (obsolete)
+        #  2, Energy Weapons
+        #  3, Explosives
+        #  4, Lockpick
+        #  5, Medicine
+        #  6, Melee Weapons
+        #  7, Repair
+        #  8, Science
+        #  9, Guns
+        # 10, Sneak
+        # 11, Speech
+        # 12, Survival
+        # 13, Unarmed
+
     melSet = MelSet(
         MelString('EDID','eid'),
         MelString('FULL','full'),
         MelString('DESC','description'),
         MelString('ICON','iconPath'),
-        MelClasData('DATA','4I2IbB2s','tagSkill1','tagSkill2','tagSkill3','tagSkill4',(_flags,'flags',0L),(aiService,'services',0L),('trainSkill',0),('trainLevel',0),('unused1',null2)),
-        MelTuple('ATTR','7B','attributes',[0]*7),
+        MelStruct('DATA','4i2IbB2s','tagSkill1','tagSkill2','tagSkill3',
+            'tagSkill4',(_flags,'flags',0L),(aiService,'services',0L),
+            ('trainSkill',-1),('trainLevel',0),('unused1',null2)),
+        # MelTuple('ATTR','7B','attributes',[0]*7),
+        MelStructA('ATTR','7B','attributes','strength','perception','endurance','charisma',
+            'intelligence','agility','luck'),
         )
     __slots__ = MelRecord.__slots__ + melSet.getSlotsUsed()
 
