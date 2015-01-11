@@ -4176,7 +4176,7 @@ class MreIpct(MelRecord):
                   'angleThreshold','placementRadius','soundLevel','flags'),
         MelOptStruct('DODT','7fBB2s3Bs','minWidth','maxWidth','minHeight',
                      'maxHeight','depth','shininess','parallaxScale',
-                     'parallaxPasses',(DecalDataFlags,'flags',0L),
+                     'parallaxPasses',(DecalDataFlags,'decalFlags',0L),
                      ('unused1',null2),'red','green','blue',('unused2',null1)),
         MelFid('DNAM','textureSet'),
         MelFid('SNAM','sound1'),
