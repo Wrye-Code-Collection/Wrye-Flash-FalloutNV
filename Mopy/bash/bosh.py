@@ -23260,7 +23260,7 @@ class ActorImporter(ImportPatcher):
         for recClass in (MreCrea,):
             self.recAttrs_class[recClass] = {
                 'Actors.AIData': ('aggression','confidence','energyLevel','responsibility','mood','services','trainSkill','trainLevel','assistance','aggroRadiusBehavior','aggroRadius'),
-                'Actors.Stats': ('type','combatSkill','magicSkill','StealthSkill','health','damage','strength','perception','endurance','charisma','intelligence','agility','luck'),
+                'Actors.Stats': ('type','combatSkill','magicSkill','stealthSkill','health','damage','strength','perception','endurance','charisma','intelligence','agility','luck'),
                 'Actors.ACBS': (('fatigue','level','calcMin','calcMax','flags.pcLevelOffset'),
                                 'barterGold','speedMultiplier','karma','dispotionBase','templateFlags',
                                 'flags.biped','flags.essential','flags.weaponAndShield','flags.respawn',
