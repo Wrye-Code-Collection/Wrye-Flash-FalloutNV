@@ -6255,11 +6255,14 @@ class MreSoun(MelRecord):
                   'boundX2','boundY2','boundZ2'),
         MelString('FNAM','soundFile'),
         MelStruct('RNAM','B','_rnam'),
-        MelOptStruct('SNDD','=2BbsIh2B6h3i',('minDistance',0), ('maxDistance',0), ('freqAdjustment',0), ('unused1',''),
-            (_flags,'flags',0L),('staticAtten',0),('stopTime',0),('startTime',0),
-            ('point0',0),('point1',0),('point2',0),('point3',0),('point4',0),('reverb',0),('priority',0), ('xLoc',0), ('yLoc',0),),
-        MelSounSndx('SNDX','=2BbsIh2B',('minDistance',0), ('maxDistance',0), ('freqAdjustment',0), ('unused1',''),
-            (_flags,'flags',0L),('staticAtten',0),('stopTime',0),('startTime',0),),
+        MelOptStruct('SNDD','=2BbsIh2B6h3i',('minDist',0), ('maxDist',0),
+                    ('freqAdj',0), ('unusedSndd',null1),(_flags,'flags',0L),
+                    ('staticAtten',0),('stopTime',0),('startTime',0),
+                    ('point0',0),('point1',0),('point2',0),('point3',0),('point4',0),
+                    ('reverb',0),('priority',0), ('xLoc',0), ('yLoc',0),),
+        MelSounSndx('SNDX','=2BbsIh2B',('minDist',0), ('maxDist',0),
+                   ('freqAdj',0), ('unusedSndd',null1),(_flags,'flags',0L),
+                   ('staticAtten',0),('stopTime',0),('startTime',0),),
         MelBase('ANAM','_anam'), #--Should be a struct. Maybe later.
         MelBase('GNAM','_gnam'), #--Should be a struct. Maybe later.
         MelBase('HNAM','_hnam'), #--Should be a struct. Maybe later.
