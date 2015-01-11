@@ -6801,9 +6801,51 @@ class MreWrld(MelRecord):
     __slots__ = MelRecord.__slots__ + melSet.getSlotsUsed()
 
 #------------------------------------------------------------------------------
+class MelPnamNam0Handler(MelStructA):
+    """Handle older truncated PNAM for WTHR subrecord."""
+    def __init__(self,type,attr):
+        MelStructA.__init__(self,type,'3Bs3Bs3Bs3Bs3Bs3Bs',attr,
+            'riseRed','riseGreen','riseBlue',('unused1',null1),
+            'dayRed','dayGreen','dayBlue',('unused2',null1),
+            'setRed','setGreen','setBlue',('unused3',null1),
+            'nightRed','nightGreen','nightBlue',('unused4',null1),
+            'noonRed','noonGreen','noonBlue',('unused5',null1),
+            'midnightRed','midnightGreen','midnightBlue',('unused6',null1),
+            )
+
+    def loadData(self,record,ins,type,size,readId):
+        """Handle older truncated PNAM for WTHR subrecord."""
+        if (type == 'PNAM' and size == 96) or (type == 'NAM0' and size == 240):
+            MelStructA.loadData(self,record,ins,type,size,readId)
+            return
+        elif (type == 'PNAM' and size == 64) or (type == 'NAM0' and size == 160):
+            oldFormat = '3Bs3Bs3Bs3Bs'
+            ## Following code works completely, but it's depend on the implementation of MelStructA.loadData and MelStruct.loadData.
+            # newFormat = self.format
+            # self.format = oldFormat # temporarily set to older format
+            # MelStructA.loadData(self,record,ins,type,size,readId)
+            # self.format = newFormat
+            ## Following code is redundant but independent and robust.
+            selfDefault = self.getDefault
+            recordAppend = record.__getattribute__(self.attr).append
+            selfAttrs = self.attrs
+            itemSize = struct.calcsize(oldFormat)
+            for x in xrange(size/itemSize):
+                target = selfDefault()
+                recordAppend(target)
+                target.__slots__ = selfAttrs
+                unpacked = ins.unpack(oldFormat,itemSize,readId)
+                setter = target.__setattr__
+                for attr,value,action in zip(selfAttrs,unpacked,self.actions):
+                    if action: value = action(value)
+                    setter(attr,value)
+        else:
+            raise ModSizeError(record.inName,record.recType+'.'+type,(96 if type == 'PNAM' else 240),size,True)
+
 class MreWthr(MelRecord):
     """Weather record."""
     classType = 'WTHR'
+
     melSet = MelSet(
         MelString('EDID','eid'),
         MelFid("\x00IAD", 'sunriseImageSpaceModifier'),
@@ -6819,13 +6861,8 @@ class MreWthr(MelRecord):
         MelModel(),
         MelBase('LNAM','unknown1'),
         MelStruct('ONAM','4B','cloudSpeed0','cloudSpeed1','cloudSpeed3','cloudSpeed4'),
-        MelBase('PNAM','_pnam'), #--RGB(3Bs) * 16?
-        MelStructA('NAM0','3Bs3Bs3Bs3Bs','colors',
-                   'riseRed','riseGreen','riseBlue',('unused1',null1),
-                   'dayRed','dayGreen','dayBlue',('unused2',null1),
-                   'setRed','setGreen','setBlue',('unused3',null1),
-                   'nightRed','nightGreen','nightBlue',('unused4',null1),
-                   ),
+        MelPnamNam0Handler('PNAM','cloudColors'),
+        MelPnamNam0Handler('NAM0','daytimeColors'),
         MelStruct('FNAM','6f','fogDayNear','fogDayFar','fogNightNear','fogNightFar','fogDayPower','fogNightPower'),
         MelBase('INAM','_inam'), #--Should be a struct. Maybe later.
         MelStruct('DATA','15B',
