@@ -3089,21 +3089,8 @@ class MreCrea(MreActor):
         (14,'training'),
         (16,'recharge'),
         (17,'repair'),))
-    aiTrainSkill = Flags(0L,Flags.getNames(
-        (0,'barter'),
-        (1,'bigGuns'),
-        (2,'energyWeapons'),
-        (3,'explosives'),
-        (4,'lockpick'),
-        (5,'medicine'),
-        (6,'meleeWeapons'),
-        (7,'none'),
-        (8,'repair'),
-        (9,'science'),
-        (10,'smallGuns'),
-        (11,'sneak'),
-        (12,'throwing'),
-        (13,'unarmed'),))
+    aggroflags = Flags(0L,Flags.getNames('aggroRadiusBehavior',))
+
     #--Mel Set
     melSet = MelSet(
         MelString('EDID','eid'),
@@ -3117,9 +3104,9 @@ class MreCrea(MreActor):
         MelStruct('EAMT','H', 'eamt'),
         MelStrings('NIFZ','bodyParts'),
         MelBase('NIFT','nift_p'), ###Texture File hashes, Byte Array
-        MelStruct('ACBS','=I2Hh3Hf2H',
-            (_flags,'flags',0L),'fatigue','barterGold',
-            ('level',1),'calcMin','calcMax','speedMultiplier','karma','dispotionBase','templateFlags'),
+        MelStruct('ACBS','=I2Hh3HfhH',(_flags,'flags',0L),'fatigue',
+            'barterGold',('level',1),'calcMin','calcMax','speedMultiplier',
+            'karma','dispotionBase','templateFlags'),
         MelStructs('SNAM','=IB3s','factions',
             (FID,'faction',None),'rank',('unused1','IFZ')),
         MelFid('INAM','deathItem'),
@@ -3129,25 +3116,40 @@ class MreCrea(MreActor):
         MelFid('SCRI','script'),
         MelGroups('items',
             MelStruct('CNTO','Ii',(FID,'item',None),('count',1)),
-            MelOptStruct('COED','IIf',(FID,'owner',None),(FID,'glob',None),('condition',1.0)),
+            MelOptStruct('COED','IIf',(FID,'owner',None),(FID,'glob',None),
+                ('condition',1.0)),
         ),
-        MelStruct('AIDT','=5B2I3Bi',
-            ('aggression',5),('confidence',50),('energyLevel',50),('responsibility',50),('mood',0L),
-            (aiService,'services',0L),(aiTrainSkill,'trainSkill',0L),'trainLevel','assistance',
-            'aggroRadiusBehavior','aggroRadius'),
+        MelStruct('AIDT','=5B3sIbBbBi',
+        #0:Unaggressive,1:Aggressive,2:Very Aggressive,3:Frenzied
+        ('aggression',0),
+        #0:Cowardly,1:Cautious,2:Average,3:Brave,4:Foolhardy
+        ('confidence',2),
+        ('energyLevel',50),('responsibility',50),
+        #0:Neutral,1:Afraid,2:Annoyed,3:Cocky,4:Drugged,5:Pleasant,6:Angry,7:Sad
+        ('mood',0),
+        ('unused_aidt',null3),(aiService,'services',0L),
+        #-1:None,0:Barter,1:Big Guns (obsolete),2:Energy Weapons,3:Explosives
+        #4:Lockpick,5:Medicine,6:Melee Weapons,7:Repair,8:Science,9:Guns,10:Sneak
+        #11:Speech,12:Survival,13:Unarmed,
+        ('trainSkill',-1),
+        'trainLevel',
+        #0:Helps Nobody,1:Helps Allies,2:Helps Friends and Allies
+        ('assistance',0),
+        (aggroflags,'aggroRadiusBehavior',0L),'aggroRadius'),
         MelFids('PKID','aiPackages'),
         MelStrings('KFFZ','animations'),
-        MelStruct('DATA','=4BIH7B','type','combatSkill','magicSkill','StealthSkill',
-            'health','damage','strength','perception','endurance','charisma','intelligence','agility','luck'),
+        MelStruct('DATA','=4Bh2sh7B','type','combatSkill','magicSkill',
+            'stealthSkill','health',('unused2',null2),'damage','strength','perception',
+            'endurance','charisma','intelligence','agility','luck'),
         MelStruct('RNAM','B','attackReach'),
         MelFid('ZNAM','combatStyle'),
         MelFid('PNAM','bodyPartData'),
         MelStruct('TNAM','f','turningSpeed'),
         MelStruct('BNAM','f','baseScale'),
         MelStruct('WNAM','f','footWeight'),
-        MelFid('CSCR','inheritsSoundsFrom'),
         MelStruct('NAM4','I',('impactMaterialType',0L)),
         MelStruct('NAM5','I',('soundLevel',0L)),
+        MelFid('CSCR','inheritsSoundsFrom'),
         MelGroups('sounds',
             MelStruct('CSDT','I','type'),
             MelFid('CSDI','sound'),
