@@ -4189,7 +4189,7 @@ class MreIpds(MelRecord):
     """Impact Dataset record."""
     classType = 'IPDS'
     class MelIpdsData(MelStruct):
-        """Handle older trucated DATA for IPDS subrecord."""
+        """Handle older truncated DATA for IPDS subrecord."""
         def loadData(self,record,ins,type,size,readId):
             if size == 48:
                 MelStruct.loadData(self,record,ins,type,size,readId)
