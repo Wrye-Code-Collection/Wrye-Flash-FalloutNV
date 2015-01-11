@@ -4621,6 +4621,91 @@ class MreNavm(MelRecord):
     __slots__ = MelRecord.__slots__ + melSet.getSlotsUsed()
 
 #------------------------------------------------------------------------------
+class MreNote(MelRecord):
+    """Note record."""
+    classType = 'NOTE'
+    class MelNoteTnam(MelBase):
+        """text or topic"""
+        def hasFids(self,formElements):
+            formElements.add(self)
+        def loadData(self,record,ins,type,size,readId):
+            #0:'sound',1:'text',2:'image',3:'voice'
+            if record.dataType == 1: # text (string)
+                value = ins.readString(size,readId)
+                record.__setattr__(self.attr, (False, value))
+            elif record.dataType == 3: # voice (fid:DIAL)
+                (value,) = ins.unpack('I',size,readId)
+                record.__setattr__(self.attr, (True, value))
+            else:
+                raise ModError(ins.inName,_('Unexpected type: %d') % record.type)
+            if self._debug: print unpacked
+        def dumpData(self,record,out):
+            value = record.__getattribute__(self.attr)
+            if value is None: return
+            (isFid, value) = value
+            if value is not None:
+                #0:'sound',1:'text',2:'image',3:'voice'
+                if record.dataType == 1: # text (string)
+                    out.packSub0(self.subType,value)
+                elif record.dataType == 3: # voice (fid:DIAL)
+                    out.packRef(self.subType,value)
+                else:
+                    raise ModError(ins.inName,_('Unexpected type: %d') % record.type)
+        def mapFids(self,record,function,save=False):
+            value = record.__getattribute__(self.attr)
+            if value is None: return
+            (isFid, value) = value
+            if isFid:
+                result = function(value)
+                if save: record.__setattr__(self.attr,(isFid,result))
+    class MelNoteSnam(MelBase):
+        """sound or npc"""
+        def hasFids(self,formElements):
+            formElements.add(self)
+        def loadData(self,record,ins,type,size,readId):
+            #0:'sound',1:'text',2:'image',3:'voice'
+            if record.dataType == 0: # sound (fid:SOUN)
+                (value,) = ins.unpack('I',size,readId)
+                record.__setattr__(self.attr, (True, value))
+            elif record.dataType == 3: # voice (fid:NPC_)
+                (value,) = ins.unpack('I',size,readId)
+                record.__setattr__(self.attr, (True, value))
+            else:
+                raise ModError(ins.inName,_('Unexpected type: %d') % record.type)
+            if self._debug: print unpacked
+        def dumpData(self,record,out):
+            value = record.__getattribute__(self.attr)
+            if value is None: return
+            (isFid, value) = value
+            if value is not None: out.packRef(self.subType,value)
+        def mapFids(self,record,function,save=False):
+            value = record.__getattribute__(self.attr)
+            if value is None: return
+            (isFid, value) = value
+            if isFid:
+                result = function(value)
+                if save: record.__setattr__(self.attr,(isFid,result))
+    melSet = MelSet(
+        MelString('EDID','eid'),
+        MelStruct('OBND','=6h',
+                  'boundX1','boundY1','boundZ1',
+                  'boundX2','boundY2','boundZ2'),
+        MelString('FULL','full'),
+        MelModel(),
+        MelString('ICON','iconPath'),
+        MelString('MICO','smallIconPath'),
+        MelFid('YNAM','pickupSound'),
+        MelFid('ZNAM','dropSound'),
+        #0:'sound',1:'text',2:'image',3:'voice'
+        MelStruct('DATA','B','dataType'),
+        MelFidList('ONAM','quests'),
+        MelString('XNAM','texture'),
+        MelNoteTnam('TNAM', 'textTopic'),
+        MelNoteSnam('SNAM', 'soundNpc'),
+        )
+    __slots__ = MelRecord.__slots__ + melSet.getSlotsUsed()
+
+#------------------------------------------------------------------------------
 class MreNpc(MreActor):
     """NPC Record. Non-Player Character."""
     classType = 'NPC_'
@@ -4786,93 +4871,6 @@ class MreNpc(MreActor):
             0x223c8 : 0x4a2e ,#--Wood Elf
             }
         self.fnam = fnams.get(race,0x358e)
-
-#------------------------------------------------------------------------------
-class MreNote(MelRecord):
-    """Note record."""
-    classType = 'NOTE'
-    _type = Flags(0,Flags.getNames(
-            ( 0,'sound' ),
-            ( 1,'text' ),
-            ( 2,'image' ),
-            ( 3,'voice' ),
-            ))
-    class MelNoteTnam(MelBase):
-        """text or topic"""
-        def hasFids(self,formElements):
-            formElements.add(self)
-        def loadData(self,record,ins,type,size,readId):
-            if record.dataType == 1: # text (string)
-                value = ins.readString(size,readId)
-                record.__setattr__(self.attr, (False, value))
-            elif record.dataType == 3: # voice (fid:DIAL)
-                (value,) = ins.unpack('I',size,readId)
-                record.__setattr__(self.attr, (True, value))
-            else:
-                raise ModError(ins.inName,_('Unexpected type: %d') % record.type)
-            if self._debug: print unpacked
-        def dumpData(self,record,out):
-            value = record.__getattribute__(self.attr)
-            if value is None: return
-            (isFid, value) = value
-            if value is not None:
-                if record.dataType == 1: # text (string)
-                    out.packSub0(self.subType,value)
-                elif record.dataType == 3: # voice (fid:DIAL)
-                    out.packRef(self.subType,value)
-                else:
-                    raise ModError(ins.inName,_('Unexpected type: %d') % record.type)
-        def mapFids(self,record,function,save=False):
-            value = record.__getattribute__(self.attr)
-            if value is None: return
-            (isFid, value) = value
-            if isFid:
-                result = function(value)
-                if save: record.__setattr__(self.attr,(isFid,result))
-    class MelNoteSnam(MelBase):
-        """sound or npc"""
-        def hasFids(self,formElements):
-            formElements.add(self)
-        def loadData(self,record,ins,type,size,readId):
-            if record.dataType == 0: # sound (fid:SOUN)
-                (value,) = ins.unpack('I',size,readId)
-                record.__setattr__(self.attr, (True, value))
-            elif record.dataType == 3: # voice (fid:NPC_)
-                (value,) = ins.unpack('I',size,readId)
-                record.__setattr__(self.attr, (True, value))
-            else:
-                raise ModError(ins.inName,_('Unexpected type: %d') % record.type)
-            if self._debug: print unpacked
-        def dumpData(self,record,out):
-            value = record.__getattribute__(self.attr)
-            if value is None: return
-            (isFid, value) = value
-            if value is not None: out.packRef(self.subType,value)
-        def mapFids(self,record,function,save=False):
-            value = record.__getattribute__(self.attr)
-            if value is None: return
-            (isFid, value) = value
-            if isFid:
-                result = function(value)
-                if save: record.__setattr__(self.attr,(isFid,result))
-    melSet = MelSet(
-        MelString('EDID','eid'),
-        MelStruct('OBND','=6h',
-                  'boundX1','boundY1','boundZ1',
-                  'boundX2','boundY2','boundZ2'),
-        MelString('FULL','full'),
-        MelModel(),
-        MelString('ICON','iconPath'),
-        MelString('MICO','smallIconPath'),
-        MelFid('YNAM','pickupSound'),
-        MelFid('ZNAM','dropSound'),
-        MelStruct('DATA','B','dataType'),
-        MelFidList('ONAM','quests'),
-        MelString('XNAM','texture'),
-        MelNoteTnam('TNAM', 'textTopic'),
-        MelNoteSnam('SNAM', 'soundNpc'),
-        )
-    __slots__ = MelRecord.__slots__ + melSet.getSlotsUsed()
 
 #------------------------------------------------------------------------------
 class MrePack(MelRecord):
