@@ -4564,7 +4564,7 @@ class MreNavi(MelRecord):
     """Navigation Mesh Info Map."""
     classType = 'NAVI'
     class MelNaviNvmi(MelStructs):
-        """Handle older trucated NVMI for NAVI subrecord."""
+        """Handle older truncated NVMI for NAVI subrecord."""
         def loadData(self,record,ins,type,size,readId):
             if size <= 16:
                 raise "Unexpected size encountered for NAVI subrecord: %s" % size
@@ -4599,6 +4599,7 @@ class MreNavi(MelRecord):
         MelStruct('NVER','I',('version',11)),
         MelNaviNvmi('NVMI','','unknowns',
                    'unknown1',(FID,'navigationMesh'),(FID,'location'),'gridX','gridY','unknown2'),
+        MelFidList('NVCI','unknownDoors',),
        )
     __slots__ = MelRecord.__slots__ + melSet.getSlotsUsed()
 
