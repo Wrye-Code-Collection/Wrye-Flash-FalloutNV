@@ -2453,16 +2453,14 @@ class MreArma(MelRecord):
     classType = 'ARMA'
     _flags = MelBipedFlags(0L,Flags.getNames())
     _generalFlags = Flags(0L,Flags.getNames(
+        ( 2,'hasBackpack'),
+        ( 3,'medium'),
         (5,'powerArmor'),
         (6,'notPlayable'),
         (7,'heavyArmor')
     ))
-    _etype = Flags(0L,Flags.getNames(
-        'alcohol','bigGuns','bodyWear','chems','energyWeapons','food','handWear','headWear',
-        'meleeWeapons','mine','none','smallGuns','stimpack','thrownWeapons','unarmedWeapon'
-    ))
     class MelArmaDnam(MelStruct):
-        """Handle older trucated DNAM for ARMA subrecord."""
+        """Handle older truncated DNAM for ARMA subrecord."""
         def loadData(self,record,ins,type,size,readId):
             if size == 12:
                 MelStruct.loadData(self,record,ins,type,size,readId)
@@ -2492,7 +2490,10 @@ class MreArma(MelRecord):
         MelModel('femaleWorld',4),
         MelString('ICO2','femaleIconPath'),
         MelString('MIC2','femaleSmallIconPath'),
-        MelStruct('ETYP','I',(_etype,'etype',0L)),
+        #-1:None,0:Big Guns,1:Energy Weapons,2:Small Guns,3:Melee Weapons,
+        #4:Unarmed Weapon,5:Thrown Weapons,6:Mine,7:Body Wear,8:Head Wear,
+        #9:Hand Wear,10:Chems,11:Stimpack,12:Food,13:Alcohol
+        MelStruct('ETYP','i',('etype',-1)),
         MelStruct('DATA','IIf','value','health','weight'),
         MelArmaDnam('DNAM','=HHfI','ar','flags','dt',('unknown',0L)),
         )
