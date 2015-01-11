@@ -3538,13 +3538,14 @@ class MreEnch(MelRecord,MreHasEffects):
 class MreExpl(MelRecord):
     """Explosion record."""
     classType = 'EXPL'
-    _flags = Flags(0,Flags.getNames('unknown1',
-                                    'alwaysUsesWorldOrientation',
-                                    'knockDownAlways',
-                                    'knockDownByFormular',
-                                    'IgnoreLosCheck',
-                                    'pushExplosionSourceRefOnly',
-                                    'ignoreImageSpaceSwap'))
+    _flags = Flags(0,Flags.getNames(
+        (1, 'alwaysUsesWorldOrientation'),
+        (2, 'knockDownAlways'),
+        (3, 'knockDownByFormular'),
+        (4, 'ignoreLosCheck'),
+        (5, 'pushExplosionSourceRefOnly'),
+        (6, 'ignoreImageSpaceSwap'),
+    ))
     melSet = MelSet(
         MelString('EDID','eid'),
         MelStruct('OBND','=6h',
@@ -3554,7 +3555,7 @@ class MreExpl(MelRecord):
         MelModel(),
         MelFid('EITM','objectEffect'),
         MelFid('MNAM','imageSpaceModifier'),
-        MelStruct('DATA','fffIIHfIIfffI','force','damage','radius',(FID,'light',None),
+        MelStruct('DATA','fffIIIfIIfffI','force','damage','radius',(FID,'light',None),
                   (FID,'sound1',None),(_flags,'flags'),'isRadius',(FID,'impactDataset',None),
                   (FID,'sound2',None),'radiationLevel','radiationTime','radiationRadius','soundLevel'),
         MelFid('INAM','placedImpactObject'),
