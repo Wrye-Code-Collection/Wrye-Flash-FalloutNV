@@ -5346,18 +5346,22 @@ class MrePmis(MelRecord):
 class MreProj(MelRecord):
     """Projectile record."""
     classType = 'PROJ'
-    _flags = Flags(0,Flags.getNames('hitscan',
-                                    'explosive',
-                                    'altTriger',
-                                    'muzzleFlash',
-                                    'unknown4',
-                                    'canbeDisable',
-                                    'canbePickedUp',
-                                    'superSonic',
-                                    'pinsLimbs',
-                                    'passThroughSmallTransparent'))
+    _flags = Flags(0,Flags.getNames(
+        'hitscan',
+        'explosive',
+        'altTriger',
+        'muzzleFlash',
+        None,
+        'canbeDisable',
+        'canbePickedUp',
+        'superSonic',
+        'pinsLimbs',
+        'passThroughSmallTransparent'
+        'detonates',
+        'rotation'
+        ))
     class MelProjData(MelStruct):
-        """Handle older trucated DATA for PROJ subrecord."""
+        """Handle older truncated DATA for PROJ subrecord."""
         def loadData(self,record,ins,type,size,readId):
             if size == 84:
                 MelStruct.loadData(self,record,ins,type,size,readId)
@@ -5380,17 +5384,17 @@ class MreProj(MelRecord):
         MelString('FULL','full'),
         MelModel(),
         MelDestructible(),
-        MelProjData('DATA','HHfffIIfffIIfffIII ffff',(_flags,'flags'),'type',
+        MelProjData('DATA','HHfffIIfffIIfffIIIffff',(_flags,'flags'),'type',
                   ('gravity',0.00000),('speed',10000.00000),('range',10000.00000),
                   (FID,'light',0),(FID,'muzzleFlash',0),('tracerChance',0.00000),
                   ('explosionAltTrigerProximity',0.00000),('explosionAltTrigerTimer',0.00000),
                   (FID,'explosion',0),(FID,'sound',0),('muzzleFlashDuration',0.00000),
                   ('fadeDuration',0.00000),('impactForce',0.00000),
-                  (FID,'soundCountDown',0),(FID,'soundDisable',0),(FID,'defaultWeaponSource',0),
-                  ('rotationX',0.00000),('rotationY',0.00000),('rotationZ',0.00000),
-                  ('bouncyMult',0.00000)),
+                  (FID,'soundCountDown',0),(FID,'soundDisable',0),
+                  (FID,'defaultWeaponSource',0),('rotationX',0.00000),
+                  ('rotationY',0.00000),('rotationZ',0.00000),('bouncyMult',0.00000)),
         MelString('NAM1','muzzleFlashPath'),
-        MelBase('NAM2','_nam2'), #--Should be a struct. Maybe later.
+        MelBase('NAM2','_nam2'),
         MelStruct('VNAM','I','soundLevel'),
         )
     __slots__ = MelRecord.__slots__ + melSet.getSlotsUsed()
