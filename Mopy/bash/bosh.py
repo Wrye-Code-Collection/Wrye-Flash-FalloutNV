@@ -4320,7 +4320,8 @@ class MreLsct(MelRecord):
     classType = 'LSCT'
     melSet = MelSet(
         MelString('EDID','eid'),
-        MelStruct('DATA','I 4IfI3fI20s I3f4sI','type','data1X','data1Y','data1Width','data1Height','data1Orientation',
+        MelStruct('DATA','5IfI3fI20sI3f4sI','type','data1X','data1Y','data1Width',
+                         'data1Height','data1Orientation',
             'data1Font','data1ColorR','data1ColorG','data1ColorB','data1Align','unknown1',
             'data2Font','data2ColorR','data2ColorG','data2ColorB','unknown2','stats'),
         )
