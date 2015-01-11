@@ -4234,6 +4234,7 @@ class MreKeym(MelRecord):
         MelFid('YNAM','pickupSound'),
         MelFid('ZNAM','dropSound'),
         MelStruct('DATA','if','value','weight'),
+        MelFid('RNAM','soundRandomLooping'),
         )
     __slots__ = MelRecord.__slots__ + melSet.getSlotsUsed()
 
