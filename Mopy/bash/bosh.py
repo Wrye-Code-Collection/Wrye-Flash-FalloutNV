@@ -22946,7 +22946,7 @@ class GraphicsPatcher(ImportPatcher):
                 'textureCountU','textureCountV',
                 'addonModelsFadeInTime','addonModelsFadeOutTime',
                 'addonModelsScaleStart','addonModelsScaleEnd',
-                'addonModelsScaleInTime','addonModelsScaleOutTime',),
+                'addonModelsScaleInTime','addonModelsScaleOutTime')
         for recClass in (MreExpl,):
             recAttrs_class[recClass] = ('imageSpaceModifier','light','impactDataset','placedImpactObject')
         for recClass in (MreTxst,):
