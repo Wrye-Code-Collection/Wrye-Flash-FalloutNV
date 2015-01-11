@@ -6104,10 +6104,12 @@ class MreScpt(MelRecord):
     """Script record."""
     classType = 'SCPT'
     _flags = Flags(0L,Flags.getNames('isLongOrShort'))
+    schrFlags = Flags(0L,Flags.getNames('enabled'))
     melSet = MelSet(
         MelString('EDID','eid'),
-        MelStruct('SCHR','4s4I',('unused1',null4),'numRefs','compiledSize','lastIndex','scriptType'),
-        #--Type: 0: Object, 1: Quest, 0x100: Magic Effect
+        #scriptType:0:Object,1:Quest,0x100:Magic Effect
+        MelStruct('SCHR','4s3I2H',('unused1',null4),'numRefs','compiledSize',
+                  'lastIndex','scriptType',(schrFlags,'enableflag',0L),),
         MelBase('SCDA','compiled_p'),
         MelString('SCTX','scriptText'),
         MelGroups('vars',
