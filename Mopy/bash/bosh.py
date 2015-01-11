@@ -3455,19 +3455,19 @@ class MreEfsh(MelRecord):
         ))
 
     class MelEfshData(MelStruct):
-        """Handle older trucated DATA for EFSH subrecord."""
+        """Handle older truncated DATA for EFSH subrecord."""
         def loadData(self,record,ins,type,size,readId):
             if size == 308:
                 MelStruct.loadData(self,record,ins,type,size,readId)
                 return
             elif size == 300:
-                unpacked = ins.unpack('B3s3I3Bs9f3Bs8f5I19f3Bs3Bs3Bs6f5fI5f3BsfII4f',size,readId)
+                unpacked = ins.unpack('B3s3I3Bs9f3Bs8f5I19f3Bs3Bs3Bs11fI5f3Bsf2I4f',size,readId)
             elif size == 284:
-                unpacked = ins.unpack('B3s3I3Bs9f3Bs8f5I19f3Bs3Bs3Bs6f5fI5f3BsfII',size,readId)
+                unpacked = ins.unpack('B3s3I3Bs9f3Bs8f5I19f3Bs3Bs3Bs11fI5f3Bsf2I',size,readId)
             elif size == 248:
-                unpacked = ins.unpack('B3s3I3Bs9f3Bs8f5I19f3Bs3Bs3Bs6f5fI',size,readId)
+                unpacked = ins.unpack('B3s3I3Bs9f3Bs8f5I19f3Bs3Bs3Bs11fI',size,readId)
             elif size == 244:
-                unpacked = ins.unpack('B3s3I3Bs9f3Bs8f5I19f3Bs3Bs3Bs6f5f',size,readId)
+                unpacked = ins.unpack('B3s3I3Bs9f3Bs8f5I19f3Bs3Bs3Bs11f',size,readId)
             elif size == 224:
                 unpacked = ins.unpack('B3s3I3Bs9f3Bs8f5I19f3Bs3Bs3Bs6f',size,readId)
             else:
@@ -3483,25 +3483,33 @@ class MreEfsh(MelRecord):
         MelString('ICON','fillTexture'),
         MelString('ICO2','particleTexture'),
         MelString('NAM7','holesTexture'),
-        MelEfshData('DATA','B3s3I3Bs9f3Bs8f5I19f3Bs3Bs3Bs6f5fI5f3BsfII6f',(_flags,'flags'),('unused1',null3),'memSBlend',
-            'memBlendOp','memZFunc','fillRed','fillGreen','fillBlue',('unused2',null1),
-            'fillAIn','fillAFull','fillAOut','fillAPRatio','fillAAmp',
-            'fillAFreq','fillAnimSpdU','fillAnimSpdV','edgeOff','edgeRed',
-            'edgeGreen','edgeBlue',('unused3',null1),'edgeAIn','edgeAFull',
-            'edgeAOut','edgeAPRatio','edgeAAmp','edgeAFreq','fillAFRatio',
-            'edgeAFRatio','memDBlend',('partSBlend',5),('partBlendOp',1),
-            ('partZFunc',4),('partDBlend',6),('partBUp',0.0),('partBFull',0.0),('partBDown',0.0),
-            ('partBFRatio',1.0),('partBPRatio',1.0),('partLTime',1.0),('partLDelta',0.0),('partNSpd',0.0),
-            ('partNAcc',0.0),('partVel1',0.0),('partVel2',0.0),('partVel3',0.0),('partAcc1',0.0),
-            ('partAcc2',0.0),('partAcc3',0.0),('partKey1',1.0),('partKey2',1.0),('partKey1Time',0.0),
-            ('partKey2Time',1.0),('key1Red',255),('key1Green',255),('key1Blue',255),('unused4',null1),
-            ('key2Red',255),('key2Green',255),('key2Blue',255),('unused5',null1),('key3Red',255),('key3Green',255),
-            ('key3Blue',255),('unused6',null1),('key1A',1.0),('key2A',1.0),('key3A',1.0),('key1Time',0.0),
-            ('key2Time',0.5),('key3Time',1.0),
-            ('partNSpdDelta',0.00000),('partRot',0.00000),('partRotDelta',0.00000),('partRotSpeed',0.00000),('partRotSpeedDelta',0.00000),
-            (FID,'addonModels',None),('holesStartTime',0.00000),('holesEndTime',0.00000),('holesStartVal',0.00000),('holesEndVal',0.00000),
-            ('edgeWidth',0.00000),('edgeRed',255),('edgeGreen',255),('edgeBlue',255),('unused7',null1),
-            ('explosionWindSpeed',0.00000),('textureCountU',1),('textureCountV',1),
+        MelEfshData('DATA','B3s3I3Bs9f3Bs8f5I19f3Bs3Bs3Bs11fI5f3Bsf2I6f',
+            (_flags,'flags'),('unused1',null3),'memSBlend',
+            'memBlendOp','memZFunc','fillRed','fillGreen','fillBlue',
+            ('unused2',null1),'fillAIn','fillAFull','fillAOut','fillAPRatio',
+            'fillAAmp','fillAFreq','fillAnimSpdU','fillAnimSpdV','edgeOff',
+            'edgeRed','edgeGreen','edgeBlue',('unused3',null1),'edgeAIn',
+            'edgeAFull','edgeAOut','edgeAPRatio','edgeAAmp','edgeAFreq',
+            'fillAFRatio','edgeAFRatio','memDBlend',('partSBlend',5),
+            ('partBlendOp',1),('partZFunc',4),('partDBlend',6),('partBUp',0.0),
+            ('partBFull',0.0),('partBDown',0.0),('partBFRatio',1.0),
+            ('partBPRatio',1.0),('partLTime',1.0),('partLDelta',0.0),
+            ('partNSpd',0.0),('partNAcc',0.0),('partVel1',0.0),('partVel2',0.0),
+            ('partVel3',0.0),('partAcc1',0.0),('partAcc2',0.0),('partAcc3',0.0),
+            ('partKey1',1.0),('partKey2',1.0),('partKey1Time',0.0),
+            ('partKey2Time',1.0),('key1Red',255),('key1Green',255),
+            ('key1Blue',255),('unused4',null1),('key2Red',255),('key2Green',255),
+            ('key2Blue',255),('unused5',null1),('key3Red',255),('key3Green',255),
+            ('key3Blue',255),('unused6',null1),('key1A',1.0),('key2A',1.0),
+            ('key3A',1.0),('key1Time',0.0),('key2Time',0.5),('key3Time',1.0),
+            ('partNSpdDelta',0.00000),('partRot',0.00000),
+            ('partRotDelta',0.00000),('partRotSpeed',0.00000),
+            ('partRotSpeedDelta',0.00000),(FID,'addonModels',None),
+            ('holesStartTime',0.00000),('holesEndTime',0.00000),
+            ('holesStartVal',0.00000),('holesEndVal',0.00000),
+            ('edgeWidth',0.00000),('edgeRed',255),('edgeGreen',255),
+            ('edgeBlue',255),('unused7',null1),('explosionWindSpeed',0.00000),
+            ('textureCountU',1),('textureCountV',1),
             ('addonModelsFadeInTime',1.00000),('addonModelsFadeOutTime',1.00000),
             ('addonModelsScaleStart',1.00000),('addonModelsScaleEnd',1.00000),
             ('addonModelsScaleInTime',1.00000),('addonModelsScaleOutTime',1.00000),
@@ -22910,19 +22918,35 @@ class GraphicsPatcher(ImportPatcher):
         for recClass in (MreMgef,):
             recAttrs_class[recClass] = ('iconPath','model','effectShader','objectDisplayShader','light')
         for recClass in (MreEfsh,):
-            recAttrs_class[recClass] = ('particleTexture','fillTexture','flags','unused1','memSBlend',
-                                        'memBlendOp','memZFunc','fillRed','fillGreen','fillBlue','unused2',
-                                        'fillAIn','fillAFull','fillAOut','fillAPRatio','fillAAmp','fillAFreq',
-                                        'fillAnimSpdU','fillAnimSpdV','edgeOff','edgeRed','edgeGreen',
-                                        'edgeBlue','unused3','edgeAIn','edgeAFull','edgeAOut','edgeAPRatio',
-                                        'edgeAAmp','edgeAFreq','fillAFRatio','edgeAFRatio','memDBlend',
-                                        'partSBlend','partBlendOp','partZFunc','partDBlend','partBUp',
-                                        'partBFull','partBDown','partBFRatio','partBPRatio','partLTime',
-                                        'partLDelta','partNSpd','partNAcc','partVel1','partVel2','partVel3',
-                                        'partAcc1','partAcc2','partAcc3','partKey1','partKey2','partKey1Time',
-                                        'partKey2Time','key1Red','key1Green','key1Blue','unused4','key2Red',
-                                        'key2Green','key2Blue','unused5','key3Red','key3Green','key3Blue',
-                                        'unused6','key1A','key2A','key3A','key1Time','key2Time','key3Time')
+            recAttrs_class[recClass] = ('flags','unused1','memSBlend',
+                'memBlendOp','memZFunc','fillRed','fillGreen','fillBlue',
+                'unused2','fillAIn','fillAFull','fillAOut','fillAPRatio',
+                'fillAAmp','fillAFreq','fillAnimSpdU','fillAnimSpdV','edgeOff',
+                'edgeRed','edgeGreen','edgeBlue','unused3','edgeAIn',
+                'edgeAFull','edgeAOut','edgeAPRatio','edgeAAmp','edgeAFreq',
+                'fillAFRatio','edgeAFRatio','memDBlend','partSBlend',
+                'partBlendOp','partZFunc','partDBlend','partBUp',
+                'partBFull','partBDown','partBFRatio',
+                'partBPRatio','partLTime','partLDelta',
+                'partNSpd','partNAcc','partVel1','partVel2',
+                'partVel3','partAcc1','partAcc2','partAcc3',
+                'partKey1','partKey2','partKey1Time',
+                'partKey2Time','key1Red','key1Green',
+                'key1Blue','unused4','key2Red','key2Green',
+                'key2Blue','unused5','key3Red','key3Green',
+                'key3Blue','unused6','key1A','key2A',
+                'key3A','key1Time','key2Time','key3Time',
+                'partNSpdDelta','partRot',
+                'partRotDelta','partRotSpeed',
+                'partRotSpeedDelta','addonModels',
+                'holesStartTime','holesEndTime',
+                'holesStartVal','holesEndVal',
+                'edgeWidth','edgeRed','edgeGreen',
+                'edgeBlue','unused7','explosionWindSpeed',
+                'textureCountU','textureCountV',
+                'addonModelsFadeInTime','addonModelsFadeOutTime',
+                'addonModelsScaleStart','addonModelsScaleEnd',
+                'addonModelsScaleInTime','addonModelsScaleOutTime',),
         for recClass in (MreExpl,):
             recAttrs_class[recClass] = ('imageSpaceModifier','light','impactDataset','placedImpactObject')
         for recClass in (MreTxst,):
