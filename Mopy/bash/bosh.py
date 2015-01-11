@@ -4901,7 +4901,7 @@ class MrePack(MelRecord):
                 setter(attr,value)
             if self._debug: print unpacked
     class MelPackPkdd(MelOptStruct):
-        """Handle older trucated PKDD for PACK subrecord."""
+        """Handle older truncated PKDD for PACK subrecord."""
         def loadData(self,record,ins,type,size,readId):
             if size == 24:
                 MelStruct.loadData(self,record,ins,type,size,readId)
