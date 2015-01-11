@@ -5107,7 +5107,7 @@ class MrePerk(MelRecord):
     """Perk record."""
     classType = 'PERK'
     class MelPerkData(MelStruct):
-        """Handle older trucated DATA for PERK subrecord."""
+        """Handle older truncated DATA for PERK subrecord."""
         def loadData(self,record,ins,type,size,readId):
             if size == 5:
                 MelStruct.loadData(self,record,ins,type,size,readId)
