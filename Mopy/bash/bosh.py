@@ -6503,7 +6503,7 @@ class MreWatr(MelRecord):
     classType = 'WATR'
     _flags = Flags(0L,Flags.getNames('causesDmg','reflective'))
     class MelWatrData(MelStruct):
-        """Handle older trucated DATA for WATR subrecord."""
+        """Handle older truncated DATA for WATR subrecord."""
         def loadData(self,record,ins,type,size,readId):
             if size == 186:
                 MelStruct.loadData(self,record,ins,type,size,readId)
@@ -6517,7 +6517,7 @@ class MreWatr(MelRecord):
             out.packSub(self.subType,'H',record.damage)
 
     class MelWatrDnam(MelStruct):
-        """Handle older trucated DNAM for WATR subrecord."""
+        """Handle older truncated DNAM for WATR subrecord."""
         def loadData(self,record,ins,type,size,readId):
             if size == 196:
                 MelStruct.loadData(self,record,ins,type,size,readId)
@@ -6541,7 +6541,7 @@ class MreWatr(MelRecord):
         MelStruct('ANAM','B','opacity'),
         MelStruct('FNAM','B',(_flags,'flags',0)),
         MelString('MNAM','material'),
-        MelFid('SNAM','sound'),
+        MelFid('SNAM','sound',),
         MelFid('XNAM','effect'),
         MelWatrData('DATA','10f3Bs3Bs3BsI32fH',('windVelocity',0.100),('windDirection',90.0),
             ('waveAmp',0.5),('waveFreq',1.0),('sunPower',50.0),('reflectAmt',0.5),
