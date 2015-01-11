@@ -2683,6 +2683,46 @@ class MreBsgn(MelRecord):
     __slots__ = MelRecord.__slots__ + melSet.getSlotsUsed()
 
 #------------------------------------------------------------------------------
+class MreCams(MelRecord):
+    """Cams Type"""
+    classType = 'CAMS'
+
+    # DATA 'Action','Location','Target' is wbEnum
+    # 'Action-Shoot',
+    # 'Action-Fly',
+    # 'Action-Hit',
+    # 'Action-Zoom'
+
+    # 'Location-Attacker',
+    # 'Location-Projectile',
+    # 'Location-Target',
+
+    # 'Target-Attacker',
+    # 'Target-Projectile',
+    # 'Target-Target',
+
+    CamsFlagsFlags = Flags(0L,Flags.getNames(
+            (0, 'positionFollowsLocation'),
+            (1, 'rotationFollowsTarget'),
+            (2, 'dontFollowBone'),
+            (3, 'firstPersonCamera'),
+            (4, 'noTracer'),
+            (5, 'startAtTimeZero'),
+        ))
+
+    melSet = MelSet(
+        MelString('EDID','eid'),
+        MelString('DATA','eid'),
+        MelModel(),
+        MelStruct('DATA','4I6f','action','location','target',
+                  (CamsFlagsFlags,'flags',0L),'timeMultPlayer',
+                  'timeMultTarget','timeMultGlobal','maxTime','minTime',
+                  'targetPctBetweenActors',),
+        MelFid('MNAM','imageSpaceModifier',),
+        )
+    __slots__ = MelRecord.__slots__ + melSet.getSlotsUsed()
+
+#------------------------------------------------------------------------------
 class MreCcrd(MelRecord):
     """Caravan Card."""
     classType = 'CCRD'
