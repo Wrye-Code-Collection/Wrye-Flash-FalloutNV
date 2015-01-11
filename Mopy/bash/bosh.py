@@ -4366,6 +4366,40 @@ class MreLvln(MreLeveledList):
     __slots__ = MreLeveledList.__slots__
 
 #------------------------------------------------------------------------------
+class MreMesg(MelRecord):
+    """Message Record."""
+    classType = 'MESG'
+
+    MesgTypeFlags = Flags(0L,Flags.getNames(
+            (0, 'messageBox'),
+            (1, 'autoDisplay'),
+        ))
+
+    melSet = MelSet(
+        MelString('EDID','eid'),
+        MelString('DESC','description'),
+        MelLString('FULL','full'),
+        MelFid('INAM','icon'),
+        MelBase('NAM0', 'unused_0'),
+        MelBase('NAM1', 'unused_1'),
+        MelBase('NAM2', 'unused_2'),
+        MelBase('NAM3', 'unused_3'),
+        MelBase('NAM4', 'unused_4'),
+        MelBase('NAM5', 'unused_5'),
+        MelBase('NAM6', 'unused_6'),
+        MelBase('NAM7', 'unused_7'),
+        MelBase('NAM8', 'unused_8'),
+        MelBase('NAM9', 'unused_9'),
+        MelStruct('DNAM','I',(MesgTypeFlags,'flags',0L),),
+        MelStruct('TNAM','I','displayTime',),
+        MelGroups('menuButtons',
+            MelString('ITXT','buttonText'),
+            MelConditions(),
+            ),
+    )
+    __slots__ = MelRecord.__slots__ + melSet.getSlotsUsed()
+
+#------------------------------------------------------------------------------
 class MreMgef(MelRecord):
     """MGEF (magic effect) record."""
     classType = 'MGEF'
