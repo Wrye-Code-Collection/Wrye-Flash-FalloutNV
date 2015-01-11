@@ -3196,67 +3196,31 @@ class MreCsty(MelRecord):
         ( 6,'prefersRanged'),
         ( 7,'meleeAlertOK'),
         ))
-    _flagsB = Flags(0L,Flags.getNames(
-        ( 0,'doNotAcquire'),
-        ))
 
-    class MelCstdData(MelStruct):
-        """Handle older trucated DATA for CSTD subrecord."""
-        def loadData(self,record,ins,type,size,readId):
-            if size == 124:
-                MelStruct.loadData(self,record,ins,type,size,readId)
-                return
-            elif size == 120:
-                #--Else 120 byte record (skips flagsB
-                unpacked = ins.unpack('2B2s8f2B2s3fB3s2f5B3s2f2B2s7fB3sf',size,readId)
-            elif size == 112:
-                #--112 byte record (skips flagsB, rushChance, unused6, rushMult
-                unpacked = ins.unpack('2B2s8f2B2s3fB3s2f5B3s2f2B2s7f',size,readId)
-            elif size == 104:
-                #--104 byte record (skips flagsB, rushChance, unused6, rushMult, rStand, groupStand
-                #-- only one occurence (AndragilTraining
-                unpacked = ins.unpack('2B2s8f2B2s3fB3s2f5B3s2f2B2s5f',size,readId)
-            elif size == 92:
-                #--92 byte record (skips flagsB, rushChance, unused6, rushMult, rStand, groupStand
-                #--                mDistance, rDistance, buffStand
-                #-- These records keep getting shorter and shorter...
-                #-- This one is used by quite a few npcs
-                unpacked = ins.unpack('2B2s8f2B2s3fB3s2f5B3s2f2B2s2f',size,readId)
-            elif size == 84:
-                #--84 byte record (skips flagsB, rushChance, unused6, rushMult, rStand, groupStand
-                #--                mDistance, rDistance, buffStand, rMultOpt, rMultMax
-                #-- This one is present once: VidCaptureNoAttacks and it isn't actually used.
-                unpacked = ins.unpack('2B2s8f2B2s3fB3s2f5B3s2f2B2s',size,readId)
-            else:
-                raise ModError(ins.inName,_('Unexpected size encountered for CSTD subrecord: ')+str(size))
-            unpacked += self.defaults[len(unpacked):]
-            setter = record.__setattr__
-            for attr,value,action in zip(self.attrs,unpacked,self.actions):
-                if callable(action): value = action(value)
-                setter(attr,value)
-            if self._debug: print unpacked, record.flagsA.getTrueAttrs()
     #--Mel Set
     melSet = MelSet(
         MelString('EDID','eid'),
-        MelCstdData('CSTD', '2B2s8f2B2s3fB3s2f5B3s2f2B2s7fB3sfI', 'dodgeChance', 'lrChance',
-                    ('unused1',null2), 'lrTimerMin', 'lrTimerMax', 'forTimerMin', 'forTimerMax',
-                    'backTimerMin', 'backTimerMax', 'idleTimerMin', 'idleTimerMax',
-                    'blkChance', 'atkChance', ('unused2',null2), 'atkBRecoil','atkBunc',
-                    'atkBh2h', 'pAtkChance', ('unused3',null3), 'pAtkBRecoil', 'pAtkBUnc',
-                    'pAtkNormal', 'pAtkFor', 'pAtkBack', 'pAtkL', 'pAtkR', ('unused4',null3),
-                    'holdTimerMin', 'holdTimerMax', (_flagsA,'flagsA'), 'acroDodge',
-                    ('unused5',null2), ('rMultOpt',1.0), ('rMultMax',1.0), ('mDistance',250.0), ('rDistance',1000.0),
-                    ('buffStand',325.0), ('rStand',500.0), ('groupStand',325.0), ('rushChance',25),
-                    ('unused6',null3), ('rushMult',1.0), (_flagsB,'flagsB')),
+        MelOptStruct('CSTD', '2B2s8f2B2s3fB3s2f5B3s2fH2s2B2sf','dodgeChance',
+                    'lrChance',('unused1',null2),'lrTimerMin','lrTimerMax',
+                    'forTimerMin','forTimerMax','backTimerMin','backTimerMax',
+                    'idleTimerMin','idleTimerMax','blkChance','atkChance',
+                    ('unused2',null2),'atkBRecoil','atkBunc','atkBh2h',
+                    'pAtkChance',('unused3',null3),'pAtkBRecoil','pAtkBUnc',
+                    'pAtkNormal','pAtkFor','pAtkBack','pAtkL','pAtkR',
+                    ('unused4',null3),'holdTimerMin','holdTimerMax',
+                    (_flagsA,'flagsA'),('unused5',null2),'acroDodge',
+                    ('rushChance',25),('unused6',null3),('rushMult',1.0),),
         MelOptStruct('CSAD', '21f', 'dodgeFMult', 'dodgeFBase', 'encSBase', 'encSMult',
                      'dodgeAtkMult', 'dodgeNAtkMult', 'dodgeBAtkMult', 'dodgeBNAtkMult',
                      'dodgeFAtkMult', 'dodgeFNAtkMult', 'blockMult', 'blockBase',
                      'blockAtkMult', 'blockNAtkMult', 'atkMult','atkBase', 'atkAtkMult',
                      'atkNAtkMult', 'atkBlockMult', 'pAtkFBase', 'pAtkFMult'),
-        MelOptStruct('CSSD', '9fII5f', 'coverSearchRadius', 'takeCoverChance', 'waitTimerMin', 'waitTimerMax',
-                     'waitToFireTimerMin', 'waitToFireTimerMax', 'fireTimerMin', 'fireTimerMax'
-                     'rangedWeaponRangeMultMin','weaponRestrictions','unknown1','rangedWeaponRangeMultMax',
-                     'maxTargetingFov','combatRadius','semiAutomaticFireDelayMultMin','semiAutomaticFireDelayMultMax'),
+        MelOptStruct('CSSD', '9f4sI5f', 'coverSearchRadius', 'takeCoverChance',
+                     'waitTimerMin', 'waitTimerMax', 'waitToFireTimerMin',
+                     'waitToFireTimerMax', 'fireTimerMin', 'fireTimerMax'
+                     'rangedWeaponRangeMultMin','unknown1','weaponRestrictions',
+                     'rangedWeaponRangeMultMax','maxTargetingFov','combatRadius',
+                     'semiAutomaticFireDelayMultMin','semiAutomaticFireDelayMultMax'),
         )
     __slots__ = MelRecord.__slots__ + melSet.getSlotsUsed()
 
