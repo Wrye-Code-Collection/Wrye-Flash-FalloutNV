@@ -34987,7 +34987,8 @@ class RacePatcher(SpecialPatcher,ListPatcher):
                     for key in ('maleMouth','femaleMouth','maleTongue','femaleTongue'):
                         tempRaceData[key] = getattr(race,key)
                 if 'R.Head' in bashTags:
-                    tempRaceData['head'] = race.head
+                    for key in ('maleHead','femaleHead',):
+                        tempRaceData[key] = getattr(race,key)
                 if 'R.Ears' in bashTags:
                     for key in ('maleEars','femaleEars'):
                         tempRaceData[key] = getattr(race,key)
