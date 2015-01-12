@@ -38,6 +38,10 @@ Additionally, Wrye Bash comes packaged with the following programs:
 {{CONTENTS=0}}
 **All versions by Wrye team and or Valda unless otherwise noted.**
 
+=== 16.5 [1/11/2015]
+* Fixed bug with DestructiblePatcher
+* Fixed bug with FactionRelations
+
 === 16.4 [1/11/2015]
 * Fixed bug with R.Head Bash Tag
 * Updated MreAchr, MreAcre, MreAlch, MreAmmo, MreArma, MreArmo, MreBook, MreBptd, MreClas, MreCrea, MreCsty, MreDebr, MreDial, MreEczn, MreEfsh, MreEnch, MreExpl, MreFact, MreFlst, MreIdle, MreIdle, MreImad, MreInfo,  MreIngr, MreIpct, MreKeym, MreLigh, MreLsct, MreLtex, MreMesg, MreMgef, MreMset, MreNavi, MreNpc, MreProj, MrePwat, MreRegn, MreSoun, MreSpel, MreStat, MreTerm, MreTxst, MreWatr, MreWeap, MreWthr
