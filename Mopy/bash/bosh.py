@@ -6630,23 +6630,23 @@ class MreWeap(MelRecord):
                 MelStruct.loadData(self,record,ins,type,size,readId)
                 return
             elif size == 200:
-                unpacked = ins.unpack('I2f4B5fI4B2f2I11fiI2fi4f3I3f2IsB2s6f',size,readId)
+                unpacked = ins.unpack('I2f4B4f4sI4B2f2I11fiI2fi3f4s3I3f2IsB2s6f',size,readId)
             elif size == 196:
-                unpacked = ins.unpack('I2f4B5fI4B2f2I11fiI2fi4f3I3f2IsB2s5f',size,readId)
+                unpacked = ins.unpack('I2f4B4f4sI4B2f2I11fiI2fi3f4s3I3f2IsB2s5f',size,readId)
             elif size == 180:
-                unpacked = ins.unpack('I2f4B5fI4B2f2I11fiI2fi4f3I3f2IsB2sf',size,readId)
+                unpacked = ins.unpack('I2f4B4f4sI4B2f2I11fiI2fi3f4s3I3f2IsB2sf',size,readId)
             elif size == 172:
-                unpacked = ins.unpack('I2f4B5fI4B2f2I11fiI2fi4f3I3f2I',size,readId)
+                unpacked = ins.unpack('I2f4B4f4sI4B2f2I11fiI2fi3f4s3I3f2I',size,readId)
             elif size == 164:
-                unpacked = ins.unpack('I2f4B5fI4B2f2I11fiI2fi4f3I3f',size,readId)
+                unpacked = ins.unpack('I2f4B4f4sI4B2f2I11fiI2fi3f4s3I3f',size,readId)
             elif size == 136:
-                unpacked = ins.unpack('I2f4B5fI4B2f2I11fiI2fi3f',size,readId)
+                unpacked = ins.unpack('I2f4B4f4sI4B2f2I11fiI2fi3f',size,readId)
             elif size == 124:
                 #--Else 124 byte record (skips sightUsage, semiAutomaticFireDelayMin and semiAutomaticFireDelayMax...
-                unpacked = ins.unpack('I2f4B5fI4B2f2I11fiI2fi',size,readId)
+                unpacked = ins.unpack('I2f4B4f4sI4B2f2I11fiI2fi',size,readId)
             elif size == 120:
                 #--Else 120 byte record (skips resistType, sightUsage, semiAutomaticFireDelayMin and semiAutomaticFireDelayMax...
-                unpacked = ins.unpack('I2f4B5fI4B2f2I11fiI2f',size,readId)
+                unpacked = ins.unpack('I2f4B4f4sI4B2f2I11fiI2f',size,readId)
             else:
                 raise "Unexpected size encountered for WEAP:DNAM subrecord: %s" % size
             unpacked += self.defaults[len(unpacked):]
@@ -6746,8 +6746,8 @@ class MreWeap(MelRecord):
                     'animationAttackMultiplier','fireRate','overrideActionPoint',
                     'rumbleLeftMotorStrength','rumbleRightMotorStrength',
                     'rumbleDuration','overrideDamageToWeaponMult','attackShotsPerSec',
-                    'reloadTime','jamTime','aimArc','skill','rumblePattern',
-                    'rambleWavelangth','limbDmgMult',('resistType',0xFFFFFFFF),
+                    'reloadTime','jamTime','aimArc',('skill',45),'rumblePattern',
+                    'rambleWavelangth','limbDmgMult',('resistType',-1),
                     'sightUsage','semiAutomaticFireDelayMin',
                     'semiAutomaticFireDelayMax',
                     # NV additions
