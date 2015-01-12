@@ -3610,7 +3610,7 @@ class MreFact(MelRecord):
     melSet = MelSet(
         MelString('EDID','eid'),
         MelString('FULL','full'),
-        MelStructs('XNAM','IiI','relations',(FID,'faction'),'mod','combatReaction'),
+        MelStructs('XNAM','IiI','relations',(FID,'faction'),'mod','groupCombatReaction'),
         MelFactData('DATA','2B2s',(_flags,'flags',0L),'flagsFact',('unknown',null2),),
         MelOptStruct('CNAM','f',('crimeGoldMultiplier',None)),
         MelGroups('ranks',
