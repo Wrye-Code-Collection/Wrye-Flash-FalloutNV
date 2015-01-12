@@ -6672,6 +6672,7 @@ class MreWeap(MelRecord):
                 if callable(action): value = action(value)
                 setter(attr,value)
             if self._debug: print unpacked
+
     melSet = MelSet(
         MelString('EDID','eid'),
         MelStruct('OBND','=6h',
