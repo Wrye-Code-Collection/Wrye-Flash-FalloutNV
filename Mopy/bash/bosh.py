@@ -23245,7 +23245,8 @@ class GraphicsPatcher(ImportPatcher):
         for recClass in (MreMgef,):
             recAttrs_class[recClass] = ('iconPath','model','effectShader','objectDisplayShader','light')
         for recClass in (MreEfsh,):
-            recAttrs_class[recClass] = ('flags','unused1','memSBlend',
+            recAttrs_class[recClass] = ('particleTexture','fillTexture','flags',
+                'unused1','memSBlend',
                 'memBlendOp','memZFunc','fillRed','fillGreen','fillBlue',
                 'unused2','fillAIn','fillAFull','fillAOut','fillAPRatio',
                 'fillAAmp','fillAFreq','fillAnimSpdU','fillAnimSpdV','edgeOff',
