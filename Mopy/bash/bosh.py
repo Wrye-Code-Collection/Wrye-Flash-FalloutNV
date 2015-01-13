@@ -6630,23 +6630,23 @@ class MreWeap(MelRecord):
                 MelStruct.loadData(self,record,ins,type,size,readId)
                 return
             elif size == 200:
-                unpacked = ins.unpack('I2f4B4f4sI4B2f2I11fiI2fi3f4s3I3f2IsB2s6f',size,readId)
+                unpacked = ins.unpack('IffBBBBfffffIBBBBffIIfffffffffffiIffiffffIIIfffIIsB2sffffff',size,readId)
             elif size == 196:
-                unpacked = ins.unpack('I2f4B4f4sI4B2f2I11fiI2fi3f4s3I3f2IsB2s5f',size,readId)
+                unpacked = ins.unpack('IffBBBBfffffIBBBBffIIfffffffffffiIffiffffIIIfffIIsB2sfffff',size,readId)
             elif size == 180:
-                unpacked = ins.unpack('I2f4B4f4sI4B2f2I11fiI2fi3f4s3I3f2IsB2sf',size,readId)
+                unpacked = ins.unpack('IffBBBBfffffIBBBBffIIfffffffffffiIffiffffIIIfffIIsB2sf',size,readId)
             elif size == 172:
-                unpacked = ins.unpack('I2f4B4f4sI4B2f2I11fiI2fi3f4s3I3f2I',size,readId)
+                unpacked = ins.unpack('IffBBBBfffffIBBBBffIIfffffffffffiIffiffffIIIfffII',size,readId)
             elif size == 164:
-                unpacked = ins.unpack('I2f4B4f4sI4B2f2I11fiI2fi3f4s3I3f',size,readId)
+                unpacked = ins.unpack('IffBBBBfffffIBBBBffIIfffffffffffiIffiffffIIIfff',size,readId)
             elif size == 136:
-                unpacked = ins.unpack('I2f4B4f4sI4B2f2I11fiI2fi3f',size,readId)
+                unpacked = ins.unpack('IffBBBBfffffIBBBBffIIfffffffffffiIffifff',size,readId)
             elif size == 124:
                 #--Else 124 byte record (skips sightUsage, semiAutomaticFireDelayMin and semiAutomaticFireDelayMax...
-                unpacked = ins.unpack('I2f4B4f4sI4B2f2I11fiI2fi',size,readId)
+                unpacked = ins.unpack('IffBBBBfffffIBBBBffIIfffffffffffiIffi',size,readId)
             elif size == 120:
                 #--Else 120 byte record (skips resistType, sightUsage, semiAutomaticFireDelayMin and semiAutomaticFireDelayMax...
-                unpacked = ins.unpack('I2f4B4f4sI4B2f2I11fiI2f',size,readId)
+                unpacked = ins.unpack('IffBBBBfffffIBBBBffIIfffffffffffiIff',size,readId)
             else:
                 raise "Unexpected size encountered for WEAP:DNAM subrecord: %s" % size
             unpacked += self.defaults[len(unpacked):]
@@ -6737,11 +6737,11 @@ class MreWeap(MelRecord):
         MelFids('WMS1','soundMod1Shoot3Ds'),
         MelFid('WMS2','soundMod1Shoot2D'),
         MelStruct('DATA','2IfHB','value','health','weight','damage','clipsize'),
-        MelWeapDnam('DNAM','I2f4B4f4sI4B2f2I11fiI2fi3f4s3I3f2IsB2s6fI',
+        MelWeapDnam('DNAM','IffBBBBfffffIBBBBffIIfffffffffffiIffiffffIIIfffIIsB2sffffffI',
                     'animationType','animationMultiplier','reach',
                     (_dflags1,'dnamFlags1',0L),'gripAnimation','ammoUse',
-                    'reloadAnimation','minSpread','spread','unused1','sightFov',
-                    ('unused2',null4),(FID,'projectile',0L),'baseVatsToHitChance',
+                    'reloadAnimation','minSpread','spread','weapDnam1','sightFov',
+                    ('weapDnam2',0.0),(FID,'projectile',0L),'baseVatsToHitChance',
                     'attackAnimation','projectileCount','embeddedWeaponActorValue',
                     'minRange','maxRange','onHit',(_dflags2,'dnamFlags2',0L),
                     'animationAttackMultiplier','fireRate','overrideActionPoint',
@@ -6752,15 +6752,15 @@ class MreWeap(MelRecord):
                     'sightUsage','semiAutomaticFireDelayMin',
                     'semiAutomaticFireDelayMax',
                     # NV additions
-                    ('unknown3',null4),'effectMod1','effectMod2','effectMod3','valueAMod1',
+                    ('weapDnam3',0.0),'effectMod1','effectMod2','effectMod3','valueAMod1',
                     'valueAMod2','valueAMod3','powerAttackAnimation','strengthReq',
-                    ('unknown4',null1),'reloadAnimationMod',('unknown5',null2),
+                    ('weapDnam4',null1),'reloadAnimationMod',('weapDnam5',null2),
                     'regenRate','killImpulse','valueBMod1','valueBMod2','valueBMod3',
                     'impulseDist','skillReq'),
-        MelStruct('CRDT','H2sfB3sI','criticalDamage','unknown3','criticalMultiplier',
-                 (_cflags,'criticalFlags',0L),'unknown4',(FID,'criticalEffect',0L)),
+        MelStruct('CRDT','H2sfB3sI','criticalDamage','weapCrdt1','criticalMultiplier',
+                 (_cflags,'criticalFlags',0L),'weapCrdt2',(FID,'criticalEffect',0L)),
         MelWeapVats('VATS','I3f2B2s','vatsEffect','vatsSkill','vatsDamMult',
-                    'vatsAp','vatsSilent','vatsModReqiured',('unused1',null2)),
+                    'vatsAp','vatsSilent','vatsModReqiured',('weapVats1',null2)),
         MelBase('VNAM','soundLevel'),
         )
     __slots__ = MelRecord.__slots__ + melSet.getSlotsUsed()
