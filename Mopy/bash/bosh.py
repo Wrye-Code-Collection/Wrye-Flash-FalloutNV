@@ -3233,7 +3233,7 @@ class MreDebr(MelRecord):
     """Debris record."""
     classType = 'DEBR'
 
-    dataFlags = bolt.Flags(0L,bolt.Flags.getNames('hasCollissionData'))
+    dataFlags = Flags(0L,Flags.getNames('hasCollissionData'))
     class MelDebrData(MelStruct):
         subType = 'DATA'
         _elements = (('percentage',0),('modPath',null1),('flags',0),)
