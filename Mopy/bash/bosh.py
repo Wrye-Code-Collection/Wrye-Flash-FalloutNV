@@ -2414,8 +2414,10 @@ class MreAmmo(MelRecord):
         MelDestructible(),
         MelFid('YNAM','pickupSound'),
         MelFid('ZNAM','dropSound'),
-        MelStruct('DATA','fB3sIB','speed',(_flags,'flags',0L),('unused1',null3),'value','clipRounds'),
-        MelAmmoDat2('DAT2','IIfIf','projPerShot',(FID,'projectile',0L),'weight',(FID,'consumedAmmo'),'consumedPercentage'),
+        MelStruct('DATA','fB3siB','speed',(_flags,'flags',0L),('ammoData1',null3),
+                  'value','clipRounds'),
+        MelAmmoDat2('DAT2','IIfIf','projPerShot',(FID,'projectile',0L),'weight',
+                    (FID,'consumedAmmo'),'consumedPercentage'),
         MelString('ONAM','shortName'),
         MelString('QNAM','abbrev'),
         MelFids('RCIL','effects'),
@@ -2495,7 +2497,7 @@ class MreArma(MelRecord):
         #9:Hand Wear,10:Chems,11:Stimpack,12:Food,13:Alcohol
         MelStruct('ETYP','i',('etype',-1)),
         MelStruct('DATA','IIf','value','health','weight'),
-        MelArmaDnam('DNAM','=HHfI','ar','flags','dt',('unknown',0L)),
+        MelArmaDnam('DNAM','=hHfI','ar','flags','dt',('armaDnam1',0L)),
         )
     __slots__ = MelRecord.__slots__ + melSet.getSlotsUsed()
 
@@ -2534,7 +2536,8 @@ class MreArmo(MelRecord):
         MelString('FULL','full'),
         MelFid('SCRI','script'),
         MelFid('EITM','objectEffect'),
-        MelStruct('BMDT','=2I',(_flags,'bipedFlags',0L),(_generalFlags,'generalFlags',0L)),
+        MelStruct('BMDT','=IB3s',(_flags,'bipedFlags',0L),
+                  (_generalFlags,'generalFlags',0L),'armoBMDT1',),
         MelModel('maleBody'),
         MelModel('maleWorld',2),
         MelString('ICON','maleIconPath'),
@@ -2912,10 +2915,10 @@ class MreClas(MelRecord):
         MelString('ICON','iconPath'),
         MelStruct('DATA','4i2IbB2s','tagSkill1','tagSkill2','tagSkill3',
             'tagSkill4',(_flags,'flags',0L),(aiService,'services',0L),
-            ('trainSkill',-1),('trainLevel',0),('unused1',null2)),
+            ('trainSkill',-1),('trainLevel',0),('clasData1',null2)),
         # MelTuple('ATTR','7B','attributes',[0]*7),
-        MelStructA('ATTR','7B','attributes','strength','perception','endurance','charisma',
-            'intelligence','agility','luck'),
+        MelStructA('ATTR','7B','attributes','strength','perception','endurance',
+                   'charisma','intelligence','agility','luck'),
         )
     __slots__ = MelRecord.__slots__ + melSet.getSlotsUsed()
 
@@ -3139,8 +3142,9 @@ class MreCrea(MreActor):
         MelFids('PKID','aiPackages'),
         MelStrings('KFFZ','animations'),
         MelStruct('DATA','=4Bh2sh7B','type','combatSkill','magicSkill',
-            'stealthSkill','health',('unused2',null2),'damage','strength','perception',
-            'endurance','charisma','intelligence','agility','luck'),
+            'stealthSkill','health',('unused2',null2),'damage','strength',
+            'perception','endurance','charisma','intelligence','agility',
+            'luck'),
         MelStruct('RNAM','B','attackReach'),
         MelFid('ZNAM','combatStyle'),
         MelFid('PNAM','bodyPartData'),
@@ -3528,7 +3532,7 @@ class MreEnch(MelRecord,MreHasEffects):
         MelString('EDID','eid'),
         MelFull0(), #--At least one mod has this. Odd.
         MelStruct('ENIT','3IB3s','itemType','chargeAmount','enchantCost',
-                 (_flags,'flags',0L),('unused1',null3)),
+                  (_flags,'flags',0L),('unused1',null3)),
         #--itemType = 0: Scroll, 1: Staff, 2: Weapon, 3: Apparel
         MelEffects(),
         )
@@ -4435,6 +4439,7 @@ class MreMgef(MelRecord):
         MelString('DESC','text'),
         MelString('ICON','iconPath'),
         MelModel(),
+        # 'counterEffectCount' is a count of ESCE and should be updated
         MelStruct('DATA','IfI2iH2sIf6I2fIi',
             (_flags,'flags'),'baseCost',(FID,'associated'),'school','resistValue',
             'counterEffectCount',('unused1',null2),(FID,'light',0),'projectileSpeed',
@@ -4787,10 +4792,12 @@ class MreNpc(MreActor):
                   'boundX2','boundY2','boundZ2'),
         MelString('FULL','full'),
         MelModel(),
-        MelStruct('ACBS','=I2Hh3Hf2H',(_flags,'flags',0L),'fatigue','barterGold',
-                 ('level',1),'calcMin','calcMax','speedMultiplier','karma',
-                 'dispotionBase','templateFlags'),
-        MelStructs('SNAM','=IB3s','factions',(FID,'faction',None),'rank',('unused1','ODB')),
+        MelStruct('ACBS','=I2Hh3Hf2H',
+            (_flags,'flags',0L),'fatigue','barterGold',
+            ('level',1),'calcMin','calcMax','speedMultiplier','karma',
+            'dispotionBase','templateFlags'),
+        MelStructs('SNAM','=IB3s','factions',
+            (FID,'faction',None),'rank',('unused1','ODB')),
         MelFid('INAM','deathItem'),
         MelFid('VTCK','voice'),
         MelFid('TPLT','template'),
@@ -6047,7 +6054,7 @@ class MreRepu(MelRecord):
         MelString('FULL','full'),
         MelString('ICON','iconPath'),
         MelString('MICO','smallIconPath'),
-        MelStruct('DATA','I','value'),
+        MelStruct('DATA','f','value'),
         )
     __slots__ = MelRecord.__slots__ + melSet.getSlotsUsed()
 
