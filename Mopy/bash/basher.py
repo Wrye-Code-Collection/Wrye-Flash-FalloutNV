@@ -13069,9 +13069,6 @@ class Save_EditCreatedData(balt.ListEditorData):
             buff.write(', '.join(record.flags.getTrueAttrs())+'\n')
             for attr in ('strength','value','weight'):
                 buff.write('%s: %s\n' % (attr,getattr(record,attr)))
-        elif record.recType == 'CLOT':
-            buff.write(_('Clothing\nFlags: '))
-            buff.write(', '.join(record.flags.getTrueAttrs())+'\n')
         elif record.recType == 'WEAP':
             buff.write(bush.weaponTypes[record.weaponType]+'\n')
             for attr in ('damage','value','speed','reach','weight'):
@@ -13123,7 +13120,7 @@ class Save_EditCreatedData(balt.ListEditorData):
 class Save_EditCreated(Link):
     """Allows user to rename custom items (spells, enchantments, etc)."""
     menuNames = {'ENCH':_('Rename Enchanted...'),'SPEL':_('Rename Spells...'),'ALCH':_('Rename Potions...')}
-    recordTypes = {'ENCH':('ARMO','CLOT','WEAP')}
+    recordTypes = {'ENCH':('ARMO','WEAP')}
 
     def __init__(self,type):
         if type not in Save_EditCreated.menuNames:
