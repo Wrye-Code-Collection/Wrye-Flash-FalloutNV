@@ -2492,6 +2492,9 @@ class MreArmo(MelRecord):
     """Armor record."""
     classType = 'ARMO'
     _flags = MelBipedFlags(0L,Flags.getNames())
+    _dnamFlags = Flags(0L,Flags.getNames(
+        (0,'modulatesVoice'),
+    ))
     _generalFlags = Flags(0L,Flags.getNames(
         (5,'powerArmor'),
         (6,'notPlayable'),
@@ -2523,7 +2526,7 @@ class MreArmo(MelRecord):
         MelFid('SCRI','script'),
         MelFid('EITM','objectEffect'),
         MelStruct('BMDT','=IB3s',(_flags,'bipedFlags',0L),
-                  (_generalFlags,'generalFlags',0L),'armoBMDT1',),
+                  (_generalFlags,'generalFlags',0L),('armoBMDT1',null3),),
         MelModel('maleBody'),
         MelModel('maleWorld',2),
         MelString('ICON','maleIconPath'),
@@ -2543,7 +2546,7 @@ class MreArmo(MelRecord):
         MelFid('YNAM','pickupSound'),
         MelFid('ZNAM','dropSound'),
         MelStruct('DATA','=2if','value','health','weight'),
-        MelArmoDnam('DNAM','=hHfI','ar','flags','dt',('unknown',0L)),
+        MelArmoDnam('DNAM','=hHfI','ar',(_dnamFlags,'dnamFlags',0L),'dt',('unknown',null4)),
         MelStruct('BNAM','I',('overridesAnimationSound',0L)),
         MelStructs('SNAM','IB3sI','animationSounds',(FID,'sound'),'chance',('unused','\xb7\xe7\x0b'),'type'),
         MelFid('TNAM','animationSoundsTemplate'),
@@ -6625,8 +6628,9 @@ class MreWeap(MelRecord):
                     ('weapDnam4',null1),'reloadAnimationMod',('weapDnam5',null2),
                     'regenRate','killImpulse','valueBMod1','valueBMod2','valueBMod3',
                     'impulseDist','skillReq'),
-        MelStruct('CRDT','H2sfB3sI','criticalDamage','weapCrdt1','criticalMultiplier',
-                 (_cflags,'criticalFlags',0L),'weapCrdt2',(FID,'criticalEffect',0L)),
+        MelOptStruct('CRDT','H2sfB3sI','criticalDamage',('weapCrdt1',null2),
+                     'criticalMultiplier',(_cflags,'criticalFlags',0L),
+                     ('weapCrdt2',null3),(FID,'criticalEffect',0L)),
         MelWeapVats('VATS','I3f2B2s','vatsEffect','vatsSkill','vatsDamMult',
                     'vatsAp','vatsSilent','vatsModReqiured',('weapVats1',null2)),
         MelBase('VNAM','soundLevel'),
