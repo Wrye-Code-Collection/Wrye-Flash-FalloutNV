@@ -5990,18 +5990,6 @@ class MreRepu(MelRecord):
     __slots__ = MelRecord.__slots__ + melSet.getSlotsUsed()
 
 #------------------------------------------------------------------------------
-class MreRoad(MelRecord):
-    """Road structure. Part of large worldspaces."""
-    ####Could probably be loaded via MelStructA,
-    ####but little point since it is too complex to manipulate
-    classType = 'ROAD'
-    melSet = MelSet(
-        MelBase('PGRP','points_p'),
-        MelBase('PGRR','connections_p'),
-    )
-    __slots__ = MelRecord.__slots__ + melSet.getSlotsUsed()
-
-#------------------------------------------------------------------------------
 class MreRgdl(MelRecord):
     """Ragdoll"""
     classType = 'RGDL'
@@ -6758,22 +6746,23 @@ class MreWthr(MelRecord):
 # MreRecord.type_class
 #------------------------------------------------------------------------------
 MreRecord.type_class = dict((x.classType,x) for x in (
-        MreAchr, MreAcre, MreActi, MreAddn, MreAlch, MreAloc, MreAmef, MreAmmo, MreAnio,
-        MreArma, MreArmo, MreAspc, MreAvif, MreBook, MreBptd, MreCams, MreCcrd, MreCdck,
-        MreCell, MreChal, MreChip, MreClas, MreClmt, MreCmny, MreCobj, MreCont, MreCpth,
-        MreCrea, MreCsno, MreCsty, MreDebr, MreDehy, MreDial, MreDobj, MreDoor, MreEczn, MreEfsh,
-        MreEnch, MreExpl, MreEyes, MreFact, MreFlst, MreFurn, MreGlob, MreGmst, MreGras,
-        MreHair, MreHdpt, MreHung, MreIdle, MreIdlm, MreImad, MreImgs, MreImod, MreInfo, MreIngr,
+        MreActi, MreAddn, MreAlch, MreAloc, MreAmef, MreAmmo, MreAnio, MreArma, MreArmo, MreAspc,
+        MreAvif, MreBook, MreBptd, MreCams, MreCcrd, MreCdck, MreChal, MreChip, MreClas, MreClmt,
+        MreCmny, MreCobj, MreCont, MreCpth, MreCrea, MreCsno, MreCsty, MreDebr, MreDehy, MreDobj,
+        MreDoor, MreEczn, MreEfsh, MreEnch, MreExpl, MreEyes, MreFact, MreFlst, MreFurn, MreGlob,
+        MreGras, MreHair, MreHdpt, MreHung, MreIdle, MreIdlm, MreImad, MreImgs, MreImod, MreIngr,
         MreIpct, MreIpds, MreKeym, MreLgtm, MreLigh, MreLscr, MreLsct, MreLtex, MreLvlc, MreLvli,
-        MreLvln, MreMgef, MreMicn, MreMisc, MreMset, MreMstt, MreMusc, MreNavm, MreNote,
-        MreNpc, MrePack, MrePerk, MrePgre, MrePmis, MreProj, MrePwat, MreQust, MreRace, MreRads,
-        MreRcct, MreRcpe, MreRefr, MreRegn, MreRepu, MreRgdl, MreRoad, MreScol, MreScpt,
-        MreSlpd, MreSoun, MreSpel, MreStat, MreTact, MreTerm, MreTree,
-        MreTxst, MreVtyp, MreWatr, MreWeap, MreWrld, MreWthr,
+        MreLvln, MreMesg, MreMgef, MreMicn, MreMisc, MreMset, MreMstt, MreMusc, MreNote, MreNpc,
+        MrePack, MrePerk, MreProj, MrePwat, MreQust, MreRace, MreRads, MreRcct, MreRcpe, MreRegn,
+        MreRepu, MreRgdl, MreScol, MreScpt, MreSlpd, MreSoun, MreSpel, MreStat, MreTact, MreTerm,
+        MreTree, MreTxst, MreVtyp, MreWatr, MreWeap, MreWthr,
+        # Not Mergable
+        MreAchr, MreAcre, MreCell, MreDial, MreGmst, MreInfo, MreNavi, MreNavm, MrePgre, MrePmis,
+        MreRefr, MreWrld,
         MreTes4,
     ))
 MreRecord.simpleTypes = (set(MreRecord.type_class) -
-    set(('TES4','ACHR','ACRE','REFR','CELL','PGRD','ROAD','LAND','WRLD','INFO','DIAL','PGRE','NAVM')))
+    set(('TES4','ACHR','ACRE','REFR','CELL','PGRD','PGRE','LAND','WRLD','INFO','DIAL','NAVM')))
 
 # Mod Blocks, File ------------------------------------------------------------
 #------------------------------------------------------------------------------
@@ -6840,7 +6829,7 @@ class LoadFactory:
 
     def addClass(self,recClass):
         """Adds specified class."""
-        cellTypes = ('WRLD','ROAD','CELL','REFR','ACHR','ACRE','PGRD','LAND','PGRE','NAVM')
+        cellTypes = ('WRLD','CELL','REFR','ACHR','ACRE','PGRD','LAND','PGRE','NAVM')
         if isinstance(recClass,str):
             recType = recClass
             recClass = MreRecord
@@ -6873,7 +6862,7 @@ class LoadFactory:
     def getCellTypeClass(self):
         """Returns type_class dictionary for cell objects."""
         if not self.cellType_class:
-            types = ('REFR','ACHR','ACRE','PGRD','LAND','CELL','ROAD','PGRE','NAVM')
+            types = ('REFR','ACHR','ACRE','PGRD','LAND','CELL','PGRE','NAVM')
             getterRecClass = self.getRecClass
             self.cellType_class.update((x,getterRecClass(x)) for x in types)
         return self.cellType_class
@@ -7648,10 +7637,7 @@ class MobWorld(MobCells):
             header = insRecHeader()
             recType = header[0]
             recClass = cellGet(recType)
-            if recType == 'ROAD':
-                if not recClass: insSeek(header[1],1)
-                else: self.road = recClass(header,ins,True)
-            elif recType == 'CELL':
+            if recType == 'CELL':
                 if cell:
                     cellBlock = MobCell(header,selfLoadFactory,cell)
                     if block:
@@ -7763,7 +7749,7 @@ class MobWorld(MobCells):
         srcGetter = srcBlock.__getattribute__
         selfSetter = self.__setattr__
         mergeDiscard = mergeIds.discard
-        for attr in ('world','road'):
+        for attr in ('world',):
             myRecord = selfGetter(attr)
             record = srcGetter(attr)
             if myRecord and record:
@@ -20811,17 +20797,16 @@ class PatchFile(ModFile):
     """Defines and executes patcher configuration."""
     #--Class
     mergeClasses = (
-        MreActi, MreAddn, MreAlch, MreAloc, MreAmef, MreAmmo, MreAnio, MreArma, MreArmo,
-        MreAspc, MreAvif, MreBook, MreBptd, MreCams, MreCcrd, MreCdck, MreChal, MreChip,
-        MreClas, MreClmt, MreCmny, MreCobj, MreCont, MreCpth, MreCrea, MreCsno, MreCsty,
-        MreDebr, MreDehy, MreDobj, MreDoor, MreEczn, MreEfsh, MreEnch, MreExpl, MreEyes, MreFact,
-        MreFlst, MreFurn, MreGlob, MreGras, MreHair, MreHdpt, MreHung, MreIdle, MreIdlm,
-        MreImad, MreImgs, MreImod, MreIngr, MreIpct, MreIpds, MreKeym, MreLgtm, MreLigh, MreLscr,
-        MreLsct, MreLtex, MreLvlc, MreLvli, MreLvln, MreMgef, MreMicn, MreMisc, MreMset,
-        MreMstt, MreMusc, MreNote, MreNpc, MrePack, MrePerk, MreProj, MrePwat, MreQust, MreRace,
-        MreRads, MreRcct, MreRcpe, MreRegn, MreRepu, MreRgdl, MreScol, MreScpt,
-        MreSlpd, MreSoun, MreSpel, MreStat, MreTact, MreTerm, MreTree, MreTxst,
-        MreVtyp, MreWatr, MreWeap, MreWthr,
+        MreActi, MreAddn, MreAlch, MreAloc, MreAmef, MreAmmo, MreAnio, MreArma, MreArmo, MreAspc,
+        MreAvif, MreBook, MreBptd, MreCams, MreCcrd, MreCdck, MreChal, MreChip, MreClas, MreClmt,
+        MreCmny, MreCobj, MreCont, MreCpth, MreCrea, MreCsno, MreCsty, MreDebr, MreDehy, MreDobj,
+        MreDoor, MreEczn, MreEfsh, MreEnch, MreExpl, MreEyes, MreFact, MreFlst, MreFurn, MreGlob,
+        MreGras, MreHair, MreHdpt, MreHung, MreIdle, MreIdlm, MreImad, MreImgs, MreImod, MreIngr,
+        MreIpct, MreIpds, MreKeym, MreLgtm, MreLigh, MreLscr, MreLsct, MreLtex, MreLvlc, MreLvli,
+        MreLvln, MreMesg, MreMgef, MreMicn, MreMisc, MreMset, MreMstt, MreMusc, MreNote, MreNpc,
+        MrePack, MrePerk, MreProj, MrePwat, MreQust, MreRace, MreRads, MreRcct, MreRcpe, MreRegn,
+        MreRepu, MreRgdl, MreScol, MreScpt, MreSlpd, MreSoun, MreSpel, MreStat, MreTact, MreTerm,
+        MreTree, MreTxst, MreVtyp, MreWatr, MreWeap, MreWthr,
         )
 
     @staticmethod
@@ -26136,14 +26121,14 @@ class RoadImporter(ImportPatcher):
     def initData(self,progress):
         """Get cells from source files."""
         if not self.isActive: return
-        loadFactory = LoadFactory(False,MreCell,MreWrld,MreRoad)
+        loadFactory = LoadFactory(False,MreCell,MreWrld)
         progress.setFull(len(self.sourceMods))
         for srcMod in self.sourceMods:
             if srcMod not in modInfos: continue
             srcInfo = modInfos[srcMod]
             srcFile = ModFile(srcInfo,loadFactory)
             srcFile.load(True)
-            srcFile.convertToLongFids(('WRLD','ROAD'))
+            srcFile.convertToLongFids(('WRLD',))
             for worldBlock in srcFile.WRLD.worldBlocks:
                 if worldBlock.road:
                     worldId = worldBlock.world.fid
@@ -26153,17 +26138,17 @@ class RoadImporter(ImportPatcher):
 
     def getReadClasses(self):
         """Returns load factory classes needed for reading."""
-        return (None,(MreCell,MreWrld,MreRoad))[self.isActive]
+        return (None,(MreCell,MreWrld))[self.isActive]
 
     def getWriteClasses(self):
         """Returns load factory classes needed for writing."""
-        return (None,(MreCell,MreWrld,MreRoad))[self.isActive]
+        return (None,(MreCell,MreWrld))[self.isActive]
 
     def scanModFile(self, modFile, progress):
         """Add lists from modFile."""
         if not self.isActive or 'WRLD' not in modFile.tops: return
         patchWorlds = self.patchFile.WRLD
-        modFile.convertToLongFids(('CELL','WRLD','ROAD'))
+        modFile.convertToLongFids(('CELL','WRLD'))
         for worldBlock in modFile.WRLD.worldBlocks:
             if worldBlock.road:
                 worldId = worldBlock.world.fid

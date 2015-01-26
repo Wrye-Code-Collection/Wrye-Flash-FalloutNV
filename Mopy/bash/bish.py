@@ -106,7 +106,7 @@ def readRecord(record, melSet=0, skipLabel=0):
     if isinstance(record, bosh.MobCell):
         melSet = ['cell','persistent','distant','temp','land','pgrd']
     elif isinstance(record, bosh.MobWorld):
-        melSet = ['cellBlocks','world','road','worldCellBlock']
+        melSet = ['cellBlocks','world','worldCellBlock']
     elif hasattr(record, 'melSet'):
         melSet = record.melSet.getSlotsUsed()
         if record.recType == 'DIAL':
