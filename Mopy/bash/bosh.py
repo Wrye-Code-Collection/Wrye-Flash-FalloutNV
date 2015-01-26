@@ -23091,7 +23091,7 @@ class GraphicsPatcher(ImportPatcher):
         for recClass in (MreWeap,):
             recAttrs_class[recClass] = ('iconPath','smallIconPath','model','shellCasingModel','scopeModel','worldModel','firstPersonModel','animationType','gripAnimation','reloadAnimation','modelWithMods','firstPersonModelWithMods')
         for recClass in (MreArmo, MreArma):
-            recAttrs_class[recClass] = ('maleBody','maleWorld','maleIconPath','maleSmallIconPath','femaleBody','femaleWorld','femaleIconPath','femaleSmallIconPath','flags')
+            recAttrs_class[recClass] = ('maleBody','maleWorld','maleIconPath','maleSmallIconPath','femaleBody','femaleWorld','femaleIconPath','femaleSmallIconPath','dnamFlags')
         for recClass in (MreCrea,):
             recAttrs_class[recClass] = ('model','bodyParts','nift_p','bodyPartData','impactDataset')
         for recClass in (MreMgef,):
