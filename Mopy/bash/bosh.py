@@ -1699,7 +1699,7 @@ class MreSubrecord:
         self.data = data
         self.size = len(data)
 
-    def getSize(self):
+    def getSize(self,data):
         """Return size of self.data, after, if necessary, packing it."""
         if not self.changed: return self.size
         #--StringIO Object
@@ -4566,67 +4566,78 @@ class MreNavm(MelRecord):
 class MreNote(MelRecord):
     """Note record."""
     classType = 'NOTE'
+
     class MelNoteTnam(MelBase):
         """text or topic"""
-        def hasFids(self,formElements):
+
+        def hasFids(self, formElements):
             formElements.add(self)
-        def loadData(self,record,ins,type,size,readId):
-            #0:'sound',1:'text',2:'image',3:'voice'
-            if record.dataType == 1: # text (string)
-                value = ins.readString(size,readId)
+
+        def loadData(self, record, ins, type, size, readId):
+            # 0:'sound',1:'text',2:'image',3:'voice'
+            if record.dataType == 1:  # text (string)
+                (value,) = ins.readString(size, readId)
                 record.__setattr__(self.attr, (False, value))
-            elif record.dataType == 3: # voice (fid:DIAL)
-                (value,) = ins.unpack('I',size,readId)
+            elif record.dataType == 3:  # voice (fid:DIAL)
+                (value,) = ins.unpack('I', size, readId)
                 record.__setattr__(self.attr, (True, value))
             else:
-                raise ModError(ins.inName,_('Unexpected type: %d') % record.type)
-            if self._debug: print unpacked
-        def dumpData(self,record,out):
+                raise ModError(ins.inName, _('Unexpected type: %d') % record.type)
+            if self._debug: print value
+
+        def dumpData(self, record, out):
             value = record.__getattribute__(self.attr)
             if value is None: return
             (isFid, value) = value
             if value is not None:
-                #0:'sound',1:'text',2:'image',3:'voice'
-                if record.dataType == 1: # text (string)
-                    out.packSub0(self.subType,value)
-                elif record.dataType == 3: # voice (fid:DIAL)
-                    out.packRef(self.subType,value)
+                # 0:'sound',1:'text',2:'image',3:'voice'
+                if record.dataType == 1:  # text (string)
+                    out.packSub0(self.subType, value)
+                elif record.dataType == 3:  # voice (fid:DIAL)
+                    out.packRef(self.subType, value)
                 else:
-                    raise ModError(ins.inName,_('Unexpected type: %d') % record.type)
-        def mapFids(self,record,function,save=False):
+                    raise ModError(record.inName, _('Unexpected type: %d') % record.type)
+
+        def mapFids(self, record, function, save=False):
             value = record.__getattribute__(self.attr)
             if value is None: return
             (isFid, value) = value
             if isFid:
                 result = function(value)
-                if save: record.__setattr__(self.attr,(isFid,result))
+                if save: record.__setattr__(self.attr, (isFid, result))
+
     class MelNoteSnam(MelBase):
         """sound or npc"""
-        def hasFids(self,formElements):
+
+        def hasFids(self, formElements):
             formElements.add(self)
-        def loadData(self,record,ins,type,size,readId):
-            #0:'sound',1:'text',2:'image',3:'voice'
-            if record.dataType == 0: # sound (fid:SOUN)
-                (value,) = ins.unpack('I',size,readId)
+
+        def loadData(self, record, ins, type, size, readId):
+            # 0:'sound',1:'text',2:'image',3:'voice'
+            if record.dataType == 0:  # sound (fid:SOUN)
+                (value,) = ins.unpack('I', size, readId)
                 record.__setattr__(self.attr, (True, value))
-            elif record.dataType == 3: # voice (fid:NPC_)
-                (value,) = ins.unpack('I',size,readId)
+            elif record.dataType == 3:  # voice (fid:NPC_)
+                (value,) = ins.unpack('I', size, readId)
                 record.__setattr__(self.attr, (True, value))
             else:
-                raise ModError(ins.inName,_('Unexpected type: %d') % record.type)
-            if self._debug: print unpacked
-        def dumpData(self,record,out):
+                raise ModError(ins.inName, _('Unexpected type: %d') % record.type)
+            if self._debug: print value
+
+        def dumpData(self, record, out):
             value = record.__getattribute__(self.attr)
             if value is None: return
             (isFid, value) = value
-            if value is not None: out.packRef(self.subType,value)
-        def mapFids(self,record,function,save=False):
+            if value is not None: out.packRef(self.subType, value)
+
+        def mapFids(self, record, function, save=False):
             value = record.__getattribute__(self.attr)
             if value is None: return
             (isFid, value) = value
             if isFid:
                 result = function(value)
-                if save: record.__setattr__(self.attr,(isFid,result))
+                if save: record.__setattr__(self.attr, (isFid, result))
+
     melSet = MelSet(
         MelString('EDID','eid'),
         MelStruct('OBND','=6h',
@@ -5054,52 +5065,57 @@ class MrePack(MelRecord):
 class MrePerk(MelRecord):
     """Perk record."""
     classType = 'PERK'
+
     class MelPerkData(MelStruct):
         """Handle older truncated DATA for PERK subrecord."""
-        def loadData(self,record,ins,type,size,readId):
+
+        def loadData(self, record, ins, type, size, readId):
             if size == 5:
-                MelStruct.loadData(self,record,ins,type,size,readId)
+                MelStruct.loadData(self, record, ins, type, size, readId)
                 return
             elif size == 4:
-                unpacked = ins.unpack('BBBB',size,readId)
+                unpacked = ins.unpack('BBBB', size, readId)
             else:
                 raise "Unexpected size encountered for DATA subrecord: %s" % size
             unpacked += self.defaults[len(unpacked):]
             setter = record.__setattr__
-            for attr,value,action in zip(self.attrs,unpacked,self.actions):
+            for attr, value, action in zip(self.attrs, unpacked, self.actions):
                 if callable(action): value = action(value)
-                setter(attr,value)
+                setter(attr, value)
             if self._debug: print unpacked, record.flagsA.getTrueAttrs()
+
     class MelPerkEffectData(MelBase):
-        def hasFids(self,formElements):
+        def hasFids(self, formElements):
             formElements.add(self)
-        def loadData(self,record,ins,type,size,readId):
+
+        def loadData(self, record, ins, type, size, readId):
             target = MelObject()
-            record.__setattr__(self.attr,target)
+            record.__setattr__(self.attr, target)
             if record.type == 0:
-                format,attrs = ('II',('quest','queststage'))
+                format, attrs = ('II', ('quest', 'queststage'))
             elif record.type == 1:
-                format,attrs = ('I',('ability',))
+                format, attrs = ('I', ('ability',))
             elif record.type == 2:
-                format,attrs = ('HB',('entrypoint','function'))
+                format, attrs = ('HB', ('entrypoint', 'function'))
             else:
-                raise ModError(ins.inName,_('Unexpected type: %d') % record.type)
-            unpacked = ins.unpack(format,size,readId)
+                raise ModError(ins.inName, _('Unexpected type: %d') % record.type)
+            unpacked = ins.unpack(format, size, readId)
             setter = target.__setattr__
-            for attr,value in zip(attrs,unpacked):
-                setter(attr,value)
+            for attr, value in zip(attrs, unpacked):
+                setter(attr, value)
             if self._debug: print unpacked
-        def dumpData(self,record,out):
+
+        def dumpData(self, record, out):
             target = record.__getattribute__(self.attr)
             if not target: return
             if record.type == 0:
-                format,attrs = ('II',('quest','queststage'))
+                format, attrs = ('II', ('quest', 'queststage'))
             elif record.type == 1:
-                format,attrs = ('I',('ability',))
+                format, attrs = ('I', ('ability',))
             elif record.type == 2:
-                format,attrs = ('HB',('entrypoint','function'))
+                format, attrs = ('HB', ('entrypoint', 'function'))
             else:
-                raise ModError(ins.inName,_('Unexpected type: %d') % record.type)
+                raise ModError(record.inName, _('Unexpected type: %d') % record.type)
             values = []
             valuesAppend = values.append
             getter = target.__getattribute__
@@ -5107,11 +5123,12 @@ class MrePerk(MelRecord):
                 value = getter(attr)
                 valuesAppend(value)
             try:
-                out.packSub(self.subType,format,*values)
+                out.packSub(self.subType, format, *values)
             except struct.error:
-                print self.subType,format,values
+                print self.subType, format, values
                 raise
-        def mapFids(self,record,function,save=False):
+
+        def mapFids(self, record, function, save=False):
             target = record.__getattribute__(self.attr)
             if not target: return
             if record.type == 0:
@@ -5120,16 +5137,19 @@ class MrePerk(MelRecord):
             elif record.type == 1:
                 result = function(target.ability)
                 if save: target.ability = result
+
     class MelPerkEffects(MelGroups):
-        def __init__(self,attr,*elements):
-            MelGroups.__init__(self,attr,*elements)
-        def setMelSet(self,melSet):
+        def __init__(self, attr, *elements):
+            MelGroups.__init__(self, attr, *elements)
+
+        def setMelSet(self, melSet):
             self.melSet = melSet
             self.attrLoaders = {}
             for element in melSet.elements:
-                attr = element.__dict__.get('attr',None)
+                attr = element.__dict__.get('attr', None)
                 if attr: self.attrLoaders[attr] = element
-        def loadData(self,record,ins,type,size,readId):
+
+        def loadData(self, record, ins, type, size, readId):
             if type == 'DATA' or type == 'CTDA':
                 effects = record.__getattribute__(self.attr)
                 if not effects:
@@ -5137,12 +5157,13 @@ class MrePerk(MelRecord):
                         element = self.attrLoaders['_data']
                     elif type == 'CTDA':
                         element = self.attrLoaders['conditions']
-                    element.loadData(record,ins,type,size,readId)
+                    element.loadData(record, ins, type, size, readId)
                     return
-            MelGroups.loadData(self,record,ins,type,size,readId)
+            MelGroups.loadData(self, record, ins, type, size, readId)
+
     class MelPerkEffectParams(MelGroups):
-        def loadData(self,record,ins,type,size,readId):
-            if type in ('EPFD','EPFT','EPF2','EPF3','SCHR'):
+        def loadData(self, record, ins, type, size, readId):
+            if type in ('EPFD', 'EPFT', 'EPF2', 'EPF3', 'SCHR'):
                 target = self.getDefault()
                 record.__getattribute__(self.attr).append(target)
             else:
@@ -5152,13 +5173,14 @@ class MrePerk(MelRecord):
             slots.extend(element.getSlotsUsed())
             target.__slots__ = slots
             target.recordType = type
-            element.loadData(target,ins,type,size,readId)
-        def dumpData(self,record,out):
+            element.loadData(target, ins, type, size, readId)
+
+        def dumpData(self, record, out):
             for target in record.__getattribute__(self.attr):
                 element = self.loaders[target.recordType]
                 if not element:
-                    raise ModError(ins.inName,_('Unexpected type: %d') % target.recordType)
-                element.dumpData(target,out)
+                    raise ModError(record.inName, _('Unexpected type: %d') % target.recordType)
+                element.dumpData(target, out)
 
     melSet = MelSet(
         MelString('EDID','eid'),
@@ -12178,13 +12200,17 @@ class ModInfos(FileInfos):
 
     def getRequires(self,fileName):
         """Extracts and returns requirement dictionary for fileName from header.hedr.description."""
+        print "****************************** THIS FUNCTION WAS CALLED"
         requires = {}
         if not fileName in self.data or not self.data[fileName].header:
             maRequires = reRequires.search(self.data[fileName].header.description)
+            print maRequires
             if maRequires:
                 for item in map(string.strip,maRequires.group(1).split(',')):
                     maReqItem = reReqItem.match(item)
-                    key,value = ma
+                    print maReqItem
+                    key,value = maReqItem
+                    print (key,value)
                     if maReqItem:
                         key,value = maReqItem.groups()
                         requires[key] = float(value or 0)
@@ -20534,34 +20560,34 @@ class ModCleaner:
             return [(set(),set(),set()) for x in range(len(modInfos))]
 
     @staticmethod
-    def _clean_CBash(cleaners,what,progress):
-        if what & (ModCleaner.UDR|ModCleaner.FOG):
+    def _clean_CBash(cleaners, what, progress):
+        if what & (ModCleaner.UDR | ModCleaner.FOG):
             doUDR = what & ModCleaner.UDR
             doFog = what & ModCleaner.FOG
-            progress.setFull(max(len(cleaners),1))
+            progress.setFull(max(len(cleaners), 1))
             if len(cleaners) > 1:
-                progress(0,_('Loading...')+'\n'+cleaners[0].modInfo.name.s)
+                progress(0, _('Loading...') + '\n' + cleaners[0].modInfo.name.s)
             else:
-                progress(0,_('Loading...'))
-            #--Load
+                progress(0, _('Loading...'))
+            # --Load
             collection = ModCleaner._loadCollection(cleaners)
             #--Clean
-            for i,cleaner in enumerate(cleaners):
-                progress(i,_('Cleaning...') + '\n' + cleaner.modInfo.name.s)
+            for i, cleaner in enumerate(cleaners):
+                progress(i, _('Cleaning...') + '\n' + cleaner.modInfo.name.s)
                 path = cleaner.modInfo.getPath()
                 modFile = collection.LookupModFile(path.stail)
                 changed = False
                 #Only do UDR and Fog right now
-                total = sum([len(cleaner.udr)*doUDR,len(cleaner.fog)*doFog])
+                total = sum([len(cleaner.udr) * doUDR, len(cleaner.fog) * doFog])
                 recordNum = 0
-                subprogress = SubProgress(progress,i,i+1)
-                subprogress.setFull(max(total,1))
+                subprogress = SubProgress(progress, i, i + 1)
+                subprogress.setFull(max(total, 1))
                 if doUDR:
                     for fid in cleaner.udr:
                         subprogress(recordNum)
                         recordNum += 1
                         record = modFile.LookupRecord(fid)
-                        if record and record._Type in ('ACRE','ACHR','REFR') and record.IsDeleted:
+                        if record and record._Type in ('ACRE', 'ACHR', 'REFR') and record.IsDeleted:
                             changed = True
                             record.IsDeleted = False
                             record.IsIgnored = True
@@ -20580,7 +20606,14 @@ class ModCleaner:
                         modFile.save(False)
                     except WindowsError, werr:
                         if werr.winerror != 32: raise
-                        while balt.askYes(None,_('Bash encountered an error when saving %s.\n\nThe file is in use by another process such as TES4Edit.\nPlease close the other program that is accessing %s.\n\nTry again?') % (modPath.stail,modPath.stail),_('%s - Save Error') % modPath.stail):
+                        while balt.askYes(None, (_('Bash encountered an error when saving %s.')
+                                                     + '\n\n' +
+                                                     _('The file is in use by another process such as TES4Edit.')
+                                                     + '\n' +
+                                                     _('Please close the other program that is accessing %s.')
+                                                     + '\n\n' +
+                                                     _('Try again?')
+                                                ) % (path.stail, path.stail), path.stail + _(' - Save Error')):
                             try:
                                 modFile.save(False)
                             except WindowsError, werr:
@@ -20591,55 +20624,59 @@ class ModCleaner:
             collection.Unload()
 
     @staticmethod
-    def _clean_Python(cleaners,what,progress):
-        if what & (ModCleaner.UDR|ModCleaner.FOG):
+    def _clean_Python(cleaners, what, progress):
+        if what & (ModCleaner.UDR | ModCleaner.FOG):
             doUDR = what & ModCleaner.UDR
             doFog = what & ModCleaner.FOG
-            progress.setFull(max(len(cleaners),1))
-            #--Clean
-            for i,cleaner in enumerate(cleaners):
-                progress(i,_('Cleaning...')+'\n'+cleaner.modInfo.name.s)
-                subprogress = SubProgress(progress,i,i+1)
-                subprogress.setFull(max(cleaner.modInfo.size,1))
+            progress.setFull(max(len(cleaners), 1))
+            # --Clean
+            for i, cleaner in enumerate(cleaners):
+                progress(i, _('Cleaning...') + '\n' + cleaner.modInfo.name.s)
+                subprogress = SubProgress(progress, i, i + 1)
+                subprogress.setFull(max(cleaner.modInfo.size, 1))
                 #--File stream
                 path = cleaner.modInfo.getPath()
                 #--Scan & clean
-                ins = ModReader(cleaner.modInfo.name,path.open('rb'))
+                ins = ModReader(cleaner.modInfo.name, path.open('rb'))
                 out = path.temp.open('wb')
+
                 def copy(size):
                     out.write(ins.read(size))
+
                 def copyPrev(size):
-                    ins.seek(-size,1)
+                    ins.seek(-size, 1)
                     out.write(ins.read(size))
+
                 changed = False
                 while not ins.atEnd():
                     subprogress(ins.tell())
-                    (type,size,flags,fid,uint2,uint3) = ins.unpackRecHeader()
+                    (type, size, flags, fid, uint2, uint3) = ins.unpackRecHeader()
                     if type == 'GRUP':
                         if fid != 0:
                             pass
-                        elif flags not in ('CELL','WRLD'):
-                            copy(size-20)
+                        elif flags not in ('CELL', 'WRLD'):
+                            copy(size - 20)
                     else:
-                        if doUDR and flags & 0x20 and type in ('ACHR','ACRE','REFR'):
+                        if doUDR and flags & 0x20 and type in ('ACHR', 'ACRE', 'REFR'):
                             flags = (flags & ~0x20) | 0x1000
-                            out.seek(-20,1)
-                            out.write(struct.pack('=4s4I',type,size,flags,fid,uint2))
+                            out.seek(-20, 1)
+                            out.write(struct.pack('=4s4I', type, size, flags, fid, uint2))
                             change = True
                         if doFog and type == 'CELL':
                             nextRecord = ins.tell() + size
                             while ins.tell() < nextRecord:
                                 subprogress(ins.tell())
-                                (nextType,nextSize) = ins.unpackSubHeader()
+                                (nextType, nextSize) = ins.unpackSubHeader()
                                 copyPrev(6)
                                 if nextType != 'XCLL':
                                     copy(nextSize)
                                 else:
-                                    color,near,far,rotXY,rotZ,fade,clip = ins.unpack('=12s2f2l2f',size,'CELL.XCLL')
+                                    color, near, far, rotXY, rotZ, fade, clip = ins.unpack('=12s2f2l2f', size,
+                                                                                           'CELL.XCLL')
                                     if not (near or far or clip):
                                         near = 0.0001
                                         changed = True
-                                    out.write(struct.pack('=12s2f2l2f',color,near,far,rotXY,rotZ,fade,clip))
+                                    out.write(struct.pack('=12s2f2l2f', color, near, far, rotXY, rotZ, fade, clip))
                         else:
                             copy(size)
                 #--Done
@@ -20647,20 +20684,27 @@ class ModCleaner:
                 out.close()
                 #--Save
                 if changed:
-                    modInfo.makeBackup()
+                    cleaner.modInfo.makeBackup()
                     try:
                         path.untemp()
                     except WindowsError, werr:
                         if werr.winerror != 32: raise
-                        while balt.askYes(None,_('Bash encountered an error when saving %s.\n\nThe file is in use by another process such as TES4Edit.\nPlease close the other program that is accessing %s.\n\nTry again?') % (modPath.stail,modPath.stail),_('%s - Save Error') % modPath.stail):
+                        while balt.askYes(None, (_(u'Bash encountered an error when saving %s.')
+                                                     + u'\n\n' +
+                                                     _(u'The file is in use by another process such as TES4Edit.')
+                                                     + u'\n' +
+                                                     _(u'Please close the other program that is accessing %s.')
+                                                     + u'\n\n' +
+                                                     _(u'Try again?')
+                                                ) % (path.stail, path.stail), path.stail + _(u' - Save Error')):
                             try:
                                 path.untemp()
-                            except WindowsError,werr:
+                            except WindowsError, werr:
                                 continue
                             break
                         else:
                             raise
-                    modInfo.setmtime()
+                    cleaner.modInfo.setmtime()
                 else:
                     path.temp.remove()
 
