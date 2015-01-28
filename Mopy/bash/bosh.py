@@ -4576,7 +4576,7 @@ class MreNote(MelRecord):
         def loadData(self, record, ins, type, size, readId):
             # 0:'sound',1:'text',2:'image',3:'voice'
             if record.dataType == 1:  # text (string)
-                (value,) = ins.readString(size, readId)
+                value = ins.readString(size, readId)
                 record.__setattr__(self.attr, (False, value))
             elif record.dataType == 3:  # voice (fid:DIAL)
                 (value,) = ins.unpack('I', size, readId)
