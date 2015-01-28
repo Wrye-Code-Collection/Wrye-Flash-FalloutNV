@@ -60,7 +60,7 @@ UnicodeEncodings = (
     'U16',      # Some files use UTF-16 though
     'cp1252',   # Western Europe
     'cp500',    # Western Europe
-    'cp932',    # Japanese SJIS-win 
+    'cp932',    # Japanese SJIS-win
     'mbcs',     # Multi-byte character set (depends on the Windows locale)
     )
 NumEncodings = len(UnicodeEncodings)
@@ -72,7 +72,7 @@ def Unicode(name,tryFirstEncoding=False):
         if tryFirstEncoding:
             try:
                 return unicode(name,tryFirstEncoding)
-            except UnicodeDecodeError: 
+            except UnicodeDecodeError:
                 deprint("Unable to decode '%s' in %s." % (name, tryFirstEncoding))
                 pass
         for i in range(NumEncodings):
@@ -90,7 +90,7 @@ def Encode(name,tryFirstEncoding=False):
         if tryFirstEncoding:
             try:
                 return name.encode(tryFirstEncoding)
-            except UnicodeEncodeError: 
+            except UnicodeEncodeError:
                 deprint("Unable to encode '%s' in %s." % (name, tryFirstEncoding))
                 pass
         for i in range(NumEncodings):
@@ -777,9 +777,12 @@ class LString(object):
     __slots__ = ('_s','_cs')
 
     def __init__(self,s):
-        if isinstance(s,LString): s = s._s
-        self._s = s
-        self._cs = s.lower()
+        if isinstance(s,LString):
+            self._s = s._s
+            self._cs = s._cs
+        else:
+            self._s = s
+            self._cs = s.lower()
 
     def __getstate__(self):
         """Used by pickler. _cs is redundant,so don't include."""
@@ -963,53 +966,53 @@ class Path(object):
     #--String/unicode versions.
     @property
     def s(self):
-        "Path as string."
+        """Path as string."""
         return self._s
     @property
     def cs(self):
-        "Path as string in normalized case."
+        """Path as string in normalized case."""
         return self._cs
     @property
     def csroot(self):
-        "Root as string."
+        """Root as string."""
         return self._csroot
     @property
     def sroot(self):
-        "Root as string."
+        """Root as string."""
         return self._sroot
     @property
     def shead(self):
-        "Head as string."
+        """Head as string."""
         return self._shead
     @property
     def stail(self):
-        "Tail as string."
+        """Tail as string."""
         return self._stail
     @property
     def sbody(self):
-        "For alpha\beta.gamma returns beta as string."
+        """For alpha\beta.gamma returns beta as string."""
         return self._sbody
     @property
     def csbody(self):
-        "For alpha\beta.gamma returns beta as string in normalized case."
+        """For alpha\beta.gamma returns beta as string in normalized case."""
         return self._csbody
 
     #--Head, tail
     @property
     def headTail(self):
-        "For alpha\beta.gamma returns (alpha,beta.gamma)"
+        """For alpha\beta.gamma returns (alpha,beta.gamma)"""
         return map(GPath,(self._shead,self._stail))
     @property
     def head(self):
-        "For alpha\beta.gamma, returns alpha."
+        """For alpha\beta.gamma, returns alpha."""
         return GPath(self._shead)
     @property
     def tail(self):
-        "For alpha\beta.gamma, returns beta.gamma."
+        """For alpha\beta.gamma, returns beta.gamma."""
         return GPath(self._stail)
     @property
     def body(self):
-        "For alpha\beta.gamma, returns beta."
+        """For alpha\beta.gamma, returns beta."""
         return GPath(self._sbody)
 
     #--Root, ext
@@ -1018,15 +1021,15 @@ class Path(object):
         return (GPath(self._sroot),self._ext)
     @property
     def root(self):
-        "For alpha\beta.gamma returns alpha\beta"
+        """For alpha\beta.gamma returns alpha\beta"""
         return GPath(self._sroot)
     @property
     def ext(self):
-        "Extension (including leading period, e.g. '.txt')."
+        """Extension (including leading period, e.g. '.txt')."""
         return self._ext
     @property
     def cext(self):
-        "Extension in normalized case."
+        """Extension in normalized case."""
         return self._cext
     @property
     def temp(self):
@@ -1034,13 +1037,13 @@ class Path(object):
         return self+'.tmp'
     @property
     def backup(self):
-        "Backup file path."
+        """Backup file path."""
         return self+'.bak'
 
     #--size, atime, ctime
     @property
     def size(self):
-        "Size of file or directory."
+        """Size of file or directory."""
         if self.isdir():
             join = os.path.join
             getSize = os.path.getsize
@@ -1085,7 +1088,7 @@ class Path(object):
                 return max(c)
             except ValueError:
                 return 0
-        try:        
+        try:
             mtime = int(os.path.getmtime(self._s))
         except WindowsError, werr:
                 if werr.winerror != 123: raise
@@ -1481,6 +1484,7 @@ class DataDict:
     def __contains__(self,key):
         return key in self.data
     def __getitem__(self,key):
+        """Return value for key or modinfo (?) of the game master file."""
         if self.data.has_key(key):
             return self.data[key]
         else:
@@ -1493,7 +1497,8 @@ class DataDict:
     def __len__(self):
         return len(self.data)
     def setdefault(self,key,default):
-        return self.data.setdefault(key,value)
+        # return self.data.setdefault(key,value)
+        return self.data.setdefault(key,default)
     def keys(self):
         return self.data.keys()
     def values(self):
@@ -2343,8 +2348,8 @@ def getMatch(reMatch,group=0):
 
 def intArg(arg,default=None):
     """Returns argument as an integer. If argument is a string, then it converts it using int(arg,0)."""
-    if arg == None: return default
-    elif isinstance(arg,StringType): return int(arg,0)
+    if arg is None: return default
+    elif isinstance(arg,types.StringTypes): return int(arg,0)
     else: return int(arg)
 
 def invertDict(indict):
@@ -2679,7 +2684,7 @@ class WryeText:
         reHttp = re.compile(r' (http://[_~a-zA-Z0-9\./%-]+)')
         reWww = re.compile(r' (www\.[_~a-zA-Z0-9\./%-]+)')
         #reWd = re.compile(r'(<[^>]+>|\[[^\]]+\]|\W+)')     # \[[^\]]+\] doesn't match.
-        reWd = re.compile(r'(<[^>]+>|\[\[[^\]]+\]\]|\s+|[%s]+)' % re.escape(string.punctuation.replace('_',''))) 
+        reWd = re.compile(r'(<[^>]+>|\[\[[^\]]+\]\]|\s+|[%s]+)' % re.escape(string.punctuation.replace('_','')))
         rePar = re.compile(r'^(\s*[a-zA-Z(;]|\*\*|~~|__|\s*<i|\s*<a)')
         reFullLink = re.compile(r'(:|#|\.[a-zA-Z0-9]{2,4}$)')
         reColor = re.compile(r'\[\s*color\s*=[\s\"\']*(.+?)[\s\"\']*\](.*?)\[\s*/\s*color\s*\]',re.I)
