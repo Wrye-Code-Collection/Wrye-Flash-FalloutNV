@@ -393,7 +393,7 @@ def netString(x):
     elif lenx > 0x7FFF: #--Actually probably fails earlier.
         raise UncodedError
     else:
-        lenx =  x80 | lenx & 0x7f | (lenx & 0xff80) << 1
+        lenx = 0x80 | lenx & 0x7f | (lenx & 0xff80) << 1
         return struct.pack('H',lenx)+x
 
 # Groups
