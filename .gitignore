@@ -242,3 +242,10 @@ NVJP/
 Redists/
 *.pyc
 *.bak
+
+
+#############
+## PyCharm Dirs and Files
+#############
+
+Mopy/.idea/*
