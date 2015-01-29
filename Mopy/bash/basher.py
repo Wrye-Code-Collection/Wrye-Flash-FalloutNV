@@ -6791,7 +6791,7 @@ PatchDialog.patchers.extend((
     NpcFacePatcher(),
 ##    PowerExhaustion(),
     RacePatcher(),
-    RoadImporter(),
+##    RoadImporter(),
     SoundPatcher(),
     StatsPatcher(),
 ##    SEWorldEnforcer(),
