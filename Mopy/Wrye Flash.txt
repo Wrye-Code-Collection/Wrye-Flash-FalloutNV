@@ -38,9 +38,10 @@ Additionally, Wrye Bash comes packaged with the following programs:
 {{CONTENTS=0}}
 **All versions by Wrye team and or Valda unless otherwise noted.**
 
-=== 16.8 [1/26/2015]
+=== 16.8 [1/28/2015]
 * Removed def setRace since it is not used in Fallout
 * Minor fixes to MreArma, MreArmo, MreWeap and Graphics patcher
+* Normalized Routines and patchers between FO3 and FNV when applicable
 
 === 16.7 [1/25/2015]
 * Removed Unused Records
