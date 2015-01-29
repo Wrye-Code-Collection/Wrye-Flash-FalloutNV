@@ -149,7 +149,7 @@ allTags = sorted((
     'Names', 'NoMerge', 'NpcFaces', 'R.Relations', 'Relev', 'Scripts',
     'ScriptContents', 'Sound', 'Stats', 'Voice-F', 'Voice-M', 'R.Teeth',
     'R.Mouth', 'R.Ears', 'R.Head', 'R.Attributes-F', 'R.Attributes-M', 'R.Skills',
-    'R.Description', 'Roads', 'Actors.Anims', 'Actors.AIData', 'Actors.DeathItem',
+    'R.Description', 'Actors.Anims', 'Actors.AIData', 'Actors.DeathItem',
     'Actors.AIPackages', 'Actors.AIPackagesForceAdd', 'Actors.Stats', 'Actors.ACBS',
     'NPC.Class', 'Actors.CombatStyle', 'Creatures.Blood', 'NPC.Race',
     'Actors.Skeleton', 'NpcFacesForceFullImport', 'MustBeActiveIfImported', 'Deflst',
