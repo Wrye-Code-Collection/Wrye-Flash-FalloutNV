@@ -1377,7 +1377,7 @@ class MelEffects(MelGroups):
         """Initialize elements."""
         MelGroups.__init__(self,attr,
             MelFid('EFID','baseEffect'),
-            MelStruct('EFIT','5i','magnitude','area','duration','recipient','actorValue'),
+            MelStruct('EFIT','4Ii','magnitude','area','duration','recipient','actorValue'),
             # MelGroup('scriptEffect',
             #     MelEffects.MelEffectsScit(),
             #     MelString('FULL','full'),
@@ -1391,10 +1391,9 @@ class MelDestructible(MelGroup):
     def __init__(self,attr='destructible'):
         """Initialize elements."""
         MelGroup.__init__(self,attr,
-            MelBase('DEST','header'),
-            MelStruct('DEST','IhH','health','count','flags'),
+            MelStruct('DEST','i2B2s','health','count','destFlags1','unused'),
             MelGroups('stages',
-                      MelStruct('DSTD','=4B4I','health','index','damageStage','flags',
+                      MelStruct('DSTD','=4B4I','health','index','damageStage','destFlags1',
                                 'selfDamagePerSecond',(FID,'explosion',None),(FID,'debris',None),'debrisCount'),
                       MelString('DMDL','model'),
                       MelBase('DMDT','dmdt'), #--Should be a struct. Maybe later.
@@ -1460,6 +1459,7 @@ class MelOwnership(MelGroup):
         MelGroup.__init__(self, 'ownership',
             MelFid('XOWN','owner'),
             MelOptStruct('XRNK','i',('rank',None)),
+            # Double check XGLB it's not used in FNVEdit
             MelFid('XGLB','global'),
         )
 
@@ -23132,7 +23132,7 @@ class GraphicsPatcher(ImportPatcher):
         recFidAttrs_class = self.recFidAttrs_class = {}
         for recClass in (MreLscr, MreClas, MreLtex, MreRegn):
             recAttrs_class[recClass] = ('iconPath',)
-        for recClass in (MreActi, MreDoor, MreFurn, MreGras, MreStat, MreMstt, MrePwat, MreHdpt, MreTact, MreDobj):
+        for recClass in (MreActi, MreBptd, MreDoor, MreFurn, MreGras, MreHdpt, MreMstt, MrePwat, MreStat, MreTact, MreTerm):
             recAttrs_class[recClass] = ('model',)
         for recClass in (MreLigh,):
             recAttrs_class[recClass] = ('iconPath','model')
@@ -26212,7 +26212,7 @@ class RoadImporter(ImportPatcher):
         """Add lists from modFile."""
         if not self.isActive or 'WRLD' not in modFile.tops: return
         patchWorlds = self.patchFile.WRLD
-        modFile.convertToLongFids(('CELL','WRLD'))
+        modFile.convertToLongFids(('CELL','WRLD',))
         for worldBlock in modFile.WRLD.worldBlocks:
             if worldBlock.road:
                 worldId = worldBlock.world.fid
