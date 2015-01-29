@@ -2741,7 +2741,7 @@ class ObCELLRecord(ObBaseRecord):
         retValue = _CGetField(self._CollectionID, self._ModID, self._RecordID, 40, 0, 0, 0, 0, 0, 0, 0)
         if(retValue): return retValue
         return 0
-        
+
     @property
     def bsb(self):
         """Returns tesfile block and sub-block indices for cells in this group.
@@ -3849,36 +3849,36 @@ class ObLVLIRecord(ObBaseRecord):
     IsUseAllSpells = CBashBasicFlag('flags', 0x00000004)
     exportattrs = copyattrs = ObBaseRecord.baseattrs + ['chanceNone', 'flags', 'entries_list']
 
-class ObLVSPRecord(ObBaseRecord):
-    _Type = 'LVSP'
-    class Entry(ListComponent):
-        level = CBashGeneric_LIST(1, c_short)
-        unused1 = CBashUINT8ARRAY_LIST(2, 2)
-        listId = CBashFORMID_LIST(3)
-        count = CBashGeneric_LIST(4, c_short)
-        unused2 = CBashUINT8ARRAY_LIST(5, 2)
-        exportattrs = copyattrs = ['level', 'listId', 'count']
+# class ObLVLNRecord(ObBaseRecord):
+#     _Type = 'LVLN'
+#     class Entry(ListComponent):
+#         level = CBashGeneric_LIST(1, c_short)
+#         unused1 = CBashUINT8ARRAY_LIST(2, 2)
+#         listId = CBashFORMID_LIST(3)
+#         count = CBashGeneric_LIST(4, c_short)
+#         unused2 = CBashUINT8ARRAY_LIST(5, 2)
+#         exportattrs = copyattrs = ['level', 'listId', 'count']
+#
+#     def mergeFilter(self,modSet):
+#         """Filter out items that don't come from specified modSet."""
+#         self.entries = [entry for entry in self.entries if entry.listId[0] in modSet]
+#
+#     chanceNone = CBashGeneric(5, c_ubyte)
+#     flags = CBashGeneric(6, c_ubyte)
+#     script = CBashJunk(7) #Doesn't actually exist, but is here so that LVLC,LVLI,LVLN can be processed similarly
+#     template = CBashJunk(8) #ditto
 
-    def mergeFilter(self,modSet):
-        """Filter out items that don't come from specified modSet."""
-        self.entries = [entry for entry in self.entries if entry.listId[0] in modSet]
+#     def create_entry(self):
+#         length = CBash.GetFieldAttribute(self._CollectionID, self._ModID, self._RecordID, 9, 0, 0, 0, 0, 0, 0, 1)
+#         CBash.SetField(self._CollectionID, self._ModID, self._RecordID, 9, 0, 0, 0, 0, 0, 0, 0, c_ulong(length + 1))
+#         return self.Entry(self._CollectionID, self._ModID, self._RecordID, 9, length)
+#     entries = CBashLIST(9, Entry)
+#     entries_list = CBashLIST(9, Entry, True)
 
-    chanceNone = CBashGeneric(5, c_ubyte)
-    flags = CBashGeneric(6, c_ubyte)
-    script = CBashJunk(7) #Doesn't actually exist, but is here so that LVLC,LVLI,LVSP can be processed similarly
-    template = CBashJunk(8) #ditto
-
-    def create_entry(self):
-        length = CBash.GetFieldAttribute(self._CollectionID, self._ModID, self._RecordID, 9, 0, 0, 0, 0, 0, 0, 1)
-        CBash.SetField(self._CollectionID, self._ModID, self._RecordID, 9, 0, 0, 0, 0, 0, 0, 0, c_ulong(length + 1))
-        return self.Entry(self._CollectionID, self._ModID, self._RecordID, 9, length)
-    entries = CBashLIST(9, Entry)
-    entries_list = CBashLIST(9, Entry, True)
-
-    IsCalcFromAllLevels = CBashBasicFlag('flags', 0x00000001)
-    IsCalcForEachItem = CBashBasicFlag('flags', 0x00000002)
-    IsUseAllSpells = CBashBasicFlag('flags', 0x00000004)
-    exportattrs = copyattrs = ObBaseRecord.baseattrs + ['chanceNone', 'flags', 'entries_list']
+#     IsCalcFromAllLevels = CBashBasicFlag('flags', 0x00000001)
+#     IsCalcForEachItem = CBashBasicFlag('flags', 0x00000002)
+#     IsUseAllSpells = CBashBasicFlag('flags', 0x00000004)
+#     exportattrs = copyattrs = ObBaseRecord.baseattrs + ['chanceNone', 'flags', 'entries_list']
 
 class ObMGEFRecord(ObBaseRecord):
     _Type = 'MGEF'
@@ -4886,8 +4886,8 @@ class ObSOUNRecord(ObBaseRecord):
     IsMenuSound = CBashBasicFlag('flags', 0x00000020)
     Is2D = CBashBasicFlag('flags', 0x00000040)
     Is360LFE = CBashBasicFlag('flags', 0x00000080)
-    exportattrs = copyattrs = ObBaseRecord.baseattrs + ['soundPath', 'minDistance', 'maxDistance',
-                                        'freqAdjustment', 'flags', 'staticAtten',
+    exportattrs = copyattrs = ObBaseRecord.baseattrs + ['soundPath', 'minDist', 'maxDist',
+                                        'freqAdj', 'flags', 'staticAtten',
                                         'stopTime', 'startTime']
 
 class ObSPELRecord(ObBaseRecord):
@@ -5326,7 +5326,8 @@ type_record = dict([('BASE',ObBaseRecord),(None,None),('',None),
                     ('REFR',ObREFRRecord),('PGRD',ObPGRDRecord),('LAND',ObLANDRecord),
                     ('ROAD',ObROADRecord),('DIAL',ObDIALRecord),('INFO',ObINFORecord),
                     ('QUST',ObQUSTRecord),('IDLE',ObIDLERecord),('PACK',ObPACKRecord),
-                    ('CSTY',ObCSTYRecord),('LSCR',ObLSCRRecord),('LVSP',ObLVSPRecord),
+                    # Removed ('LVSP',ObLVSPRecord)
+                    ('CSTY',ObCSTYRecord),('LSCR',ObLSCRRecord),
                     ('ANIO',ObANIORecord),('WATR',ObWATRRecord),('EFSH',ObEFSHRecord)])
 
 class ObModFile(object):
@@ -5410,7 +5411,7 @@ class ObModFile(object):
                         if not formId: continue
                         if formId[0] != self.GName:
                             masters.add(formId[0])
-                if type in ('LVLI','LVSP','LVLC'):
+                if type in ('LVLI','LVLC','LVLN'):
                     for entry in record.entries:
                         formMaster = entry.listId[0]
                         if formMaster != self.GName:
@@ -5767,11 +5768,11 @@ class ObModFile(object):
         return None
     LSCR = CBashRECORDARRAY(ObLSCRRecord, 'LSCR', 0)
 
-    def create_LVSP(self, EditorID=0, FormID=0):
-        RecordID = CBash.CreateRecord(self._CollectionID, self._ModID, cast("LVSP", POINTER(c_ulong)).contents.value, MakeShortFid(self._CollectionID, FormID), EditorID, 0, 0)
-        if(RecordID): return ObLVSPRecord(self._CollectionID, self._ModID, RecordID, 0, 0)
-        return None
-    LVSP = CBashRECORDARRAY(ObLVSPRecord, 'LVSP', 0)
+    # def create_LVLN(self, EditorID=0, FormID=0):
+    #    RecordID = CBash.CreateRecord(self._CollectionID, self._ModID, cast("LVLN", POINTER(c_ulong)).contents.value, MakeShortFid(self._CollectionID, FormID), EditorID, 0, 0)
+    #    if(RecordID): return ObLVLNRecord(self._CollectionID, self._ModID, RecordID, 0, 0)
+    #    return None
+    # LVLN = CBashRECORDARRAY(ObLVLNRecord, 'LVLN', 0)
 
     def create_ANIO(self, EditorID=0, FormID=0):
         RecordID = CBash.CreateRecord(self._CollectionID, self._ModID, cast("ANIO", POINTER(c_ulong)).contents.value, MakeShortFid(self._CollectionID, FormID), EditorID, 0, 0)
@@ -5900,7 +5901,7 @@ class ObModFile(object):
                      ("LVLI", self.LVLI),("WTHR", self.WTHR),("CLMT", self.CLMT),("REGN", self.REGN),
                      ("CELL", self.CELL),("WRLD", self.WRLD),("DIAL", self.DIAL),("QUST", self.QUST),
                      ("IDLE", self.IDLE),("PACK", self.PACK),("CSTY", self.CSTY),("LSCR", self.LSCR),
-                     ("LVSP", self.LVSP),("ANIO", self.ANIO),("WATR", self.WATR),("EFSH", self.EFSH)))
+                     ("ANIO", self.ANIO),("WATR", self.WATR),("EFSH", self.EFSH)))
 
     @property
     def aggregates(self):
@@ -5918,7 +5919,7 @@ class ObModFile(object):
                      ("WRLD", self.WRLD),("CELL", self.CELLS),("ACHR", self.ACHRS),("ACRE", self.ACRES),
                      ("REFR", self.REFRS),("PGRD", self.PGRDS),("LAND", self.LANDS),("ROAD", self.ROADS),
                      ("DIAL", self.DIAL),("INFO", self.INFOS),("QUST", self.QUST),("IDLE", self.IDLE),
-                     ("PACK", self.PACK),("CSTY", self.CSTY),("LSCR", self.LSCR),("LVSP", self.LVSP),
+                     ("PACK", self.PACK),("CSTY", self.CSTY),("LSCR", self.LSCR),
                      ("ANIO", self.ANIO),("WATR", self.WATR),("EFSH", self.EFSH)))
 
 class ObCollection:

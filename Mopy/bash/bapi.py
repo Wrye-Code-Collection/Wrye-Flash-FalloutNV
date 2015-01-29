@@ -7,7 +7,7 @@ import os
 import platform
 
 try:
-    # Wrye Bash specific support
+    # Wrye Flash specific support
     import bolt
     from bolt import Path, GPath
 except:
@@ -616,7 +616,7 @@ def Init(path):
             clean = c_uint32()
             _CGetDirtyMessage(self._DB,_enc(plugin),byref(message),byref(clean))
             return (_uni(message.value),clean.value)
-            
+
         def DumpMinimal(self,file,overwrite):
             _CDumpMinimal(self._DB,_enc(file),overwrite)
 
