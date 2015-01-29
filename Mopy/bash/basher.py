@@ -6676,7 +6676,7 @@ class RacePatcher(bosh.RacePatcher,ListPatcher):
 #class CBash_RacePatcher(bosh.CBash_RacePatcher,ListPatcher):
 #    listLabel = _("Race Mods")
 
-class RoadImporter(bosh.RoadImporter,ListPatcher): pass
+#class RoadImporter(bosh.RoadImporter,ListPatcher): pass
 #class CBash_RoadImporter(bosh.CBash_RoadImporter,ListPatcher): pass
 
 class SoundPatcher(bosh.SoundPatcher,ListPatcher): pass
