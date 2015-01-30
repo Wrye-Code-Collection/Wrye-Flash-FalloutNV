@@ -2486,7 +2486,7 @@ class MreArma(MelRecord):
         #9:Hand Wear,10:Chems,11:Stimpack,12:Food,13:Alcohol
         MelStruct('ETYP','i',('etype',-1)),
         MelStruct('DATA','IIf','value','health','weight'),
-        MelArmaDnam('DNAM','=hHfI','ar',(_dnamFlags,'dnamFlags',0L),'dt',('armaDnam1',0L)),
+        MelArmaDnam('DNAM','=hHf4s','ar',(_dnamFlags,'dnamFlags',0L),'dt',('armaDnam1',null4),),
         )
     __slots__ = MelRecord.__slots__ + melSet.getSlotsUsed()
 
@@ -2549,7 +2549,7 @@ class MreArmo(MelRecord):
         MelFid('YNAM','pickupSound'),
         MelFid('ZNAM','dropSound'),
         MelStruct('DATA','=2if','value','health','weight'),
-        MelArmoDnam('DNAM','=hHfI','ar',(_dnamFlags,'dnamFlags',0L),'dt',('unknown',null4)),
+        MelArmoDnam('DNAM','=hHf4s','ar',(_dnamFlags,'dnamFlags',0L),'dt',('armoDnam1',null4),),
         MelStruct('BNAM','I',('overridesAnimationSound',0L)),
         MelStructs('SNAM','IB3sI','animationSounds',(FID,'sound'),'chance',('unused','\xb7\xe7\x0b'),'type'),
         MelFid('TNAM','animationSoundsTemplate'),
