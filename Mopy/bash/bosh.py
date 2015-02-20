@@ -2486,7 +2486,7 @@ class MreArma(MelRecord):
         #9:Hand Wear,10:Chems,11:Stimpack,12:Food,13:Alcohol
         MelStruct('ETYP','i',('etype',-1)),
         MelStruct('DATA','IIf','value','health','weight'),
-        MelArmaDnam('DNAM','=hHf4s','ar',(_dnamFlags,'dnamFlags',0L),('dt',0.0),('armoDnam1',null4),),
+        MelArmaDnam('DNAM','=hHf4s','ar',(_dnamFlags,'dnamFlags',0L),('dt',0.0),('armaDnam1',null4),),
         )
     __slots__ = MelRecord.__slots__ + melSet.getSlotsUsed()
 
