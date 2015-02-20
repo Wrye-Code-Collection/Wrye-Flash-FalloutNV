@@ -2510,7 +2510,7 @@ class MreArmo(MelRecord):
                 MelStruct.loadData(self,record,ins,type,size,readId)
                 return
             elif size == 4:
-                unpacked = ins.unpack('=HH',size,readId)
+                unpacked = ins.unpack('=hH',size,readId)
             else:
                 raise "Unexpected size encountered for ARMO subrecord: %s" % size
             unpacked += self.defaults[len(unpacked):]
@@ -2549,7 +2549,7 @@ class MreArmo(MelRecord):
         MelFid('YNAM','pickupSound'),
         MelFid('ZNAM','dropSound'),
         MelStruct('DATA','=2if','value','health','weight'),
-        MelArmoDnam('DNAM','=hHf4s','ar',(_dnamFlags,'dnamFlags',0L),'dt',('armoDnam1',null4),),
+        MelArmoDnam('DNAM','=hHf4s','ar',(_dnamFlags,'dnamFlags',0L),('dt',0.0),('armoDnam1',null4),),
         MelStruct('BNAM','I',('overridesAnimationSound',0L)),
         MelStructs('SNAM','IB3sI','animationSounds',(FID,'sound'),'chance',('unused','\xb7\xe7\x0b'),'type'),
         MelFid('TNAM','animationSoundsTemplate'),
@@ -4240,6 +4240,7 @@ class MreLigh(MelRecord):
         MelDestructible(),
         MelString('FULL','full'),
         MelString('ICON','iconPath'),
+        MelString('MICO','smallIconPath'),
         MelStruct('DATA','iI3BsI2fIf','duration','radius','red','green','blue',
                   ('unused1',null1),(_flags,'flags',0L),'falloff','fov','value',
                   'weight'),
@@ -18151,7 +18152,7 @@ class CompleteItemData:
             'BOOK':('eid', 'full', 'weight', 'value', 'iconPath', 'smallIconPath'),
             'INGR':('eid', 'full', 'weight', 'value', 'iconPath'),
             'KEYM':('eid', 'full', 'weight', 'value', 'iconPath', 'smallIconPath'),
-            'LIGH':('eid', 'full', 'weight', 'value', 'duration','iconPath'),
+            'LIGH':('eid', 'full', 'weight', 'value', 'duration','iconPath','smallIconPath'),
             'MISC':('eid', 'full', 'weight', 'value', 'iconPath', 'smallIconPath'),
             'WEAP':('eid', 'full', 'weight', 'value', 'health', 'damage','clipsize',
                     'animationMultiplier','reach','ammoUse','minSpread','spread','sightFov','baseVatsToHitChance','projectileCount',
@@ -23135,7 +23136,7 @@ class GraphicsPatcher(ImportPatcher):
         for recClass in (MreActi, MreBptd, MreDoor, MreFurn, MreGras, MreHdpt, MreMstt, MrePwat, MreStat, MreTact, MreTerm):
             recAttrs_class[recClass] = ('model',)
         for recClass in (MreLigh,):
-            recAttrs_class[recClass] = ('iconPath','model')
+            recAttrs_class[recClass] = ('iconPath','smallIconPath','model')
         for recClass in (MreMicn,):
             recAttrs_class[recClass] = ('iconPath','smallIconPath')
         for recClass in (MreRepu,):
