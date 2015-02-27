@@ -5344,6 +5344,8 @@ class MreProj(MelRecord):
             if size == 84:
                 MelStruct.loadData(self,record,ins,type,size,readId)
                 return
+            elif size == 72:
+                unpacked = ins.unpack('HHfffIIfffIIfffIIIf',size,readId)
             elif size == 68:
                 unpacked = ins.unpack('HHfffIIfffIIfffIII',size,readId)
             else:
