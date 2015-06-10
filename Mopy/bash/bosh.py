@@ -3178,10 +3178,10 @@ class MreCsty(MelRecord):
                      'atkNAtkMult', 'atkBlockMult', 'pAtkFBase', 'pAtkFMult'),
         MelOptStruct('CSSD', '9f4sI5f', 'coverSearchRadius', 'takeCoverChance',
                      'waitTimerMin', 'waitTimerMax', 'waitToFireTimerMin',
-                     'waitToFireTimerMax', 'fireTimerMin', 'fireTimerMax'
-                     'rangedWeaponRangeMultMin','unknown1','weaponRestrictions',
-                     'rangedWeaponRangeMultMax','maxTargetingFov','combatRadius',
-                     'semiAutomaticFireDelayMultMin','semiAutomaticFireDelayMultMax'),
+                     'waitToFireTimerMax', 'fireTimerMin', 'fireTimerMax',
+                     'rangedWeaponRangeMultMin', 'unkCSSD1', 'weaponRestrictions',
+                     'rangedWeaponRangeMultMax', 'maxTargetingFov', 'combatRadius',
+                     'semiAutomaticFireDelayMultMin', 'semiAutomaticFireDelayMultMax'),
         )
     __slots__ = MelRecord.__slots__ + melSet.getSlotsUsed()
 
