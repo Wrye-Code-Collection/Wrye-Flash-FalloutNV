@@ -3135,6 +3135,7 @@ class MreCsno(MelRecord):
             MelString('MODL','model')),
         MelString('MOD2','slotMachineModel'),
         MelString('MOD3','blackjackTableModel'),
+        MelString('MODT','extraBlackjackTableModel'),
         MelString('MOD4','rouletteTableModel'),
         MelGroups('slotReelTextures',
             MelString('ICON','texture')),
@@ -23145,7 +23146,10 @@ class GraphicsPatcher(ImportPatcher):
         for recClass in (MreRepu,):
             recAttrs_class[recClass] = ('iconPath','smallIconPath')
         for recClass in (MreCsno,):
-            recAttrs_class[recClass] = ('chipModels','slotMachineModel','blackjackTableModel','rouletteTableModel','slotReelTextures','blackjackDecks')
+            recAttrs_class[recClass] = ('chipModels','slotMachineModel',
+                                        'blackjackTableModel','extraBlackjackTableModel',
+                                        'rouletteTableModel','slotReelTextures',
+                                        'blackjackDecks')
         for recClass in (MreAlch, MreAmmo, MreBook, MreIngr, MreKeym, MreMisc, MreTree, MreCmny, MreImod, MreChip):
             recAttrs_class[recClass] = ('iconPath','smallIconPath','model')
         for recClass in (MreNote,):
