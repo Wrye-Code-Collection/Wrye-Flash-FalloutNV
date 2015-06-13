@@ -11910,9 +11910,10 @@ class ModInfos(FileInfos):
         """Sort list of mod names into their load order."""
         data = self.data
         modNames = list(modNames) #--Don't do an in-place sort.
-        modNames.sort()
+        #modNames.sort()
         modNames.sort(key=lambda a: (a in data) and data[a].mtime) #--Sort on modified
-        modNames.sort(key=lambda a: a.cs[-1]) #--Sort on esm/esp
+        #modNames.sort(key=lambda a: a.cs[-1]) #--Sort on esm/esp
+        modNames.sort(key=lambda a: (a in data) and data[a].isEsp())
         if asTuple: return tuple(modNames)
         else: return modNames
 
