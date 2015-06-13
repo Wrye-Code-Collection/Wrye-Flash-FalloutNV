@@ -1483,12 +1483,18 @@ class ModList(List):
         # Make sure we don't go out of bounds
         target = indexes[0]
         thisFile = self.items[target]
+        def isEsp(file):
+            if thisFile in bosh.modInfos:
+                return bosh.modInfos[thisFile].isEsp()
+            else:
+                return None
+        thisFileIsEsp = isEsp(thisFile)
         while True:
             if target < 0: break
             if target + howMany >= len(self.items) - inc: break
             if target == newPos: break
             swapFile = self.items[target]
-            if thisFile.cext != swapFile.cext: break
+            if thisFileIsEsp != isEsp(swapFile): break
             target += inc
         if inc == 1 and target + howMany <= indexes[-1]: return
         if inc == -1 and target >= indexes[0]: return
@@ -1704,7 +1710,7 @@ class ModList(List):
         #--ESMs First?
         settings['bash.mods.esmsFirst'] = self.esmsFirst
         if self.esmsFirst or col == 'Load Order':
-            self.items.sort(key = lambda x: x.cext)
+            self.items.sort(key = lambda x: (x in bosh.modInfos) and bosh.modInfos[x].isEsp())
         #--Selected First?
         settings['bash.mods.selectedFirst'] = self.selectedFirst
         if self.selectedFirst:
