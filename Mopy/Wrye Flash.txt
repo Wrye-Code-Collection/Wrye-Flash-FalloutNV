@@ -38,6 +38,11 @@ Additionally, Wrye Bash comes packaged with the following programs:
 {{CONTENTS=0}}
 **All versions by Wrye team and or Valda unless otherwise noted.**
 
+=== 17.1 [6/13/2015]
+* Bug fix for False Flagged ESP Files [Valda]
+
+Wrye Flash will now sort .esp files flagged as ESM files together with other .esm files.
+
 === 17.0 [6/10/2015]
 * Bug fix for class MreCsty for CSSD error
 * Added MODT subrecord to CSNO
