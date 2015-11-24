@@ -881,11 +881,38 @@ conditionFunctionData = ( #--0: no param; 1: int param; 2: formid param
     # extended by NVSE
     (1024, 'GetNVSEVersion', 0, 0, 0, 0),
     (1025, 'GetNVSERevision', 0, 0, 0, 0),
-    (1213, 'GetNVSEBeta', 0, 0, 0, 0),
-    (1082, 'IsKeyPressed', 1, 0, 0, 0),
-    (1166, 'IsControlPressed', 1, 0, 0, 0),
+    (1026, 'GetNVSEBeta', 0, 0, 0, 0),
+    (1107, 'IsKeyPressed', 1, 0, 0, 0),
+    (1131, 'IsControlPressed', 1, 0, 0, 0),
     (1028, 'GetWeight', 2, 0, 0, 0),
-    (1165, 'GetWeaponHasScope', 0, 0, 0, 0),
+    (1076, 'GetWeaponHasScope', 0, 0, 0, 0),
+
+    #--0: no param; 1: int param; 2: formid param
+    (1089, 'ListGetFormIndex', 2, 1, 0, 0), # ParamType1: ptFormList; ParamType2: ptFormType
+    (1271, 'HasOwnership', 2, 0, 0, 0), # ParamType1: ptObjectReference
+    (1272, 'IsOwned', 2, 0, 0, 0), # ParamType1: ptActor
+    (1274, 'GetDialogueTarget', 2, 0, 0, 0), # ParamType1: ptActor
+    (1275, 'GetDialogueSubject', 2, 0, 0, 0), # ParamType1: ptActor
+    (1276, 'GetDialogueSpeaker', 2, 0, 0, 0), # ParamType1: ptActor
+    (1278, 'GetAgeClass', 2, 0, 0, 0), # ParamType1: ptActorBase
+    (1286, 'GetTokenValue', 1, 0, 0, 0), # ParamType1: ptFormType
+    (1288, 'GetTokenRef', 1, 0, 0, 0), # ParamType1: ptFormType
+    (1291, 'GetPaired', 2, 2, 0, 0), # ParamType1: ptInventoryObject; ParamType2: ptActorBase
+    (1292, 'GetRespawn', 2, 0, 0, 0), # ParamType1: ptACtorBase
+    (1294, 'GetPermanent', 2, 0, 0, 0), # ParamType1: ptObjectReference
+    (1297, 'IsRefInList', 2, 1, 0, 0), # ParamType1: ptFormList; ParamType2: ptFormType
+    (1301, 'GetPackageCount', 2, 0, 0, 0), # ParamType1: ptObjectReference
+    (1440, 'IsPlayerSwimming', 0, 0, 0, 0),
+    (1441, 'GetTFC', 0, 0, 0, 0),
+
+    # Added by nvse_plugin_ExtendedActorVariable
+    (4352, 'GetExtendedActorVariable', 2, 0, 0, 0), # ParamType1: ptInventoryObject
+    (4353, 'GetBaseExtendedActorVariable', 2, 0, 0, 0), # ParamType1: ptInventoryObject
+    (4355, 'GetModExtendedActorVariable', 2, 0, 0, 0), # ParamType1: ptInventoryObject
+
+    # Added by nvse_extender
+    (4420, 'NX_GetEVFl', 0, 0, 0, 0), # ParamType1: ptNone;  Actually ptString, but it cannot be used in GECK
+    (4426, 'NX_GetQVEVFl', 2, 1, 0, 0), # ParamType1: ptQuest; ParamType2: ptInteger;
     )
 allConditions = set(entry[0] for entry in conditionFunctionData)
 fid1Conditions = set(entry[0] for entry in conditionFunctionData if entry[2] == 2)
