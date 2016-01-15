@@ -38,6 +38,9 @@ Additionally, Wrye Bash comes packaged with the following programs:
 {{CONTENTS=0}}
 **All versions by Wrye team and or Valda unless otherwise noted.**
 
+=== 17.2 [1/14/2016]
+* Updated NVSE CTDA [Sharlikran]
+
 === 17.1 [6/13/2015]
 * Bug fix for False Flagged ESP Files [Valda]
 
