@@ -721,7 +721,7 @@ conditionFunctionData = ( #--0: no param; 1: int param; 2: formid param
     ( 66, 'GetShouldAttack', 2, 0, 0, 0),
     (159, 'GetSitting', 0, 0, 0, 0),
     ( 49, 'GetSleeping', 0, 0, 0, 0),
-    ( 58, 'GetStage', 2, 0, 0, 0),
+    ( 58, 'GetStage', 2, 0, 0, 0), # ParamType1: ptQuest
     ( 59, 'GetStageDone', 2, 1, 0, 0),
     ( 11, 'GetStartingAngle', 1, 0, 0, 0),
     ( 10, 'GetStartingPos', 1, 0, 0, 0),
@@ -782,14 +782,14 @@ conditionFunctionData = ( #--0: no param; 1: int param; 2: formid param
     (101, 'IsWeaponOut', 0, 0, 0, 0),
     (309, 'IsXBox', 0, 0, 0, 0),
     ( 36, 'MenuMode', 1, 0, 0, 0),
-    ( 42, 'SameFaction', 2, 0, 0, 0),
+    ( 42, 'SameFaction', 2, 0, 0, 0), # ParamType1: ptActor
     (133, 'SameFactionAsPC', 0, 0, 0, 0),
     ( 43, 'SameRace', 2, 0, 0, 0),
     (134, 'SameRaceAsPC', 0, 0, 0, 0),
     ( 44, 'SameSex', 2, 0, 0, 0),
     (135, 'SameSexAsPC', 0, 0, 0, 0),
     (323, 'WhichServiceMenu', 0, 0, 0, 0),
-    (449, 'HasPerk', 2, 1, 1, 2),
+    (449, 'HasPerk', 2, 1, 1, 2), # ParamType1: ptPerk; ParamType2: ptInteger
     (546, 'GetQuestCompleted', 2, 0, 0, 0),
     (427, 'GetIsVoiceType', 2, 0, 0, 0),
     (523, 'IsPS3', 0, 0, 0, 0),
@@ -844,7 +844,7 @@ conditionFunctionData = ( #--0: no param; 1: int param; 2: formid param
     (575, 'GetReputationThreshold', 2, 1, 0, 0),
     (610, 'GetCasinoWinningStage', 2, 0, 0, 0),
     (573, 'GetReputation', 2, 1, 0, 0),
-    (612, 'PlayerInRegion', 2, 0, 0, 0),
+    (612, 'PlayerInRegion', 2, 0, 0, 0), # ParamType1: ptRegion
     (601, 'GetForceHitReaction', 0, 0, 0, 0),
     (118, 'GetActorAggroRadiusViolated', 0, 0, 0, 0),
     (192, 'GetIgnoreCrime', 0, 0, 0, 0),
@@ -882,13 +882,12 @@ conditionFunctionData = ( #--0: no param; 1: int param; 2: formid param
     (1024, 'GetNVSEVersion', 0, 0, 0, 0),
     (1025, 'GetNVSERevision', 0, 0, 0, 0),
     (1026, 'GetNVSEBeta', 0, 0, 0, 0),
-    (1107, 'IsKeyPressed', 1, 0, 0, 0),
-    (1131, 'IsControlPressed', 1, 0, 0, 0),
-    (1028, 'GetWeight', 2, 0, 0, 0),
-    (1076, 'GetWeaponHasScope', 0, 0, 0, 0),
-
     #--0: no param; 1: int param; 2: formid param
+    (1028, 'GetWeight', 2, 0, 0, 0), # ParamType1: ptInventoryObject
+    (1076, 'GetWeaponHasScope', 2, 0, 0, 0), # ParamType1: ptInventoryObject
     (1089, 'ListGetFormIndex', 2, 1, 0, 0), # ParamType1: ptFormList; ParamType2: ptFormType
+    (1107, 'IsKeyPressed', 1, 1, 0, 0), # ParamType1: ptInteger; ParamType2: ptInteger
+    (1131, 'IsControlPressed', 1, 0, 0, 0), # ParamType1: ptInteger
     (1271, 'HasOwnership', 2, 0, 0, 0), # ParamType1: ptObjectReference
     (1272, 'IsOwned', 2, 0, 0, 0), # ParamType1: ptActor
     (1274, 'GetDialogueTarget', 2, 0, 0, 0), # ParamType1: ptActor
@@ -904,6 +903,9 @@ conditionFunctionData = ( #--0: no param; 1: int param; 2: formid param
     (1301, 'GetPackageCount', 2, 0, 0, 0), # ParamType1: ptObjectReference
     (1440, 'IsPlayerSwimming', 0, 0, 0, 0),
     (1441, 'GetTFC', 0, 0, 0, 0),
+    (1475, 'GetPerkRank', 2, 2, 0, 0), # ParamType1: ptPerk; ParamType2: ptActor;),
+    (1476, 'GetAltPerkRank', 2, 2, 0, 0), # ParamType1: ptPerk; ParamType2: ptActor;),
+    (1541, 'GetActorFIKstatus', 0, 0, 0, 0),
 
     # Added by nvse_plugin_ExtendedActorVariable
     (4352, 'GetExtendedActorVariable', 2, 0, 0, 0), # ParamType1: ptInventoryObject
@@ -913,6 +915,18 @@ conditionFunctionData = ( #--0: no param; 1: int param; 2: formid param
     # Added by nvse_extender
     (4420, 'NX_GetEVFl', 0, 0, 0, 0), # ParamType1: ptNone;  Actually ptString, but it cannot be used in GECK
     (4426, 'NX_GetQVEVFl', 2, 1, 0, 0), # ParamType1: ptQuest; ParamType2: ptInteger;
+
+    # Added by lutana_nvse
+    (4708, 'GetArmorClass', 2, 0, 0, 0), # ParamType1: ptAnyForm; ),
+    (4709, 'IsRaceInList', 2, 0, 0, 0), # ParamType1: ptFormList; ),
+    (4822, 'GetReferenceFlag', 1, 0, 0, 0), # ParamType1: ptInteger; ),
+
+    # Added by JIP NVSE Plugin
+    (5637, 'GetIsPoisoned', 0, 0, 0, 0),
+    (5708, 'IsEquippedWeaponSilenced', 0, 0, 0, 0),
+    (5709, 'IsEquippedWeaponScoped', 0, 0, 0, 0),
+    (5953, 'GetPCInRegion', 2, 0, 0, 0), # ParamType1: ptRegion
+    (5962, 'GetPCDetectionState', 0, 0, 0, 0),
     )
 allConditions = set(entry[0] for entry in conditionFunctionData)
 fid1Conditions = set(entry[0] for entry in conditionFunctionData if entry[2] == 2)
