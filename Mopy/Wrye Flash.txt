@@ -38,6 +38,10 @@ Additionally, Wrye Bash comes packaged with the following programs:
 {{CONTENTS=0}}
 **All versions by Wrye team and or Valda unless otherwise noted.**
 
+=== 17.3 [1/19/2016]
+* Updated NVSE CTDA [Sharlikran]
+* Added JIP, Lutana NVSE CTDA [Sharlikran]
+
 === 17.2 [1/14/2016]
 * Updated NVSE CTDA [Sharlikran]
 
