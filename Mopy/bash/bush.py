@@ -90,6 +90,9 @@ bethDataFiles = set((
     r'deadmoney.esm',
     r'deadmoney - main.bsa',
     r'deadmoney - sounds.bsa',
+    r'gunrunnersarsenal.esm',
+    r'gunrunnersarsenal - main.bsa',
+    r'gunrunnersarsenal - sounds.bsa',
     r'honesthearts.esm',
     r'honesthearts - main.bsa',
     r'honesthearts - sounds.bsa',
@@ -101,7 +104,7 @@ bethDataFiles = set((
     r'lonesomeroad - sounds.bsa',
     ))
 allBethFiles = set((
-    #vanilla
+    # Section 1: Vanilla files
     r'Credits.txt',
     r'CreditsWacky.txt',
     r'Fallout - Meshes.bsa',
@@ -376,7 +379,7 @@ allBethFiles = set((
     r'Sound\songs\radionv\MUS_Where_Have_You_Been_All_My_Life.mp3',
     r'Sound\songs\radionv\MUS_Why_Dont_You_Do_Right.mp3',
     r'Video\FNVIntro.bik',
-    #Preorder Packs
+    # Section 2: Preorder Packs
     r'CaravanPack - Main.bsa',
     r'CaravanPack.esm',
     r'CaravanPack.nam',
@@ -389,11 +392,15 @@ allBethFiles = set((
     r'TribalPack - Main.bsa',
     r'TribalPack.esm',
     r'TribalPack.nam',
-    #DLCs
+    # Section 3: DLCs
     r'DEADMONEY.NAM',
     r'DeadMoney - Main.bsa',
     r'DeadMoney - Sounds.bsa',
     r'DeadMoney.esm',
+    r'GUNRUNNERSARSENAL.NAM',
+    r'GunRunnersArsenal - Main.bsa',
+    r'GunRunnersArsenal - Sounds.bsa',
+    r'GunRunnersArsenal.esm',
     r'HONESTHEARTS.NAM',
     r'HonestHearts - Main.bsa',
     r'HonestHearts - Sounds.bsa',
