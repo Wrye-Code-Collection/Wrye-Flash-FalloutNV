@@ -12627,9 +12627,9 @@ class ConfigHelpers:
         try:
             import _winreg
             for hkey in (_winreg.HKEY_CURRENT_USER, _winreg.HKEY_LOCAL_MACHINE):
-                for wow6432 in ('','Wow6432Node\\'):
+                for wow6432 in (_winreg.KEY_WOW64_64KEY, _winreg.KEY_WOW64_32KEY):
                     try:
-                        key = _winreg.OpenKey(hkey,'Software\\%sBoss' % wow6432)
+                        key = _winreg.OpenKey(hkey,'Software\\Boss', 0, _winreg.KEY_READ | wow6432)
                         value = _winreg.QueryValueEx(key,'Installed Path')
                     except:
                         continue
