@@ -6107,6 +6107,7 @@ class PatchDialog(wx.Dialog):
             self.gPatchers.Check(index,False)
             patcher.isEnabled = False
             if not hasattr(patcher, 'gList'): continue
+            if patcher.getName() == 'FormID Lists': continue # special case that one.
             if patcher.getName() == 'Leveled Lists': continue # special case that one.
             patcher.gList.SetChecked([])
             patcher.OnListCheck()
