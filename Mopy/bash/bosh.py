@@ -23140,18 +23140,16 @@ class GraphicsPatcher(ImportPatcher):
             recAttrs_class[recClass] = ('iconPath',)
         for recClass in (MreActi, MreBptd, MreDoor, MreFurn, MreGras, MreHdpt, MreMstt, MrePwat, MreStat, MreTact, MreTerm):
             recAttrs_class[recClass] = ('model',)
-        for recClass in (MreLigh,):
-            recAttrs_class[recClass] = ('iconPath','smallIconPath','model')
-        for recClass in (MreMicn,):
-            recAttrs_class[recClass] = ('iconPath','smallIconPath')
-        for recClass in (MreRepu,):
+        for recClass in (MreTree,):
+            recAttrs_class[recClass] = ('iconPath','model')
+        for recClass in (MreMicn, MreRepu,):
             recAttrs_class[recClass] = ('iconPath','smallIconPath')
         for recClass in (MreCsno,):
             recAttrs_class[recClass] = ('chipModels','slotMachineModel',
                                         'blackjackTableModel','extraBlackjackTableModel',
                                         'rouletteTableModel','slotReelTextures',
                                         'blackjackDecks')
-        for recClass in (MreAlch, MreAmmo, MreBook, MreIngr, MreKeym, MreMisc, MreTree, MreCmny, MreImod, MreChip):
+        for recClass in (MreAlch, MreAmmo, MreBook, MreIngr, MreLigh, MreKeym, MreMisc, MreCmny, MreImod, MreChip):
             recAttrs_class[recClass] = ('iconPath','smallIconPath','model')
         for recClass in (MreNote,):
             recAttrs_class[recClass] = ('iconPath','smallIconPath','model','texture')
