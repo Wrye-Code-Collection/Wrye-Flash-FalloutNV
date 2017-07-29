@@ -662,7 +662,7 @@ conditionFunctionData = ( #--0: no param; 1: int param; 2: formid param
     ( 35, 'GetDisabled', 0, 0, 0, 0),
     ( 39, 'GetDisease', 0, 0, 0, 0),
     ( 76, 'GetDisposition', 2, 0, 0, 0),
-    (  1, 'GetDistance', 2, 0, 0, 0),
+    (  1, 'GetDistance', 2, 0, 0, 0), # ParamType1: ptObjectReference
     (215, 'GetDefaultOpen', 0, 0, 0, 0),
     (182, 'GetEquipped', 2, 0, 0, 0),
     ( 73, 'GetFactionRank', 2, 0, 0, 0),
@@ -779,7 +779,7 @@ conditionFunctionData = ( #--0: no param; 1: int param; 2: formid param
     (103, 'IsShieldOut', 0, 0, 0, 0),
     (286, 'IsSneaking', 0, 0, 0, 0),
     ( 75, 'IsSnowing', 0, 0, 0, 0),
-    (223, 'IsSpellTarget', 2, 0, 0, 0),
+    (223, 'IsSpellTarget', 2, 0, 0, 0), # ParamType1: ptMagicItem
     (185, 'IsSwimming', 0, 0, 0, 0),
     (141, 'IsTalking', 0, 0, 0, 0),
     (265, 'IsTimePassing', 0, 0, 0, 0),
@@ -889,6 +889,7 @@ conditionFunctionData = ( #--0: no param; 1: int param; 2: formid param
     (1024, 'GetNVSEVersion', 0, 0, 0, 0),
     (1025, 'GetNVSERevision', 0, 0, 0, 0),
     (1026, 'GetNVSEBeta', 0, 0, 0, 0),
+
     #--0: no param; 1: int param; 2: formid param
     (1028, 'GetWeight', 2, 0, 0, 0), # ParamType1: ptInventoryObject
     (1076, 'GetWeaponHasScope', 2, 0, 0, 0), # ParamType1: ptInventoryObject
@@ -910,8 +911,8 @@ conditionFunctionData = ( #--0: no param; 1: int param; 2: formid param
     (1301, 'GetPackageCount', 2, 0, 0, 0), # ParamType1: ptObjectReference
     (1440, 'IsPlayerSwimming', 0, 0, 0, 0),
     (1441, 'GetTFC', 0, 0, 0, 0),
-    (1475, 'GetPerkRank', 2, 2, 0, 0), # ParamType1: ptPerk; ParamType2: ptActor;),
-    (1476, 'GetAltPerkRank', 2, 2, 0, 0), # ParamType1: ptPerk; ParamType2: ptActor;),
+    (1475, 'GetPerkRank', 2, 2, 0, 0), # ParamType1: ptPerk; ParamType2: ptActor
+    (1476, 'GetAltPerkRank', 2, 2, 0, 0), # ParamType1: ptPerk; ParamType2: ptActor
     (1541, 'GetActorFIKstatus', 0, 0, 0, 0),
 
     # Added by nvse_plugin_ExtendedActorVariable
@@ -921,12 +922,22 @@ conditionFunctionData = ( #--0: no param; 1: int param; 2: formid param
 
     # Added by nvse_extender
     (4420, 'NX_GetEVFl', 0, 0, 0, 0), # ParamType1: ptNone;  Actually ptString, but it cannot be used in GECK
-    (4426, 'NX_GetQVEVFl', 2, 1, 0, 0), # ParamType1: ptQuest; ParamType2: ptInteger;
+    (4426, 'NX_GetQVEVFl', 2, 1, 0, 0), # ParamType1: ptQuest; ParamType2: ptInteger
 
     # Added by lutana_nvse
-    (4708, 'GetArmorClass', 2, 0, 0, 0), # ParamType1: ptAnyForm; ),
-    (4709, 'IsRaceInList', 2, 0, 0, 0), # ParamType1: ptFormList; ),
-    (4822, 'GetReferenceFlag', 1, 0, 0, 0), # ParamType1: ptInteger; ),
+    (4612, 'IsButtonPressed', 1, 0, 0, 0), # ParamType1: ptInteger
+    (4613, 'GetLeftStickX', 0, 0, 0, 0),
+    (4614, 'GetLeftStickY', 0, 0, 0, 0),
+    (4615, 'GetRightStickX', 0, 0, 0, 0),
+    (4616, 'GetRightStickY', 0, 0, 0, 0),
+    (4617, 'GetLeftTrigger', 0, 0, 0, 0),
+    (4618, 'GetRightTrigger', 0, 0, 0, 0),
+    (4708, 'GetArmorClass', 2, 0, 0, 0), # ParamType1: ptAnyForm
+    (4709, 'IsRaceInList', 2, 0, 0, 0), # ParamType1: ptFormList
+    (4822, 'GetReferenceFlag', 1, 0, 0, 0), # ParamType1: ptInteger
+    (4832, 'GetDistance2D', 2, 0, 0, 0), # ParamType1: ptObjectReference
+    (4833, 'GetDistance3D', 2, 0, 0, 0), # ParamType1: ptObjectReference
+    (4843, 'PlayerHasKey', 0, 0, 0, 0),
 
     # Added by JIP NVSE Plugin
     (5637, 'GetIsPoisoned', 0, 0, 0, 0),
@@ -934,6 +945,20 @@ conditionFunctionData = ( #--0: no param; 1: int param; 2: formid param
     (5709, 'IsEquippedWeaponScoped', 0, 0, 0, 0),
     (5953, 'GetPCInRegion', 2, 0, 0, 0), # ParamType1: ptRegion
     (5962, 'GetPCDetectionState', 0, 0, 0, 0),
+    (5993, 'IsAttacking', 0, 0, 0, 0),
+    (5994, 'GetPCUsingScope', 0, 0, 0, 0),
+    (6010, 'GetPCUsingIronSights', 0, 0, 0, 0),
+    (6012, 'GetRadiationLevelAlt', 0, 0, 0, 0),
+    (6013, 'IsInWater', 0, 0, 0, 0),
+    (6058, 'GetAlwaysRun', 0, 0, 0, 0),
+    (6059, 'GetAutoMove', 0, 0, 0, 0),
+    (6061, 'GetIsRagdolled', 0, 0, 0, 0),
+    (6065, 'AuxVarGetFltCond', 2, 1, 0, 0), # ParamType1: ptQuest; ParamType2: ptInteger
+    (6069, 'IsInAir', 0, 0, 0, 0),
+    (6070, 'GetHasContact', 2, 0, 0, 0), # ParamType1: ptAnyForm
+    (6072, 'GetHasContactBase', 2, 0, 0, 0), # ParamType1: ptAnyForm
+    (6073, 'GetHasContactType', 1, 0, 0, 0), # ParamType1: ptInteger
+    (6124, 'IsSpellTargetAlt', 2, 0, 0, 0), # ParamType1: ptMagicItem
     )
 allConditions = set(entry[0] for entry in conditionFunctionData)
 fid1Conditions = set(entry[0] for entry in conditionFunctionData if entry[2] == 2)
