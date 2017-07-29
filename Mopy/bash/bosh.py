@@ -8090,12 +8090,16 @@ class ModFile:
     def getShortMapper(self):
         """Returns a mapping function to map long fids to short fids."""
         masters = self.tes4.masters+[self.fileInfo.name]
-        indices = dict([(name,index) for index,name in enumerate(masters)])
+        indices = dict((name, index) for index, name in enumerate(masters))
+        gLong = self.getLongMapper()
         def mapper(fid):
             if fid == None: return None
+            if isinstance(fid, (long, int)):
+                fid = gLong(fid)
             modName,object = fid
-            mod = indices[modName]
-            return (long(mod) << 24 ) | long(object)
+            long_id = long(object)
+            mod = indices[modName] if long_id >= 0x800 else 0
+            return (long(mod) << 24) | long_id
         return mapper
 
     def convertToLongFids(self,types=None):
