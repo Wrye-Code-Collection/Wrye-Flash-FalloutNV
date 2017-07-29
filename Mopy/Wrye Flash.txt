@@ -38,6 +38,9 @@ Additionally, Wrye Bash comes packaged with the following programs:
 {{CONTENTS=0}}
 **All versions by Wrye team and or Valda unless otherwise noted.**
 
+=== 17.6 [7/29/2017]
+* Updated JIP (Version 50), Lutana NVSE CTDA [Sharlikran]
+
 === 17.5 [5/17/2016]
 * Bug fix for BOSS Detection [Valda]
 * Bug fix for Deselect All in Update Bash Patch window [Valda]
@@ -77,7 +80,7 @@ Wrye Flash will now sort .esp files flagged as ESM files together with other .es
 
 === 16.6 [1/12/2015]
 * Fixed bug with Weapons Patcher
-* Fixed bug with Sound Patcher 
+* Fixed bug with Sound Patcher
 
 === 16.5 [1/11/2015]
 * Fixed bug with DestructiblePatcher
