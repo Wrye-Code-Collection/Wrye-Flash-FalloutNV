@@ -240,7 +240,7 @@ def importRacialEyesHair(srcMod, srcRaceEid, dstMod, dstRaceEid):
     """Copies eyes and hair from one race to another."""
     init(3)
     if dstMod.lower() == 'falloutnv.esm':
-        raise "You don't REALLY want to overwrite Oblvion.esm, do you?"
+        raise "You don't REALLY want to overwrite FalloutNV.esm, do you?"
     srcFactory = bosh.LoadFactory(False, bosh.MreRace)
     dstFactory = bosh.LoadFactory(True, bosh.MreRace)
     srcInfo = bosh.modInfos[GPath(srcMod)]
@@ -493,8 +493,8 @@ def bookImport(fileName=None):
 # Misc. Utils -----------------------------------------------------------------
 @mainfunc
 def perfTest():
-    import psyco
-    psyco.full()
+    # import psyco
+    # psyco.full()
     init(3)
     test = 0.0
     total = 0.0
@@ -679,7 +679,7 @@ def getIds(fileName=None):
             sizeCheck, = struct.unpack('I', ins.read(4))
             decomp = zlib.decompress(ins.read(size - 4))
             if len(decomp) != sizeCheck:
-                raise ModError(self.inName,
+                raise bosh.ModError(ins.inName,
                     _('Mis-sized compressed data. Expected %d, got %d.') % (
                     size, len(decomp)))
             reader = bosh.ModReader(fileName, stringBuffer(decomp))
@@ -976,8 +976,8 @@ def parseDials(srcName=None, dstName='Wrye Test.esp'):
 
 @mainfunc
 def parseRecords(fileName='FalloutNV.esm'):
-    import psyco
-    psyco.full()
+    # import psyco
+    # psyco.full()
     init(3)
     skipPrint = False
     tempDict = dict()
@@ -1048,8 +1048,8 @@ def parseRecords(fileName='FalloutNV.esm'):
 # --Temp
 @mainfunc
 def temp(fileName=None):
-    import psyco
-    psyco.full()
+    # import psyco
+    # psyco.full()
     init(3)
     testClasses = (
     bosh.MreWrld, bosh.MreCell, bosh.MreAcre, bosh.MreAchr, bosh.MreRefr)
