@@ -49,9 +49,9 @@ import struct
 import cStringIO
 import StringIO
 import sys
-import types
+import codecs
 from subprocess import *
-from operator import attrgetter, itemgetter
+from operator import attrgetter
 
 # --Local
 import bosh
@@ -1232,7 +1232,7 @@ class Archive:
         path = size = crc = isDir = 0
 
         command = '"%s" l "%s"' % (bosh.exe7z, self.path.s)
-        command = Encode(command, 'mbcs')
+        command = codecs.encode(command, 'mbcs')
         out = Popen(command, stdout=PIPE, stdin=PIPE).stdout
         for line in out:
             print line,
@@ -1257,9 +1257,8 @@ class Archive:
 
     def extract(self):
         """Extracts specified files from archive."""
-        command = '"%s" x "%s" -y -oDumpster @listfile.txt -scsWIN' % (
-        exe7z, self.path.s)
-        command = Encode(command, 'mbcs')
+        command = '"%s" x "%s" -y -oDumpster @listfile.txt -scsWIN' % (bosh.exe7z, self.path.s)
+        command = codecs.encode(command, 'mbcs')
         out = Popen(command, stdout=PIPE, stdin=PIPE).stdout
         reExtracting = re.compile('Extracting\s+(.+)')
         for line in out:
