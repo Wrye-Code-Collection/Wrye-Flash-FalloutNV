@@ -1698,7 +1698,7 @@ except:
             return other <= self
 
         def __eq__(self, other):
-            if not isintance(other, MutableSet):
+            if not isinstance(other, MutableSet):
                 return NotImplemented
             return len(self) == len(other) and self <= other
 
@@ -2599,6 +2599,7 @@ def delist(header, items, on=False):
 
 def dictFromLines(lines, sep=None):
     """Generate a dictionary from a string with lines, stripping comments and skipping empty strings."""
+    # TODO: Look for old code for reComment
     temp = [reComment.sub('', x).strip() for x in lines.split('\n')]
     if sep == None or type(sep) == type(''):
         temp = dict([x.split(sep, 1) for x in temp if x])
@@ -2632,6 +2633,7 @@ def invertDict(indict):
 
 def listFromLines(lines):
     """Generate a list from a string with lines, stripping comments and skipping empty strings."""
+    # TODO: Look for old code for reComment
     temp = [reComment.sub('', x).strip() for x in lines.split('\n')]
     temp = [x for x in temp if x]
     return temp
