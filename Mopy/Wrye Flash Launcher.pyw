@@ -25,7 +25,7 @@
 
 from bash import bash, bolt
 
-#For Wrye Flash Launcher.pyw, default to debug mode Off
+# For Wrye Flash Launcher.pyw, default to debug mode Off
 bolt.deprintOn = False
 
 if __name__ == '__main__':
