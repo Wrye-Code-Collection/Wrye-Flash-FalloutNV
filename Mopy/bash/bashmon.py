@@ -195,6 +195,7 @@ def saveSaveGame(saveKey):
 @monitorCommand
 def deleteForm(saveKey, formid):
     """Saves changes to savegame. WARNING: NOT TESTED! [3/16/2008]"""
+    # TODO Check if this was ever updated
     formid = intArg(formid)
     saveFile = data.getSaveFile(saveName)
     removedRecord = saveFile.removeRecord(formid)
