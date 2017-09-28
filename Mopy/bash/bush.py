@@ -900,18 +900,16 @@ conditionFunctionData = (  # --0: no param; 1: int param; 2: formid param
     (614, 'GetChallengeCompleted', 2, 0, 0, 0),
     (619, 'IsAlwaysHardcore', 0, 0, 0, 0),
 
-        # extended by NVSE
+    # extended by NVSE
     (1024, 'GetNVSEVersion', 0, 0, 0, 0),
     (1025, 'GetNVSERevision', 0, 0, 0, 0),
     (1026, 'GetNVSEBeta', 0, 0, 0, 0),
 
-        # --0: no param; 1: int param; 2: formid param
+    # --0: no param; 1: int param; 2: formid param
     (1028, 'GetWeight', 2, 0, 0, 0),  # ParamType1: ptInventoryObject
     (1076, 'GetWeaponHasScope', 2, 0, 0, 0),  # ParamType1: ptInventoryObject
-    (1089, 'ListGetFormIndex', 2, 1, 0, 0),
-        # ParamType1: ptFormList; ParamType2: ptFormType
-    (1107, 'IsKeyPressed', 1, 1, 0, 0),
-        # ParamType1: ptInteger; ParamType2: ptInteger
+    (1089, 'ListGetFormIndex', 2, 1, 0, 0), # ParamType1: ptFormList; ParamType2: ptFormType
+    (1107, 'IsKeyPressed', 1, 1, 0, 0), # ParamType1: ptInteger; ParamType2: ptInteger
     (1131, 'IsControlPressed', 1, 0, 0, 0),  # ParamType1: ptInteger
     (1271, 'HasOwnership', 2, 0, 0, 0),  # ParamType1: ptObjectReference
     (1272, 'IsOwned', 2, 0, 0, 0),  # ParamType1: ptActor
@@ -921,36 +919,25 @@ conditionFunctionData = (  # --0: no param; 1: int param; 2: formid param
     (1278, 'GetAgeClass', 2, 0, 0, 0),  # ParamType1: ptActorBase
     (1286, 'GetTokenValue', 1, 0, 0, 0),  # ParamType1: ptFormType
     (1288, 'GetTokenRef', 1, 0, 0, 0),  # ParamType1: ptFormType
-    (1291, 'GetPaired', 2, 2, 0, 0),
-        # ParamType1: ptInventoryObject; ParamType2: ptActorBase
+    (1291, 'GetPaired', 2, 2, 0, 0), # ParamType1: ptInventoryObject; ParamType2: ptActorBase
     (1292, 'GetRespawn', 2, 0, 0, 0),  # ParamType1: ptACtorBase
     (1294, 'GetPermanent', 2, 0, 0, 0),  # ParamType1: ptObjectReference
-    (1297, 'IsRefInList', 2, 1, 0, 0),
-        # ParamType1: ptFormList; ParamType2: ptFormType
+    (1297, 'IsRefInList', 2, 1, 0, 0), # ParamType1: ptFormList; ParamType2: ptFormType
     (1301, 'GetPackageCount', 2, 0, 0, 0),  # ParamType1: ptObjectReference
     (1440, 'IsPlayerSwimming', 0, 0, 0, 0),
     (1441, 'GetTFC', 0, 0, 0, 0),
-    (1475, 'GetPerkRank', 2, 2, 0, 0),
-        # ParamType1: ptPerk; ParamType2: ptActor
-    (1476, 'GetAltPerkRank', 2, 2, 0, 0),
-        # ParamType1: ptPerk; ParamType2: ptActor
-    (1541, 'GetActorFIKstatus', 0, 0, 0, 0),
+    (1475, 'GetPerkRank', 2, 2, 0, 0), # ParamType1: ptPerk; ParamType2: ptActor
+    (1476, 'GetAltPerkRank', 2, 2, 0, 0), # ParamType1: ptPerk; ParamType2: ptActor
+    (1541, 'GetActorFIKstatus', 0, 0, 0, 0), # Added by nvse_plugin_ExtendedActorVariable
+    (4352, 'GetExtendedActorVariable', 2, 0, 0, 0), # ParamType1: ptInventoryObject
+    (4353, 'GetBaseExtendedActorVariable', 2, 0, 0, 0), # ParamType1: ptInventoryObject
+    (4355, 'GetModExtendedActorVariable', 2, 0, 0, 0), # ParamType1: ptInventoryObject
 
-        # Added by nvse_plugin_ExtendedActorVariable
-    (4352, 'GetExtendedActorVariable', 2, 0, 0, 0),
-        # ParamType1: ptInventoryObject
-    (4353, 'GetBaseExtendedActorVariable', 2, 0, 0, 0),
-        # ParamType1: ptInventoryObject
-    (4355, 'GetModExtendedActorVariable', 2, 0, 0, 0),
-        # ParamType1: ptInventoryObject
+    # Added by nvse_extender
+    (4420, 'NX_GetEVFl', 0, 0, 0, 0), # ParamType1: ptNone;  Actually ptString, but it cannot be used in GECK
+    (4426, 'NX_GetQVEVFl', 2, 1, 0, 0), # ParamType1: ptQuest; ParamType2: ptInteger
 
-        # Added by nvse_extender
-    (4420, 'NX_GetEVFl', 0, 0, 0, 0),
-        # ParamType1: ptNone;  Actually ptString, but it cannot be used in GECK
-    (4426, 'NX_GetQVEVFl', 2, 1, 0, 0),
-        # ParamType1: ptQuest; ParamType2: ptInteger
-
-        # Added by lutana_nvse
+    # Added by lutana_nvse
     (4612, 'IsButtonPressed', 1, 0, 0, 0),  # ParamType1: ptInteger
     (4613, 'GetLeftStickX', 0, 0, 0, 0),
     (4614, 'GetLeftStickY', 0, 0, 0, 0),
@@ -960,15 +947,21 @@ conditionFunctionData = (  # --0: no param; 1: int param; 2: formid param
     (4618, 'GetRightTrigger', 0, 0, 0, 0),
     (4708, 'GetArmorClass', 2, 0, 0, 0),  # ParamType1: ptAnyForm
     (4709, 'IsRaceInList', 2, 0, 0, 0),  # ParamType1: ptFormList
+    (4758, 'IsButtonDisabled', 1, 0, 0, 0),
+    (4761, 'IsButtonHeld', 1, 0, 0, 0),
+    (4774, 'IsTriggerDisabled', 1, 0, 0, 0),
+    (4777, 'IsTriggerHeld', 1, 0, 0, 0),
     (4822, 'GetReferenceFlag', 1, 0, 0, 0),  # ParamType1: ptInteger
     (4832, 'GetDistance2D', 2, 0, 0, 0),  # ParamType1: ptObjectReference
     (4833, 'GetDistance3D', 2, 0, 0, 0),  # ParamType1: ptObjectReference
     (4843, 'PlayerHasKey', 0, 0, 0, 0),
 
-        # Added by JIP NVSE Plugin
+    # Added by JIP NVSE Plugin
     (5637, 'GetIsPoisoned', 0, 0, 0, 0),
     (5708, 'IsEquippedWeaponSilenced', 0, 0, 0, 0),
     (5709, 'IsEquippedWeaponScoped', 0, 0, 0, 0),
+    (5947, 'GetActorLightAmount', 0, 0, 0, 0),
+    (5951, 'GetGameDifficulty', 0, 0, 0, 0),
     (5953, 'GetPCInRegion', 2, 0, 0, 0),  # ParamType1: ptRegion
     (5962, 'GetPCDetectionState', 0, 0, 0, 0),
     (5993, 'IsAttacking', 0, 0, 0, 0),
@@ -979,23 +972,20 @@ conditionFunctionData = (  # --0: no param; 1: int param; 2: formid param
     (6058, 'GetAlwaysRun', 0, 0, 0, 0),
     (6059, 'GetAutoMove', 0, 0, 0, 0),
     (6061, 'GetIsRagdolled', 0, 0, 0, 0),
-    (6065, 'AuxVarGetFltCond', 2, 1, 0, 0),
-        # ParamType1: ptQuest; ParamType2: ptInteger
+    (6065, 'AuxVarGetFltCond', 2, 1, 0, 0), # ParamType1: ptQuest; ParamType2: ptInteger
     (6069, 'IsInAir', 0, 0, 0, 0),
     (6070, 'GetHasContact', 2, 0, 0, 0),  # ParamType1: ptAnyForm
     (6072, 'GetHasContactBase', 2, 0, 0, 0),  # ParamType1: ptAnyForm
     (6073, 'GetHasContactType', 1, 0, 0, 0),  # ParamType1: ptInteger
     (6124, 'IsSpellTargetAlt', 2, 0, 0, 0),  # ParamType1: ptMagicItem
+    (6167, 'IsIdlePlayingEx', 2, 0, 0, 0),
+    (6186, 'IsInCharGen', 0, 0, 0, 0),
 )
 allConditions = set(entry[0] for entry in conditionFunctionData)
-fid1Conditions = set(
-    entry[0] for entry in conditionFunctionData if entry[2] == 2)
-fid2Conditions = set(
-    entry[0] for entry in conditionFunctionData if entry[3] == 2)
-fid3Conditions = set(
-    entry[0] for entry in conditionFunctionData if entry[4] == 2)
-fid4Conditions = set(
-    entry[0] for entry in conditionFunctionData if entry[5] == 2)
+fid1Conditions = set(entry[0] for entry in conditionFunctionData if entry[2] == 2)
+fid2Conditions = set(entry[0] for entry in conditionFunctionData if entry[3] == 2)
+fid3Conditions = set(entry[0] for entry in conditionFunctionData if entry[4] == 2)
+fid4Conditions = set(entry[0] for entry in conditionFunctionData if entry[5] == 2)
 
 # Magic Info ------------------------------------------------------------------
 weaponTypes = (
