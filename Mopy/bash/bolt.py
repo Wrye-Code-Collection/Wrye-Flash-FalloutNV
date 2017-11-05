@@ -46,8 +46,7 @@ import ConfigParser
 startupinfo = None
 if os.name == 'nt':
     startupinfo = subprocess.STARTUPINFO()
-    try:
-        startupinfo.dwFlags |= subprocess.STARTF_USESHOWWINDOW
+    try: startupinfo.dwFlags |= subprocess.STARTF_USESHOWWINDOW
     except:
         import _subprocess
 
@@ -75,8 +74,7 @@ def Unicode(name, tryFirstEncoding=False):
             try:
                 return unicode(name, tryFirstEncoding)
             except UnicodeDecodeError:
-                deprint(
-                    "Unable to decode '%s' in %s." % (name, tryFirstEncoding))
+                deprint("Unable to decode '%s' in %s." % (name, tryFirstEncoding))
                 pass
         for i in range(NumEncodings):
             try:
@@ -95,8 +93,7 @@ def Encode(name, tryFirstEncoding=False):
             try:
                 return name.encode(tryFirstEncoding)
             except UnicodeEncodeError:
-                deprint(
-                    "Unable to encode '%s' in %s." % (name, tryFirstEncoding))
+                deprint("Unable to encode '%s' in %s." % (name, tryFirstEncoding))
                 pass
         for i in range(NumEncodings):
             try:
@@ -170,14 +167,9 @@ if locale.getlocale() == (None, None):
 language = locale.getlocale()[0].split('_', 1)[0]
 if language.lower() == 'german': language = 'de'  # --Hack for German speakers who aren't 'DE'.
 # TODO: use bosh.dirs['l10n'] once we solve the circular import
-languagePkl, languageTxt = (os.path.join('bash', 'l10n', language + ext) for ext
-in ('.pkl', '.txt'))
+languagePkl, languageTxt = (os.path.join('bash', 'l10n', language + ext) for ext in ('.pkl', '.txt'))
 # --Recompile pkl file?
-if os.path.exists(languageTxt) and (
-        not os.path.exists(languagePkl) or (
-            os.path.getmtime(languageTxt) > os.path.getmtime(languagePkl)
-    )
-):
+if os.path.exists(languageTxt) and (not os.path.exists(languagePkl) or (os.path.getmtime(languageTxt) > os.path.getmtime(languagePkl))):
     compileTranslator(languageTxt, languagePkl)
 # --Use dictionary from pickle as translator
 if os.path.exists(languagePkl):
@@ -187,19 +179,16 @@ if os.path.exists(languagePkl):
     pklFile.close()
 
 
-    def _(text, encode=True):
-        # text = Encode(text,'mbcs')
-        if isinstance(text, unicode): text = text.encode('mbcs')
-        if encode: text = reEscQuote.sub("'", text.encode('string_escape'))
+    def _(text,do_encode=True):
+        if isinstance(text, unicode): text = text.encode(sys_fs_enc)
+        if do_encode: text = reEscQuote.sub("'",text.encode('string_escape'))
         head, core, tail = reTrans.match(text).groups()
-        if core and core in _translator:
-            text = head + _translator[core] + tail
-        if encode: text = text.decode('string_escape')
-        if bUseUnicode: text = unicode(text, 'mbcs')
+        if core and core in _translator: text = head + _translator[core] + tail
+        if do_encode: text = text.decode('string_escape')
+        if bUseUnicode: text = unicode(text, sys_fs_enc)
         return text
 else:
-    def _(text, encode=True):
-        return text
+    def _(text,do_encode=True): return text
 
 CBash = 0
 images_list = {
