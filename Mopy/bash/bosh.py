@@ -26914,11 +26914,9 @@ class ImportRelations(ImportPatcher):
             progress.plus()
         # --Finish
         for fid, relations in factionRelations.id_relations.iteritems():
-            if fid and (
-                    fid[0] is not None and fid[0] in self.patchFile.loadSet):
-                filteredRelations = [relation for relation in relations if
-                    relation[0] and (relation[0][0] is not None and relation[0][
-                                                                        0] in self.patchFile.loadSet)]
+            if fid and (fid[0] is not None and fid[0] in self.patchFile.loadSet):
+                filteredRelations = [relation for relation in relations if relation[0] and
+                (relation[0][0] is not None and relation[0][0] in self.patchFile.loadSet)]
                 if filteredRelations:
                     self.id_relations[fid] = filteredRelations
 
@@ -26957,8 +26955,8 @@ class ImportRelations(ImportPatcher):
         id_relations = self.id_relations
         type_count = {}
         for type in ('FACT',):
-            if type not in modFile.tops: continue
             type_count[type] = 0
+            if type not in modFile.tops: continue
             for record in modFile.tops[type].records:
                 fid = record.fid
                 if fid in id_relations:
