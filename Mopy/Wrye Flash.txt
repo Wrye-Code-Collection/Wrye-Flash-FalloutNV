@@ -38,11 +38,16 @@ Additionally, Wrye Bash comes packaged with the following programs:
 {{CONTENTS=0}}
 **All versions by Wrye team and or Valda unless otherwise noted.**
 
+=== 17.8 [07/02/2018]
+* Updated JIP (Version 54.20), Lutana NVSE CTDA [Sharlikran][Hlp]
+* Bug fix for Import Relations [Valda]
+
 === 17.7 [9/27/2017]
-* Updated JIP (Version 50), Lutana NVSE CTDA [Sharlikran]
+* Updated JIP (Version 51.60), Lutana NVSE CTDA [Sharlikran]
+* Add form version to Bash Patch [Sharlikran]
 
 === 17.6 [9/21/2017]
-* Updated JIP (Version 50), Lutana NVSE CTDA [Sharlikran]
+* Updated JIP (Version 48), Lutana NVSE CTDA [Sharlikran]
 
 === 17.5 [5/17/2016]
 * Bug fix for BOSS Detection [Valda]
