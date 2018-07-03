@@ -16207,6 +16207,18 @@ class InstallerProject(Installer):
             archive.s, "\n".join(errorLine)))
         outFile.untemp()
 
+    @staticmethod
+    def createFromData(projectPath,files,progress=None):
+        if not files: return
+        progress = progress if progress else bolt.Progress()
+        projectPath = GPath(projectPath)
+        progress.setFull(len(files))
+        srcJoin = dirs['mods'].join
+        dstJoin = projectPath.join
+        for i,currentFile in enumerate(files):
+            progress(i,currentFile.s)
+            srcJoin(currentFile).copyTo(dstJoin(currentFile))
+
     # --Fomod Config ------------------------------------------------------------
     class FomodConfig:
         """Tiny little fomod config class."""
