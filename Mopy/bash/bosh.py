@@ -25,12 +25,9 @@
 files and environment. It does not provide interface functions which are instead
 provided by separate modules: bish for CLI and bash/basher for GUI."""
 
-# Use the 'with' statement for python 2.5
-from __future__ import with_statement
-
 # Localization ----------------------------------------------------------------
 # --Not totally clear on this, but it seems to safest to put locale first...
-import locale;
+import locale
 
 locale.setlocale(locale.LC_ALL, '')
 # locale.setlocale(locale.LC_ALL,'German')

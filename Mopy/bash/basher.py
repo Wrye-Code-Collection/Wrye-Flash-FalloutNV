@@ -36,7 +36,6 @@ provided through the settings singleton (however the modInfos singleton also
 has its own data store)."""
 
 # Imports ---------------------------------------------------------------------
-from __future__ import with_statement  # Python 2.5 with statement
 # --Localization
 # ..Handled by bosh, so import that.
 import bush
