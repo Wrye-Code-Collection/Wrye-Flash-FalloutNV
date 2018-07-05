@@ -245,7 +245,7 @@ settingDefaults = {
     'bash.installers.skipLandscapeLODMeshes'      : False,
     'bash.installers.skipLandscapeLODTextures'    : False,
     'bash.installers.skipLandscapeLODNormals'     : False,
-    'bash.installers.allowNVSEPlugins'            : False,
+    'bash.installers.allowNVSEPlugins'            : True,
     'bash.installers.sortProjects'                : True,
     'bash.installers.sortActive'                  : False,
     'bash.installers.sortStructure'               : False,
