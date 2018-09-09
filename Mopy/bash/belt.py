@@ -46,8 +46,7 @@ UNEXPECTED = _("Unexpected '%s'.")
 class WizardReturn(object):
     __slots__ = (
     'Canceled', 'SelectEspms', 'RenameEspms', 'SelectSubPackages', 'Install',
-    'IniEdits', 'PageSize', 'Pos',
-    )
+    'IniEdits', 'PageSize', 'Pos',)
 
     # Canceled: Set to true if the user canceled the wizard, or if an error occured
     # SelectEspms: List of ESP's/ESM's to 'select' for install
@@ -83,8 +82,8 @@ class WizardReturn(object):
 class InstallerWizard(wiz.Wizard):
     def __init__(self, link, subs, pageSize, pos):
         wiz.Wizard.__init__(self, link.gTank, wx.ID_ANY, _('Installer Wizard'),
-            pos=pos,
-            style=wx.DEFAULT_DIALOG_STYLE | wx.RESIZE_BORDER | wx.MAXIMIZE_BOX)
+            pos = pos,
+            style = wx.DEFAULT_DIALOG_STYLE | wx.RESIZE_BORDER | wx.MAXIMIZE_BOX)
 
         # 'dummy' page tricks the wizard into always showing the "Next" button,
         # 'next' will be set by the parser
@@ -104,7 +103,7 @@ class InstallerWizard(wiz.Wizard):
         bArchive = link.isSingleArchive()
         if bArchive:
             # Extract the wizard, and any images as well
-            installer.unpackToTemp(path, [installer.hasWizard,
+            installer.unpackToTemp(path, [installer.hasWizard, 
                 '*.bmp',  # BMP's
                 '*.jpg', '*.jpeg',  # JPEG's
                 '*.png',  # PNG's
@@ -193,7 +192,7 @@ class InstallerWizard(wiz.Wizard):
         # Clean up temp files
         if self.parser.bArchive:
             try:
-                self.parser.installer.tempDir.rmtree(safety='Temp')
+                self.parser.installer.tempDir.rmtree(safety = 'Temp')
             except:
                 pass
         return self.ret
@@ -241,7 +240,7 @@ class PageError(PageInstaller):
         # Layout stuff
         sizerMain = wx.FlexGridSizer(2, 1, 5, 5)
         textError = wx.TextCtrl(self, -1, errorMsg,
-            style=wx.TE_READONLY | wx.TE_MULTILINE)
+            style = wx.TE_READONLY | wx.TE_MULTILINE)
         sizerMain.Add(wx.StaticText(self, -1, title))
         sizerMain.Add(textError, 0, wx.ALL | wx.CENTER | wx.EXPAND)
         sizerMain.AddGrowableCol(0)
@@ -284,19 +283,19 @@ class PageSelect(PageInstaller):
 
         sizerBoxes = wx.GridSizer(1, 2, 5, 5)
         self.textItem = wx.TextCtrl(self, wx.ID_ANY, '',
-            style=wx.TE_READONLY | wx.TE_MULTILINE)
-        self.bmpItem = balt.Picture(self, 0, 0, background=None)
+            style = wx.TE_READONLY | wx.TE_MULTILINE)
+        self.bmpItem = balt.Picture(self, 0, 0, background = None)
         if parent.parser.choiceIdex < len(parent.parser.choices):
             oldChoices = parent.parser.choices[parent.parser.choiceIdex]
             defaultMap = [choice in oldChoices for choice in listItems]
         if bMany:
-            self.listOptions = wx.CheckListBox(self, 643, choices=listItems,
-                style=wx.LB_HSCROLL)
+            self.listOptions = wx.CheckListBox(self, 643, choices = listItems,
+                style = wx.LB_HSCROLL)
             for index, default in enumerate(defaultMap):
                 self.listOptions.Check(index, default)
         else:
-            self.listOptions = wx.ListBox(self, 643, choices=listItems,
-                style=wx.LB_HSCROLL)
+            self.listOptions = wx.ListBox(self, 643, choices = listItems,
+                style = wx.LB_HSCROLL)
             self.parent.FindWindowById(wx.ID_FORWARD).Enable(False)
             for index, default in enumerate(defaultMap):
                 if default:
@@ -361,19 +360,15 @@ class PageSelect(PageInstaller):
             for i in self.listOptions.GetSelections():
                 temp.append(self.items[i])
         if self.parent.parser.choiceIdex < len(self.parent.parser.choices):
-            oldChoices = self.parent.parser.choices[
-                self.parent.parser.choiceIdex]
+            oldChoices = self.parent.parser.choices[self.parent.parser.choiceIdex]
             if temp == oldChoices:
                 pass
             else:
-                self.parent.parser.choices = self.parent.parser.choices[
-                0:self.parent.parser.choiceIdex]
+                self.parent.parser.choices = self.parent.parser.choices[0:self.parent.parser.choiceIdex]
                 self.parent.parser.choices.append(temp)
         else:
             self.parent.parser.choices.append(temp)
-        self.parent.parser.PushFlow('Select', False,
-            ['SelectOne', 'SelectMany', 'Case', 'Default', 'EndSelect'],
-            values=temp, hitCase=False)
+        self.parent.parser.PushFlow('Select', False, ['SelectOne', 'SelectMany', 'Case', 'Default', 'EndSelect'], values = temp, hitCase = False)
 
 
 # End PageSelect -----------------------------------------
@@ -395,9 +390,9 @@ def generateTweakLines(wizardEdits, target):
             format = '%(setting)s=%(value)s%(comment)s'
         for realSetting in wizardEdits[realSection][1]:
             lines.append(format % (
-            dict(setting=wizardEdits[realSection][1][realSetting][0],
-                value=wizardEdits[realSection][1][realSetting][1],
-                comment=wizardEdits[realSection][1][realSetting][2], )))
+                dict(setting = wizardEdits[realSection][1][realSetting][0],
+                    value = wizardEdits[realSection][1][realSetting][1],
+                    comment = wizardEdits[realSection][1][realSetting][2], )))
     return lines
 
 
@@ -442,14 +437,14 @@ class PageFinish(PageInstaller):
         sizerLists = wx.FlexGridSizer(2, 2, 5, 5)
         sizerLists.Add(wx.StaticText(self, -1, _('Sub-Packages')))
         sizerLists.Add(wx.StaticText(self, -1, _('Esp/ms')))
-        self.listSubs = wx.CheckListBox(self, 666, choices=subs)
+        self.listSubs = wx.CheckListBox(self, 666, choices = subs)
         wx.EVT_CHECKLISTBOX(self, 666, self.OnSelectSubs)
         for index, key in enumerate(subs):
             key = key.replace('&&', '&')
             if subsList[key]:
                 self.listSubs.Check(index, True)
                 self.parent.ret.SelectSubPackages.append(key)
-        self.listEspms = wx.CheckListBox(self, 667, choices=espmShow)
+        self.listEspms = wx.CheckListBox(self, 667, choices = espmShow)
         wx.EVT_CHECKLISTBOX(self, 667, self.OnSelectEspms)
         for index, key in enumerate(espms):
             if espmsList[key]:
@@ -467,10 +462,10 @@ class PageFinish(PageInstaller):
         sizerInis = wx.FlexGridSizer(2, 2, 5, 5)
         sizerInis.Add(wx.StaticText(self, -1, _('Ini Tweaks:')))
         sizerInis.Add(wx.StaticText(self, -1, ''))
-        self.listInis = wx.ListBox(self, 668, style=wx.LB_SINGLE,
-            choices=[x.s for x in iniedits.keys()])
+        self.listInis = wx.ListBox(self, 668, style = wx.LB_SINGLE,
+            choices = [x.s for x in iniedits.keys()])
         self.listInis.Bind(wx.EVT_LISTBOX, self.OnSelectIni)
-        self.listTweaks = wx.ListBox(self, -1, style=wx.LB_SINGLE)
+        self.listTweaks = wx.ListBox(self, -1, style = wx.LB_SINGLE)
         sizerInis.Add(self.listInis, 0, wx.ALL | wx.EXPAND)
         sizerInis.Add(self.listTweaks, 0, wx.ALL | wx.EXPAND)
         sizerInis.AddGrowableRow(1)
@@ -483,7 +478,7 @@ class PageFinish(PageInstaller):
         sizerNotes = wx.FlexGridSizer(2, 1, 5, 0)
         sizerNotes.Add(wx.StaticText(self, -1, _('Notes:')))
         sizerNotes.Add(wx.TextCtrl(self, -1, ''.join(notes),
-            style=wx.TE_READONLY | wx.TE_MULTILINE), 1, wx.EXPAND)
+            style = wx.TE_READONLY | wx.TE_MULTILINE), 1, wx.EXPAND)
         sizerNotes.AddGrowableCol(0)
         sizerNotes.AddGrowableRow(1)
         sizerMain.Add(sizerNotes, 2, wx.TOP | wx.EXPAND)
@@ -576,8 +571,7 @@ class PageVersions(PageInstaller):
         PageInstaller.__init__(self, parent)
 
         bmp = [wx.Bitmap(bosh.dirs['images'].join('x.png').s),
-            wx.Bitmap(bosh.dirs['images'].join('check.png').s)
-        ]
+               wx.Bitmap(bosh.dirs['images'].join('check.png').s)]
 
         sizerMain = wx.FlexGridSizer(5, 1, 0, 0)
 
@@ -869,21 +863,22 @@ class WryeParser(ScriptParser.Parser):
         self.SetOperator('<=', self.opLE, ScriptParser.OP.CO1)
         self.SetOperator('<', self.opL, ScriptParser.OP.CO1)
         self.SetOperator('==:', self.opEc, ScriptParser.OP.CO2,
-            passTokens=False)  # Case insensitive ==
+            passTokens = False)  # Case insensitive ==
         self.SetOperator('!=:', self.opNEc, ScriptParser.OP.CO2,
-            passTokens=False)  # Case insensitive !=
+            passTokens = False)  # Case insensitive !=
         self.SetOperator('>=:', self.opGEc, ScriptParser.OP.CO1,
-            passTokens=False)  # Case insensitive >=
+            passTokens = False)  # Case insensitive >=
         self.SetOperator('>:', self.opGc, ScriptParser.OP.CO1,
-            passTokens=False)  # Case insensitive >
+            passTokens = False)  # Case insensitive >
         self.SetOperator('<=:', self.opLEc, ScriptParser.OP.CO1,
-            passTokens=False)  # Case insensitive <=
+            passTokens = False)  # Case insensitive <=
         self.SetOperator('<:', self.opLc, ScriptParser.OP.CO1,
-            passTokens=False)  # Case insensitive <
+            passTokens = False)  # Case insensitive <
         # Membership operators
-        self.SetOperator('in', self.opIn, ScriptParser.OP.MEM, passTokens=False)
+        self.SetOperator('in', self.opIn, ScriptParser.OP.MEM,
+            passTokens = False)
         self.SetOperator('in:', self.opInc, ScriptParser.OP.MEM,
-            passTokens=False)  # Case insensitive in
+            passTokens = False)  # Case insensitive in
         # Boolean
         self.SetOperator('&', self.opAnd, ScriptParser.OP.AND)
         self.SetOperator('and', self.opAnd, ScriptParser.OP.AND)
@@ -921,14 +916,14 @@ class WryeParser(ScriptParser.Parser):
         self.SetFunction('int', self.fnInt, 1)
         self.SetFunction('float', self.fnFloat, 1)
         # --String functions
-        self.SetFunction('len', self.fnLen, 1, dotFunction=True)
+        self.SetFunction('len', self.fnLen, 1, dotFunction = True)
         self.SetFunction('endswith', self.fnEndsWith, 2,
-            ScriptParser.KEY.NO_MAX, dotFunction=True)
+            ScriptParser.KEY.NO_MAX, dotFunction = True)
         self.SetFunction('startswith', self.fnStartsWith, 2,
-            ScriptParser.KEY.NO_MAX, dotFunction=True)
-        self.SetFunction('lower', self.fnLower, 1, dotFunction=True)
-        self.SetFunction('find', self.fnFind, 2, 4, dotFunction=True)
-        self.SetFunction('rfind', self.fnRFind, 2, 4, dotFunction=True)
+            ScriptParser.KEY.NO_MAX, dotFunction = True)
+        self.SetFunction('lower', self.fnLower, 1, dotFunction = True)
+        self.SetFunction('find', self.fnFind, 2, 4, dotFunction = True)
+        self.SetFunction('rfind', self.fnRFind, 2, 4, dotFunction = True)
         # --String pathname functions
         self.SetFunction('GetFilename', self.fnGetFilename, 1)
         self.SetFunction('GetFolder', self.fnGetFolder, 1)
@@ -953,7 +948,7 @@ class WryeParser(ScriptParser.Parser):
         self.SetKeyword('Continue', self.kwdContinue)
         self.SetKeyword('EndWhile', self.kwdEndWhile)
         self.SetKeyword('For', self.kwdFor, 3, ScriptParser.KEY.NO_MAX,
-            passTokens=True, splitCommas=False)
+            passTokens = True, splitCommas = False)
         self.SetKeyword('from', self.kwdDummy)
         self.SetKeyword('to', self.kwdDummy)
         self.SetKeyword('by', self.kwdDummy)
@@ -1004,7 +999,7 @@ class WryeParser(ScriptParser.Parser):
                 o.write(_(
                     'An unhandled error occured while parsing the wizard:\n Line(%s):\t%s\n\n') % (
                         self.cLine, newline.strip('\n')))
-                traceback.print_exc(file=o)
+                traceback.print_exc(file = o)
                 msg = o.getvalue()
                 o.close()
                 return PageError(self.parent, _('Installer Wizard'), msg)
@@ -1375,7 +1370,7 @@ class WryeParser(ScriptParser.Parser):
             self.PushFlow('If', False, ['If', 'EndIf'])
             return
         self.PushFlow('If', bActive, ['If', 'Else', 'Elif', 'EndIf'],
-            ifTrue=bActive, hitElse=False)
+            ifTrue = bActive, hitElse = False)
 
     def kwdElif(self, bActive):
         if self.LenFlow() == 0 or self.PeekFlow().type != 'If' or self.PeekFlow().hitElse:
@@ -1407,8 +1402,8 @@ class WryeParser(ScriptParser.Parser):
             # next 'EndWhile' towards THIS one
             self.PushFlow('While', False, ['While', 'EndWhile'])
             return
-        self.PushFlow('While', bActive, ['While', 'EndWhile'], cLine=self.cLine,
-            expr=args)
+        self.PushFlow('While', bActive, ['While', 'EndWhile'],
+            cLine = self.cLine, expr = args)
 
     def kwdContinue(self):
         # Find the next up While or For statement to continue from
@@ -1486,7 +1481,7 @@ class WryeParser(ScriptParser.Parser):
         if args[1].text == 'from':
             # For varname from value_start to value_end [by value_increment]
             if (len(args) not in [5, 7]) or (args[3].text != 'to') or (
-                    len(args) == 7 and args[5].text != 'by'):
+                len(args) == 7 and args[5].text != 'by'):
                 error(
                     "Invalid syntax for 'For' statement.  Expected format:\n For var_name from value_start to value_end\n For var_name from value_start to value_end by value_increment")
             start = self.ExecuteTokens([args[2]])
@@ -1498,8 +1493,8 @@ class WryeParser(ScriptParser.Parser):
             else:
                 by = 1
             self.variables[varname.text] = start
-            self.PushFlow('For', True, ['For', 'EndFor'], ForType=0,
-                cLine=self.cLine, varname=varname.text, end=end, by=by)
+            self.PushFlow('For', True, ['For', 'EndFor'], ForType = 0,
+                cLine = self.cLine, varname = varname.text, end = end, by = by)
         elif args[1].text == 'in':
             # For name in SubPackages / For name in SubPackage
             if args[2].text == 'SubPackages':
@@ -1534,8 +1529,9 @@ class WryeParser(ScriptParser.Parser):
                 self.PushFlow('For', False, ['For', 'EndFor'])
             else:
                 self.variables[varname.text] = List[0]
-                self.PushFlow('For', True, ['For', 'EndFor'], ForType=1,
-                    cLine=self.cLine, varname=varname.text, List=List, index=0)
+                self.PushFlow('For', True, ['For', 'EndFor'], ForType = 1,
+                    cLine = self.cLine, varname = varname.text, List = List,
+                    index = 0)
         else:
             error(
                 "Invalid syntax for 'For' statement.  Expected format:\n For var_name from value_start to value_end [by value_increment]\n For var_name in SubPackages\n For var_name in subpackage_name")
@@ -1611,7 +1607,7 @@ class WryeParser(ScriptParser.Parser):
                                 break
                     self.PushFlow('Select', False,
                         ['SelectOne', 'SelectMany', 'Case', 'Default',
-                            'EndSelect'], values=temp, hitCase=False)
+                         'EndSelect'], values = temp, hitCase = False)
                     return
         self.choiceIdex += 1
         if self.reversing:
@@ -1619,7 +1615,7 @@ class WryeParser(ScriptParser.Parser):
             self.reversing -= 1
             self.PushFlow('Select', False,
                 ['SelectOne', 'SelectMany', 'Case', 'Default', 'EndSelect'],
-                values=self.choices[self.choiceIdex], hitCase=False)
+                values = self.choices[self.choiceIdex], hitCase = False)
             return
         # If not an auto-wizard, or an auto-wizard with no default option
         if self.bArchive:
