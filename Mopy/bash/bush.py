@@ -432,7 +432,7 @@ baloGroups = (
     ('Place', 1),
     ('Quest', 3, -1),
     ('Last', 1, -1),
-)
+    )
 
 # Tes3 Group/Top Types -------------------------------------------------------------
 groupTypes = [
@@ -447,7 +447,7 @@ groupTypes = [
     _('Cell Persistent Childen'),
     _('Cell Temporary Children'),
     _('Cell Visible Distant Children'),
-]
+    ]
 
 # --Top types in FalloutNV order.
 topTypes = ['GMST', 'TXST', 'MICN', 'GLOB', 'CLAS', 'FACT', 'HDPT', 'HAIR',
@@ -484,12 +484,9 @@ topTypes = ['GMST', 'TXST', 'MICN', 'GLOB', 'CLAS', 'FACT', 'HDPT', 'HAIR',
 # ['SLGM', 'BSGN', 'FLOR', 'SGST', 'CLOT', 'SBSP', 'SKIL', 'LVSP', 'APPA']
 
 # --Dict mapping 'ignored' top types to un-ignored top types.
-topIgTypes = dict(
-    [(struct.pack('I', (struct.unpack('I', type)[0]) | 0x1000), type) for type
-        in topTypes])
+topIgTypes = dict([(struct.pack('I', (struct.unpack('I', type)[0]) | 0x1000), type) for type in topTypes])
 
-recordTypes = set(
-    topTypes + 'GRUP,TES4,ACHR,ACRE,INFO,LAND,NAVM,PGRE,PMIS,REFR'.split(','))
+recordTypes = set(topTypes + 'GRUP,TES4,ACHR,ACRE,INFO,LAND,NAVM,PGRE,PMIS,REFR'.split(','))
 
 
 # Id Functions ----------------------------------------------------------------
@@ -523,7 +520,7 @@ raceNames = {
     0x0987dd: _('Asian Old Aged'),
     0x0987de: _('AfricanAmerican Old Aged'),
     0x0987df: _('Caucasian Old Aged'),
-}
+    }
 
 raceShortNames = {
     0x000019: 'Cau',
@@ -547,7 +544,7 @@ raceShortNames = {
     0x0987dd: 'AOA',
     0x0987de: 'FOA',
     0x0987df: 'COA',
-}
+    }
 
 raceHairMale = {
     0x000019: 0x014b90,  # --Cau
@@ -571,7 +568,7 @@ raceHairMale = {
     0x0987dd: 0x0987da,  # --AOA
     0x0987de: 0x0987d9,  # --FOA
     0x0987df: 0x0987da,  # --COA
-}
+    }
 
 raceHairFemale = {
     0x000019: 0x05dc6b,  # --Cau
@@ -595,7 +592,7 @@ raceHairFemale = {
     0x0987dd: 0x044529,  # --AOA
     0x0987de: 0x044529,  # --FOA
     0x0987df: 0x044529,  # --COA
-}
+    }
 
 # Default Eyes/Hair -----------------------------------------------------------
 # standardEyes = [ob(x) for x in (0x27306,0x27308,0x27309)] + [cobl(x) for x in (0x000821, 0x000823, 0x000825, 0x000828, 0x000834, 0x000837, 0x000839, 0x00084F, )]
@@ -645,7 +642,7 @@ defaultEyes = {
         standardEyes,
     ob(0x0987df):  # --Caucasian Old Aged
         standardEyes,
-}
+    }
 
 # Function Info ---------------------------------------------------------------
 conditionFunctionData = ( #--0: no param; 1: int param; 2: formid param
@@ -1002,7 +999,7 @@ weaponTypes = (
     _('Unarmed'),
     _('Thrown'),
     _('Mine'),
-)
+    )
 
 magicEffects = {
     'ABAT': [5, _('Absorb Attribute'), 0.95],
@@ -1166,19 +1163,16 @@ magicEffects = {
     'ZWRL': [1, _('Summon Gloom Wraith'), 260],
     'ZXIV': [1, _('Summon Xivilai'), 200],
     'ZZOM': [1, _('Summon Zombie'), 16.67],
-}
+    }
 mgef_school = dict((x, y) for x, [y, z, a] in magicEffects.items())
 mgef_name = dict((x, z) for x, [y, z, a] in magicEffects.items())
 mgef_basevalue = dict((x, a) for x, [y, z, a] in magicEffects.items())
-mgef_school.update(dict(
-    (ctypes.cast(x, ctypes.POINTER(ctypes.c_ulong)).contents.value, y) for
-        x, [y, z, a] in magicEffects.items()))
-mgef_name.update(dict(
-    (ctypes.cast(x, ctypes.POINTER(ctypes.c_ulong)).contents.value, z) for
-        x, [y, z, a] in magicEffects.items()))
-mgef_basevalue.update(dict(
-    (ctypes.cast(x, ctypes.POINTER(ctypes.c_ulong)).contents.value, a) for
-        x, [y, z, a] in magicEffects.items()))
+mgef_school.update(
+    dict((ctypes.cast(x, ctypes.POINTER(ctypes.c_ulong)).contents.value, y) for x, [y, z, a] in magicEffects.items()))
+mgef_name.update(
+    dict((ctypes.cast(x, ctypes.POINTER(ctypes.c_ulong)).contents.value, z) for x, [y, z, a] in magicEffects.items()))
+mgef_basevalue.update(
+    dict((ctypes.cast(x, ctypes.POINTER(ctypes.c_ulong)).contents.value, a) for x, [y, z, a] in magicEffects.items()))
 
 hostileEffects = {
     'ABAT',  # --Absorb Attribute
@@ -1319,7 +1313,7 @@ actorValues = [
 
     'Darkness',  # --70
     'ResistWaterDamage',
-]
+    ]
 
 acbs = {
     'Armorer'     : 0,
@@ -1352,7 +1346,7 @@ acbs = {
     'Endurance'   : 30,
     'Personality' : 31,
     'Luck'        : 32,
-}
+    }
 
 # Save File Info --------------------------------------------------------------
 saveRecTypes = {
@@ -1376,7 +1370,7 @@ saveRecTypes = {
     58: _('Dialog Entry'),
     59: _('Quest'),
     61: _('AI Package'),
-}
+    }
 
 # Alchemical Catalogs ---------------------------------------------------------
 ingred_alchem = (
@@ -1384,13 +1378,13 @@ ingred_alchem = (
     (2, 0xCEC, _('Alchemical Ingredients II'), 500),
     (3, 0xCEB, _('Alchemical Ingredients III'), 1000),
     (4, 0xCE7, _('Alchemical Ingredients IV'), 2000),
-)
+    )
 effect_alchem = (
     (1, 0xCEA, _('Alchemical Effects I'), 500),
     (2, 0xCE9, _('Alchemical Effects II'), 1000),
     (3, 0xCE8, _('Alchemical Effects III'), 2000),
     (4, 0xCE6, _('Alchemical Effects IV'), 4000),
-)
+    )
 
 # Power Exhaustion ------------------------------------------------------------
 orrery = getIdFunc('DLCOrrery.esp')
@@ -1473,7 +1467,7 @@ id_exhaustion = {
     orrery(0x11DC68): 7,  # Secunda's Magnetism
     orrery(0x11DC6A): 7,  # Secunda's Brilliance
     orrery(0x11DC6C): 7,  # Masser's Courage
-}
+    }
 
 # Repair Factions -------------------------------------------------------------
 # --Formids for npcs which legitimately have no faction membership
@@ -1495,34 +1489,20 @@ repairFactions_legitNullFactions = set((
 repairFactions_legitDroppedFactions = {
     (0x000034CC, 0x000034B9),  # UlrichLeland CheydinhalGuardFaction
     (0x000034CC, 0x000034BB),  # UlrichLeland CheydinhalCastleFaction
-    (0x000055C2, 0x00090E31),
-        # CheydinhalGuardCastlePostDay01 CheydinhalCorruptGuardsFactionMS10
-    (0x000055C4, 0x00090E31),
-        # CheydinhalGuardCastlePostNight01 CheydinhalCorruptGuardsFactionMS10
-    (0x000055C5, 0x00090E31),
-        # CheydinhalGuardCastlePostNight02 CheydinhalCorruptGuardsFactionMS10
-    (0x000055C7, 0x00090E31),
-        # CheydinhalGuardCityPatrolDay02 CheydinhalCorruptGuardsFactionMS10
-    (0x000055C8, 0x00090E31),
-        # CheydinhalGuardCityPatrolNight01 CheydinhalCorruptGuardsFactionMS10
-    (0x000055C9, 0x00090E31),
-        # CheydinhalGuardCityPatrolNight02 CheydinhalCorruptGuardsFactionMS10
-    (0x000055CB, 0x00090E31),
-        # CheydinhalGuardCityPostDay02 CheydinhalCorruptGuardsFactionMS10
-    (0x000055CC, 0x00090E31),
-        # CheydinhalGuardCityPostNight01 CheydinhalCorruptGuardsFactionMS10
-    (0x000055CD, 0x00090E31),
-        # CheydinhalGuardCityPostNight02 CheydinhalCorruptGuardsFactionMS10
-    (0x000055D2, 0x00090E31),
-        # CheydinhalGuardCastlePatrolDay01 CheydinhalCorruptGuardsFactionMS10
-    (0x000055D3, 0x00090E31),
-        # CheydinhalGuardCastlePatrolNight01 CheydinhalCorruptGuardsFactionMS10
-    (0x000055D4, 0x00090E31),
-        # CheydinhalGuardCountEscort CheydinhalCorruptGuardsFactionMS10
-    (0x000055D5, 0x00090E31),
-        # CheydinhalGuardJailorDay CheydinhalCorruptGuardsFactionMS10
-    (0x000055D6, 0x00090E31),
-        # CheydinhalGuardJailorNight CheydinhalCorruptGuardsFactionMS10
+    (0x000055C2, 0x00090E31),  # CheydinhalGuardCastlePostDay01 CheydinhalCorruptGuardsFactionMS10
+    (0x000055C4, 0x00090E31),  # CheydinhalGuardCastlePostNight01 CheydinhalCorruptGuardsFactionMS10
+    (0x000055C5, 0x00090E31),  # CheydinhalGuardCastlePostNight02 CheydinhalCorruptGuardsFactionMS10
+    (0x000055C7, 0x00090E31),  # CheydinhalGuardCityPatrolDay02 CheydinhalCorruptGuardsFactionMS10
+    (0x000055C8, 0x00090E31),  # CheydinhalGuardCityPatrolNight01 CheydinhalCorruptGuardsFactionMS10
+    (0x000055C9, 0x00090E31),  # CheydinhalGuardCityPatrolNight02 CheydinhalCorruptGuardsFactionMS10
+    (0x000055CB, 0x00090E31),  # CheydinhalGuardCityPostDay02 CheydinhalCorruptGuardsFactionMS10
+    (0x000055CC, 0x00090E31),  # CheydinhalGuardCityPostNight01 CheydinhalCorruptGuardsFactionMS10
+    (0x000055CD, 0x00090E31),  # CheydinhalGuardCityPostNight02 CheydinhalCorruptGuardsFactionMS10
+    (0x000055D2, 0x00090E31),  # CheydinhalGuardCastlePatrolDay01 CheydinhalCorruptGuardsFactionMS10
+    (0x000055D3, 0x00090E31),  # CheydinhalGuardCastlePatrolNight01 CheydinhalCorruptGuardsFactionMS10
+    (0x000055D4, 0x00090E31),  # CheydinhalGuardCountEscort CheydinhalCorruptGuardsFactionMS10
+    (0x000055D5, 0x00090E31),  # CheydinhalGuardJailorDay CheydinhalCorruptGuardsFactionMS10
+    (0x000055D6, 0x00090E31),  # CheydinhalGuardJailorNight CheydinhalCorruptGuardsFactionMS10
     (0x0000BD60, 0x00091ADB),  # Larthjar Prisoners
     (0x00012106, 0x0001557F),  # SEThadon SENewSheothBliss
     (0x00012106, 0x0001AD45),  # SEThadon SEManiaFaction
@@ -1568,13 +1548,10 @@ repairFactions_legitDroppedFactions = {
     (0x00035649, 0x0002A09C),  # MercatorHosidus SkingradCastleFaction
     (0x00035ECB, 0x00035EA9),  # Jearl BrumaFaction
     (0x0003628D, 0x00009274),  # VelwynBenirus AnvilFaction
-    (0x0004EF69, 0x00090E31),
-        # CheydinhalGuardCityPostDay03 CheydinhalCorruptGuardsFactionMS10
-    (0x0004EFF9, 0x00090E31),
-        # CheydinhalGuardCityPostDay04 CheydinhalCorruptGuardsFactionMS10
-    (0x0004EFFA, 0x00090E31),
-    # CheydinhalGuardCityPostNight04 CheydinhalCorruptGuardsFactionMS10
-}
+    (0x0004EF69, 0x00090E31),  # CheydinhalGuardCityPostDay03 CheydinhalCorruptGuardsFactionMS10
+    (0x0004EFF9, 0x00090E31),  # CheydinhalGuardCityPostDay04 CheydinhalCorruptGuardsFactionMS10
+    (0x0004EFFA, 0x00090E31),  # CheydinhalGuardCityPostNight04 CheydinhalCorruptGuardsFactionMS10
+    }
 
 # Messages Text ===============================================================
 messagesHeader = """<html>
