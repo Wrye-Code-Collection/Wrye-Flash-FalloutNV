@@ -82,7 +82,7 @@ def init(initLevel):
         3: saveInfos"""
     # --Settings
     bosh.initBosh()
-    bosh.initSettings(readOnly=True)
+    bosh.initSettings(readOnly = True)
     bosh.falloutIni = bosh.FalloutIni()
     # --MwIniFile (initLevel >= 1)
     if initLevel < 1: return
@@ -306,7 +306,7 @@ def diffScripts(oldFile, newFile):
         scripts.update(dict(
             (record.eid, record.scriptText) for record in modFile.SCPT.records))
     oldDump, newDump = ((GPath(fileName) + '.mws').open('w') for fileName in
-    (oldFile, newFile))
+                        (oldFile, newFile))
     for eid in sorted(oldScripts):
         if eid in newScripts and oldScripts[eid] != newScripts[eid]:
             print 'Modified:', eid
@@ -356,7 +356,7 @@ def scriptVars(fileName=None, printAll=None):
     modInfo = bosh.modInfos[GPath(fileName)]
     modFile = bosh.ModFile(modInfo, loadFactory)
     modFile.load(True)
-    for record in sorted(modFile.SCPT.records, key=lambda a: a.eid):
+    for record in sorted(modFile.SCPT.records, key = lambda a: a.eid):
         indices = [var.index for var in record.vars]
         if printAll or (indices != range(1, len(indices) + 1)):
             print '%s:  NRefs: %d Last: %d' % (
@@ -500,7 +500,7 @@ def perfTest():
     total = 0.0
     from timeit import Timer
     for testClasses in ['bosh.MreClmt', 'bosh.MreCsty', 'bosh.MreIdle',
-        'bosh.MreLtex', 'bosh.MreRegn', 'bosh.MreSbsp']:
+                        'bosh.MreLtex', 'bosh.MreRegn', 'bosh.MreSbsp']:
         test = Timer(
             'testClasses = (%s,);loadFactory = bosh.LoadFactory(False,*testClasses);modInfo = bosh.modInfos[GPath("FalloutNV.esm")];modFile = bosh.ModFile(modInfo,loadFactory);modFile.load(True)' % testClasses,
             "import bosh;from bolt import GPath").timeit(1)
@@ -624,10 +624,10 @@ def csFunctions(fileName="CS Functions.txt"):
             "'''Editors:''' Do not edit entries on this page. See [[Raw Function List]] for more info.\n\n")
         if doLinks: out.write('{{CompactTOC4}}\n')
         # --Sort
-        records.sort(key=lambda x: x[0].lower())
+        records.sort(key = lambda x: x[0].lower())
         current = ''
         links = ("",
-        " - [[#A|A]][[#B|B]][[#C|C]][[#D|D]][[#E|E]][[#F|F]][[#G|G]][[#H|H]][[#I|I]][[#J|J]][[#K|K]][[#L|L]][[#M|M]][[#N|N]][[#O|O]][[#P|P]][[#Q|Q]][[#R|R]][[#S|S]][[#T|T]][[#U|U]][[#V|V]][[#W|W]][[#X|X]][[#Y|Y]][[#Z|Z]]")[
+                 " - [[#A|A]][[#B|B]][[#C|C]][[#D|D]][[#E|E]][[#F|F]][[#G|G]][[#H|H]][[#I|I]][[#J|J]][[#K|K]][[#L|L]][[#M|M]][[#N|N]][[#O|O]][[#P|P]][[#Q|Q]][[#R|R]][[#S|S]][[#T|T]][[#U|U]][[#V|V]][[#W|W]][[#X|X]][[#Y|Y]][[#Z|Z]]")[
             doLinks]
         if source == 'TSFC': links = ''
         for func, src, type, text in records:
@@ -820,8 +820,8 @@ def createTagList(inPath='masterlist.txt', outPath='taglist.txt'):
             revision = int(line[37:42])
     ins.close()
     tagList = '\ Taglist for Wrye Flash; derived from BOSS Masterlist revision %i.\n' % (
-    revision) + '\% A Bashed Patch suggestion for the mod above.\n\n'
-    for mod in sorted(tags, key=str.lower):
+        revision) + '\% A Bashed Patch suggestion for the mod above.\n\n'
+    for mod in sorted(tags, key = str.lower):
         tagList += mod + '\n'
         tagList += tags[mod] + '\n'
         if mod in bossDirtyMods:
@@ -1114,7 +1114,8 @@ def balancer(fileName=None):
     modFile.load(True)
     balFile.load(True)
     skillNames = bush.actorValues[12:33]
-    for race in sorted(modFile.RACE.getActiveRecords(), key=attrgetter('eid')):
+    for race in sorted(modFile.RACE.getActiveRecords(),
+        key = attrgetter('eid')):
         balRace = balFile.RACE.getRecord(race.fid)
         if not balRace: continue
         print 'if', race.eid
@@ -1233,7 +1234,7 @@ class Archive:
 
         command = '"%s" l "%s"' % (bosh.exe7z, self.path.s)
         command = codecs.encode(command, 'mbcs')
-        out = Popen(command, stdout=PIPE, stdin=PIPE).stdout
+        out = Popen(command, stdout = PIPE, stdin = PIPE).stdout
         for line in out:
             print line,
             maList = reList.match(line)
