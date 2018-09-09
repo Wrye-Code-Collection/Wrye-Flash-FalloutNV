@@ -78,9 +78,7 @@ def Init(path):
     c_size_t_p = POINTER(c_size_t)
 
     class BashTag(Structure):
-        _fields_ = [('id', c_uint32),
-            ('name', c_uint8_p),
-        ]
+        _fields_ = [('id', c_uint32), ('name', c_uint8_p), ]
 
     BashTag_p = POINTER(BashTag)
     BashTag_p_p = POINTER(BashTag_p)
@@ -97,9 +95,8 @@ def Init(path):
         return u'' if x is None else unicode(x, 'utf8')
 
     def _enc(x):
-        return (x.encode('utf8') if isinstance(x, unicode)
-        else x.s.encode('utf8') if isinstance(x, Path)
-        else x)
+        return (x.encode('utf8') if isinstance(x, unicode) else x.s.encode(
+            'utf8') if isinstance(x, Path) else x)
 
     # =========================================================================
     # API Functions - Version
@@ -132,17 +129,16 @@ def Init(path):
         'BOSS_API_GAME_FALLOUTNV').value
     BOSS_API_GAME_NEHRIM = c_uint.in_dll(BAPI, 'BOSS_API_GAME_NEHRIM').value
     BOSS_API_GAME_SKYRIM = c_uint.in_dll(BAPI, 'BOSS_API_GAME_SKYRIM').value
-    games = {
-        'Oblivion'             : BOSS_API_GAME_OBLIVION,
-        BOSS_API_GAME_OBLIVION : BOSS_API_GAME_OBLIVION,
-        'Fallout 3'            : BOSS_API_GAME_FALLOUT3,
-        BOSS_API_GAME_FALLOUT3 : BOSS_API_GAME_FALLOUT3,
-        'Fallout: New Vegas'   : BOSS_API_GAME_FALLOUTNV,
+    games = {'Oblivion': BOSS_API_GAME_OBLIVION,
+        BOSS_API_GAME_OBLIVION: BOSS_API_GAME_OBLIVION,
+        'Fallout 3': BOSS_API_GAME_FALLOUT3,
+        BOSS_API_GAME_FALLOUT3: BOSS_API_GAME_FALLOUT3,
+        'Fallout: New Vegas': BOSS_API_GAME_FALLOUTNV,
         BOSS_API_GAME_FALLOUTNV: BOSS_API_GAME_FALLOUTNV,
-        'Nehrim'               : BOSS_API_GAME_NEHRIM,
-        BOSS_API_GAME_NEHRIM   : BOSS_API_GAME_NEHRIM,
-        'Skyrim'               : BOSS_API_GAME_SKYRIM,
-        BOSS_API_GAME_SKYRIM   : BOSS_API_GAME_SKYRIM,
+        'Nehrim': BOSS_API_GAME_NEHRIM,
+        BOSS_API_GAME_NEHRIM: BOSS_API_GAME_NEHRIM,
+        'Skyrim': BOSS_API_GAME_SKYRIM,
+        BOSS_API_GAME_SKYRIM: BOSS_API_GAME_SKYRIM,
     }
 
     # =========================================================================
@@ -165,28 +161,16 @@ def Init(path):
     # =========================================================================
     errors = {}
     ErrorCallbacks = {}
-    for name in ['OK',
-        'OK_NO_UPDATE_NECESSARY',
-        'WARN_BAD_FILENAME',
-        'WARN_LO_MISMATCH',
-        'ERROR_FILE_WRITE_FAIL',
-        'ERROR_FILE_DELETE_FAIL',
-        'ERROR_FILE_NOT_UTF8',
-        'ERROR_FILE_NOT_FOUND',
-        'ERROR_FILE_RENAME_FAIL',
-        'ERROR_TIMESTAMP_READ_FAIL',
-        'ERROR_TIMESTAMP_WRITE_FAIL',
-        'ERROR_PARSE_FAIL',
-        'ERROR_CONDITION_EVAL_FAIL',
-        'ERROR_NO_MEM',
-        'ERROR_INVALID_ARGS',
-        'ERROR_NETWORK_FAIL',
-        'ERROR_NO_INTERNET_CONNECTION',
-        'ERROR_NO_TAG_MAP',
-        'ERROR_PLUGINS_FULL',
-        'ERROR_GAME_NOT_FOUND',
-        'ERROR_REGEX_EVAL_FAIL',
-    ]:
+    for name in ['OK', 'OK_NO_UPDATE_NECESSARY', 'WARN_BAD_FILENAME',
+                 'WARN_LO_MISMATCH', 'ERROR_FILE_WRITE_FAIL',
+                 'ERROR_FILE_DELETE_FAIL', 'ERROR_FILE_NOT_UTF8',
+                 'ERROR_FILE_NOT_FOUND', 'ERROR_FILE_RENAME_FAIL',
+                 'ERROR_TIMESTAMP_READ_FAIL', 'ERROR_TIMESTAMP_WRITE_FAIL',
+                 'ERROR_PARSE_FAIL', 'ERROR_CONDITION_EVAL_FAIL',
+                 'ERROR_NO_MEM', 'ERROR_INVALID_ARGS', 'ERROR_NETWORK_FAIL',
+                 'ERROR_NO_INTERNET_CONNECTION', 'ERROR_NO_TAG_MAP',
+                 'ERROR_PLUGINS_FULL', 'ERROR_GAME_NOT_FOUND',
+                 'ERROR_REGEX_EVAL_FAIL', ]:
         name = 'BOSS_API_' + name
         errors[name] = c_uint.in_dll(BAPI, name).value
         ErrorCallbacks[errors[name]] = None
@@ -207,7 +191,7 @@ def Init(path):
         if ret != BOSS_API_OK:
             raise Exception(
                 u'An error occurred while getting the details of a BOSS API error: %i' % (
-                ret))
+                    ret))
         return unicode(details.value, 'utf8')
 
     def RegisterCallback(errorCode, callback):
@@ -310,7 +294,7 @@ def Init(path):
     _CSortMods = BAPI.SortMods
     _CSortMods.restype = BossErrorCheck
     _CSortMods.argtypes = [boss_db, c_bool, c_uint8_p_p_p, c_size_t_p,
-        c_size_t_p]
+                           c_size_t_p]
     ## uint32_t GetLoadOrder(boss_db db, uint8_t ***plugins, size_t *numPlugins)
     _CGetLoadOrder = BAPI.GetLoadOrder
     _CGetLoadOrder.restype = BossErrorCheck
@@ -359,7 +343,7 @@ def Init(path):
     _CGetModBashTags = BAPI.GetModBashTags
     _CGetModBashTags.restype = BossErrorCheck
     _CGetModBashTags.argtypes = [boss_db, c_uint8_p, c_uint32_p_p, c_size_t_p,
-        c_uint32_p_p, c_size_t_p, c_bool_p]
+                                 c_uint32_p_p, c_size_t_p, c_bool_p]
     ## uint32_t GetDirtyMessage(boss_db db, const uint8_t *plugin, uint8_t **message, uint32_t *needsCleaning)
     _CGetDirtyMessage = BAPI.GetDirtyMessage
     _CGetDirtyMessage.restype = BossErrorCheck
@@ -423,8 +407,8 @@ def Init(path):
             num = c_size_t()
             bashTags = BashTag_p()
             _CGetBashTagMap(self._DB, byref(bashTags), byref(num))
-            self.tags = {bashTags[i].id: _uni(bashTags[i].name)
-                for i in xrange(num.value)}
+            self.tags = {bashTags[i].id: _uni(bashTags[i].name) for i in
+                         xrange(num.value)}
 
         # ---------------------------------------------------------------------
         # Load Order management
