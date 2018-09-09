@@ -82,7 +82,7 @@ defPos = wx.DefaultPosition
 defSize = wx.DefaultSize
 
 wxListAligns = [wx.LIST_FORMAT_LEFT, wx.LIST_FORMAT_RIGHT,
-    wx.LIST_FORMAT_CENTRE]
+                wx.LIST_FORMAT_CENTRE]
 
 # Settings --------------------------------------------------------------------
 _settings = {}  # --Using applications should override this.
@@ -148,8 +148,7 @@ class Image:
                 self.icon = wx.Icon(self.file.s, wx.BITMAP_TYPE_ICO,
                     self.iconSize, self.iconSize)
                 w, h = self.icon.GetWidth(), self.icon.GetHeight()
-                if (w > self.iconSize or w == 0 or
-                        h > self.iconSize or h == 0):
+                if (w > self.iconSize or w == 0 or h > self.iconSize or h == 0):
                     self.iconSize = 16
                     self.icon = wx.Icon(self.file.s, wx.BITMAP_TYPE_ICO,
                         self.iconSize, self.iconSize)
@@ -263,7 +262,7 @@ class textCtrl(wx.TextCtrl):
 
     def __init__(self, parent, id=defId, name='', size=defSize, style=0,
         autotooltip=True):
-        wx.TextCtrl.__init__(self, parent, id, name, size=size, style=style)
+        wx.TextCtrl.__init__(self, parent, id, name, size = size, style = style)
         if autotooltip:
             self.Bind(wx.EVT_TEXT, self.OnTextChange)
             self.Bind(wx.EVT_SIZE, self.OnSizeChange)
@@ -305,8 +304,7 @@ class comboBox(wx.ComboBox):
 
 
 def bitmapButton(parent, bitmap, pos=defPos, size=defSize, style=wx.BU_AUTODRAW,
-    val=defVal,
-    name='button', id=defId, onClick=None, tip=None, onRClick=None):
+    val=defVal, name='button', id=defId, onClick=None, tip=None, onRClick=None):
     """Creates a button, binds click function, then returns bound button."""
     gButton = wx.BitmapButton(parent, id, bitmap, pos, size, style, val, name)
     if onClick: gButton.Bind(wx.EVT_BUTTON, onClick)
@@ -325,8 +323,7 @@ def button(parent, label='', pos=defPos, size=defSize, style=0, val=defVal,
 
 
 def toggleButton(parent, label='', pos=defPos, size=defSize, style=0,
-    val=defVal,
-    name='button', id=defId, onClick=None, tip=None):
+    val=defVal, name='button', id=defId, onClick=None, tip=None):
     """Creates a toggle button, binds toggle function, then returns bound button."""
     gButton = wx.ToggleButton(parent, id, label, pos, size, style, val, name)
     if onClick: gButton.Bind(wx.EVT_TOGGLEBUTTON, onClick)
@@ -363,27 +360,27 @@ def spinCtrl(parent, value='', pos=defPos, size=defSize, style=wx.SP_ARROW_KEYS,
 # Sub-Windows -----------------------------------------------------------------
 def leftSash(parent, defaultSize=(100, 100), onSashDrag=None):
     """Creates a left sash window."""
-    sash = wx.SashLayoutWindow(parent, style=wx.SW_3D)
+    sash = wx.SashLayoutWindow(parent, style = wx.SW_3D)
     sash.SetDefaultSize(defaultSize)
     sash.SetOrientation(wx.LAYOUT_VERTICAL)
     sash.SetAlignment(wx.LAYOUT_LEFT)
     sash.SetSashVisible(wx.SASH_RIGHT, True)
     if onSashDrag:
         id = sash.GetId()
-        sash.Bind(wx.EVT_SASH_DRAGGED_RANGE, onSashDrag, id=id, id2=id)
+        sash.Bind(wx.EVT_SASH_DRAGGED_RANGE, onSashDrag, id = id, id2 = id)
     return sash
 
 
 def topSash(parent, defaultSize=(100, 100), onSashDrag=None):
     """Creates a top sash window."""
-    sash = wx.SashLayoutWindow(parent, style=wx.SW_3D)
+    sash = wx.SashLayoutWindow(parent, style = wx.SW_3D)
     sash.SetDefaultSize(defaultSize)
     sash.SetOrientation(wx.LAYOUT_HORIZONTAL)
     sash.SetAlignment(wx.LAYOUT_TOP)
     sash.SetSashVisible(wx.SASH_BOTTOM, True)
     if onSashDrag:
         id = sash.GetId()
-        sash.Bind(wx.EVT_SASH_DRAGGED_RANGE, onSashDrag, id=id, id2=id)
+        sash.Bind(wx.EVT_SASH_DRAGGED_RANGE, onSashDrag, id = id, id2 = id)
     return sash
 
 
@@ -429,7 +426,7 @@ def vsbSizer(boxArgs, *elements):
 def askDirectory(parent, message=_('Choose a directory.'), defaultPath=''):
     """Shows a modal directory dialog and return the resulting path, or None if canceled."""
     dialog = wx.DirDialog(parent, message, GPath(defaultPath).s,
-        style=wx.DD_NEW_DIR_BUTTON)
+        style = wx.DD_NEW_DIR_BUTTON)
     if dialog.ShowModal() != wx.ID_OK:
         dialog.Destroy()
         return None
@@ -446,25 +443,20 @@ def askContinue(parent, message, continueKey, title=_('Warning')):
     # --ContinueKey set?
     if _settings.get(continueKey): return wx.ID_OK
     # --Generate/show dialog
-    dialog = wx.Dialog(parent, defId, title, size=(350, 200),
-        style=wx.DEFAULT_DIALOG_STYLE | wx.RESIZE_BORDER)
+    dialog = wx.Dialog(parent, defId, title, size = (350, 200),
+        style = wx.DEFAULT_DIALOG_STYLE | wx.RESIZE_BORDER)
     icon = wx.StaticBitmap(dialog, defId,
         wx.ArtProvider_GetBitmap(wx.ART_WARNING, wx.ART_MESSAGE_BOX, (32, 32)))
     gCheckBox = checkBox(dialog, _("Don't show this in the future."))
     # --Layout
-    sizer = vSizer(
-        (hSizer(
-            (icon, 0, wx.ALL, 6),
-            (staticText(dialog, message, style=wx.ST_NO_AUTORESIZE), 1,
-            wx.EXPAND | wx.LEFT, 6),
-        ), 1, wx.EXPAND | wx.ALL, 6),
+    sizer = vSizer((hSizer((icon, 0, wx.ALL, 6), (
+    staticText(dialog, message, style = wx.ST_NO_AUTORESIZE), 1,
+    wx.EXPAND | wx.LEFT, 6), ), 1, wx.EXPAND | wx.ALL, 6),
         (gCheckBox, 0, wx.EXPAND | wx.LEFT | wx.RIGHT | wx.BOTTOM, 6),
         (hSizer(  # --Save/Cancel
-            spacer,
-            button(dialog, id=wx.ID_OK),
-            (button(dialog, id=wx.ID_CANCEL), 0, wx.LEFT, 4),
-        ), 0, wx.EXPAND | wx.LEFT | wx.RIGHT | wx.BOTTOM, 6),
-    )
+            spacer, button(dialog, id = wx.ID_OK),
+            (button(dialog, id = wx.ID_CANCEL), 0, wx.LEFT, 4), ), 0,
+         wx.EXPAND | wx.LEFT | wx.RIGHT | wx.BOTTOM, 6), )
     dialog.SetSizer(sizer)
     # --Get continue key setting and return
     result = dialog.ShowModal()
@@ -477,25 +469,20 @@ def askContinueShortTerm(parent, message, title=_('Warning')):
     """Shows a modal continue query  Returns True to continue.
     Also provides checkbox "Don't show this in for rest of operation."."""
     # --Generate/show dialog
-    dialog = wx.Dialog(parent, defId, title, size=(350, 200),
-        style=wx.DEFAULT_DIALOG_STYLE | wx.RESIZE_BORDER)
+    dialog = wx.Dialog(parent, defId, title, size = (350, 200),
+        style = wx.DEFAULT_DIALOG_STYLE | wx.RESIZE_BORDER)
     icon = wx.StaticBitmap(dialog, defId,
         wx.ArtProvider_GetBitmap(wx.ART_WARNING, wx.ART_MESSAGE_BOX, (32, 32)))
     gCheckBox = checkBox(dialog, _("Don't show this for rest of operation."))
     # --Layout
-    sizer = vSizer(
-        (hSizer(
-            (icon, 0, wx.ALL, 6),
-            (staticText(dialog, message, style=wx.ST_NO_AUTORESIZE), 1,
-            wx.EXPAND | wx.LEFT, 6),
-        ), 1, wx.EXPAND | wx.ALL, 6),
+    sizer = vSizer((hSizer((icon, 0, wx.ALL, 6), (
+    staticText(dialog, message, style = wx.ST_NO_AUTORESIZE), 1,
+    wx.EXPAND | wx.LEFT, 6), ), 1, wx.EXPAND | wx.ALL, 6),
         (gCheckBox, 0, wx.EXPAND | wx.LEFT | wx.RIGHT | wx.BOTTOM, 6),
         (hSizer(  # --Save/Cancel
-            spacer,
-            button(dialog, id=wx.ID_OK),
-            (button(dialog, id=wx.ID_CANCEL), 0, wx.LEFT, 4),
-        ), 0, wx.EXPAND | wx.LEFT | wx.RIGHT | wx.BOTTOM, 6),
-    )
+            spacer, button(dialog, id = wx.ID_OK),
+            (button(dialog, id = wx.ID_CANCEL), 0, wx.LEFT, 4), ), 0,
+         wx.EXPAND | wx.LEFT | wx.RIGHT | wx.BOTTOM, 6), )
     dialog.SetSizer(sizer)
     # --Get continue key setting and return
     result = dialog.ShowModal()
@@ -623,7 +610,7 @@ def showList(parent, header, items, maxItems=0, title=''):
     """Formats a list of items into a message for use in a Message."""
     numItems = len(items)
     if maxItems <= 0: maxItems = numItems
-    message = string.Template(header).substitute(count=numItems)
+    message = string.Template(header).substitute(count = numItems)
     message += '\n* ' + '\n* '.join(items[:min(numItems, maxItems)])
     if numItems > maxItems:
         message += _('\n(And %d others.)') % (numItems - maxItems,)
@@ -669,12 +656,12 @@ def showLog(parent, logText, title='', style=0, asDialog=True, fixedFont=False,
         size = _settings.get('balt.LogMessage.size', (400, 400))
     # --Dialog or Frame
     if asDialog:
-        window = wx.Dialog(parent, defId, title, pos=pos, size=size,
-            style=wx.DEFAULT_DIALOG_STYLE | wx.RESIZE_BORDER)
+        window = wx.Dialog(parent, defId, title, pos = pos, size = size,
+            style = wx.DEFAULT_DIALOG_STYLE | wx.RESIZE_BORDER)
     else:
-        window = wx.Frame(parent, defId, title, pos=pos, size=size,
-            style=(
-            wx.RESIZE_BORDER | wx.CAPTION | wx.SYSTEM_MENU | wx.CLOSE_BOX | wx.CLIP_CHILDREN))
+        window = wx.Frame(parent, defId, title, pos = pos, size = size,
+            style = (
+                    wx.RESIZE_BORDER | wx.CAPTION | wx.SYSTEM_MENU | wx.CLOSE_BOX | wx.CLIP_CHILDREN))
         if icons: window.SetIcons(icons)
     window.SetSizeHints(200, 200)
     window.Bind(wx.EVT_CLOSE, showLogClose)
@@ -682,7 +669,7 @@ def showLog(parent, logText, title='', style=0, asDialog=True, fixedFont=False,
         wx.NullColour)  # --Bug workaround to ensure that default colour is being used.
     # --Text
     textCtrl = wx.TextCtrl(window, defId, logText,
-        style=wx.TE_READONLY | wx.TE_MULTILINE | wx.TE_RICH2 | wx.SUNKEN_BORDER)
+        style = wx.TE_READONLY | wx.TE_MULTILINE | wx.TE_RICH2 | wx.SUNKEN_BORDER)
     if fixedFont:
         fixedFont = wx.SystemSettings_GetFont(wx.SYS_ANSI_FIXED_FONT)
         fixedFont.SetPointSize(8)
@@ -693,33 +680,25 @@ def showLog(parent, logText, title='', style=0, asDialog=True, fixedFont=False,
     if question:
         bosh.question = False
         # --Buttons
-        gYesButton = button(window, id=wx.ID_YES)
+        gYesButton = button(window, id = wx.ID_YES)
         gYesButton.Bind(wx.EVT_BUTTON,
             lambda evt, temp=window: showQuestionLogCloseYes(evt, temp))
         gYesButton.SetDefault()
-        gNoButton = button(window, id=wx.ID_NO)
+        gNoButton = button(window, id = wx.ID_NO)
         gNoButton.Bind(wx.EVT_BUTTON,
             lambda evt, temp=window: showQuestionLogCloseNo(evt, temp))
         # --Layout
-        window.SetSizer(
-            vSizer(
-                (textCtrl, 1, wx.EXPAND | wx.ALL ^ wx.BOTTOM, 2),
-                hSizer((gYesButton, 0, wx.ALIGN_RIGHT | wx.ALL, 4),
-                    (gNoButton, 0, wx.ALIGN_RIGHT | wx.ALL, 4))
-            )
-        )
+        window.SetSizer(vSizer((textCtrl, 1, wx.EXPAND | wx.ALL ^ wx.BOTTOM, 2),
+            hSizer((gYesButton, 0, wx.ALIGN_RIGHT | wx.ALL, 4),
+                (gNoButton, 0, wx.ALIGN_RIGHT | wx.ALL, 4))))
     else:
         # --Buttons
-        gOkButton = button(window, id=wx.ID_OK,
-            onClick=lambda event: window.Close())
+        gOkButton = button(window, id = wx.ID_OK,
+            onClick = lambda event: window.Close())
         gOkButton.SetDefault()
         # --Layout
-        window.SetSizer(
-            vSizer(
-                (textCtrl, 1, wx.EXPAND | wx.ALL ^ wx.BOTTOM, 2),
-                (gOkButton, 0, wx.ALIGN_RIGHT | wx.ALL, 4),
-            )
-        )
+        window.SetSizer(vSizer((textCtrl, 1, wx.EXPAND | wx.ALL ^ wx.BOTTOM, 2),
+            (gOkButton, 0, wx.ALIGN_RIGHT | wx.ALL, 4), ))
     # --Show
     if asDialog:
         window.ShowModal()
@@ -754,18 +733,18 @@ def showWryeLog(parent, logText, title='', style=0, asDialog=True, icons=None):
     size = _settings.get('balt.WryeLog.size', (400, 400))
     # --Dialog or Frame
     if asDialog:
-        window = wx.Dialog(parent, defId, title, pos=pos, size=size,
-            style=wx.DEFAULT_DIALOG_STYLE | wx.RESIZE_BORDER)
+        window = wx.Dialog(parent, defId, title, pos = pos, size = size,
+            style = wx.DEFAULT_DIALOG_STYLE | wx.RESIZE_BORDER)
     else:
-        window = wx.Frame(parent, defId, title, pos=pos, size=size,
-            style=(
-            wx.RESIZE_BORDER | wx.CAPTION | wx.SYSTEM_MENU | wx.CLOSE_BOX | wx.CLIP_CHILDREN))
+        window = wx.Frame(parent, defId, title, pos = pos, size = size,
+            style = (
+                    wx.RESIZE_BORDER | wx.CAPTION | wx.SYSTEM_MENU | wx.CLOSE_BOX | wx.CLIP_CHILDREN))
         if icons: window.SetIcons(icons)
     window.SetSizeHints(200, 200)
     window.Bind(wx.EVT_CLOSE, showLogClose)
     # --Text
     textCtrl = wx.lib.iewin.IEHtmlWindow(window, defId,
-        style=wx.NO_FULL_REPAINT_ON_RESIZE)
+        style = wx.NO_FULL_REPAINT_ON_RESIZE)
     if not isinstance(logText, bolt.Path):
         logPath = _settings.get('balt.WryeLog.temp',
             bolt.Path.getcwd().join('WryeLogTemp.html'))
@@ -780,28 +759,20 @@ def showWryeLog(parent, logText, title='', style=0, asDialog=True, icons=None):
     bitmap = wx.ArtProvider_GetBitmap(wx.ART_GO_BACK, wx.ART_HELP_BROWSER,
         (16, 16))
     gBackButton = bitmapButton(window, bitmap,
-        onClick=lambda evt: textCtrl.GoBack())
+        onClick = lambda evt: textCtrl.GoBack())
     bitmap = wx.ArtProvider_GetBitmap(wx.ART_GO_FORWARD, wx.ART_HELP_BROWSER,
         (16, 16))
     gForwardButton = bitmapButton(window, bitmap,
-        onClick=lambda evt: textCtrl.GoForward())
-    gOkButton = button(window, id=wx.ID_OK,
-        onClick=lambda event: window.Close())
+        onClick = lambda evt: textCtrl.GoForward())
+    gOkButton = button(window, id = wx.ID_OK,
+        onClick = lambda event: window.Close())
     gOkButton.SetDefault()
     if not asDialog:
         window.SetBackgroundColour(gOkButton.GetBackgroundColour())
     # --Layout
-    window.SetSizer(
-        vSizer(
-            (textCtrl, 1, wx.EXPAND | wx.ALL ^ wx.BOTTOM, 2),
-            (hSizer(
-                gBackButton,
-                gForwardButton,
-                spacer,
-                gOkButton,
-            ), 0, wx.ALL | wx.EXPAND, 4),
-        )
-    )
+    window.SetSizer(vSizer((textCtrl, 1, wx.EXPAND | wx.ALL ^ wx.BOTTOM, 2), (
+    hSizer(gBackButton, gForwardButton, spacer, gOkButton, ), 0,
+    wx.ALL | wx.EXPAND, 4), ))
     # --Show
     if asDialog:
         window.ShowModal()
@@ -926,7 +897,7 @@ class ListEditor(wx.Dialog):
         self.items = data.getItemList()
         # --GUI
         wx.Dialog.__init__(self, parent, id, title,
-            style=wx.DEFAULT_DIALOG_STYLE | wx.RESIZE_BORDER)
+            style = wx.DEFAULT_DIALOG_STYLE | wx.RESIZE_BORDER)
         wx.EVT_CLOSE(self, self.OnCloseWindow)
         # --Caption
         if data.caption:
@@ -935,53 +906,47 @@ class ListEditor(wx.Dialog):
             captionText = None
         # --List Box
         if type == 'checklist':
-            self.list = wx.CheckListBox(self, -1, choices=self.items,
-                style=wx.LB_SINGLE)
+            self.list = wx.CheckListBox(self, -1, choices = self.items,
+                style = wx.LB_SINGLE)
             for index, checked in enumerate(self.data.getChecks()):
                 self.list.Check(index, checked)
             self.Bind(wx.EVT_CHECKLISTBOX, self.DoCheck, self.list)
         else:
-            self.list = wx.ListBox(self, -1, choices=self.items,
-                style=wx.LB_SINGLE)
+            self.list = wx.ListBox(self, -1, choices = self.items,
+                style = wx.LB_SINGLE)
         self.list.SetSizeHints(125, 150)
         self.list.Bind(wx.EVT_LISTBOX, self.OnSelect)
         # --Infobox
         if data.showInfo:
-            self.gInfoBox = wx.TextCtrl(self, -1, " ", size=(130, -1),
-                style=(
-                      self.data.infoReadOnly * wx.TE_READONLY) | wx.TE_MULTILINE | wx.SUNKEN_BORDER)
+            self.gInfoBox = wx.TextCtrl(self, -1, " ", size = (130, -1),
+                style = (
+                                self.data.infoReadOnly * wx.TE_READONLY) | wx.TE_MULTILINE | wx.SUNKEN_BORDER)
             if not self.data.infoReadOnly:
                 self.gInfoBox.Bind(wx.EVT_TEXT, self.OnInfoEdit)
         else:
             self.gInfoBox = None
         # --Buttons
-        buttonSet = (
-            (data.showAction, _('Action'), self.DoAction),
-            (data.showAdd, _('Add'), self.DoAdd),
-            (data.showEdit, _('Edit'), self.DoEdit),
-            (data.showRename, _('Rename'), self.DoRename),
-            (data.showRemove, _('Remove'), self.DoRemove),
-            (data.showSave, _('Save'), self.DoSave),
-            (data.showCancel, _('Cancel'), self.DoCancel),
-        )
+        buttonSet = ((data.showAction, _('Action'), self.DoAction),
+                     (data.showAdd, _('Add'), self.DoAdd),
+                     (data.showEdit, _('Edit'), self.DoEdit),
+                     (data.showRename, _('Rename'), self.DoRename),
+                     (data.showRemove, _('Remove'), self.DoRemove),
+                     (data.showSave, _('Save'), self.DoSave),
+                     (data.showCancel, _('Cancel'), self.DoCancel),)
         if sum(bool(x[0]) for x in buttonSet):
             buttons = vSizer()
             for (flag, defLabel, func) in buttonSet:
                 if not flag: continue
                 label = (flag == True and defLabel) or flag
-                buttons.Add(button(self, label, onClick=func), 0,
+                buttons.Add(button(self, label, onClick = func), 0,
                     wx.LEFT | wx.TOP, 4)
         else:
             buttons = None
         # --Layout
-        sizer = vSizer(
-            (captionText, 0, wx.LEFT | wx.TOP, 4),
-            (hSizer(
-                (self.list, 1, wx.EXPAND | wx.TOP, 4),
-                (self.gInfoBox, self.data.infoWeight, wx.EXPAND | wx.TOP, 4),
-                (buttons, 0, wx.EXPAND),
-            ), 1, wx.EXPAND)
-        )
+        sizer = vSizer((captionText, 0, wx.LEFT | wx.TOP, 4), (
+        hSizer((self.list, 1, wx.EXPAND | wx.TOP, 4),
+            (self.gInfoBox, self.data.infoWeight, wx.EXPAND | wx.TOP, 4),
+            (buttons, 0, wx.EXPAND), ), 1, wx.EXPAND))
         # --Done
         className = data.__class__.__name__
         if className in sizes:
@@ -1002,8 +967,7 @@ class ListEditor(wx.Dialog):
         if self.list.IsChecked(index):
             self.data.check(item)
         else:
-            self.data.uncheck(item)
-            # self.list.SetSelection(index)
+            self.data.uncheck(item)  # self.list.SetSelection(index)
 
     # --List Commands
     def DoAction(self, event):
@@ -1105,8 +1069,8 @@ class Picture(wx.Window):
     def __init__(self, parent, width, height, scaling=1, style=0,
         background=wx.MEDIUM_GREY_BRUSH):
         """Initialize."""
-        wx.Window.__init__(self, parent, defId, size=(width, height),
-            style=style)
+        wx.Window.__init__(self, parent, defId, size = (width, height),
+            style = style)
         self.SetBackgroundStyle(wx.BG_STYLE_CUSTOM)
         self.bitmap = None
         if background is not None:
@@ -1203,9 +1167,9 @@ class Progress(bolt.Progress):
     def doProgress(self, state, message):
         if not self.dialog:
             raise StateError(_('Dialog already destroyed.'))
-        elif (state == 0 or state == 1 or (message != self.prevMessage) or
-                (state - self.prevState) > 0.05 or (
-            time.time() - self.prevTime) > 0.5):
+        elif (state == 0 or state == 1 or (message != self.prevMessage) or (
+            state - self.prevState) > 0.05 or (
+                  time.time() - self.prevTime) > 0.5):
             self.dialog.SetFocus()
             if message != self.prevMessage:
                 ret = self.dialog.Update(int(state * 100),
@@ -1274,7 +1238,7 @@ class ListCtrl(wx.ListCtrl, ListCtrlAutoWidthMixin):
     def __init__(self, parent, id, pos=defPos, size=defSize, style=0,
         dndFiles=False, dndList=False, dndOnlyMoveContinuousGroup=True,
         fnDropFiles=None, fnDropIndexes=None, fnDndAllow=None):
-        wx.ListCtrl.__init__(self, parent, id, pos, size, style=style)
+        wx.ListCtrl.__init__(self, parent, id, pos, size, style = style)
         ListCtrlAutoWidthMixin.__init__(self)
         if dndFiles or dndList:
             self.SetDropTarget(ListCtrl.DropFileOrList(self, dndFiles, dndList))
@@ -1340,7 +1304,7 @@ class ListCtrl(wx.ListCtrl, ListCtrlAutoWidthMixin):
 
         source = wx.DropSource(self)
         source.SetData(data)
-        source.DoDragDrop(flags=wx.Drag_DefaultMove)
+        source.DoDragDrop(flags = wx.Drag_DefaultMove)
 
     def OnDropFiles(self, x, y, filenames):
         if self.fnDropFiles:
@@ -1406,8 +1370,8 @@ class ListCtrl(wx.ListCtrl, ListCtrlAutoWidthMixin):
 
     def OnDropIndexes(self, indexes, newPos):
         if self.fnDropIndexes:
-            wx.CallLater(10, self.fnDropIndexes, indexes, newPos)
-            # self.fnDropIndexes(indexes, newPos)
+            wx.CallLater(10, self.fnDropIndexes, indexes,
+                newPos)  # self.fnDropIndexes(indexes, newPos)
 
     def dndAllow(self):
         if self.doDnD:
@@ -1428,7 +1392,7 @@ class Tank(wx.Panel):
     def __init__(self, parent, data, icons=None, mainMenu=None, itemMenu=None,
         details=None, id=-1, style=(wx.LC_REPORT | wx.LC_SINGLE_SEL),
         dndList=False, dndFiles=False, dndColumns=[]):
-        wx.Panel.__init__(self, parent, id, style=wx.WANTS_CHARS)
+        wx.Panel.__init__(self, parent, id, style = wx.WANTS_CHARS)
         # --Data
         if icons == None: icons = {}
         self.data = data
@@ -1446,10 +1410,9 @@ class Tank(wx.Panel):
         self.SetSizer(sizer)
         self.SetSizeHints(50, 50)
         # --ListCtrl
-        self.gList = gList = ListCtrl(self, -1, style=style,
-            dndFiles=dndFiles, dndList=dndList,
-            fnDndAllow=self.dndAllow, fnDropIndexes=self.OnDropIndexes,
-            fnDropFiles=self.OnDropFiles)
+        self.gList = gList = ListCtrl(self, -1, style = style,
+            dndFiles = dndFiles, dndList = dndList, fnDndAllow = self.dndAllow,
+            fnDropIndexes = self.OnDropIndexes, fnDropFiles = self.OnDropFiles)
         if self.icons:
             gList.SetImageList(icons.GetImageList(), wx.IMAGE_LIST_SMALL)
         # --State info
@@ -1496,12 +1459,12 @@ class Tank(wx.Panel):
         reverse = self.colReverse.get(column, False)
         if reverse:
             newPos = self.gList.GetItemCount() - newPos - 1 - (
-            indexes[-1] - indexes[0])
+                    indexes[-1] - indexes[0])
             if newPos < 0: newPos = 0
 
         # Move the given indexes to the new position
         self.data.moveArchives(self.GetSelected(), newPos)
-        self.data.refresh(what='N')
+        self.data.refresh(what = 'N')
         self.RefreshUI()
 
     def OnDropFiles(self, x, y, filenames):
@@ -1679,13 +1642,13 @@ class Tank(wx.Panel):
         elif details:
             selected = tuple(details)
         if items == 'ALL':
-            self.UpdateItems(selected=selected)
+            self.UpdateItems(selected = selected)
         elif items in self.data:
-            self.UpdateItem(self.GetIndex(items), items, selected=selected)
+            self.UpdateItem(self.GetIndex(items), items, selected = selected)
         else:  # --Iterable
             for index in range(self.gList.GetItemCount()):
                 if self.GetItem(index) in set(items):
-                    self.UpdateItem(index, None, selected=selected)
+                    self.UpdateItem(index, None, selected = selected)
         self.RefreshDetails(details)
 
     # --Details view (if it exists)
@@ -1704,8 +1667,8 @@ class Tank(wx.Panel):
     def GetSelected(self):
         """Return list of items selected (hilighted) in the interface."""
         gList = self.gList
-        return [self.GetItem(x) for x in range(gList.GetItemCount())
-            if gList.GetItemState(x, wx.LIST_STATE_SELECTED)]
+        return [self.GetItem(x) for x in range(gList.GetItemCount()) if
+                gList.GetItemState(x, wx.LIST_STATE_SELECTED)]
 
     def ClearSelected(self):
         """Unselect all items."""
