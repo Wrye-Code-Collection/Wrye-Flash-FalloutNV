@@ -37,16 +37,18 @@
 #  ExecuteTokens
 #  TokensToRPN
 #  ExecuteRPN
-#==================================================
+# ==================================================
 from string import digits, whitespace, letters
 import types
-#--------------------------------------------------
+
+# --------------------------------------------------
 name_start = letters + '_'
 name_chars = name_start + digits
 
+
 # validName ---------------------------------------
 #  Test if a string can be used as a valid name
-#--------------------------------------------------
+# --------------------------------------------------
 def validName(name):
     try:
         if name[0] not in name_start: return False
@@ -56,9 +58,10 @@ def validName(name):
     except:
         return False
 
+
 # validNumber -------------------------------------
 #  Test if a string can be used as a valid number
-#--------------------------------------------------
+# --------------------------------------------------
 def validNumber(string):
     try:
         float(string)
@@ -67,6 +70,7 @@ def validNumber(string):
     except:
         return False
 
+
 # Define Some Constants ---------------------------
 
 # Some error string
@@ -74,25 +78,28 @@ ERR_CANNOT_SET = "Cannot set %s '%s': type is '%s'."
 ERR_TOO_FEW_ARGS = "Too few arguments to %s '%s':  got %s, expected %s."
 ERR_TOO_MANY_ARGS = "Too many arguments to %s '%s':  got %s, expected %s."
 
+
 class KEY:
     # Constants for keyword args
-    NO_MAX = -1     # No maximum arguments
-    NA = 0          # Not a variable argument keyword
+    NO_MAX = -1  # No maximum arguments
+    NA = 0  # Not a variable argument keyword
+
 
 class OP:
     # Constants for operator precedences
-    PAR = 0     # Parenthesis
-    EXP = 1     # Exponent
-    UNA = 2     # Unary (++, --)
-    MUL = 3     # Multiplication (*, /, %)
-    ADD = 4     # Addition (+, -)
-    CO1 = 5     # Comparison (>=,<=,>,<)
-    CO2 = 6     # Comparison (!=, ==)
-    MEM = 7     # Membership test (a in b)
-    NOT = 8     # Logical not (not, !)
-    AND = 9     # Logical and (and, &)
-    OR  = 10    # Locical or (or, |)
-    ASS = 11    # Assignment (=,+=,etc
+    PAR = 0  # Parenthesis
+    EXP = 1  # Exponent
+    UNA = 2  # Unary (++, --)
+    MUL = 3  # Multiplication (*, /, %)
+    ADD = 4  # Addition (+, -)
+    CO1 = 5  # Comparison (>=,<=,>,<)
+    CO2 = 6  # Comparison (!=, ==)
+    MEM = 7  # Membership test (a in b)
+    NOT = 8  # Logical not (not, !)
+    AND = 9  # Logical and (and, &)
+    OR = 10  # Locical or (or, |)
+    ASS = 11  # Assignment (=,+=,etc
+
 
 # Constants for operator associations
 LEFT = 0
@@ -100,7 +107,7 @@ RIGHT = 1
 
 # Constants for the type of a token
 UNKNOWN = 0
-NAME = 1            # Can be a name token, but not used yet
+NAME = 1  # Can be a name token, but not used yet
 CONSTANT = 2
 VARIABLE = 3
 FUNCTION = 4
@@ -140,7 +147,7 @@ Types = {UNKNOWN : 'UNKNOWN',
 #  determines the type of a string.  If 'parser'
 #  is passed, then it will attempt it against
 #  vairious names as well.
-#------------------------------------------------
+# ------------------------------------------------
 def getType(item, parser=None):
     if type(item) == types.StringType:
         if not parser: return STRING
@@ -166,10 +173,11 @@ def getType(item, parser=None):
     if type(item) == types.FloatType: return DECIMAL
     return UNKNOWN
 
+
 # FlowControl -------------------------------------
 #  Flow control object, to hold info about a flow
 #  control statement
-#--------------------------------------------------
+# --------------------------------------------------
 class FlowControl:
     def __init__(self, type, active, keywords=[], **attribs):
         self.type = type
@@ -178,15 +186,16 @@ class FlowControl:
         for i in attribs:
             setattr(self, i, attribs[i])
 
+
 # Token -------------------------------------------
 #  Token object, to hold info about a token
-#--------------------------------------------------
+# --------------------------------------------------
 
 # ParserError -------------------------------------
 #  So when we catch exceptions we know if it's a
 #  problem with the parser, or a problem with the
 #  script
-#--------------------------------------------------
+# --------------------------------------------------
 class ParserError(SyntaxError): pass
 
 
@@ -195,13 +204,15 @@ gParser = None
 
 def error(msg):
     if gParser:
-        raise ParserError, '(Line %s, Column %s): %s' % (gParser.cLine, gParser.cCol, msg)
+        raise ParserError, '(Line %s, Column %s): %s' % (
+        gParser.cLine, gParser.cCol, msg)
     else:
         raise ParserError, msg
 
+
 # Parser ------------------------------------------
 #  This is where the magic happens
-#--------------------------------------------------
+# --------------------------------------------------
 class Parser(object):
     class ParserType(object):
         @property
@@ -222,7 +233,7 @@ class Parser(object):
             # Remove commas if necessary, pass values if necessary
             if not self.passCommas or not self.passTokens:
                 args = [(x.data, x)[self.passTokens] for x in args if
-                    x.type != COMMA or self.passCommas]
+                        x.type != COMMA or self.passCommas]
             return self.execute(*args)
 
         def execute(self, *args):
@@ -234,7 +245,8 @@ class Parser(object):
                     self.Type, 'self.text', numArgs, self.minArgs))
                 else:
                     error(ERR_TOO_MANY_ARGS % (self.Type, 'self.text', numArgs,
-                    'min: %s, max: %s' % (self.minArgs, self.maxArgs)))
+                                               'min: %s, max: %s' % (
+                                               self.minArgs, self.maxArgs)))
             if numArgs < self.minArgs:
                 if self.maxArgs == KEY.NO_MAX:
                     error(ERR_TOO_FEW_ARGS % (
@@ -244,7 +256,8 @@ class Parser(object):
                     self.Type, 'self.text', numArgs, self.minArgs))
                 else:
                     error(ERR_TOO_FEW_ARGS % (self.Type, 'self.text', numArgs,
-                    'min: %s, max: %s' % (self.minArgs, self.maxArgs)))
+                                              'min: %s, max: %s' % (
+                                              self.minArgs, self.maxArgs)))
             return self.function(*args)
 
     class Operator(Callable):
@@ -257,7 +270,7 @@ class Parser(object):
             else:
                 min_args = 2
             super(Parser.Operator, self).__init__(function, min_args,
-                passTokens=passTokens)
+                passTokens = passTokens)
 
     class Keyword(Callable):
         def __init__(self, function, min_args=0, max_args=KEY.NA,
@@ -432,9 +445,8 @@ class Parser(object):
         self.functions = {}
         self.constants = constants or {}
         self.variables = variables or {}
-        self.escapes = {'n': '\n',
-            't'            : '\t'
-        }
+        self.escapes = {'n': '\n', 't': '\t'
+                        }
 
         self.word = None
         self.wordStart = None
@@ -668,8 +680,8 @@ class Parser(object):
                     error("Misplaced ':' or missing bracket.")
                 stack[-2].numArgs += stack[-1].numArgs
                 if len(temp) == 0 and stack[-1].numArgs == 0:
-                    rpn.append(
-                        Parser.Token(Parser._marker, Type=UNKNOWN, parser=self))
+                    rpn.append(Parser.Token(Parser._marker, Type = UNKNOWN,
+                        parser = self))
                     stack[-2].numArgs += 1
                 else:
                     rpn.extend(temp)
@@ -708,7 +720,7 @@ class Parser(object):
             elif i.type == OPEN_PARENS:
                 stack.append(i)
             elif i.type == OPEN_BRACKET:
-                stack.append(Parser.Token(']index[', parser=self))
+                stack.append(Parser.Token(']index[', parser = self))
                 stack.append(i)
             elif i.type == CLOSE_PARENS:
                 while len(stack) > 0 and stack[-1].type != OPEN_PARENS:
@@ -729,8 +741,8 @@ class Parser(object):
                 numArgs = stack[-1].numArgs
                 stack.pop()
                 if len(temp) == 0 and numArgs == 0 and stack[-1].numArgs != 0:
-                    rpn.append(
-                        Parser.Token(Parser._marker, Type=UNKNOWN, parser=self))
+                    rpn.append(Parser.Token(Parser._marker, Type = UNKNOWN,
+                        parser = self))
                     numArgs += 1
                 rpn.extend(temp)
                 stack[-1].numArgs += numArgs + 1
@@ -820,13 +832,13 @@ class Parser(object):
                 left = self.tokens[-1].type
                 if left in [CLOSE_PARENS, CLOSE_BRACKET]:
                     if type in [OPEN_PARENS, DECIMAL, INTEGER, FUNCTION,
-                        VARIABLE, CONSTANT, NAME]:
+                                VARIABLE, CONSTANT, NAME]:
                         self.tokens.append(
                             Parser.Token(self.doImplicit, OPERATOR, self,
                                 self.cLine))
                 elif left in [DECIMAL, INTEGER]:
                     if type in [OPEN_PARENS, FUNCTION, VARIABLE, CONSTANT,
-                        NAME]:
+                                NAME]:
                         self.tokens.append(
                             Parser.Token(self.doImplicit, OPERATOR, self,
                                 self.cLine))
@@ -871,7 +883,7 @@ class Parser(object):
         if c == '\\': return self._stateSQuoteEscape
         if c == "'":
             if not self.word: self.word = ''
-            self._emit(type=STRING)
+            self._emit(type = STRING)
             return self._stateSpace
         if c == '\n':
             error('Unterminated single quote.')
@@ -889,7 +901,7 @@ class Parser(object):
         if c == '\\': return self._stateDQuoteEscape
         if c == '"':
             if not self.word: self.word = ""
-            self._emit(type=STRING)
+            self._emit(type = STRING)
             return self._stateSpace
         if c == '\n':
             error("Unterminated double quote.")
