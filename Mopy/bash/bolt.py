@@ -171,13 +171,10 @@ language = locale.getlocale()[0].split('_', 1)[0]
 if language.lower() == 'german': language = 'de'  # --Hack for German speakers who aren't 'DE'.
 # TODO: use bosh.dirs['l10n'] once we solve the circular import
 languagePkl, languageTxt = (os.path.join('bash', 'l10n', language + ext) for ext
-in ('.pkl', '.txt'))
+                            in ('.pkl', '.txt'))
 # --Recompile pkl file?
-if os.path.exists(languageTxt) and (
-        not os.path.exists(languagePkl) or (
-            os.path.getmtime(languageTxt) > os.path.getmtime(languagePkl)
-    )
-):
+if os.path.exists(languageTxt) and (not os.path.exists(languagePkl) or (
+    os.path.getmtime(languageTxt) > os.path.getmtime(languagePkl))):
     compileTranslator(languageTxt, languagePkl)
 # --Use dictionary from pickle as translator
 if os.path.exists(languagePkl):
@@ -1203,7 +1200,7 @@ class Path(object):
             deprint(_(
                 "Unable to set modified time of %s - probably a unicode error") % self._s)
 
-    mtime = property(getmtime, setmtime, doc="Time file was last modified.")
+    mtime = property(getmtime, setmtime, doc = "Time file was last modified.")
 
     @property
     def version(self):
@@ -1358,8 +1355,8 @@ class Path(object):
             # Clear ReadOnly flag if set
             cmd = r'attrib -R "%s\*" /S /D' % (self._s)
             cmd = Encode(cmd, 'mbcs')
-            ins, err = Popen(cmd, stdout=PIPE, stdin=PIPE,
-                startupinfo=startupinfo).communicate()
+            ins, err = Popen(cmd, stdout = PIPE, stdin = PIPE,
+                startupinfo = startupinfo).communicate()
             shutil.rmtree(self._s)
 
     # --start, move, copy, touch, untemp
@@ -1367,10 +1364,10 @@ class Path(object):
         """Starts file as if it had been doubleclicked in file explorer."""
         if self._cext == '.exe':
             if not exeArgs:
-                subprocess.Popen([self.s], close_fds=close_fds)
+                subprocess.Popen([self.s], close_fds = close_fds)
             else:
-                subprocess.Popen(exeArgs, executable=self.s,
-                    close_fds=close_fds)
+                subprocess.Popen(exeArgs, executable = self.s,
+                    close_fds = close_fds)
         else:
             os.startfile(self._s)
 
@@ -1439,7 +1436,7 @@ class Path(object):
                     ['off.', 'on.'][bUseUnicode]))
                     deprint(
                         "unrecovered Unicode error when dealing with %s - presuming non equal." % (
-                        self._cs))
+                            self._cs))
                     return False
         else:
             try:
@@ -1452,7 +1449,7 @@ class Path(object):
                     ['off', 'on'][bUseUnicode]))
                     deprint(
                         "unrecovered Unicode error when dealing with %s - presuming non equal.'" % (
-                        self._cs))
+                            self._cs))
                     return False
 
 
@@ -1608,7 +1605,7 @@ class Flags(object):
     def getTrueAttrs(self):
         """Returns attributes that are true."""
         trueNames = [name for name in self._names if getattr(self, name)]
-        trueNames.sort(key=lambda xxx: self._names[xxx])
+        trueNames.sort(key = lambda xxx: self._names[xxx])
         return tuple(trueNames)
 
 
@@ -1696,7 +1693,7 @@ except:
             return other <= self
 
         def __eq__(self, other):
-            if not isinstance(other, MutableSet):
+            if not isintance(other, MutableSet):
                 return NotImplemented
             return len(self) == len(other) and self <= other
 
@@ -1878,7 +1875,7 @@ class MemorySet(object):
     def __or__(self, other):
         """Return items in self or in other"""
         discards = (self.discarded - other._items()) | (
-        other.discarded - self._items())
+                other.discarded - self._items())
         right = list(other.items)
         left = list(self.items)
 
@@ -2060,7 +2057,7 @@ class PickleDict:
                             self.vdata.update(cPickle.load(translator))
                             self.data.update(cPickle.load(translator))
                         except:
-                            deprint("unable to unpickle data", traceback=True)
+                            deprint("unable to unpickle data", traceback = True)
                             raise
                     else:
                         self.data.update(header)
@@ -2313,8 +2310,8 @@ class TableColumn:
         """Dictionary emulation."""
         tableData = self.table.data
         column = self.column
-        return [(key, tableData[key][column]) for key in tableData.keys()
-            if (column in tableData[key])]
+        return [(key, tableData[key][column]) for key in tableData.keys() if
+                (column in tableData[key])]
 
     def has_key(self, key):
         """Dictionary emulation."""
@@ -2576,7 +2573,7 @@ def deprint(*args, **keyargs):
         import traceback, cStringIO
         o = cStringIO.StringIO()
         o.write(msg + '\n')
-        traceback.print_exc(file=o)
+        traceback.print_exc(file = o)
         msg = o.getvalue()
         o.close()
     print msg
@@ -2971,7 +2968,8 @@ class WryeText:
         reItalic = re.compile(r'~~')
         reBoldItalic = re.compile(r'\*\*')
         states = {'bold': False, 'italic': False, 'boldItalic': False,
-            'code'      : 0}
+                  'code': 0
+                  }
 
         def subBold(match):
             state = states['bold'] = not states['bold']
@@ -3013,7 +3011,7 @@ class WryeText:
             address = text = match.group(1).strip()
             if '|' in text:
                 (address, text) = [chunk.strip() for chunk in
-                    text.split('|', 1)]
+                                   text.split('|', 1)]
                 if address == '#': address += urllib.quote(
                     Encode(reWd.sub('', text)))
             if address.startswith('!'):
@@ -3074,7 +3072,7 @@ class WryeText:
                 if maCodeBoxStart:
                     codeboxLines = [maCodeBoxStart.group(1)]
                     continue
-                    # --Code --------------------------------------
+                # --Code --------------------------------------
                 if codeLines is not None:
                     maCodeEnd = reCodeEnd.match(line)
                     if maCodeEnd:
