@@ -58,7 +58,7 @@ class Data:
     def __init__(self):
         # --Init bosh stuff
         bosh.initBosh()
-        bosh.initSettings(readOnly=True)
+        bosh.initSettings(readOnly = True)
         bosh.falloutIni = bosh.FalloutIni()
         bosh.falloutIni.mtime = 0
         bosh.modInfos = bosh.ModInfos()
