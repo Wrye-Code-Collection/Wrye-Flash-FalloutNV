@@ -982,6 +982,7 @@ conditionFunctionData = ( #--0: no param; 1: int param; 2: formid param
     (6192, 'GetWaterImmersionPerc', 0, 0, 0, 0),
     (6204, 'IsFleeing', 0, 0, 0, 0),
     (6217, 'GetTargetUnreachable', 0, 0, 0, 0),
+    (6217, 'IsInKillCam', 0, 0, 0, 0),
     )
 allConditions = set(entry[0] for entry in conditionFunctionData)
 fid1Conditions = set(entry[0] for entry in conditionFunctionData if entry[2] == 2)
