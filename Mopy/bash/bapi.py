@@ -718,8 +718,7 @@ def Init(path):
                 byref(userlist))
             added = set(
                 [self.tags[tagIds_added[i]] for i in xrange(numAdded.value)])
-            removed = set([self.tags[tagIds_removed[i]] for i in
-                xrange(numRemoved.value)])
+            removed = set([self.tags[tagIds_removed[i]] for i in xrange(numRemoved.value)])
             return (added, removed, userlist.value)
 
         def GetDirtyMessage(self, plugin):
@@ -746,8 +745,7 @@ def Init(path):
             """Given a list of plugins, returns the subset of that list,
                consisting of plugins that meet the given BOSS_API_CLEAN_*
                code"""
-            return [x for x in plugins if
-                self.GetDirtyMessage(x)[1] == cleanCode]
+            return [x for x in plugins if self.GetDirtyMessage(x)[1] == cleanCode]
 
         def DeactivatePlugins(self, plugins):
             for plugin in plugins:
