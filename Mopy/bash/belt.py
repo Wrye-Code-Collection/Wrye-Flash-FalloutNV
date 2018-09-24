@@ -360,7 +360,8 @@ class PageSelect(PageInstaller):
             for i in self.listOptions.GetSelections():
                 temp.append(self.items[i])
         if self.parent.parser.choiceIdex < len(self.parent.parser.choices):
-            oldChoices = self.parent.parser.choices[self.parent.parser.choiceIdex]
+            oldChoices = self.parent.parser.choices[
+                self.parent.parser.choiceIdex]
             if temp == oldChoices:
                 pass
             else:
