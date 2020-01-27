@@ -2205,7 +2205,7 @@ class MreLeveledList(MelRecord):
             MelOptStruct('COED', 'IIf', (FID, 'owner', None),
                 (FID, 'glob', None), ('condition', 1.0)),
         ),
-        MelNull('DATA'),
+        MelModel('model'),
     )
     __slots__ = (MelRecord.__slots__ + melSet.getSlotsUsed() +
                  ['mergeOverLast', 'mergeSources', 'items', 'delevs', 'relevs'])
