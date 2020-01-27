@@ -955,6 +955,7 @@ conditionFunctionData = ( #--0: no param; 1: int param; 2: formid param
     (4832, 'GetDistance2D', 2, 0, 0, 0),
     (4833, 'GetDistance3D', 2, 0, 0, 0),
     (4843, 'PlayerHasKey', 0, 0, 0, 0),
+    (4897, 'ActorHasEffect', 2, 0, 0, 0),
 
     # Added by JIP NVSE Plugin
     (5637, 'GetIsPoisoned', 0, 0, 0, 0),
@@ -985,6 +986,7 @@ conditionFunctionData = ( #--0: no param; 1: int param; 2: formid param
     (6268, 'IsInKillCam', 0, 0, 0, 0),
     (6301, 'IsStickDisabled', 1, 0, 0, 0),
     (6317, 'GetHardcoreTracking', 0, 0, 0, 0),
+    (6321, 'GetNoteRead', 2, 0, 0, 0),
     (10247, 'TTW_GetEquippedWeaponSkill', 0, 0, 0, 0),
     )
 allConditions = set(entry[0] for entry in conditionFunctionData)
