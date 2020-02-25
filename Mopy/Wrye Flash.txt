@@ -1,13 +1,18 @@
-= Wrye Flash NV (Wrye Bash for Fallout New Vegas) =============================
-== Credits and Contact ========================================================
+{{PAGETITLE="Wrye Flash NV (Wrye Bash for Fallout New Vegas)"}}
+{{TAGLINE="Version Info"}}
+== Contents
+{{CONTENTS=5}}
+== Credits and Contact
 === Authors
-* **Original Code**
+* Original Code
   * Wrye Team: Gurus of the Oblivion modding.
-* **Porting**
+* Porting
   * Valda: Hentai gentleman of mojave.
+* Maintainers
+  * Sharlikran
 
 === Contact
-* If you have a question/comment about Wrye Flash, it's best to post it on the current RELZ topic on the Bethesda Game Studios (BGS) forums.
+* If you have a question/comment about Wrye Flash, it's best to post it on the nexus in the comments section.
 * Please **NEVER** post a question about Wrye Flash in the topic of original Wrye Bash.
 
 == License ===================================================================
@@ -35,8 +40,11 @@ Additionally, Wrye Bash comes packaged with the following programs:
   * Usage: Wrye Bash uses lzma.exe from the SDK to unpack OBMM compressed data streams.
 
 == Versions ===================================================================
-{{CONTENTS=0}}
 **All versions by Wrye team and or Valda unless otherwise noted.**
+
+=== 18.1 [02/24/2020]
+* Updated JIP (Version 55.41) NVSE CTDA [Sharlikran]
+* Updated LVLC Base to add Model records
 
 === 18.0 [01/27/2019]
 * Updated JIP (Version 54.86) NVSE CTDA [Sharlikran]
@@ -221,7 +229,7 @@ Wrye Flash will now sort .esp files flagged as ESM files together with other .es
 
 === 6 [11/08/2010]
 * Fixed a bug that raise exception when importing ItemData from CSV.
-* Add GMST Tweak: Terminal Speed Adjustment (referred from HackRate: http://www.fallout3nexus.com/downloads/file.php?id=2745).
+* Add GMST Tweak: Terminal Speed Adjustment (referred from [[https://www.nexusmods.com/fallout3/mods/2745 | HackRate]].
 * Update BOSS launch code (from WryeBash 291).
 * Fixed CCRD.INTV subrecord structure (reported by platycus).
 
